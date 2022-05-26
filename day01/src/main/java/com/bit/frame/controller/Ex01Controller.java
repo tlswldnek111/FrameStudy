@@ -12,5 +12,6 @@ public class Ex01Controller extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("Ex01Conterr");
 		req.getRequestDispatcher("index.jsp").forward(req, resp);
+		 
 	}
 }
