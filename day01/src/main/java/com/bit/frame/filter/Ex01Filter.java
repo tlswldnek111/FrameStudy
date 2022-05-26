@@ -7,7 +7,9 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebInitParam;
+@WebFilter(value = "/*", initParams = @WebInitParam(name = "key", value="value"))
 public class Ex01Filter implements javax.servlet.Filter {
 		@Override
 		public void init(FilterConfig filterConfig) throws ServletException {

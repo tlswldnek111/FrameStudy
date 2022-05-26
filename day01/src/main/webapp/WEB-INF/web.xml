@@ -2,6 +2,18 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee                       http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
   <display-name>Archetype Created Web Application</display-name>
   
+  <!-- 
+   <listener>
+  	<listener-class>com.bit.frame.listener.My3Listener</listener-class>
+  </listener>
+  <listener>
+  	<listener-class>com.bit.frame.listener.My2Listener</listener-class>
+  </listener>
+  <listener>
+  	<listener-class>com.bit.frame.listener.My1Listener</listener-class>
+  </listener>
+   -->
+   <!-- 
   <filter>
   	<filter-name>filter1</filter-name>
   	<filter-class>com.bit.frame.filter.Ex01Filter</filter-class>
@@ -36,5 +48,6 @@
   <servlet-mapping>
      <servlet-name>ex01</servlet-name>
      <url-pattern>/ex01.bit</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping> 
+  -->
 </web-app>

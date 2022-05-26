@@ -7,8 +7,10 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
-
+@WebFilter(value="/*",initParams=@WebInitParam(name="encoding",value="euc-kr"))
 public class Ex02Filter implements javax.servlet.Filter{
 	String encoding;
 	@Override
