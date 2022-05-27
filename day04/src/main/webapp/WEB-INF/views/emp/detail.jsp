@@ -13,12 +13,8 @@
 		<a href="${pageContext.servletContext.contextPath}/list.bit">EMP</a>
 		<a href="${pageContext.servletContext.contextPath}/login.bit">LOGIN</a>
 	</nav>
-	<h1>list page</h1>
+	<h1>detail page</h1>
 	<a href="add.bit">입력</a>
-	<%for(EmpVo bean:(List<EmpVo>)request.getAttribute("list")){ %>
-	<div><a href="detail.bit?empno=<%=bean.getEmpno()%>"><%=bean %></a>
-	<a href="delete.bit?empno=<%=bean.getEmpno()%>"><button>삭제</button></a>
-	</div>
-	<%} %>
+	<div><a href="delete.bit?empno=${bean.empno}">${bean }</a></div>
 </body>
 </html>

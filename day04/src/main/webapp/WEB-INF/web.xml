@@ -28,6 +28,10 @@
   		<param-name>/delete.bit</param-name>
   		<param-value>com.bit.frame.controller.DeleteController</param-value>
   	</init-param>
+  	<init-param>
+  		<param-name>/detail.bit</param-name>
+  		<param-value>com.bit.frame.controller.DatailController</param-value>
+  	</init-param>
   </servlet>
   
   <servlet-mapping>
