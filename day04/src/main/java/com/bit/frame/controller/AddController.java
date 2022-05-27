@@ -9,16 +9,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bit.frame.model.EmpDao;
+import com.bit.frame.util.MyController;
 
-public class AddController extends HttpServlet {
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/views/add.jsp").forward(req, resp);
+public class AddController implements MyController {
+	
+	protected String doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		return "emp/add";
+		
 		
 	}
 	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected String doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int empno=Integer.parseInt(req.getParameter("empno"));
 		String ename=req.getParameter("ename");
 		String job=req.getParameter("job");
@@ -29,7 +30,14 @@ public class AddController extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		resp.sendRedirect("list.bit");
+		return "redirect:list.bit";
+	}
+
+	@Override
+	public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		if(req.getMethod().equals("GET")) return doGet(req,resp);
+		else if(req.getMethod().equals("POST")) return doPost(req,resp);
+		return null;
 	}
 	
 }

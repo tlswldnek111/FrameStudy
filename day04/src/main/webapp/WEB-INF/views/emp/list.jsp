@@ -16,7 +16,9 @@
 	<h1>list page</h1>
 	<a href="add.bit">입력</a>
 	<%for(EmpVo bean:(List<EmpVo>)request.getAttribute("list")){ %>
-	<div><%=bean %></div>
+	<div><%=bean %>
+	<a href="delete.bit?empno=<%=bean.getEmpno()%>"><button>삭제</button></a>
+	</div>
 	<%} %>
 </body>
 </html>
