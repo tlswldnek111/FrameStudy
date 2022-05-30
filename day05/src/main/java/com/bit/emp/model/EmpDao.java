@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 
 import com.bit.framework.JdbcTemplate;
 import com.bit.framework.RowMapper;
+import com.mysql.cj.jdbc.MysqlConnectionPoolDataSource;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import com.mysql.cj.jdbc.MysqlDataSourceFactory;
 
@@ -27,7 +28,8 @@ public class EmpDao {
 		String url="jdbc:mysql://localhost:3306/scott";
 		String user="user01";
 		String password="1234";
-		MysqlDataSource dataSource=new MysqlDataSource();
+//		MysqlDataSource dataSource=new MysqlDataSource();
+		MysqlDataSource dataSource=new MysqlConnectionPoolDataSource();
 		dataSource.setUrl(url);
 		dataSource.setUser(user);
 		dataSource.setPassword(password);

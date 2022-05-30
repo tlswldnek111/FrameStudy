@@ -46,4 +46,10 @@ public class EmpDaoTest {
 	public void testDeleteOne() throws SQLException{
 //		assertSame(1,dao.deleteOne(1000));
 	}
+	
+	@Test
+	public void testUpdateOne() throws SQLException{
+//		assertSame(14,dao.deleteOne(1000));
+	}
+	
 }
