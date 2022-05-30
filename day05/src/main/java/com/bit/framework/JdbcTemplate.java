@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -42,4 +44,19 @@ public class JdbcTemplate {
 		if(pstmt!=null)pstmt.close();
 		if(conn!=null)conn.close();
 	}
+	
+	public List queryForList(String sql,RowMapper mapper,Object[] objs) throws SQLException {
+		List list=new ArrayList<>();
+		Connection conn=dataSoruce.getConnection();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			for(int i=0;i<objs.length;i++) pstmt.setObject(i+1,objs[i] );
+			rs=pstmt.executeQuery();
+			while(rs.next()) list.add(mapper.rows(rs));
+		}finally {
+			close();
+		}
+		return list;
+	}
+	
 }
