@@ -6,7 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 //view 이동하는 클래스를 따로 만들어줌
-public class SimpleViewResolver {
+public class SimpleViewResolver implements BitViewResolver {
 	String prefix;
 	String suffix;
 	

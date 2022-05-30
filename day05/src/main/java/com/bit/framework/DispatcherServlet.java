@@ -22,41 +22,29 @@ import com.bit.emp.controller.ListController;
 
 
 public class DispatcherServlet extends HttpServlet {
-	Map<String, BitController> cmap=new HashMap<>();
-	
+	private BitViewResolver resolver;
+	private BitHandlerMapping handler;
 	@Override
 	public void init() throws ServletException {
-		Map<String,String> handler=new HashMap<>();
-		File file=new File(getServletContext().getRealPath("./")+"WEB-INF\\classes\\mapping.properties");
 		
+		String bit=getInitParameter("bit");
+		if(bit==null)bit="/WEB-INF-bit.properties";
 		Properties prop=new Properties();
-		InputStream is=null;
 		try {
-			is=new FileInputStream(file);
-			prop.load(is);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		} finally {
-			
-				try {
-					if(is!=null)is.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-		}
+			prop.load(new FileInputStream(getServletContext().getRealPath(bit)));
 		
-		Enumeration eles = prop.keys();;
-		while(eles.hasMoreElements()) {
-			String key=(String)eles.nextElement();
-			handler.put(key, prop.getProperty(key));
-		}
+		SimpleHandlerMapping handler = (SimpleHandlerMapping)Class.forName(prop.getProperty("handlerMapping")).newInstance();
+		handler.setPath(getServletContext().getRealPath("./")+"WEB-INF\\classes\\mapping.properties");
+		this.handler=handler;
 		
-		
-		Set<String> keys=handler.keySet();
-		try {
-			for(String key:keys)
-			cmap.put(key, (BitController)(Class.forName(handler.get(key)).newInstance()));
+		SimpleViewResolver resolver = (SimpleViewResolver)(Class.forName(prop.getProperty("viewResolver")).newInstance());
+		resolver.setPrefix("/WEB-INF/views/");//simpleviewResolver가 씀
+		resolver.setSuffix(".jsp");//simpleviewResolver가 씀
+		this.resolver=resolver;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		} catch (InstantiationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,7 +73,8 @@ public class DispatcherServlet extends HttpServlet {
 		String url=req.getRequestURI().substring(req.getContextPath().length());
 		
 		BitController controller=null;//인터페이스 
-		controller=cmap.get(url);
+		controller=handler.getMapping().get(url);
+		
 		String viewName="";
 		try {
 			viewName=controller.execute(req, resp);
@@ -93,10 +82,6 @@ public class DispatcherServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		//redirect, forward 하는 url로 이동시키기
-		SimpleViewResolver resolver=new SimpleViewResolver();
-		resolver.setPrefix("/WEB-INF/views/");
-		resolver.setSuffix(".jsp");
 		resolver.viewResolver(viewName,req,resp);
 	}
 	

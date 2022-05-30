@@ -10,6 +10,7 @@ import org.junit.Test;
 
 public class EmpDaoTest {
 	EmpDao dao;
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -24,4 +25,20 @@ public class EmpDaoTest {
 		assertTrue(dao.selectAll().size()>0);
 	}
 
+	@Test
+	public void testInsertOne() throws SQLException {
+		dao.conn.setAutoCommit(false);
+		EmpVo target=new EmpVo(1013,1000,"test","tester");
+		dao.insertOne(target);
+		
+//		dao=new EmpDao();
+//		dao.conn.setAutoCommit(false);
+//		target=new EmpVo(1010,1000,"test","tester");
+//		try {
+//			dao.insertOne(target);
+//			assertFalse(true);
+//		}catch (Exception e) {
+//			assertFalse(false);
+//		}
+	}
 }
