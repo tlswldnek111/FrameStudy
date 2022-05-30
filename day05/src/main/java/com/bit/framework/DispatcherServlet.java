@@ -1,8 +1,15 @@
 package com.bit.framework;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,8 +26,47 @@ public class DispatcherServlet extends HttpServlet {
 	
 	@Override
 	public void init() throws ServletException {
-		cmap.put("/index.bit", new IndexController());
-		cmap.put("/emp/index.bit", new ListController());
+		Map<String,String> handler=new HashMap<>();
+		File file=new File(getServletContext().getRealPath("./")+"WEB-INF\\classes\\mapping.properties");
+		
+		Properties prop=new Properties();
+		InputStream is=null;
+		try {
+			is=new FileInputStream(file);
+			prop.load(is);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		} finally {
+			
+				try {
+					if(is!=null)is.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+		
+		Enumeration eles = prop.keys();;
+		while(eles.hasMoreElements()) {
+			String key=(String)eles.nextElement();
+			handler.put(key, prop.getProperty(key));
+		}
+		
+		
+		Set<String> keys=handler.keySet();
+		try {
+			for(String key:keys)
+			cmap.put(key, (BitController)(Class.forName(handler.get(key)).newInstance()));
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -33,6 +33,7 @@
 	<div class="page-header">
 	  <h1>List PaGge <small>emp list</small></h1>
 	</div>
+	<a href="add.bit" class="btn btn-primary btn-block" role="button">입력</a>
 	<table class="table">
 		<thead>
 			<tr>
