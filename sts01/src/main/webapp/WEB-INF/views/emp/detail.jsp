@@ -39,16 +39,12 @@
     </div>
   </div>
   
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <div class="btn-group btn-group-justified" role="group" aria-label="...">
-      <button type="submit" class="btn btn-primary">수정</button>
+     <div class="col-sm-offset-2 col-sm-10">
+ 	 <button type="submit" class="btn btn-primary">수정</button>
       <button type="reset" class="btn btn-danger">삭제</button>
-        <button type="reset" class="btn btn-default">취소</button>
+       <button type="reset" class="btn btn-default">취소</button>
       <button type="button" class="btn btn-default" onclick="history.back();">뒤로</button>
       </div>
-    </div>
-  </div>
 </form>
 </div>
 <script type="text/javascript">
