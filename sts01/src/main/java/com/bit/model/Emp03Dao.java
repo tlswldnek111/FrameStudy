@@ -16,12 +16,26 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import com.mysql.cj.jdbc.MysqlDataSource;
 
 public class Emp03Dao extends JdbcDaoSupport implements EmpDao{
+	//applicationContext에서 property로 msg 전달하는거를 위한 예시 msg setter
+//	private String msg;
+//	
+//	public String getMsg() {
+//		return msg;
+//	}
+//	public void setMsg(String msg) {
+//		this.msg = msg;
+//	}
+	
 	public Emp03Dao() {
-		MysqlDataSource dataSource=new MysqlDataSource();
-		dataSource.setUrl("jdbc:mysql://localhost:3306/scott");
-		dataSource.setUser("user01");
-		dataSource.setPassword("1234");
-		super.setDataSource(dataSource);
+		System.out.println("new Dao...");
+		//applicationContext에서 
+		//<property name="jdbcTemplate" ref="jdbcTemplate"></property>이걸 해서
+		//아래의 코드들은 의미가 없어짐.
+//		MysqlDataSource dataSource=new MysqlDataSource();
+//		dataSource.setUrl("jdbc:mysql://localhost:3306/scott");
+//		dataSource.setUser("user01");
+//		dataSource.setPassword("1234");
+//		super.setDataSource(dataSource);
 	}
 	@Override
 	public List<EmpVo> selectAll() throws SQLException{
