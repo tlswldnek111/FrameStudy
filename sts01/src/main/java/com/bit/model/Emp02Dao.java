@@ -74,4 +74,32 @@ public class Emp02Dao {
 		}
 		return null;
 	}
+
+	   public int updateOne(EmpVo bean) throws SQLException {
+		      
+		      String sql = "update emp set ename=?, sal=?, job=? where empno=?";
+		      
+		      try(
+		            Connection conn = dataSource.getConnection();
+		            PreparedStatement pstmt = conn.prepareStatement(sql);
+		            ){
+		         pstmt.setString(1, bean.getEname());
+		         pstmt.setInt(2, bean.getSal());
+		         pstmt.setString(3, bean.getJob());
+		         pstmt.setInt(4, bean.getEmpno());
+		         return pstmt.executeUpdate();
+		      }
+		   }
+
+	public int deleteOne(int empno) throws SQLException {
+		String sql = "delete from emp where empno=?";
+		try(
+				Connection conn=dataSource.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement(sql);
+				){
+			pstmt.setInt(1, empno);
+			return pstmt.executeUpdate();
+		}
+		
+	}
 }

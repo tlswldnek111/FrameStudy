@@ -13,7 +13,7 @@
   <h1>EMP Detail page</h1>
 </div>
 <div class="container">
-<form class="form-horizontal" action="insert.bit" method="post">
+<form class="form-horizontal" action="update.bit" method="post">
   <div class="form-group">
     <label for="empno" class="col-sm-2 control-label">empno</label>
     <div class="col-sm-10">
@@ -42,9 +42,9 @@
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <div class="btn-group btn-group-justified" role="group" aria-label="...">
-      <button type="submit" class="btn btn-primary ">수정</button>
-      <button type="reset" class="btn btn-danger ">삭제</button>
-        <button type="reset" class="btn btn-default ">취소</button>
+      <button type="submit" class="btn btn-primary">수정</button>
+      <button type="reset" class="btn btn-danger">삭제</button>
+        <button type="reset" class="btn btn-default">취소</button>
       <button type="button" class="btn btn-default" onclick="history.back();">뒤로</button>
       </div>
     </div>
@@ -52,12 +52,17 @@
 </form>
 </div>
 <script type="text/javascript">
+var callback2=function(){
+	$.post('delete.bit','empno=${bean.empno }',function(){
+		location.href='list.bit';
+	});
+};
 $('input').prop('readonly',true);
-$('.btn.btn-danger').show().next().hide();
+$('.btn.btn-danger').click(callback2).show().next().hide();
 var callback1=function(e){
 	$('input').prop('readonly',false).first().prop('readonly',true);
 	$('.btn.btn-danger').hide().next().show();
-	$('.jumbotron>h1').text('Emp Update page');
+	$('.jumbotron>h1').text('EMP Edit page');
 	return false;
 };
 $('form').one('submit',callback1);
