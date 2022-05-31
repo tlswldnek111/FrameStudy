@@ -24,7 +24,7 @@ public class Emp01DaoTest {
 	@Test
 	public void testSelectAll() throws ClassNotFoundException, SQLException {
 		assertTrue(dao.selectAll().size()>0);
-		for(EmpVo bean : dao.selectAll()) log.debug(bean);
+//		for(EmpVo bean : dao.selectAll()) log.debug(bean);
 	}
 
 }

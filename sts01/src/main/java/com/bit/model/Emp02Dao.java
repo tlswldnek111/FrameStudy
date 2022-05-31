@@ -8,22 +8,29 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Emp01Dao {
-	
-	//list를 return하는 모든 조회
-	public List<EmpVo> selectAll() throws ClassNotFoundException, SQLException{
-		List<EmpVo> list = new ArrayList<>();
-		String sql="select * from emp";
-		String driver="com.mysql.cj.jdbc.Driver";
+import javax.sql.DataSource;
+
+import com.mysql.cj.jdbc.MysqlDataSource;
+
+public class Emp02Dao {
+	DataSource dataSource;
+	public Emp02Dao() {
 		String url="jdbc:mysql://localhost:3306/scott";
 		String user="user01";
 		String password="1234";
-		
-		
-		Class.forName(driver);
+		MysqlDataSource dataSource = new MysqlDataSource();
+		dataSource.setUrl(url);
+		dataSource.setUser(user);
+		dataSource.setPassword(password);
+		this.dataSource=dataSource;
+	}
+	
+	public List<EmpVo> selectAll() throws ClassNotFoundException, SQLException{
+		List<EmpVo> list = new ArrayList<>();
+		String sql="select * from emp";
 		
 		try(
-				Connection conn=DriverManager.getConnection(url,user,password);
+				Connection conn=dataSource.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement(sql);
 				ResultSet rs=pstmt.executeQuery();
 				
@@ -37,16 +44,9 @@ public class Emp01Dao {
 
 	public void insertOne(EmpVo bean) throws ClassNotFoundException, SQLException {
 		String sql="insert into emp (empno, ename, sal, job) values (?,?,?,?)";
-		String driver="com.mysql.cj.jdbc.Driver";
-		String url="jdbc:mysql://localhost:3306/scott";
-		String user="user01";
-		String password="1234";
-		
-		
-		Class.forName(driver);
 		
 		try(
-				Connection conn=DriverManager.getConnection(url,user,password);
+				Connection conn=dataSource.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement(sql);
 				){
 			pstmt.setInt(1, bean.getEmpno());
@@ -56,5 +56,22 @@ public class Emp01Dao {
 			pstmt.executeUpdate();
 		}
 		
+	}
+
+	public EmpVo selectOne(int parseInt) throws SQLException {
+		String sql="select * from emp where empno=?";
+		try(
+				Connection conn=dataSource.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement(sql);
+				){
+			pstmt.setInt(1, parseInt);
+			ResultSet rs=pstmt.executeQuery();
+			if(rs.next()) return new EmpVo(
+					rs.getInt("empno"), rs.getString("ename"),
+					rs.getInt("sal"), rs.getString("job")
+						);
+			rs.close();
+		}
+		return null;
 	}
 }
