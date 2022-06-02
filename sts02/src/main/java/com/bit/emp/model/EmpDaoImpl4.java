@@ -9,9 +9,19 @@ import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.interceptor.DefaultTransactionAttribute;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
+import org.springframework.transaction.support.TransactionOperations;
+import org.springframework.transaction.support.TransactionTemplate;
 
 public class EmpDaoImpl4 implements EmpDao {
 	JdbcTemplate jdbcTemplate;
+	
+	PlatformTransactionManager transactionManager;
+	
 	RowMapper<EmpVo> rowMapper=new RowMapper<EmpVo>(){
 
 		@Override
@@ -24,8 +34,9 @@ public class EmpDaoImpl4 implements EmpDao {
 					);
 		}};
 		
-	public EmpDaoImpl4(JdbcTemplate jdbcTemplate) {
+	public EmpDaoImpl4(JdbcTemplate jdbcTemplate,PlatformTransactionManager transactionManager) {
 	this.jdbcTemplate=jdbcTemplate;
+	this.transactionManager=transactionManager;
 	}
 	
 	@Override
@@ -63,8 +74,43 @@ public class EmpDaoImpl4 implements EmpDao {
 
 	@Override
 	public void insertOne(EmpVo bean) throws SQLException {
-		// TODO Auto-generated method stub
+		TransactionStatus status=null;
+		TransactionDefinition definition=new DefaultTransactionDefinition();
+		status=transactionManager.getTransaction(definition);
+		try {
+		PreparedStatementCreator psc=new PreparedStatementCreator() {
+			@Override
+			public PreparedStatement createPreparedStatement(Connection conn) throws SQLException {
+				System.out.println("첫번째"+conn.hashCode());
+				String sql="insert into emp (empno, ename, sal, job, hiredate) value (?,?,?,?,now())";
+				PreparedStatement pstmt= conn.prepareStatement(sql);
+				pstmt.setInt(1, bean.getEmpno());
+				pstmt.setString(2, bean.getEname());
+				pstmt.setInt(3, bean.getSal());
+				pstmt.setString(4, bean.getJob());
+				return pstmt;
+			}
+		};
+		jdbcTemplate.update(psc);
+		
+		psc=new PreparedStatementCreator() {
+			@Override
+			public PreparedStatement createPreparedStatement(Connection conn) throws SQLException {
+				System.out.println("두번째"+conn.hashCode());
+				String sql="insert into emp (empno, ename, sal, job, hiredate) value (?,?,?,?,now())";
+				PreparedStatement pstmt= conn.prepareStatement(sql);
+				pstmt.setInt(1, bean.getEmpno());
+				pstmt.setString(2, bean.getEname());
+				pstmt.setInt(3, bean.getSal());
+				pstmt.setString(4, bean.getJob());
+				return pstmt;
+			}
+		};
+		jdbcTemplate.update(psc);
+		transactionManager.commit(status);
+		}catch(Exception e) {
+			transactionManager.rollback(status);
+		}
 
-	}
-
+}
 }

@@ -143,8 +143,12 @@
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<constructor-arg ref="dataSource"></constructor-arg>
 	</bean>
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<constructor-arg ref="dataSource"></constructor-arg>
+	</bean>
 	<bean id="empDao" class="com.bit.emp.model.EmpDaoImpl4">
 		<constructor-arg name="jdbcTemplate" ref="jdbcTemplate"/>
+		<constructor-arg ref="transactionManager"></constructor-arg>
 	</bean>
 	
 	
