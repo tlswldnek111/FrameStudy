@@ -45,7 +45,7 @@
 	</bean> -->
 	
 	<!-- class를 따로 빼서 ref로 값을 집어넣을수도 있음 ..  -->
-	<bean id="item1" class="java.lang.String">
+	<!-- <bean id="item1" class="java.lang.String">
 		<constructor-arg value="첫번째"></constructor-arg>
 	</bean>
 	<bean id="item2" class="java.util.Date"></bean>
@@ -55,10 +55,84 @@
 				<list>
 					<ref bean="item1"></ref>
 					<ref bean="item2"></ref>
+					<bean id="item3" class="java.util.Date"></bean>
 				</list>
 		</property>
-	</bean>
+	</bean> -->
 	<!-- 
 	[첫번째, Thu Jun 02 09:55:31 KST 2022] 형태로 값 저장됨.
 	 -->
+	 
+	 <!-- 중복을 허용하지 않는 set 타입. 순서도 없고 중복일경우 제외시키고 출력함
+	 	[1111, 2222]
+	  -->
+	<!--  <bean id="bean" class="com.bit.emp.model.EmpVo">
+		<property name="arr2">
+				<set>
+					<value>1111</value>
+					<value>2222</value>
+					<value>1111</value>
+				</set>
+		</property>
+	</bean> -->
+	
+	
+	  
+	  
+	   <!-- 
+	   map으로 key, value를 저장할수있음. property니까 setter로 저장하는거!
+	  -->
+	  <!-- {key1=val1, key2=val4, key3=Thu Jun 02 10:20:42 KST 2022, key4=Thu Jun 02 10:20:42 KST 2022} 출력함 -->
+	<!--   <bean id="now" class="java.util.Date"></bean>
+	 <bean id="bean" class="com.bit.emp.model.EmpVo">
+		<property name="arr3">
+				<map>
+					<entry key="key1">
+						<value>val1</value>
+					</entry>
+					<entry key="key2" value="val4"></entry>
+					<entry key="key3">
+						<bean class="java.util.Date"></bean>
+					</entry>
+					<entry key="key4" value-ref="now"></entry>
+					<entry>
+						<key>
+							<value>key5</value>
+						</key>
+						<ref local="now"/>
+					</entry>
+				</map>
+		</property>
+	</bean> -->
+	
+	<!-- 프로퍼티스는 map을 써도 출력이 가능한것을 보니 map..같은거인듯..? -->
+	<!-- <bean id="now" class="java.util.Date"></bean>
+	<bean id="bean" class="com.bit.emp.model.EmpVo">
+		<property name="arr4">
+			<props>
+				<prop key="key1">val1</prop>
+				<prop key="key2">val2</prop>
+			</props>
+		</property>
+	</bean> -->
+	
+	<!-- array 배열로  -->
+	<!-- <bean id="now" class="java.util.Date"></bean>
+	<bean id="bean" class="com.bit.emp.model.EmpVo">
+		<property name="arr5">
+			<array>
+				<value>첫1</value>
+				<value>첫2</value>
+				<value>첫3</value>
+				<value>첫4</value>
+			</array>
+		</property>
+	</bean> -->
+	
+	<bean id="bean" class="com.bit.emp.model.EmpVo">
+		<constructor-arg value="test" index="1"></constructor-arg>
+		<constructor-arg value="1111" index="0"></constructor-arg>
+	</bean>
+	
+	
 </beans>

@@ -7,14 +7,41 @@ public class EmpVo {
 	private String ename,job;
 	private Date hiredate;
 	///////////////////////////////
-	private java.util.ArrayList arr1;
-	public java.util.ArrayList getArr1() {
+	private java.util.List arr1;
+	private java.util.Set arr2;
+	private java.util.Map arr3;
+	private java.util.Properties arr4;
+	private String[] arr5;
+	public String[] getArr5() {
+		return arr5;
+	}
+	public void setArr5(String[] arr5) {
+		this.arr5 = arr5;
+	}
+	public java.util.List getArr1() {
 		return arr1;
 	}
-	public void setArr1(java.util.ArrayList arr1) {
+	public void setArr1(java.util.List arr1) {
 		this.arr1 = arr1;
 	}
-	
+	public java.util.Set getArr2() {
+		return arr2;
+	}
+	public void setArr2(java.util.Set arr2) {
+		this.arr2 = arr2;
+	}
+	public java.util.Map getArr3() {
+		return arr3;
+	}
+	public void setArr3(java.util.Map arr3) {
+		this.arr3 = arr3;
+	}
+	public java.util.Properties getArr4() {
+		return arr4;
+	}
+	public void setArr4(java.util.Properties arr4) {
+		this.arr4 = arr4;
+	}
 	//////////////////////////////
 	
 	public EmpVo(int empno, String ename) {
