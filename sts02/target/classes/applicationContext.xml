@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 아무것도 없는 생성자로 객체를 호출하고 getter setter로 empno, ename, hiredate를 입력한다. -->
+	<!-- <bean id="bean" class="com.bit.emp.model.EmpVo">
+			<property name="empno" value="1111"></property>
+			<property name="ename" value="test"></property>
+			<property name="hiredate">
+				<bean class="java.sql.Date">
+					<constructor-arg value="1654129578690"></constructor-arg>
+				</bean>
+			</property>
+	</bean> -->
+	
+	<!-- empno와 ename의 값을 받는 생성자를 호출하여 bean객체를 만든다. -->
+	<!-- <bean id="bean" class="com.bit.emp.model.EmpVo">
+		<constructor-arg value="2222"></constructor-arg>
+		<constructor-arg value="user01"></constructor-arg>
+	</bean> -->
+	
+	
+	<!-- <bean id="now" class="java.util.Date">
+		<constructor-arg value="1654129578690"></constructor-arg>
+	</bean>
+	6개의 값을 가진 생성자를 호출할 경우, 6개의 construictor-arg를 작성한다.
+	<bean id="bean" class="com.bit.emp.model.EmpVo">
+		<constructor-arg value="3333"></constructor-arg>
+		<constructor-arg value="1000"></constructor-arg>
+		<constructor-arg value="user03"></constructor-arg>
+		<constructor-arg value="tester"></constructor-arg>
+		<constructor-arg ref="now" ></constructor-arg>
+	</bean> -->
+	
+	<!-- ArrayList의 값을 집어넣을수도 있음. -->
+	<!-- <bean id="bean" class="com.bit.emp.model.EmpVo">
+		<property name="arr1">
+				<list>
+					<value>1111</value>
+					<value>1111</value>
+					<value>1111</value>
+				</list>
+		</property>
+	</bean> -->
+	
+	<!-- class를 따로 빼서 ref로 값을 집어넣을수도 있음 ..  -->
+	<bean id="item1" class="java.lang.String">
+		<constructor-arg value="첫번째"></constructor-arg>
+	</bean>
+	<bean id="item2" class="java.util.Date"></bean>
+						
+	<bean id="bean" class="com.bit.emp.model.EmpVo">
+		<property name="arr1">
+				<list>
+					<ref bean="item1"></ref>
+					<ref bean="item2"></ref>
+				</list>
+		</property>
+	</bean>
+	<!-- 
+	[첫번째, Thu Jun 02 09:55:31 KST 2022] 형태로 값 저장됨.
+	 -->
+</beans>
