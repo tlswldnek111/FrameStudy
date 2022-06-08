@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+		
+		<bean id="dataSource" 
+		class="org.apache.commons.dbcp.BasicDataSource"
+		p:driverClassName="com.mysql.cj.jdbc.Driver"
+		p:url="jdbc:mysql://localhost:3306/scott"
+		p:username="user01"	p:password="1234"
+		p:maxActive="3" p:maxIdle="5"
+		p:minIdle="1" p:maxWait="3000"
+		/>	
+		<!--3개를 가지고있고, 3개가 넘어가면 최대 5개까지 늘림. 6개부터는 대기시킴
+		최소 1개는 가지고있어야함.
+		대기시간은 최대3000 . 의존성이 사라진다. 다른 DB 사용하려면 드라이버 이름 변경해주면됨 -->	
+		
+	<bean id="jdbcTemplate" 
+		class="org.springframework.jdbc.core.JdbcTemplate"
+		p:dataSource-ref="dataSource"
+		/>
+	
+	<bean id="autoLogging" class="com.bit.sts05.utils.AutoLogging"></bean>
+	
+	<aop:config>
+		<aop:pointcut expression="execution(* com.bit.sts05.model.EmpDao.*(..))" id="beforelog"/>
+		<aop:aspect ref="autoLogging">
+			<aop:before method="beforeAop" pointcut-ref="beforelog"/>
+		</aop:aspect>
+	</aop:config>
+	<context:component-scan base-package="com.bit.sts05.model" >
+	</context:component-scan>
+	
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	  <property name="dataSource" ref="dataSource"/>
+	</bean>
+ 
+      
+	<!-- 
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="*" rollback-for="Exception"/>
+		</tx:attributes>
+	</tx:advice>
+ 
+        트랜잭션 Pointcut를 설정한다.    
+	<aop:config>
+		<aop:pointcut id="requiredTx"
+			expression="execution(* com.bit.sts05.service.EmpService.*(..))"/>
+		<aop:advisor advice-ref="txAdvice"
+			pointcut-ref="requiredTx" />
+	</aop:config>
+	-->
+	<context:component-scan base-package="com.bit.sts05.service" >
+	</context:component-scan>
+	<tx:annotation-driven transaction-manager="txManager"/>
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+</beans>
