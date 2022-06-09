@@ -20,7 +20,8 @@ public class EmpVoTest {
 	public void test() {
 		EmpVo bean=new EmpVo();
 		bean.setEmpno(1111);
-		System.out.println(bean.getEmpno());
+		bean.setEname("test");
+		System.out.println(bean);
 	}
-
+	
 }
