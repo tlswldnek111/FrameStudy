@@ -26,29 +26,29 @@ public class EmpDao01Impl implements EmpDao {
 	};
 	
 	
-	@Override
-	public List<EmpVo> findAll() throws SQLException {
-		
-		
-		return null;
-	}
+	 @Override
+	   public List<EmpVo> findAll() throws SQLException {
+
+	      String sql = "select * from emp";
+	      return jdbcTemplate.query(sql, mapper);
+	   }
 
 	@Override
 	public EmpVo findOne(int idx) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		String sql="select * from emp where empno=?";
+		return jdbcTemplate.queryForObject(sql, mapper,idx);
 	}
 
 	@Override
 	public void insertOne(EmpVo bean) throws SQLException {
-		// TODO Auto-generated method stub
-
+		String sql="insert into emp (ename,sal,job,empno,hiredate) values (?,?,?,?,now())";
+		jdbcTemplate.update(sql,bean.getEname(),bean.getSal(),bean.getJob(),bean.getEmpno());
 	}
 
 	@Override
 	public int updateOne(EmpVo bean) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		String sql="update emp set ename=?, sal=?, job=? where empno=?";
+		return jdbcTemplate.update(sql,bean.getEname(),bean.getSal(),bean.getJob(),bean.getEmpno());
 	}
 
 	@Override
