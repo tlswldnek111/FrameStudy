@@ -11,5 +11,25 @@
   		select * from emp where empno=#{value}
   	</select>
   	
+  	<insert id="insertOne" parameterType="com.bit.sts08.domain.Emp">
+  		insert into emp (empno, sal, ename, job, hiredate) values(#{empno},#{sal},#{ename},#{job},now())
+  	</insert>
   	
+  	<update id="updateOne" parameterType="com.bit.sts08.domain.Emp">
+  		update emp set ename=#{ename}, sal=#{sal}, job=#{job} where empno=#{empno}
+  	</update>
+  	
+  	<delete id="deleteOne" parameterType="int">
+  		delete from emp where empno=#{value}
+  	</delete>
+  	<select id="totalSize" resultType="int">
+  		select count(*) from emp;
+  	</select>
+  	<select id="findMany" parameterType="String" resultType="com.bit.sts08.domain.Emp">
+  		select * from emp where ename like concat('%',#{values},'%');
+  	</select>
+  	
+  	<select id="login" parameterType="com.bit.sts08.domain.Emp" resultType="int">
+  		select count(*) from emp where empno=#{empno} and ename=#{ename}
+  	</select>
   </mapper>
