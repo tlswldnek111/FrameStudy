@@ -1,8 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.bit.emp.model.EmpDaoTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.677 s <<< FAILURE! - in com.bit.emp.model.EmpDaoTest
-testSelectAll(com.bit.emp.model.EmpDaoTest)  Time elapsed: 0.624 s  <<< ERROR!
-java.lang.NullPointerException
-	at com.bit.emp.model.EmpDaoTest.testSelectAll(EmpDaoTest.java:24)
-
