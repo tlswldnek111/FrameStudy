@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee                       http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+
+  <display-name>Archetype Created Web Application</display-name>
+  <welcome-file-list>
+  	<welcome-file>index.bit</welcome-file>
+  </welcome-file-list>
+  <servlet>
+  	<servlet-name>index</servlet-name>
+  	<servlet-class>com.bit.frame.util.FrontController</servlet-class>
+  	<init-param>
+  		<param-name>/index.bit</param-name>
+  		<param-value>com.bit.frame.controller.indexController</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>/list.bit</param-name>
+  		<param-value>com.bit.frame.controller.ListController</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>/login.bit</param-name>
+  		<param-value>com.bit.frame.controller.LoginController</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>/add.bit</param-name>
+  		<param-value>com.bit.frame.controller.AddController</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>/delete.bit</param-name>
+  		<param-value>com.bit.frame.controller.DeleteController</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>/detail.bit</param-name>
+  		<param-value>com.bit.frame.controller.DatailController</param-value>
+  	</init-param>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>index</servlet-name>
+  	<url-pattern>*.bit</url-pattern>
+  </servlet-mapping>
+</web-app>
