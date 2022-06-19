@@ -24,7 +24,12 @@ function DeptAdd(props){
                 //this.props.history.push('/dept');
                 //props.history.push('/dept');
                 //v6~
-                navigate('/dept');
+                navigate('/dept', {state:
+                {
+                    num:param.deptno,
+                    dname:param.dname
+                },
+                });
             });
     }
     return (
