@@ -1,37 +1,40 @@
-import React from 'react'
-
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { CardGroup,Col,Row } from 'react-bootstrap';
+import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
+import { Link } from "react-router-dom";
 function DeptList() {
-  const arr=[];
-  arr.push({dname:'user1',loc:'test1'});
-  arr.push({dname:'user2',loc:'test1'});
-  arr.push({dname:'user3',loc:'test1'});
-  arr.push({dname:'user4',loc:'test1'});
+  const [arr,setArr]=useState([]);
+  useEffect(()=>{
+    axios.get('http://localhost:8080/api/dept/')
+    .then(e=>{setArr(e.data)})
+  },[]);
+  
 
   return (
-    <div>
-      <h1>List Page</h1>
-    <table className='table'>
-      <thead>
-          <tr>
-              <th>deptno</th>
-              <th>dname</th>
-              <th>loc</th>
-          </tr>
-      </thead>
-      <tbody>
-          {arr.map((bean,idx)=>(
-              <tr key={idx}>
-                  <td>{idx}</td>
-                  <td>{bean.dname}</td>
-                  <td>{bean.loc}</td>
-              </tr>
-          ))}
-      </tbody>
-
-
-    </table>
-    </div>
-
+    <>
+    <Container>
+    <h1>List Page</h1>
+    <CardGroup>
+      <Row xs={2} md={3}>
+      {arr.map((bean,idx)=>(
+       <Col key={idx}>
+       <Card >
+        <Card.Body>
+          <Card.Title >{bean.deptno}</Card.Title>
+          <Card.Subtitle className="mb-2 text-muted">{bean.dname}</Card.Subtitle>
+          <Card.Text>{bean.loc}</Card.Text>
+          <Card.Link as={Link} to={"/dept/"+bean.deptno} >Go Detail</Card.Link>
+        </Card.Body>
+      </Card>
+      </Col>
+     
+    ))}
+    </Row>
+  </CardGroup>
+  </Container>
+</>
   )
 }
 

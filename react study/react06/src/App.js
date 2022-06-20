@@ -11,11 +11,11 @@ import DeptList from "./pages/DeptList";
 import DeptOne from "./pages/DeptOne";
 import DeptAdd from "./pages/DeptAdd";
 import JoinPage from "./pages/JoinPage";
-import Navbar from "./modules/Navbar";
+import Menubar from "./modules/Menubar";
 function App() {
   return (
     <BrowserRouter>
-    <Navbar/>
+    <Menubar/>
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/intro" element={<Intro />} />
