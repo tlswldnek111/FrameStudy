@@ -50,7 +50,7 @@ public class DeptApiController {
 	}
 	
 	@PutMapping("/dept/{deptno}")
-	public ResponseEntity<?> updateDept(@PathVariable int deptno, @RequestBody Dept dept) {
+	public ResponseEntity<?> updateDept(@RequestBody Dept dept) {
 		Map<String,Object> map = new LinkedHashMap<>();
 		if(restService.updateOne(dept)>0) {
 			map.put("result",true);
