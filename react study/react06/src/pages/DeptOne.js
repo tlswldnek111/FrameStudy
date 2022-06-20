@@ -23,8 +23,10 @@ function DeptOne() {
     if(edit){//edit이 true일 경우!
       axios.put('http://localhost:8080/api/dept/'+bean.deptno,bean)
       .then(e=>{
-        if(e.data.result){
+        if(e.data.result){//성공
           navigate('/dept');
+        }else{//실패
+
         }
       });
     }
@@ -39,9 +41,15 @@ function DeptOne() {
   //   setBean({...bean,loc:e.target.value});//기존 bean에 추가적으로 loc을 바꿔준다.
   //  }
   
+  //dname 혹은 loc 값 수정할때. 위의 두 함수를 합쳐놓은거임
    const inputHandler=(e)=>{
     setBean({...bean,[e.target.name]:e.target.value});
-    
+   }
+//삭제버튼 누를때
+   const deleteHandler=(e)=>{
+    axios.delete('http://localhost:8080/api/dept/'+bean.deptno)
+        .then(e=>e.status==200?navigate('/dept'):window.alert('삭제 실패'))
+        .catch(e=>window.alert('삭제실패'))//exception이 발생할경우 catch를 통해 값을 출력한다.
    }
   return (
     <Container>
@@ -67,7 +75,11 @@ function DeptOne() {
               />
       </Form.Group>
       <Button variant="primary" type="submit">수정</Button>
-      <Button variant="danger" type="button">삭제</Button>
+      {edit?
+      <Button variant="dafault" type="reset">취소</Button>
+      :
+      <Button variant="danger" type="button" onClick={deleteHandler}>삭제</Button>
+      }
       <Button variant="default" type="button" onClick={backHandler}>뒤로</Button>
     </Form>
     </Container>
