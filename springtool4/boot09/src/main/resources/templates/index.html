@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js" integrity="sha512-1QvjE7BtotQjkq8PxLeF6P46gEpBRXuskzIVgjFpekzFVF4yjRgrQvTG1MTOJ3yQgvTteKAcO7DSZI92+u/yZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<h1> 채팅 페이지 </h1>
+<form>
+	<label>채팅메시지</label>
+	<input type="text" id="content"/>
+	<button>전송</button>
+</form>
+
+<div id="target"></div>
+<script type="text/javascript">
+//sockjs
+
+$(function(){
+	var sock=new SockJS('/echo');
+	$('form').submit(function(){
+		sock.send($('#content').val());
+		return false;
+	});
+	
+	sock.onopen = function(){
+		console.log('open');
+		sock.send('test');
+	};
+	sock.onmessage = function(e){
+		console.log('message',e.data);
+	};
+	sock.onclose = function(){
+		console.log('close');
+	};
+});
+
+
+/*
+var socket; 
+$(function(){
+	$('form').submit(function(){
+		socket.send($('#content').val());//서버에게 보내질것이다.
+		return false;
+	});
+
+	
+	// WebSocket 연결 생성
+	socket = new WebSocket('ws://localhost:8080/echo');
+
+	// 연결이 열리면
+	socket.addEventListener('open', function (event) {
+		//open 이벤트에서 send를 호출한다.
+	    socket.send('Hello Server!');
+	});
+
+	// 메시지 수신
+	socket.addEventListener('message', function (e) {
+		//메시지를 전송했을떄, handleTextMessage에서 값을 session으로 보내서 event로 출력함.
+	    $('<div>'+e.data+"</div>").appendTo('#target');
+	});
+	
+	
+});
+*/
+</script>
+</body>
+</html>
