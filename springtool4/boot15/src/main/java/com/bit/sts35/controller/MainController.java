@@ -42,6 +42,7 @@ public class MainController {
 		resp.addCookie(cook);
 		return"redirect:/";
 	}
+	
 	@GetMapping("/list")
 	@ResponseBody
 	 public ResponseEntity<Object> getList(HttpServletRequest req) throws IOException{
