@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>C&C Organ</title>
+<link rel="icon" href="/imgs/favicon.png">
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/nav.css">
+<th:block th:replace="views/template/header :: linkFragment"></th:block>
+<script type="text/javascript" src="/js/NavSide.js"></script>
+<script type="text/javascript" src="/js/MathCalc.js"></script>
+<script type="text/javascript" src="/js/organNameAuto.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.12.4.js"></script>
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<style type="text/css">
+.organ-form {
+	margin-bottom: 30px;
+	padding: 30px;
+	border: 1px gainsboro solid;
+	background-color: white;
+}
+
+.form-select {
+	width: 350px;
+	display: inline;
+	margin: 20px;
+}
+
+.form-control {
+	width: 350px;
+	display: inline;
+	margin: 20px;
+	margin-right: 20px;
+}
+
+#organHigh>input {
+	width: 350px;
+}
+
+.organ-label {
+	width: 100px;
+}
+
+#maintable {
+	width: 100%;
+	height: 470px;
+	overflow-y: scroll;
+	position: relative;
+}
+
+#maintable thead th {
+	background-color: #5A606A;
+	color: white;
+	position: sticky;
+	top: 0px;
+}
+
+table {
+	text-align: center;
+	background-color: white;
+	box-shadow: 2px 2px 2px 2px #e9ecef;
+}
+
+#organName {
+	width: 890px;
+	float: right;
+}
+
+label {
+	width: 100px;
+}
+
+#choiceView {
+	width: 100px;
+	float: right;
+}
+
+#searchBtn {
+	padding-top: 30px;
+	width: max-content;
+	margin: 0 auto;
+}
+
+#searchBtn>button {
+	color: white;
+}
+
+#paginationButton {
+	margin-top: 20px;
+	width: max-content;
+	margin: 0 auto;
+}
+
+.organ-td-state {
+	color: red;
+}
+
+.organ-td-state:hover {
+	color: red;
+}
+
+.organ-td-state:hover, .organ-td-organ-name:hover {
+	text-decoration: underline;
+}
+
+.organ-table-bg {
+	background-color: white;
+	box-shadow: 2px 2px 2px 2px #e9ecef;
+}
+
+.organ-td-organ-name {
+	text-decoration: none;
+}
+
+.nosearchresult {
+	height: 440px;
+	align-content: center;
+}
+
+.nosearchresult>div {
+	padding-top: 200px;
+}
+
+.ui-autocomplete {
+	max-height: 100px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding-right: 20px;
+}
+
+.ui-autocomplete .highlight {
+	color: #236ade;
+}
+
+html .ui-autocomplete {
+	height: 100px;
+}
+</style>
+<!-- 기관관리 페이지 css end -->
+
+<!-- 추가할 내용
+1. table 데이터값 정렬하기
+2. 마우스 over 및 밑줄 기능 구현하기
+3. 텍스트 색상변경 css 기능 수정하기
+4. 글자 수 및 정렬하기 
+  -->
+
+</head>
+
+<body>
+
+	<!-- nav -->
+	<th:block th:replace="views/template/nav :: navFragment"></th:block>
+	<!-- nav end -->
+
+	<!-- contents 내용 -->
+	<div class="main-container main-container-bg">
+
+		<!-- nav-side -->
+		<th:block th:replace="views/template/navside :: navsideFragment"></th:block>
+		<!-- nav-side end -->
+
+
+
+		<!-- 기관관리 내용 -->
+		<div class="main-contents">
+
+			<div>
+				<h3 id="main-contents-title">기관 관리</h3>
+
+				<form class="organ-form">
+					<div id="organHigh">
+						<label for="inputProduct" class="col-form-label">상품 분류</label> <select
+							class="form-select" aria-label="Default select example">
+							<option selected value="">전체</option>
+							<option value="카드">카드</option>
+						</select> <label class="col-form-label">상태값</label> <select
+							class="form-select" id="organStatus" name="organStatus"
+							aria-label="Default select example">
+							<option selected value="">전체</option>
+							<option value="확정"
+								th:selected="${cri.searchOrganStatus}==${'확정'}">확정</option>
+							<option value="기간만료"
+								th:selected="${cri.searchOrganStatus}==${'기간만료'}">기간만료</option>
+						</select> <label for="organName" class="product-label">기관명 검색</label>
+
+						<!--       <input  id="keyword" type="text" name="keyword"      th:value="${cri.searchOrganName}"      class="form-control"> -->
+						<input type="text" id="organName" name="organName" class="form-control" onkeyup="searchTypeRestrict(this);">
+						<!--   <input type="text"      id="organName"   name="organName"      th:value="${cri.searchOrganName}"      class="form-control">
+                   -->
+					</div>
+					<div>
+						<div id="searchBtn">
+							<button class="btn btn-primary" name="searchBtn">
+								조회하기 <i class="bi bi-search"></i>
+							</button>
+						</div>
+				</form>
+			</div>
+		</div>
+
+		<div>
+			<select id="choiceView" class="form-select"
+				aria-label="Default select example" onchange="showValue(this)">
+				<option value="10" th:selected="${cri.perPageNum}==${10}">10개씩</option>
+				<option value="25" th:selected="${cri.perPageNum}==${25}">25개씩</option>
+				<option value="50" th:selected="${cri.perPageNum}==${50}">50개씩</option>
+			</select>
+		</div>
+
+
+		<div id="maintable">
+			<table class="table organ-table-bg">
+				<thead>
+					<tr>
+						<th class="text-center">번호</th>
+						<th class="text-center">상품분류</th>
+						<th style="width: 500px;">기관명</th>
+						<th class="text-center">상태값</th>
+						<th class="text-center">등록일자</th>
+						<th class="text-center">최종 수정일자</th>
+						<th class="text-center">최종수정자</th>
+					</tr>
+				</thead>
+				<tbody>
+					<td class="nosearchresult" th:if="${paging.totalCount}==0"
+						colspan="8"><div>조회결과가 없습니다.</div></td>
+					<tr th:each="bean , beanStat : ${list}">
+						<!--   <td class="text-center" th:text="${list.size+1}+(${paging.cri.page}-1)*${cri.perPageNum}" >1</td>-->
+
+
+						<td class="text-center" td
+							th:text="${paging.totalCount - ((paging.cri.page-1) * (paging.cri.perPageNum)) - beanStat.index}"></td>
+
+
+
+						<td class="text-center">카드</td>
+						<td><a href="/organ" th:href="@{/organ/}+${bean.organModule}"
+							class="organ-td-organ-name" th:text="${bean.organName}">롯데카드</a></td>
+
+						<td class="text-center"><a
+							th:if="${bean.organStatus.equals('기간만료')}" href="/organ"
+							th:href="@{/organ/}+${bean.organModule}" class="organ-td-state"
+							th:text="${bean.organStatus}">기간만료</a>
+							<div th:if="${bean.organStatus.equals('확정')}"
+								th:text="${bean.organStatus}">확정</div></td>
+						<td class="text-center"
+							th:text=" ${#dates.format(bean.organCreated, 'yyyy-MM-dd')}">2021.09.12</td>
+						<td class="text-center"
+							th:text="${bean.organHistory.reviseDate}==null?'-':${#dates.format(bean.organHistory.reviseDate, 'yyyy-MM-dd')}">2022.06.02</td>
+						<td class="text-center"
+							th:text="${bean.organHistory.revisor}==null?'-':${bean.organHistory.revisor}">조연희</td>
+					</tr>
+
+
+				</tbody>
+			</table>
+		</div>
+
+		<div id="paginationButton">
+			<nav aria-label="Page navigation example">
+				<ul class="pagination">
+					<li class="page-item"><a class="page-link" aria-label="First"
+						th:href="@{/organ(page=${1},perPageNum=${paging.cri.perPageNum}  ,      organStatus   =${paging.cri.searchOrganStatus}        ,           organName=${cri.searchOrganName} )  }">
+							<span aria-hidden="true">&laquo;</span>
+					</a></li>
+
+					<li class="page-item">
+						<div th:if="${paging.startPage}-1 == 0">
+							<a class="page-link" aria-label="Prev"
+								th:href="@{/organ(page=${1} ,       perPageNum=${paging.cri.perPageNum},    organStatus   =${paging.cri.searchOrganStatus}    ,    organName=${cri.searchOrganName}  )}">
+								<span aria-hidden="true">&lt;</span>
+							</a>
+						</div>
+
+						<div th:unless="${paging.startPage}-1 == 0">
+							<a class="page-link" aria-label="Prev"
+								th:href="@{/organ(page=${paging.startPage}-1 ,       perPageNum=${paging.cri.perPageNum},    organStatus   =${paging.cri.searchOrganStatus}    ,    organName=${cri.searchOrganName}  )}">
+								<span aria-hidden="true">&lt;</span>
+							</a>
+						</div>
+					</li>
+
+					<li
+						th:each="idx,iterStat : ${#numbers.sequence(paging.startPage,paging.endPage)}"
+						th:classappend="${paging.cri.page} == ${idx} ? active : null">
+						<a class="page-link"
+						th:href="@{/organ(page=${idx},   perPageNum=${paging.cri.perPageNum},      organStatus   =${paging.cri.searchOrganStatus}        ,           organName=${cri.searchOrganName})}"
+						th:if="${paging.totalCount} > 0" th:text="${idx}"></a>
+					</li>
+
+
+					<li class="page-item">
+						<div th:if="${paging.endPage} == ${paging.totalPageCount}">
+							<a class="page-link" aria-label="Next"
+								th:href="@{/organ(page=${paging.endPage}     ,       perPageNum=${paging.cri.perPageNum}    ,       organStatus   =${paging.cri.searchOrganStatus}    ,    organName=${cri.searchOrganName}  )}">
+								<span aria-hidden="true">&gt;</span>
+							</a>
+						</div>
+
+						<div th:unless="${paging.endPage} == ${paging.totalPageCount}">
+							<a class="page-link" aria-label="Next"
+								th:href="@{/organ(page=${paging.endPage} +1   ,perPageNum=${paging.cri.perPageNum}      ,       organStatus   =${paging.cri.searchOrganStatus}    ,    organName=${cri.searchOrganName}   ) }     ">
+								<span aria-hidden="true">&gt;</span>
+							</a>
+						</div>
+					</li>
+
+
+					<li class="page-item"><a class="page-link" aria-label="Next"
+						th:href="@{/organ(page=${paging.totalPageCount}   ,    perPageNum=${paging.cri.perPageNum},    organStatus   =${paging.cri.searchOrganStatus}    ,    organName=${cri.searchOrganName}  )}">
+							<span aria-hidden="true">&raquo;</span>
+					</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+	<!-- 상품관리 내용 end -->
+
+	</div>
+	<!-- contents 내용 -->
+	<script type="text/javascript">
+     
+     /* 밑에 url부분들은 찾아서 수정 해야할 듯.. */
+  
+    const showValue = (target) =>{ 
+    	
+ 			var organStatus = $('#organStatus').val();
+        	var organName = $('#organName').val();
+        	var url = newURL+'organ/?page=1&perPageNum='+target.value;
+        	url = url + '&organStatus=' + organStatus;
+        	url = url + '&organName=' + organName;
+
+        	location.href=url;
+   		}
+    
+    $(document).on('click','#searchBtn', function(e){
+    	e.preventDefault();
+    	  
+        var organStatus = $('#organStatus').val();
+       	var organName = $('#organName').val();
+    	var url = newURL+'organ/?page=1&perPageNum='+$('#choiceView')[0].value;
+    	url = url + '&organStatus=' + organStatus;
+    	url = url + '&organName=' + organName;
+    	
+    	location.href=url;
+    	consoloe.log(url);
+    	
+    });
+    </script>
+</body>
+</html>

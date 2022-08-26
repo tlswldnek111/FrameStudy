@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <html xmlns:th="http://www.thymeleaf.org">
+    <th:block th:replace="views/template/header :: linkFragment"></th:block>
+    <link rel="stylesheet" href="/css/nav.css">
+    <script type="text/javascript" src="/js/NavSide.js"></script>
+    <script type="text/javascript" src="/js/MathCalc.js"></script>
+</head>
+
+<style type="text/css">
+	#btns-group {
+		margin-bottom:20px;
+		margin-top:-20px;
+	}
+    #btns-group > div > button{
+        width:150px;
+        height:40px;
+    }
+    #btns-group > div > button:first-child{
+        float:left;
+    }
+    #btns-group > div > button:last-child{
+        border-color:gray;
+        float:right;
+    }
+    #btns-group > div > button:last-child:hover{
+        background-color: gainsboro;
+    }
+    #organ-detail-name{
+        background-color: #e9ecef;
+        opacity: 1;
+        font-size: 1rem;
+        font-weight: 300;
+        line-height: 1.5;
+        border: 1px solid #ced4da;
+        color:gray;
+        text-align: left;
+        padding-left: 10px;
+        margin-left:90px;
+        margin-bottom:40px;
+        width:400px;
+    }
+    .organ-date-expire-ok{
+        color:#236ade;
+    }
+    .organ-date-expire-no{
+        color:gray;
+    }
+    
+     .organ-detail-title-1{
+     padding-left:40px;
+      padding-top:20px;
+   	 padding-bottom:10px;
+     }
+     .organ-detail-title-1  > :first-child{
+   		 float:left;
+        width:100%;
+        font-size: large;
+        font-weight: bold;
+     }
+      .organ-detail-title-1  > :first-child> :first-child > :first-child > :first-child{
+       margin-left:30px;
+      }
+      
+     .organ-detail-title-2{
+     padding-left:40px;
+    	 line-height:100px;
+     }
+    .organ-detail-title-2 > :first-child{
+        float:left;
+        width:40%;
+    }
+    .organ-detail-title-2 > :last-child{
+        float:left;
+        width:60%;
+    }
+    
+    #organ-detail-product{
+        margin-left:20px;
+        width:200px;
+    }
+
+    #organ-detail-tabs > :first-child{
+        margin-left:60px;
+        margin-right:5px;
+    } 
+    #organ-detail-tabs > :last-child:hover{
+        color:black;
+    }
+    .organ-detail-tab{
+        width:200px;
+        height:50px;
+        background-color: white;
+        margin-right:-6px;
+        border-top-left-radius: 0.375rem;
+        border-top-right-radius:0.375rem;
+        color:black;
+    }
+    .organ-detail-tab-ck{
+        border:1px solid #236ade;
+        border-bottom: 1px solid white;
+        font-weight: 600;
+    }
+    .organ-detail-tab-none{
+        border:1px solid gainsboro;
+        border-bottom: 1px solid white;
+        color:gray;
+    }
+    .nav-tabs .nav-link.active{
+        border-left-color:#236ade;
+        border-top-color:#236ade;
+        border-right-color: #236ade;
+        color:black;
+        font-weight: 900;
+    }
+
+    #myTabContent{
+        margin:40px;
+    }
+   .card-event-tab-detail-label{
+        width:10%;
+        font-weight: 600;
+        float:left;
+
+    }
+    .card-event-tab-detail-input{
+        width:90%;
+    }
+    #card-event-tab-detail>.row{
+        margin-top:40px;
+    }
+    .card-event-tab-detail-left{
+        width:50%;
+        float:left;
+    }
+    .card-event-tab-detail-right{
+        float:left;
+        width:50%;
+    }
+    .card-event-tab-detail-date-label{
+        width:20%;
+        font-weight: 600;
+        float:left;
+        margin-right:-8px;
+    }
+    input[type="date"] {
+        width:185px;
+    }
+    input[type="date"]::before {
+    display:none;
+    }
+
+    input[type="date"].after::-webkit-calendar-picker-indicator{
+        margin-left: 0px;
+    }
+    #radio-freepass{
+        margin-left:30px;
+    }
+    #card-event-tab-event-content,#card-event-tab-card-hashtag,.public-benefit-contents{
+        overflow-y:scroll;
+        overflow-x:hidden;
+        resize:none;
+        height:100px;
+    }
+    #card-event-tab-event-detail{
+        overflow-y:scroll;
+        overflow-x:hidden;
+        resize:none;
+        height:200px;
+    }
+    #card-event-tab-card-select{
+        float:right; 
+        resize:none;
+        margin-top:20px;
+        height:60px;
+    }
+    #card-event-tab-event-info{
+        float:right; 
+        resize:none;
+        margin-top:20px;
+        height:100px;
+    }
+    #card-event-tab-event-save{
+        width:150px;
+        height:40px;
+        margin-top:30px;
+        float:right;
+        margin-bottom:30px;
+    }
+    .organ-update-textarea{
+		float:right;
+        width:400px;
+    }
+    #organ-update-past{
+        overflow-y:scroll;
+        overflow-x:hidden;
+        resize:none;
+        height:150px;
+        width:600px;
+    }
+    #organ-update-now{
+    	float:left;
+    	margin-right:20px;
+    }
+    .main-detail-bg{
+    background-color: white;
+    box-shadow: 2px 2px 2px 2px #e9ecef;
+    }
+    #organ-detail-title-bg{
+    	background-color: white;
+    	margin-bottom:5px;
+    	
+        box-shadow: 2px 2px 2px 2px #e9ecef;
+    }
+    	
+    	#public-benefit-tab > li > button{
+	width:120px;
+	margin-left:5px;
+	text-align: left;
+	color:black;
+}
+.public-benefit-detail-tab{
+        border:1px solid gainsboro;
+        border-bottom: 1px solid white;
+}
+.public-benefit-form-label{
+float:left;
+	font-weight:bold;
+	width:10%;
+	margin-left:20px;
+	margin-right:20px;
+}
+.public-benefit-input9{
+width:87%;
+float:left;
+}
+.public-benefit-tab-title > *{
+	margin-bottom:10px;
+}
+.public-benefit-date{
+	margin-left:-10px;
+}
+.public-benefit-contents{
+width:1340px;
+}
+.public-tab > :first-child {
+	margin-top:30px;
+}
+.public-benefit-tab-title > .row{
+	margin-bottom:30px;
+}
+/*last tab*/
+	.card-last-tab-label{
+	font-weight:bold;
+	}
+
+    .card-event-tab-last-div{
+        margin-top:100px;
+        margin-left:10px;
+        margin-bottom:100px;
+    }
+    .card-event-tab-last-div > :first-child{
+        width:50%;
+        float:left;
+        line-height: 30px;
+    }
+    .card-event-tab-last-div > :last-child{
+        width:50%;
+        text-align: left;
+    }
+    .card-event-tab-last-div > :last-child > :first-child{
+       margin-left:60px;
+       margin-right:60px;
+       float:left;
+    }
+    .card-event-tab-last-div > :last-child > :last-child{
+   float:left;
+   width:150px;
+   height:40px;
+    }
+</style>
+
+<body>
+ <!-- nav -->
+    <th:block th:replace="views/template/nav :: navFragment"></th:block>
+    <!-- nav end -->
+
+    <!-- contents 내용 -->
+    <div class="main-container main-container-bg">
+
+        <!-- nav-side -->
+        <th:block th:replace="views/template/navside :: navsideFragment"></th:block>
+        <!-- nav-side end -->
+
+    		
+			    
+        <!-- 기관관리 detail 내용 -->
+       <!--organ detail contents-->
+    <div class="main-contents">
+			<p id="main-contents-title" class="detail-title">기관 관리</p>
+        <!-- btns -->
+        <div id="btns-group"  class="row">
+            <div>
+                <button class="btn btn-block btn-primary">수정정보 등록</button>
+                <button class="btn btn-block btn-light">목록</button>
+            </div>
+        </div>
+        <!--btns end-->
+        
+	 
+        <!--상태값, 기관명, 상품분류-->
+         
+         <div id="organ-detail-title-bg" >
+            <div class="row organ-detail-title-1" >
+                <div>
+                    <p>상태값 : <span class="organ-date-expire-no">기간 만료</span></p>
+                </div>
+            </div>
+         </div>   
+            <!-- 배경색 시작 white -->
+		<div class="main-detail-bg ">       
+            <div class="row organ-detail-title-2">
+                <div>
+                    <label>기관명  </label> 
+                    <input id="organ-detail-name" type="text" value="하나카드" disabled/>
+                </div>
+                <div>
+                    <label>상품 분류 </label> 
+                    <select id="organ-detail-product" disabled>
+                        <option >전체</option>
+                        <option value="1">예금</option>
+                        <option value="2">적금</option>
+                        <option value="3">대출</option>
+                        <option value="4" selected>카드</option>
+                    </select>
+                </div>
+            </div>
+        
+    	<!--상태값, 기관명, 상품분류 end-->
+		
+
+	 
+            <!--tabs-->
+            <ul class="nav nav-tabs" id="organ-detail-tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active organ-detail-tab " id="home-tab" data-bs-toggle="tab" data-bs-target="#card-event-tab" type="button" role="tab" aria-controls="card-event-tab" aria-selected="true">
+                    카드 연회비 이벤트</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link organ-detail-tab " id="profile-tab" data-bs-toggle="tab" data-bs-target="#public-benefit-tab" type="button" role="tab" aria-controls="public-benefit-tab" aria-selected="false">
+                    공동 혜택</button>
+                </li>
+              </ul>
+             <!--tabs end-->
+
+             <!-- tab 내용 -->
+         <div class="tab-content " id="myTabContent">
+               <!--card event tab detail 상세-->
+                <div class="tab-pane fade show active" id="card-event-tab" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                  
+                    <div id="card-event-tab-detail">
+                        <div class="row">
+                            <label class="card-event-tab-detail-label">이벤트명</label>
+                            <input class="card-event-tab-detail-input form-control" type="text" value="현대카드Z 시리즈 신규 발급 연회비 캐시백 이벤트" disabled maxlength="300"/>
+                        </div>
+                        <div class="row ">
+                            <label class="card-event-tab-detail-label">URL</label>
+                            <input class="card-event-tab-detail-input form-control" type="text" value="www.naver.com" disabled maxlength="300"/>
+                        </div>
+                        <div class="row ">
+                            <label class="card-event-tab-detail-label">이벤트 대상</label>
+                            <input class="card-event-tab-detail-input form-control" type="text" value="신규 발급 회원 본인카드에 한해 1인 1회 제공" disabled maxlength="300"/>
+                        </div>
+                        <div class="row ">
+                            <div class="card-event-tab-detail-left">
+                                <label class="card-event-tab-detail-date-label ">이벤트기간</label>
+                                <div class=" card-event-tab-detail-input ">
+                                    <input type="date" value="2019-09-22" disabled>
+                                    <span> - </span>
+                                    <input type="date" value="2019-09-30" disabled>
+                                </div>
+                            </div>
+                            <div class="card-event-tab-detail-right ">
+                                <label class="card-event-tab-detail-date-label">연회비 지원 방법</label>
+                               <div>
+                                    
+                                     <input id="radio-cashback" type="radio" value="cashback" checked disabled>
+                                     <label for="huey">캐시백</label>
+
+                                      <input id="radio-freepass" type="radio" value="freepass" disabled>
+                                      <label for="huey">면제</label>
+                               </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="card-event-tab-detail-label">이벤트 내용</label>
+                            <textarea id="card-event-tab-event-content" class="card-event-tab-detail-input form-control" disabled>asdasd</textarea>
+                        </div>
+                        <div class="row">
+                            <label class="card-event-tab-detail-label">이벤트 상세</label>
+                            <textarea id="card-event-tab-event-detail" class="card-event-tab-detail-input form-control" disabled>asdasd</textarea>
+                        </div>
+                        <div class="row">
+                            <label class="card-event-tab-detail-label">대상카드 선택</label>
+                            <textarea id="card-event-tab-card-hashtag" class="card-event-tab-detail-input form-control" disabled>asdasd</textarea>
+                            <label class="card-event-tab-detail-label"></label>
+                            <textarea id="card-event-tab-card-select" class="card-event-tab-detail-input form-control" disabled>asdasd</textarea>
+                        </div>
+                        <div class="row">
+                            <label class="card-event-tab-detail-label">유의사항</label>
+                            <textarea id="card-event-tab-event-detail" class="card-event-tab-detail-input form-control" >asdasd</textarea>
+                        </div>
+                    </div>
+                    <!--이벤트 저장 버튼-->
+                    <div class="row">
+                        <div>
+                            <button id="card-event-tab-event-save" class="btn btn-primary">이벤트 저장</button>
+                        </div>
+                    </div>
+                    <!--이벤트 저장 버튼 end-->
+                    
+                </div>
+                <!--card event tab detail 상세 end-->
+
+
+
+
+				<!-- public-beneft-tab -->
+                <div class="tab-pane fade" id="public-benefit-tab" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                    
+                  
+						<ul class="nav nav-tabs" id="public-benefit-tab" role="tablist">
+				                <li class="nav-item" role="presentation">
+				                  <button class="nav-link active public-benefit-detail-tab " id="home-tab" data-bs-toggle="tab" data-bs-target="#public-tab-1" type="button" role="tab" aria-controls="card-event-tab" aria-selected="true">
+				                    1</button>
+				                </li>
+				                 <li class="nav-item" role="presentation">
+				                  <button class="nav-link public-benefit-detail-tab " id="home-tab" data-bs-toggle="tab" data-bs-target="#public-tab-2" type="button" role="tab" aria-controls="card-event-tab" aria-selected="true">
+				                    1</button>
+				                </li>
+			              </ul>
+
+					<!-- tab1 내용 -->
+					<div class="tab-pane fade show active public-tab" id="public-tab-1" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+						
+						<div id="public-benefit-tab-title-1" class="public-benefit-tab-title">
+							<div class="row" >
+                            	<label class="public-benefit-form-label">패키지명</label>
+                            	<input class="public-benefit-input9 form-control" type="text" value="현대카드Z 시리즈 신규 발급 연회비 캐시백 이벤트"  maxlength="300"/>
+                     	   </div>
+                     	   <div class="row" >
+                            	<label class="public-benefit-form-label">URL</label>
+                            	<input class="public-benefit-input9 form-control" type="text" value="현대카드Z 시리즈 신규 발급 연회비 캐시백 이벤트"  maxlength="300"/>
+                     	   </div>
+                     	   <div class="row">
+                     	  		<label class="public-benefit-form-label ">이벤트기간</label>
+                                <div class="public-benefit-input9 public-benefit-date">
+                                    <input type="date" value="2019-09-22" disabled>
+                                    <span> - </span>
+                                    <input type="date" value="2019-09-30" disabled>
+                                </div>
+                     	   </div>
+                     	   
+                     	  <div class="row"> 
+		        			<label class="public-benefit-form-label">혜택 내용</label> 
+		        			<textarea class="form-control public-benefit-contents" rows="3">혜택 내용</textarea>
+		        			</div>
+                     	  <div class="row"> 
+		        			<label class="public-benefit-form-label">유의 사항</label> 
+		        			<textarea class="form-control public-benefit-contents" rows="3">유의사항</textarea>
+		        			</div> 
+                     	   
+						</div>
+						
+						<!-- 공동 혜택 탭 저장 -->
+						<div class="normal-forms">
+						
+							<div id="normal-form-0"  class="normal-form">
+								<th:block th:replace="views/Organmanage/normalForm :: detailbenefitFragment"></th:block>
+								<div class="row">
+								</div>
+							</div>
+							
+							
+						</div>
+						<!-- 공동 혜택 탭 저장 end-->
+						
+					</div>
+					<!-- tab1 내용 end -->
+					<script type="text/javascript">
+					//공동 혜택에서 + - 버튼 추가하기
+					//버튼 추가 
+					$(document).ready(function(){
+						normalform_plusbtn();
+					})
+					
+					function normalform_plusbtn(){
+						//버튼 + - 추가(있으면 삭제후 다시 추가) -> 버튼 
+						let normallen=$('.normal-forms').children().length;
+						
+						$('.normal-forms').children().each(function(index,ele){
+							//index =하나의 탭 안에 있는 normal-form의 갯수
+							$(ele).children().last().empty();
+								//	$('#normal-form-'+index+' #normal-form-btnclass').remove();
+
+							let lastbtn;
+							let minus_btn;
+							let plus_btn;
+							$(ele).attr('id','normal-form-'+index); // 제일 큰 부모 이름 변경
+							
+							
+							//내부 - 라디오버튼 이름 변경하기 ex) 처음은 0 ~ 
+							normal_radiobtn(index);
+							
+							//내부 -테이블의 추가버튼을 클릭했을 경우, -> 삭제버튼 클릭했을때 연동
+							minitable_discount_plus(index);
+							
+							
+							if(index==normallen-1 && index==0){
+								//하나밖에 없을경우, 플러스버튼만 존재하도록.
+								lastbtn = '';
+								lastbtn +='<div class="normal-form-full-btns-group">';
+								lastbtn +='<div><button id="normal-form-plus-'+index+'" class="normal-form-btn"><i class="bi bi-plus-lg"></i></button></div>';
+								lastbtn +='</div>';
+								
+								//btn 추가하기
+								$(ele).children().last().append(lastbtn);
+
+								plus_btn = $(ele).children().last().children().first().children().children().last().attr('id');
+								$('#'+plus_btn).bind("click",function(){
+									console.log("추가버튼2");
+									normalform_plus();
+									normalform_plusbtn();
+								})
+							}
+							else if(index==normallen-1){
+								//마지막일 경우, +, -버튼 추가하기
+									lastbtn = '';
+									lastbtn +='<div class="normal-form-btns-group">';
+									lastbtn +='<div><button id="normal-form-minus-'+index +'" class="normal-form-btn"><i class="bi bi-dash"></i></button></div>';
+									lastbtn +='<div><button id="normal-form-plus-'+index+'" class="normal-form-btn"><i class="bi bi-plus-lg"></i></button></div>'
+									lastbtn +='</div>';
+									
+									$(ele).children().last().append(lastbtn);
+
+									minus_btn = $(ele).children().last().children().first().children().children().first().attr('id');
+									$('#'+minus_btn).bind("click",function(){
+										$(ele).remove();
+										normalform_plusbtn();
+									});
+									plus_btn = $(ele).children().last().children().first().children().children().last().attr('id');
+									$('#'+plus_btn).bind("click",function(){
+										console.log("추가버튼");
+										normalform_plus();
+										normalform_plusbtn();
+									})
+									//안에 내용 radio버튼이나 그런거 값 변경시켜주기
+								
+							}else{
+									lastbtn = '';
+									lastbtn +='<div class="normal-form-full-btns-group">';
+									lastbtn +='<div><button id="normal-form-minus-'+index+'" class="normal-form-btn"><i class="bi bi-dash"></i></button></div>';
+									lastbtn +='</div>';
+									$(ele).children().last().append(lastbtn);
+
+									
+									minus_btn = $(ele).children().last().children().first().children().children().first().attr('id');
+									$('#'+minus_btn).bind("click",function(){
+										$(ele).remove();
+										normalform_plusbtn();
+									});
+							}
+							
+							//minusbtn();
+								
+						});
+					}
+					
+					//-테이블의 삭제버튼 클릭했을 경우,
+					function minitbale_discount_delete(id){	
+						//1. 할인
+						let minusele ='#normal-form-'+id+' #normal_Forms .normal_discount_Form div #normal_discount_Sixth .normal_discount_minitable tbody';
+
+						
+						$(minusele).children().each(function(index,ele){
+								
+								//button event 초기화
+								$(ele).children().eq(5).children().unbind("click");
+							 	$(ele).children().eq(5).children().bind("click",function(e){
+								
+								 if($(minusele+" tr").length>1){
+									// 남은 요소가 1개 이상일 경우 -> 이름을 다시 0부터 바꿔주기
+									 $(ele).remove();//해당 요소 삭제
+									//이름 다시 0부터 초기화 시켜주기
+									 $(minusele).children().each(function(index2,ele2){
+										 $(ele2).attr('id','normal_discount-'+index2).children().eq(5).children().attr('id','normal_discount-minus-'+index2);
+									 });
+								 }else if($(minusele+" tr").length==1){
+									// 남은 요소가 0개일 경우 input값 초기화 시켜준다.
+									$(minusele+' tr td span input').val('');
+									$(minusele+' tr td input').val('');
+								 }
+								 
+							 });
+                        
+                   		  });
+					}
+					//-테이블의 삭제버튼 클릭했을 경우 end
+					
+					//-테이블의 추가버튼 클릭했을 경우 
+					function minitable_discount_plus(id){
+						//1. 할인
+						let plusele = '#normal-form-'+id+' #normal_Forms .normal_discount_Form #normal_discount_Sixth .row #nordmal-discount-plusbtn';
+						let tbody_tr = '#normal-form-'+id+' #normal_discount_Sixth .normal_discount_minitable tbody';
+						
+								$(plusele).unbind("click");
+								$(plusele).bind("click",function(){
+									//테이블의 추가버튼을 클릭했을때, 10개이상은 추가되지않음.
+									if($(tbody_tr).children().length<10){
+										let tdlen=$(tbody_tr).children().length;
+										let data = '<tr id="normal_discount-'+tdlen+'">';
+											data +='<td class="minitable-border"><span><input class="form-control normal_discount_minitable-input1" type="text" onkeyup="chkrealNumber(this)" maxlength="3"/>&nbsp; 만원 이상</span></td>';
+											data +='<td class="minitable-border"><input class="form-control" type="text" value="10000" onkeyup="chkNumber(this)" /></td>';
+											data +='<td class="minitable-border"><input class="form-control" type="text" value="'+tdlen+'" onkeyup="chkNumber(this)" /></td>';
+											data +='<td class="minitable-border"><input class="form-control" type="text" value="10000" onkeyup="chkNumber(this)" /></td>';
+											data += '<td class="minitable-border"><span><input class="form-control normal_discount_minitable-input1" type="text" onkeyup="chkNumber_decimal(this)" />&nbsp; %</span></td>';
+											data +=' <td class="minitable-minus-th">';
+											data += '<button id="normal_discount-minus-'+tdlen+'" type="button">-</button>';
+											data +=' </td></tr>';
+										$(tbody_tr).append(data);
+										
+										
+										minitbale_discount_delete(id);
+									}
+									
+									
+								}) ;
+								
+							//2. 적립
+							let plusele2 = '#normal-form-'+id+' #normal_Forms .normal_Save #normal_Save_Sixth .row #nordmal-save-plusbtn';
+							let tbody_tr2 = '#normal-form-'+id+' #normal_Save_Sixth .normal_save_minitable tbody';
+							
+							$(plusele2).unbind("click");
+							$(plusele2).bind("click",function(){
+								//테이블의 추가버튼을 클릭했을때, 10개이상은 추가되지않음.
+								if($(tbody_tr2).children().length<10){
+									let tdlen=$(tbody_tr2).children().length;
+									let data = '<tr id="normal_save-'+tdlen+'">';
+										data +='<td class="minitable-border"><span><input class="form-control normal_save_minitable-input1" type="text" onkeyup="chkrealNumber(this)" maxlength="3"/>&nbsp; 만원 이상</span></td>';
+										data +='<td class="minitable-border"><input class="form-control" type="text" value="10000" onkeyup="chkNumber(this)" /></td>';
+										data +='<td class="minitable-border"><input class="form-control" type="text" value="'+tdlen+'" onkeyup="chkNumber(this)" /></td>';
+										data +='<td class="minitable-border"><input class="form-control" type="text" value="10000" onkeyup="chkNumber(this)" /></td>';
+										data += '<td class="minitable-border"><span><input class="form-control normal_save_minitable-input1" type="text" onkeyup="chkNumber_decimal(this)" />&nbsp; %</span></td>';
+										data +=' <td class="minitable-minus-th">';
+										data += '<button id="normal_save-minus-'+tdlen+'" type="button">-</button>';
+										data +=' </td></tr>';
+									$(tbody_tr2).append(data);
+									
+									
+									minitbale_discount_delete(id);
+								}
+								
+								
+							}) ;
+								
+								
+								
+								minitbale_discount_delete(id);
+							}
+					//-테이블의 추가버튼 클릭했을 경우 end
+					
+					//radio button 이름 변경
+					function normal_radiobtn(index){
+								$('#normal-form-'+index+' #normal_discount_First div input').attr('name','discount-radio-'+index);
+				       			$('input[name=discount-radio-'+index+']').change(function(){
+					       			var radiocheck = $('input[name=discount-radio-'+index+']:checked').val();
+					       			
+					       			$('#normal-form-'+index+' #normal_Forms').children().each(function(idx,ele){
+					       				$(ele).css('display','none');
+				                        if(idx==radiocheck) $(ele).css('display','block');
+				                    })
+					       				
+					       		});
+				       			$('#normal-form-'+index+' #normal_discount_First div').children().eq(0).prop('checked',true);
+							}
+					
+					//form 추가할때 --> 첫번째 요소 복사하고, 안에 table과 내용들을 초기화시켜줘야함.
+					function normalform_plus(){
+						let normallen=$('.normal-forms').children().length;
+						//현재 길이 수
+						$('.normal-forms').children().first().clone().attr('id','normal-form-'+normallen).appendTo('.normal-forms');
+						
+						//table plus btn -> minus btn
+						minitable_discount_plus(normallen);
+						// table radio btn
+						normal_radiobtn(normallen);
+						
+						//기본혜택 -> 할인 초기화
+						let first_form = '#normal-form-'+normallen+' #normal_Forms .normal_discount_Form #normal_discount';
+						$(first_form+' #normal_discount_Second input').val('');
+						$(first_form+' #normal_discount_Third textarea').val('');
+						$(first_form+' #normal_discount_Forth input').val('');
+						$(first_form+' #normal_discount_Fifth div input').val('');
+						$(first_form+' #normal_discount_Sixth table tbody input').val('');
+						$(first_form+' #normal_discount_Seventh textarea').val('');
+						//기본혜택 -> 할인 초기화 -> 테이블 tr 1개만 나오게 하기
+						$('#normal-form-'+normallen+' #normal_discount_Sixth tbody tr').remove();
+						$('#normal-form-'+normallen+' #normal_discount_Sixth .row #nordmal-discount-plusbtn').click();
+						
+						//기본혜택 -> 적립 초기화
+						$('#normal-form-'+normallen+' #normal_Forms .normal_Save');
+						
+						//기본혜택 -> 리터당 할인 초기화
+						$('#normal-form-'+normallen+' #normal_Forms .normal_Liter_Discount');
+						
+						//기본혜택 -> 리터당적립 초기화
+						$('#normal-form-'+normallen+' #normal_Forms .normal_Liter_Save');
+						
+						//기본혜택 -> 현장할인
+						$('#normal-form-'+normallen+' #normal_Forms .normal_Spot_Discount');
+						
+						
+					};
+					
+					
+					
+					</script>
+					<style type="text/css">
+					/* tab 추가 버튼 plus minus */
+					
+					    .normal-form{
+						    margin-left:-40px;
+						   	width:1600px;
+						    margin-bottom:30px;
+						    box-shadow: 0px 0px 2px 2px #e9ecef;
+					    }
+    	
+						.normal-form-btns-group,.normal-form-full-btns-group{
+						position:absolute;
+							margin-top:-20px;
+						}
+						.normal-form-btns-group > div > .normal-form-btn,
+						.normal-form-full-btns-group > div > .normal-form-btn{
+							
+							background-color: white;
+							border-radius: 30px;
+							color:#236ade;
+							width:40px;
+							height:40px;
+							text-align:center;
+							margin:auto;
+							font-size:x-large;
+	    					box-shadow: 2px 2px 2px 2px #e9ecef;
+	    					border :0px;
+	    					margin-right:5px;
+						}
+						.normal-form-btns-group > :first-child {
+							float:left;
+							width:50%;
+						}
+						.normal-form-btns-group > :last-child{
+							float:right;
+							width:50%;
+						}
+						
+						.normal-form-btns-group > :first-child >:last-child {
+							float:right;
+						}
+						.normal-form-full-btns-group > :first-child {
+							width:50%;
+							float:right;
+						}
+					</style>
+					
+					
+                </div>
+				<!-- public-beneft-tab end -->
+                
+        </div>
+           <!-- tab 내용 end -->
+    </div> 
+        
+				<div class="row card-event-tab-last-div">
+                    <div >
+                        <label class="card-last-tab-label">변경 이력</label>
+                        <textarea id="organ-update-past" class="form-control organ-update-textarea"></textarea>
+                    </div>
+                    <div >
+                        <label class="card-last-tab-label">변경 내역</label>
+                        <input id="organ-update-now" class="form-control organ-update-textarea" type="text" >
+                        <button id="organ-update-commit" class="btn btn-primary ">확정하기</button>
+                     </div>
+                </div>
+    </div>
+    <!--organ detail contents end-->
+
+        <!-- 기관관리 detail 내용 end-->
+        
+    </div>
+        
+        
+</body>
+</html>

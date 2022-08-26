@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<th:block th:fragment="organManageModal">
+	
+
+	
+		<div class="modal-background"></div>
+		<!--  혜택 업종 선택하기 modal  -->
+		<div id="Benefit-Industry-Selection-Modal" class="modal benefit-modal" tabindex="-1">
+			<div class="modal-wrap approve-modal-wrap">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title">혜택 업종 선택하기</h3>
+						<button id="Benefit-Industry-Selecetion-Close" type="button"
+							class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<!-- modal-body -->
+					<div class="modal-body">
+
+								<div class="benefit-industry-search-text">
+									<p style="margin: 0px 15px 0px 0px;">혜택 업종 찾기</p>
+								</div>
+								<div class="benefit-industry-search-text3">
+									<p>해당 업종이 맞는지 확인해주세요.</p>
+								</div>
+								<br>
+								<div class="selectlistdiv1">
+									<span>혜택 해당 업종 </span>
+									  <div id="select-box" ></div>
+								</div>
+
+					</div>
+
+					<div class="modal-footer">
+						<div class="btn-letf">
+							<span id="selecteresult" style="color: #236ADE"></span> <span>을/를
+								혜택 업종으로</span>
+							<button id="btn-acept" type="submit"
+								class="btn btn-primary btn-lg">등록</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		
+		<!-- 기관-혜택업종 선택하기 modal-end  -->
+
+
+		<!-- 기관-혜택저장-modal-start-->
+	
+		<div id="Save-Benefits-Modal" class="modal SaveBenefitsModal"
+			tabindex="-1">
+			<div class="modal-wrap approve-modal-wrap">
+				<div class="modal-content">
+					<div class="modal-header" style="padding-bottom: 40px">
+						<button id="Save-Benefits-Modal-Close" type="button"
+							class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body" id="Product_TemporaryStorage_Modal_Body">
+						<div class="sava-benefits-text1">
+									<p>빈 값이 있습니다.</p>
+									<p>다시 입력해주세요.</p>
+						</div>
+					</div>
+					<div class="modal-footer" style="padding-top: 20px">
+
+						<div class="footer-btn-right">
+							<button id="Sava-Benefits-Modal-Input-Again-No" type="button"
+								class="btn btn-primary btn-lg" data-bs-dismiss="modal">돌아가기</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 기관-혜택저장-modal-end-->
+
+		<!-- 기관=확정하기-modal-start-->
+		<div id="Organ-Confirmation-Modal"
+			class="modal OrganConfirmationModal" tabindex="-1">
+			<div class="modal-wrap approve-modal-wrap">
+				<div class="modal-content">
+					<div class="modal-header" style="padding-bottom: 40px">
+						<button id="Organ-Confirmation-Modal-Close" type="button"
+							class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="sava-benefits-text1">
+							<p style="margin: 20px 20px;">수정하시겠습니까?</p>
+						</div>
+					</div>
+					<div class="modal-footer" style="padding-top: 20px">
+
+						<div class="footer-btn-letf">
+							<button id="Organ-Confirmation-Modal-update-check-Again-Yes"
+								type="button" class="btn btn-primary btn-lg"
+								data-bs-dismiss="modal">확인</button>
+						</div>
+						<div class="footer-btn-right">
+							<button id="Organ-Confirmation-Modal-update-check-Again-No"
+								type="button" class="btn btn-primary btn-lg"
+								data-bs-dismiss="modal">취소</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="organRefreshModal"
+					class="modal OrganConfirmationModal2 " tabindex="-1">
+					<div class="modal-wrap approve-modal-wrap">
+						<div class="modal-content">
+							<div class="modal-header" style="padding-bottom: 40px">
+								<button id="Organ-Confirmation-Modal-Close2" type="button"
+									class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<div class="sava-benefits-text1">
+									<p style="margin: 20px 20px;">수정을 취소하시겠습니까?</p>
+								</div>
+							</div>
+							<div class="modal-footer" style="padding-top: 20px">
+		
+								<div class="footer-btn-letf">
+									<button id="Organ-Confirmation-Modal-update-check-Again-Yes2"
+										type="button" class="btn btn-primary btn-lg"
+										data-bs-dismiss="modal">확인</button>
+								</div>
+								<div class="footer-btn-right">
+									<button id="Organ-Confirmation-Modal-update-check-Again-No2"
+										type="button" class="btn btn-primary btn-lg"
+										data-bs-dismiss="modal">취소</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+<div class="loading-background"></div>
+<div class="loader" style="position: fixed;left: 50%;top: 50%;">Loading...</div>
+
+</th:block>
+</html>

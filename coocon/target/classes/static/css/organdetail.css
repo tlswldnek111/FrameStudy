@@ -1,0 +1,1227 @@
+#select-box{
+	width:200px;
+	float:right;
+}
+
+#autoComplete{
+	margin-top:10px;
+}
+.ui-autocomplete {
+	max-height: 100px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding-right: 20px;
+}
+.ui-autocomplete .highlight {
+        color: #236ade; 
+}
+
+html .ui-autocomplete {
+	height: 100px;
+}
+
+ .loading-background {
+   display: block;
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   top: 0;
+   left: 0;
+   z-index: 2000;
+} 
+ .loader,
+.loader:before,
+.loader:after {
+  border-radius: 50%;
+  width: 2.5em;
+  height: 2.5em;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation: load7 1.8s infinite ease-in-out;
+  animation: load7 1.8s infinite ease-in-out;
+}
+.loader {
+  color: #236ade;
+  font-size: 10px;
+  margin: 80px auto;
+  position: relative;
+  text-indent: -9999em;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+.loader:before,
+.loader:after {
+  content: '';
+  position: absolute;
+  top: 0;
+}
+.loader:before {
+  left: -3.5em;
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+.loader:after {
+  left: 3.5em;
+}
+@-webkit-keyframes load7 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 2.5em 0 -1.3em;
+  }
+  40% {
+    box-shadow: 0 2.5em 0 0;
+  }
+}
+@keyframes load7 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 2.5em 0 -1.3em;
+  }
+  40% {
+    box-shadow: 0 2.5em 0 0;
+  }
+}
+
+
+
+
+
+
+.normall-tab-event-reset{
+	border: 1px solid gray;
+    margin-top: 30px;
+    margin-right:15px;
+}
+		 .js-example-basic-single{
+          	width:100%;
+          	height:100%;
+          }
+        .row > tags:first-of-type{
+			height:150px;
+			overflow-y: auto;
+		}
+		.organ-date-expire{
+			color:#0d6efd;
+		}
+/*normalForm start*/
+ 
+    /*첫번째 CSS 기본 입력 폼  
+      DIV를 한줄씩 묶어서 사용하고 적용함
+    */
+    	/*기본혜택-할인폼 */
+    	#normal_discount_First{
+    	padding-top:30px;
+    		margin-left:30px;
+    	}
+    	.normal_discount_Form>div>div{
+    		margin:30px;
+    	}
+    	.form-label{
+    		font-weight:bold;
+    		width:10%;
+    		margin-left:30px;
+    	}
+    	
+    	#normal_discount_Second>input{
+    		width:200px;
+    		display: inline;
+    	}
+    	#normal_discount_Second>select{
+    		width:250px;
+    		display: inline;
+    	}
+    	#normal_discount_Third>label{
+    		vertical-align: top;
+    	}
+    	#normal_discount_Third>textarea{
+    	 	width:1350px;	
+    	 	display:inline;
+    	}
+    	#searchBenefit{
+    		margin-left:190px;
+    	}
+    	#normal_discount_Forth>input{
+    		width:188px;
+    		display: inline;
+    		text-align: right;
+    	}	
+    	
+    	#normal_discount_Fifth>input{
+    		width:120px;
+    		height:38.67px;
+    		display: inline;
+    		margin-left:5px;
+    	}
+    	#normal_discount_Fifth > label{
+    		height:24px;
+    		width:170px;
+    		margin-left:18px;
+    		margin-top:7px;
+    	}
+    	#normal_discount_Fifth>:last-child{
+    		width:120px;
+    		display: inline;
+    	}
+    	
+    	#normal_discount_Sixth>table{
+    		width:1350px;	
+    		display:inline;
+    	}
+    	#normal_discount_Seventh>label{
+    		vertical-align: top;
+    	}
+    	#normal_discount_Seventh>textarea{
+    		width:1350px;
+    		display: inline;
+    		margin-bottom:30px;
+    		height:200px;
+    	}
+    	/*normal_discount_table*/
+    	.normal_discount_minitable > thead {
+			background-color: gainsboro;
+		}
+		.normal_discount_minitable > thead> tr > th {
+			font-weight: bold;
+		}
+		.normal_discount_minitable > tbody > tr > td{
+			padding:15px;
+		}
+		.normal_discount_minitable > tbody > tr >:first-child{
+			float:center;
+		}
+		.normal_discount_minitable > tbody > tr > td > span > input{
+			text-align: right;
+		}
+		.normal_discount_minitable > tbody > tr > td > span > input:first-child{
+			margin-left:0px;
+		}
+		.normal_discount_minitable > tbody > tr > td > span > input:last-child{
+			margin-left:40px;
+		}
+		.normal_discount_minitable > tbody > tr > td > span{
+		line-height:40px;
+		}
+		.normal_discount_minitable-input1 {
+		width:100px;
+		float:left;
+		}
+    	/*기본혜택 적립 폼 */
+    	
+    	#normal_Save{
+    		box-shadow: 3px 3px 3px 3px ghostwhite;  
+    	}
+    	.normal_Save>div>div{
+    		margin:30px;
+    	}
+   		#normal_Save_Second>input{
+    		width:200px;
+    		display: inline;
+    	}
+    	#normal_Save_Second>select{
+    		width:250px;
+    		display: inline;
+    	}
+    	#normal_Save_Third>label{
+    		vertical-align: top;
+    	}
+    	#normal_Save_Third>textarea{
+    	 	width:1350px;	
+    	 	display:inline;
+    	}
+    	#normal_Save_Forth>input{
+    		width:188px;
+    		display: inline;
+    	}	
+    	#normal_Save_Fifth>input{
+    		width:120px;
+    		display: inline;
+    	}
+    	#normal_Save_Fifth>:last-child{
+    		width:120px;
+    		display: inline;
+    	}
+    	#normal_Save_Sixth>table{
+    		width:1350px;	
+    		display:inline;
+    	}
+    	#normal_Save_Seventh>label{
+    		vertical-align: top;
+    	}
+    	#normal_Save_Seventh>textarea{
+    		width:1350px;
+    		display: inline;
+    		margin-bottom:30px;
+    		height:200px;
+    	}
+    	#normal_Save_Select{	
+			display: flex;
+			justify-content: right;
+	    }
+	    
+	    /*normal_save_minitable*/
+		.normal_save_minitable > thead {
+			background-color: gainsboro;
+		}
+		.normal_save_minitable > thead> tr > th {
+			font-weight: bold;
+		}
+		.normal_save_minitable > tbody > tr > td{
+			padding:15px;
+		}
+		.normal_save_minitable > tbody > tr >:first-child{
+			float:center;
+		}
+		.normal_save_minitable > tbody > tr > td > span > input{
+			text-align: right;
+		}
+		.normal_save_minitable > tbody > tr > td > span > input:first-child{
+			margin-left:0px;
+		}
+		.normal_save_minitable > tbody > tr > td > span > input:last-child{
+			margin-left:40px;
+		}
+		.normal_save_minitable > tbody > tr > td > span{
+		line-height:40px;
+		}
+		.normal_save_minitable-input1 {
+		width:100px;
+		float:left;
+		}
+	    
+	    /*기본혜택-리터당 할인폼 */
+	    	
+	    #normal_Liter_Discount{
+    		box-shadow: 3px 3px 3px 3px ghostwhite;    	
+    	}
+    	.normal_Liter_Discount>div>div{
+    		margin:30px;
+    	}
+   		#normal_Liter_Discount_Second>input{
+    		width:200px;
+    		display: inline;
+    	}
+    	#normal_Liter_Discount_Second>select{
+    		width:250px;
+    		display: inline;
+    	}
+    	#normal_Liter_Discount_Third>label{
+    		vertical-align: top;
+    	}
+    	#normal_Liter_Discount_Third>textarea{
+    	 	width:1350px;	
+    	 	display:inline;
+    	}
+    	#normal_Liter_Discount_Forth>input{
+    		width:188px;
+    		display: inline;
+    	}	
+    	#normal_Liter_Discount_Fifth>input{
+    		width:120px;
+    		display: inline;
+    	}
+    	#normal_Liter_Discount_Fifth>:last-child{
+    		width:120px;
+    		display: inline;
+    	}
+    	#normal_Liter_Discount_Sixth>table{
+    		width:1350px;	
+    		display:inline;
+    	}
+    	#normal_Liter_Discount_Seventh>label{
+    		vertical-align: top;
+    	}
+    	#normal_Liter_Discount_Seventh>textarea{
+    		width:1350px;
+    		display: inline;
+    		margin-bottom:30px;
+    		height:200px;
+    	}
+		.last-element-btn{	
+			display: flex;
+			justify-content: right;
+	    }
+	    .last-element-btn > button {
+	    	width:150px;
+	    	height:40px;
+	    }
+	    
+	     /*normal_Liter_minitable*/
+		.normal_Liter_minitable > thead {
+			background-color: gainsboro;
+		}
+		.normal_Liter_minitable > thead> tr > th {
+			font-weight: bold;
+		}
+		.normal_Liter_minitable > tbody > tr > td{
+			padding:15px;
+		}
+		.normal_Liter_minitable > tbody > tr >:first-child{
+			float:center;
+		}
+		.normal_Liter_minitable > tbody > tr > td > span > input{
+			text-align: right;
+		}
+		.normal_Liter_minitable > tbody > tr > td > span > input:first-child{
+			margin-left:0px;
+		}
+		.normal_Liter_minitable > tbody > tr > td > span > input:last-child{
+			margin-left:40px;
+		}
+		.normal_Liter_minitable > tbody > tr > td > span{
+		line-height:40px;
+		}
+		.normal_Liter_minitable-input1 {
+		width:100px;
+		float:left;
+		}
+	    
+	    
+	    /*기본혜택-리터당 적립폼 */
+	    #normal_Liter_Save{
+    		box-shadow: 3px 3px 3px 3px ghostwhite;    	
+    	}
+    	#normal_Liter_Save>div>div{
+    		margin:30px;
+    	}
+   		#normal_Liter_Save_Second>input{
+    		width:200px;
+    		display: inline;
+    	}
+    	#normal_Liter_Save_Second>select{
+    		width:250px;
+    		display: inline;
+    	}
+    	#normal_Liter_Save_Third>label{
+    		vertical-align: top;
+    	}
+    	#normal_Liter_Save_Third>textarea{
+    	 	width:1350px;	
+    	 	display:inline;
+    	}
+    	#normal_Liter_Save_Forth>input{
+    		width:188px;
+    		display: inline;
+    	}	
+    	#normal_Liter_Save_Fifth>input{
+    		width:120px;
+    		display: inline;
+    	}
+    	#normal_Liter_Save_Fifth>:last-child{
+    		width:120px;
+    		display: inline;
+    	}
+    	#normal_Liter_Save_Sixth>table{
+    		width:1350px;	
+    		display:inline;
+    	}
+    	#normal_Liter_Save_Seventh>label{
+    		vertical-align: top;
+    	}
+    	#normal_Liter_Save_Seventh>textarea{
+    		width:1350px;
+    		display: inline;
+    		margin-bottom:30px;
+    		height:200px;
+    	}
+		#normal_Liter_Save_Select{	
+			display: flex;
+			justify-content: right;
+	    }
+	    
+	    /*기본혜택-현장할인폼 */
+    	.normal_Spot_Discount>div>div{
+    		margin:30px;
+    	}
+   		#normal_Spot_Discount_Second>input{
+    		width:200px;
+    		display: inline;
+    	}
+    	#normal_Spot_Discount_Second>select{
+    		width:250px;
+    		display: inline;
+    	}
+    	#normal_Spot_Discount_Third>label{
+    		vertical-align: top;
+    	}
+    	#normal_Spot_Discount_Third>textarea{
+    	 	width:1350px;	
+    	 	display:inline;
+    	}
+    	#normal_Spot_Discount_Forth>input{
+    		width:188px;
+    		display: inline;
+    	}	
+    	#normal_Spot_Discount_Fifth>input{
+    		width:120px;
+    		display: inline;
+    	}
+    	#normal_Spot_Discount_Fifth>:last-child{
+    		width:120px;
+    		display: inline;
+    	}
+    	#normal_Spot_Discount_Sixth>table{
+    		width:1350px;	
+    		display:inline;
+    	}
+    	#normal_Spot_Discount_Seventh>label{
+    		vertical-align: top;
+    	}
+    	#normal_Spot_Discount_Seventh>textarea{
+    		width:1350px;
+    		display: inline;
+    		margin-bottom:30px;
+    		height:200px;
+    	}
+		#normal_Spot_Discount_Select{	
+			display: flex;
+			justify-content: right;
+	    }
+	    
+	       /*현장할인 minitable*/
+		.normal_Spot_Discount_minitable > thead {
+			background-color: gainsboro;
+		}
+		.normal_Spot_Discount_minitable > thead> tr > th {
+			font-weight: bold;
+		}
+		.normal_Spot_Discount_minitable > tbody > tr > td{
+			padding:15px;
+		}
+		.normal_Spot_Discount_minitable > tbody > tr >:first-child{
+			float:center;
+		}
+		.normal_Spot_Discount_minitable > tbody > tr > td > span > input{
+			text-align: right;
+		}
+		.normal_Spot_Discount_minitable > tbody > tr > td > span > input:first-child{
+			margin-left:0px;
+		}
+		.normal_Spot_Discount_minitable > tbody > tr > td > span > input:last-child{
+			margin-left:40px;
+		}
+		.normal_Spot_Discount_minitable > tbody > tr > td > span{
+		line-height:40px;
+		}
+		.normal_Spot_Discount_minitable-input1 {
+		width:100px;
+		float:left;
+		}
+	    
+	    
+	    
+	    
+	    /*기본혜택-표준화 불가능 혜택폼 */
+	   
+    	.normal_Imposible>div>div{
+    		margin:30px;
+    	}
+   		#normal_Imposible_Second>input{
+    		width:800px;
+    		display: inline;
+    	}
+    	#normal_Imposible_Third>input{
+    	 	width:1350px;	
+    	 	display:inline;
+    	}
+    	#normal_Imposible_Forth>label{
+    	 	vertical-align: top;
+    	}
+    	#normal_Imposible_Forth>textarea{
+    	 	width:1350px;	
+    	 	display:inline;	
+    	 	margin-bottom:30px;
+    	 	height:200px;
+    	}
+    	
+		#normal_Imposible_Select{	
+			display: flex;
+			justify-content: right;
+	    }  
+	    /*기본혜택- 페이지 제일 마지막 폼*/
+    	#footerDiv{	
+    		margin:30px;
+    	}
+    	
+    	#footerDiv>label{
+    		vertical-align: top;
+    	}
+    	#footerDiv>textarea{
+    		width:700px	;
+    		display:inline;
+    	}
+    	#footerDiv>input{
+    		width:350px;
+    		display:inline;
+    		vertical-align: top;
+    	}
+    	#footerDiv>button{	
+    		position: absolute;
+    		margin-left:15px;
+    	}
+    	
+    	.normal_Save,.normal_Liter_Discount,.normal_Liter_Save,.normal_Spot_Discount,
+    	.normal_Imposible{
+    		display:none;
+    	}
+    	.normal_discount_Form{
+    		display:block;
+    	}
+    	.form-control, .form-select{
+    		border-radius: 0%;
+    	}
+    	.public-benefit-textarea{
+    	
+    	 overflow-y:scroll;
+        overflow-x:hidden;
+        resize:none;
+        height:100px;
+        }
+    	.last-element {
+		padding-bottom:50px;
+		margin-bottom:30px;
+		padding-right:35px;
+	}
+	.business-search-btn{
+		height:40px;
+		width:40px;
+		margin-left: -6px;
+	    border: none
+	}
+
+  		/*할인에서 테이블 css*/
+	    #normal_Save_Second,#normal_Save_Third,#normal_Save_Forth
+	    , #normal_Save_Fifth, #normal_Save_Sixth, #normal_Save_Seventh    {
+	    	margin:30px;
+	    }
+	    #normal_Liter_Discount_Second,#normal_Liter_Discount_Third,#normal_Liter_Discount_Forth,
+	    #normal_Liter_Discount_Fifth,#normal_Liter_Discount_Sixth,#normal_Liter_Discount_Seventh{
+	    	margin:30px;
+	    }
+	    .searchBenefit{
+	    resize: none;
+	    margin-left:190px;
+	    }
+	    #normal_Liter_Save_Div> div{
+	    margin:30px;
+	    }
+	    .minitable-minus-th{
+	    	background-color: white;
+	    	border : 1px solid white;
+	    }
+	    .minitable-minus-th >button{
+	    	background-color:white;
+	    	border:1px solid gainsboro;
+	    	width:30px;
+	    	height:30px;
+	    }
+	    .minitable-plus-btn{
+	    	width:35px;
+	    	height:35px;
+	    	margin:auto;
+	    	text-align: center;
+	    	background-color: white;
+	    	border:1px solid gainsboro;
+	    	margin-top:10px;
+	    }
+	    .minitable-border{
+	    border:1px solid gainsboro;
+	    }
+	    tbody > tr > td > input{
+	    text-align: right;
+	    }
+	    
+	    .form-input-right{
+	    width: 100px;
+	    display: inline;
+	    text-align: right;
+	    }
+	    /*할인에서 테이블 css end*/
+	    
+	    /*normalForm end*/
+	    
+	    
+	    /*organdetail start*/
+	    
+	    #btns-group {
+		margin-bottom:20px;
+		margin-top:-20px;
+	}
+    #btns-group > div > button{
+        width:150px;
+        height:40px;
+    }
+    #btns-group > div > button:first-child{
+        float:left;
+    }
+    #btns-group > div > button:last-child{
+        border-color:gray;
+        float:right;
+    }
+    
+    #organ-detail-name{
+        background-color: #e9ecef;
+        opacity: 1;
+        font-size: 1rem;
+        font-weight: 300;
+        line-height: 1.5;
+        border: 1px solid #ced4da;
+        color:gray;
+        text-align: left;
+        padding-left: 10px;
+        margin-left:90px;
+        margin-bottom:40px;
+        width:400px;
+    }
+    .organ-date-expire-ok{
+        color:#236ade;
+    }
+    .organ-date-expire-no{
+        color:gray;
+    }
+    
+     .organ-detail-title-1{
+     padding-left:40px;
+      padding-top:20px;
+   	 padding-bottom:10px;
+     }
+     .organ-detail-title-1  > :first-child{
+   		 float:left;
+        width:100%;
+        font-size: large;
+        font-weight: bold;
+     }
+      .organ-detail-title-1  > :first-child> :first-child > :first-child > :first-child{
+       margin-left:30px;
+      }
+      
+     .organ-detail-title-2{
+     padding-left:40px;
+    	 line-height:100px;
+     }
+    .organ-detail-title-2 > :first-child{
+        float:left;
+        width:40%;
+    }
+    .organ-detail-title-2 > :last-child{
+        float:left;
+        width:60%;
+    }
+    
+    #organ-detail-product{
+        margin-left:20px;
+        width:200px;
+    }
+
+    #organ-detail-tabs > :first-child{
+        margin-left:60px;
+        margin-right:5px;
+    } 
+    #organ-detail-tabs > :last-child:hover{
+        color:black;
+    }
+    .organ-detail-tab{
+        width:200px;
+        height:50px;
+        background-color: white;
+        margin-right:-6px;
+        border-top-left-radius: 0.375rem;
+        border-top-right-radius:0.375rem;
+        color:black;
+    }
+    .organ-detail-tab-ck{
+        border:1px solid #236ade;
+        border-bottom: 1px solid white;
+        font-weight: 600;
+    }
+    .organ-detail-tab-none{
+        border:1px solid gainsboro;
+        border-bottom: 1px solid white;
+        color:gray;
+    }
+    .nav-tabs .nav-link.active{
+        border-left-color:#236ade;
+        border-top-color:#236ade;
+        border-right-color: #236ade;
+        color:black;
+        font-weight: 900;
+    }
+
+    #myTabContent{
+        margin:40px;
+    }
+   .card-event-tab-detail-label{
+        width:10%;
+        font-weight: 600;
+        float:left;
+
+    }
+    .card-event-tab-detail-input{
+        width:90%;
+    }
+    #card-event-tab-detail>.row{
+        margin-top:40px;
+    }
+    .card-event-tab-detail-left{
+        width:50%;
+        float:left;
+    }
+    .card-event-tab-detail-right{
+        float:left;
+        width:50%;
+    }
+    .card-event-tab-detail-date-label{
+        width:20%;
+        font-weight: 600;
+        float:left;
+        margin-right:-8px;
+    }
+    input[type="date"] {
+        width:185px;
+    }
+    input[type="date"]::before {
+    display:none;
+    }
+
+    input[type="date"].after::-webkit-calendar-picker-indicator{
+        margin-left: 0px;
+    }
+    #radio-freepass{
+        margin-left:30px;
+    }
+    #card-event-tab-event-content,#card-event-tab-card-hashtag,.public-benefit-contents{
+        overflow-y:scroll;
+        overflow-x:hidden;
+        resize:none;
+        height:100px;
+    }
+    #card-event-tab-event-detail{
+        overflow-y:scroll;
+        overflow-x:hidden;
+        resize:none;
+        height:200px;
+    }
+    #card-event-tab-card-select{
+        float:right; 
+        resize:none;
+        margin-top:10px;
+        margin-left:-13px;
+        border:none;
+    }
+    #card-event-tab-event-info{
+        float:right; 
+        resize:none;
+        margin-top:20px;
+        height:100px;
+    }
+    .card-event-tab-event-save{
+        width:150px;
+        height:40px;
+        margin-top:30px;
+        float:right;
+        margin-bottom:30px;
+        border-radius:5px;
+    }
+    .card-event-tab-event-reset{
+     width:150px;
+        height:40px;
+        margin-top:30px;
+        float:left;
+        margin-bottom:30px;
+        border-radius:5px;
+        margin-left:79%;
+        background-color: white;
+	    color: black;
+	    border-color: gray;
+    }
+    
+    .organ-update-textarea{
+		float:right;
+        width:400px;
+    }
+    #organ-update-past{
+        overflow-y:scroll;
+        overflow-x:auto;
+        resize:none;
+        height:150px;
+        width:700px;
+        white-space:pre;
+    }
+    #organ-update-now{
+    	float:left;
+    	margin-right:20px;
+    }
+    .main-detail-bg{
+    background-color: white;
+    box-shadow: 2px 2px 2px 2px #e9ecef;
+    }
+    #organ-detail-title-bg{
+    	background-color: white;
+    	margin-bottom:5px;
+    	
+        box-shadow: 2px 2px 2px 2px #e9ecef;
+    }
+    	
+    	#public-benefit-tab > li > button{
+	width:120px;
+	margin-left:5px;
+	text-align: left;
+	color:black;
+}
+.public-benefit-detail-tab{
+        border:1px solid gainsboro;
+        border-bottom: 1px solid white;
+}
+.public-benefit-form-label{
+float:left;
+	font-weight:bold;
+	width:10%;
+	margin-left:20px;
+	margin-right:20px;
+}
+.public-benefit-input9{
+width:87%;
+float:left;
+}
+.public-benefit-tab-title > *{
+	margin-bottom:10px;
+}
+.public-benefit-date{
+	margin-left:-10px;
+}
+.public-benefit-contents{
+width:1340px;
+height:200px;
+}
+.public-benefit-tab-title{
+	margin-top:60px;
+}
+.public-benefit-tab-title > .row{
+	margin-bottom:30px;
+}
+/*last tab*/normal-forms
+	.card-last-tab-label{
+	font-weight:bold;
+	}
+
+    .card-event-tab-last-div{
+        margin-top:100px;
+        margin-left:10px;
+        margin-bottom:100px;
+    }
+    .card-event-tab-last-div > :first-child{
+        width:51%;
+        float:left;
+        line-height: 30px;
+    }
+    .card-event-tab-last-div > :last-child{
+        width:49%;
+        text-align: left;
+    }
+    .card-event-tab-last-div > :last-child > :first-child{
+       margin-left:60px;
+       margin-right:60px;
+       float:left;
+    }
+    .card-event-tab-last-div > :last-child > :last-child{
+   float:left;
+   width:150px;
+   height:40px;
+    }
+    #card-event-tab > div > div {
+    margin-bottom:30px;
+    }
+    #card-event-tab > div {
+    padding-top:20px;
+    padding-left:20px;
+    padding-right:20px;
+    box-shadow:2px 2px 2px 2px #e9ecef;
+    
+    }
+    #card-event-tab > .normal-form-btns-group, #card-event-tab > .normal-form-full-btns-group {
+    position: absolute;
+    margin-top: 26px;
+}
+	.main-contents-updates-btn:active{
+	background-color: white;
+    }
+    #btns-group > div > button {
+    border-radius: 6px;
+    }
+    
+	.main-contents-updates-btn{
+		 color:white;
+    background-color:#0d6efd;
+    border:0px;
+	}
+    .main-contents-cancle-btn{
+    background-color: white;
+		color:black;
+		border-color: gray;
+    }
+	    
+	    
+	    
+	    	/* tab 추가 버튼 plus minus */
+					
+					    .normal-form{
+						    margin-left:-40px;
+						   	width:1600px;
+						    margin-bottom:30px;
+						    box-shadow: 0px 0px 2px 2px #e9ecef;
+					    }
+    	
+						.normal-form-btns-group, .normal-form-full-btns-group{
+						    position:absolute;
+							margin-top:-50px;
+						}
+						.normal-form-btns-group > div > .normal-form-btn,
+						.normal-form-full-btns-group > div > .normal-form-btn{
+							
+							background-color: white;
+							border-radius: 30px;
+							color:#236ade;
+							width:40px;
+							height:40px;
+							text-align:center;
+							margin:auto;
+							font-size:x-large;
+	    					box-shadow: 2px 2px 2px 2px #e9ecef;
+	    					border :0px;
+	    					margin-right:5px;
+						}
+						.normal-form-btns-group > :first-child {
+							float:left;
+							width:50%;
+						}
+						.normal-form-btns-group > :last-child{
+							float:right;
+							width:50%;
+						}
+						
+						.normal-form-btns-group > :first-child >:last-child {
+							float:right;
+						}
+						.normal-form-full-btns-group > :nth-child(1) {
+							width:50%;
+							float:right;
+						}
+						.normal-form-full-btns-group > :nth-child(2) {
+							width:50%;
+							padding-left: 52.8%;
+						}
+						
+	    /*organdetail end*/
+	    
+	    /* organ modal */
+	    
+.modal-background {
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: 1000%;
+	background-color: rgba(0, 0, 0, 0.5);
+	top: 0;
+	left: 0;
+	z-index: 2000;
+}
+
+.modal-content {
+	width: 500px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin: -250px 0 0 -250px;
+	background: white;
+	z-index: 2001;
+}
+
+.modal {
+	display: none;
+	z-index: 2001;
+}
+
+.modal-title {
+	font-size: 22px;
+	font-weight: bolder;
+}
+
+.benefit-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+	z-index: 2001;
+}
+
+.modal-footer {
+	display: flex;
+}
+
+.benefotmodal-text1 {
+	color: blue;
+}
+
+.benefit-industry-search-text {
+	font-size: 18px;
+	color: #236ADE;
+	font-weight: bolder;
+	margin: 0px;
+   margin-left: 20px;
+}
+
+.benefit-industry-search-text3 {
+	font-size: 13px;
+	color: darkgrey;
+	margin: 0;
+   margin-left: 20px;
+}
+
+.modal-header {
+	margin: 20px;
+	padding: 0px 0px 10px 0px;
+}
+
+.modal-body {
+	margin: 0px 0px 0px 10px;
+}
+
+.modal-footer {
+	margin: 20px;
+}
+
+.select2-container {
+	z-index: 9999 !important;
+}
+
+.selectlistdiv2 {
+	display: inline;
+	margin-left: 20px;
+}
+
+.selectlistdiv1 {
+	margin-left: 50px;
+    padding-right: 60px;
+    line-height: 40px;
+}
+#businesslist{
+	width: 200px;
+    height: 40px;
+	float:right;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice
+	{
+	border-style: none;
+	border: none;
+	background-color: white;
+}
+/* modal 정리  */
+.select2-container--default .select2-results__option--highlighted[aria-selected]
+{	background-color:white;
+	color: #0d6efd;
+}
+.select2-container--default .select2-results__option[aria-selected=true]{
+	background-color: white;
+}
+.select2-results__option {
+	list-style: none;
+}
+
+.select2-results__message {
+	visibility: hidden;
+	display: none;
+}
+
+
+.select2-container--open .select2-dropdown--below{
+    position: absolute;
+   
+}
+
+
+/* 혜택저장 modal */
+.sava-benefits-text1 {
+	font-size: 20px;
+	font-weight: bolder;
+	text-align: center;
+}
+
+.SaveBenefitsModal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+	z-index: 2001;
+}
+
+.modal-footer {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+#Sava-Benefits-Modal-Input-Again-Yes {
+	width: 100px;
+	margin-right: 10px;
+}
+
+#Sava-Benefits-Modal-Input-Again-No {
+	width: 150px;
+	margin-left: 10px;
+	background-color: grey;
+	border-color: gray;
+}
+
+/* 확정하기 modal */
+#Organ-Confirmation-Modal-update-check-Again-Yes {
+	width: 100px;
+	margin-right: 10px;
+}
+
+#Organ-Confirmation-Modal-update-check-Again-No {
+	width: 100px;
+	margin-left: 10px;
+	background-color: grey;
+	border-color: gray;
+}
+
+.Organ-Confirmation-Modall {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+	z-index: 2001;
+}
+
+/*취소 모달*/
+#Organ-Confirmation-Modal-update-check-Again-Yes2 {
+	width: 100px;
+	margin-right: 10px;
+}
+
+#Organ-Confirmation-Modal-update-check-Again-No2 {
+	width: 100px;
+	margin-left: 10px;
+	background-color: grey;
+	border-color: gray;
+}
+
+.Organ-Confirmation-Modall2 {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+	z-index: 2001;
+}

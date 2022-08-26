@@ -1,0 +1,2696 @@
+#select-box{
+	width:200px;
+	float:right;
+}
+
+.loading-background {
+   display: block;
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   top: 0;
+   left: 0;
+   z-index: 2000;
+} 
+ .loader,
+.loader:before,
+.loader:after {
+  border-radius: 50%;
+  width: 2.5em;
+  height: 2.5em;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation: load7 1.8s infinite ease-in-out;
+  animation: load7 1.8s infinite ease-in-out;
+}
+.loader {
+  color: #236ade;
+  font-size: 10px;
+  margin: 80px auto;
+  position: relative;
+  text-indent: -9999em;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+.loader:before,
+.loader:after {
+  content: '';
+  position: absolute;
+  top: 0;
+}
+.loader:before {
+  left: -3.5em;
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+.loader:after {
+  left: 3.5em;
+}
+@-webkit-keyframes load7 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 2.5em 0 -1.3em;
+  }
+  40% {
+    box-shadow: 0 2.5em 0 0;
+  }
+}
+@keyframes load7 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 2.5em 0 -1.3em;
+  }
+  40% {
+    box-shadow: 0 2.5em 0 0;
+  }
+}
+
+
+
+.resetBtn{
+	background-color: white; 
+	color: black; 
+	border: 1px solid black;
+}
+
+.btn-reload{
+	margin-right:10px;
+	background: white;
+	border: 1px solid black;
+	color : black;
+	
+}
+
+
+
+    /*첫번째 CSS 기본 입력 폼  
+      DIV를 한줄씩 묶어서 사용하고 적용함
+    */
+    	/*기본혜택-할인폼 */
+    
+    	
+    	.select_discount>div>div{
+    		margin:30px;
+    	}
+   		#select_discount_Second>input{
+    		width:200px;
+    		display: inline;
+    	}
+    	#select_discount_Second>select{
+    		width:250px;
+    		display: inline;
+    	}
+    	#select_discount_Third>label{
+    		vertical-align: top;
+    	}
+    	#select_Liter_Discount_Third>textarea{
+    	 	width:1350px;	
+    	 	display:inline;
+    	}
+    	#select_discount_Forth>input{
+    		width:188px;
+    		display: inline;
+    	}	
+    	#select_discount_Fifth>input{
+    		width:120px;
+    		display: inline;
+    	}
+    	#select_discount_Fifth>:last-child{
+    		width:120x;
+    		display: inline;
+    	}
+    	#select_discount_Sixth>table{
+    		width:1350px;	
+    		display:inline;
+    	}
+    	#select_discount_Seventh>label{
+    		vertical-align: top;
+    	}
+    	#select_discount_Seventh>textarea{
+    		width:1350px;
+    		display: inline;
+    	}
+		.last-element-btn{	
+			display: flex;
+			justify-content: right;
+	    }
+	    .last-element-btn > button {
+	    	width:150px;
+	    	height:40px;
+	    }
+	    
+	     /*select_discount_minitable*/
+		.select_discount_minitable > thead {
+			background-color: gainsboro;
+		}
+		.select_discount_minitable > thead> tr > th {
+			font-weight: bold;
+		}
+		.select_discount_minitable > tbody > tr > td{
+			padding:15px;
+		}
+		.select_discount_minitable > tbody > tr >:first-child{
+			float:center;
+		}
+		.select_discount_minitable > tbody > tr > td > span > input{
+			text-align: right;
+		}
+		.select_discount_minitable > tbody > tr > td > span > input:first-child{
+			margin-left:0px;
+		}
+		.select_discount_minitable > tbody > tr > td > span > input:last-child{
+			margin-left:40px;
+		}
+		.select_discount_minitable > tbody > tr > td > span{
+		line-height:40px;
+		}
+		.select_discount_minitable-input1 {
+		width:100px;
+		float:left;
+		}
+	
+    	/*기본혜택 적립 폼 */
+    	
+    	.select_Save>div>div{
+    		margin:30px;
+    	}
+   		#select_Save_Second>input{
+    		width:200px;
+    		display: inline;
+    	}
+    	#select_Save_Second>select{
+    		width:250px;
+    		display: inline;
+    	}
+    	#select_Save_Third>label{
+    		vertical-align: top;
+    	}
+    	#select_Save_Third>textarea{
+    	 	width:1350px;	
+    	 	display:inline;
+    	}
+    	#select_Save_Forth>input{
+    		width:188px;
+    		display: inline;
+    	}	
+    	#select_Save_Fifth>input{
+    		width:120px;
+    		display: inline;
+    	}
+    	#select_Save_Fifth>:last-child{
+    		width:120x;
+    		display: inline;
+    	}
+    	#select_Save_Sixth>table{
+    		width:1350px;	
+    		display:inline;
+    	}
+    	#select_Save_Seventh>label{
+    		vertical-align: top;
+    	}
+    	#select_Save_Seventh>textarea{
+    		width:1350px;
+    		display: inline;
+    	}
+    	#select_Save_Select{	
+			display: flex;
+			justify-content: right;
+	    }
+	    
+	    /*select_save_minitable*/
+		.select_save_minitable > thead {
+			background-color: gainsboro;
+		}
+		.select_save_minitable > thead> tr > th {
+			font-weight: bold;
+		}
+		.select_save_minitable > tbody > tr > td{
+			padding:15px;
+		}
+		.select_save_minitable > tbody > tr >:first-child{
+			float:center;
+		}
+		.select_save_minitable > tbody > tr > td > span > input{
+			text-align: right;
+		}
+		.select_save_minitable > tbody > tr > td > span > input:first-child{
+			margin-left:0px;
+		}
+		.select_save_minitable > tbody > tr > td > span > input:last-child{
+			margin-left:40px;
+		}
+		.select_save_minitable > tbody > tr > td > span{
+		line-height:40px;
+		}
+		.select_save_minitable-input1 {
+		width:100px;
+		float:left;
+		}
+	    
+	    /*기본혜택-리터당 할인폼 */
+	    	
+    	.select_Liter_Discount>div>div{
+    		margin:30px;
+    	}
+   		#select_Liter_Discount_Second>input{
+    		width:200px;
+    		display: inline;
+    	}
+    	#select_Liter_Discount_Second>select{
+    		width:250px;
+    		display: inline;
+    	}
+    	#select_Liter_Discount_Third>label{
+    		vertical-align: top;
+    	}
+    	#select_Liter_Discount_Third>textarea{
+    	 	width:1350px;	
+    	 	display:inline;
+    	}
+    	#select_Liter_Discount_Forth>input{
+    		width:188px;
+    		display: inline;
+    	}	
+    	#select_Liter_Discount_Fifth>input{
+    		width:120px;
+    		display: inline;
+    	}
+    	#select_Liter_Discount_Fifth>:last-child{
+    		width:120x;
+    		display: inline;
+    	}
+    	#select_Liter_Discount_Sixth>table{
+    		width:1350px;	
+    		display:inline;
+    	}
+    	#select_Liter_Discount_Seventh>label{
+    		vertical-align: top;
+    	}
+    	#select_Liter_Discount_Seventh>textarea{
+    		width:1350px;
+    		display: inline;
+    	}
+		.last-element-btn{	
+			display: flex;
+			justify-content: right;
+	    }
+	    .last-element-btn > button {
+	    	width:150px;
+	    	height:40px;
+	    }
+	    
+	     /*select_Liter_minitable*/
+		.select_Liter_minitable > thead {
+			background-color: gainsboro;
+		}
+		.select_Liter_minitable > thead> tr > th {
+			font-weight: bold;
+		}
+		.select_Liter_minitable > tbody > tr > td{
+			padding:15px;
+		}
+		.select_Liter_minitable > tbody > tr >:first-child{
+			float:center;
+		}
+		.select_Liter_minitable > tbody > tr > td > span > input{
+			text-align: right;
+		}
+		.select_Liter_minitable > tbody > tr > td > span > input:first-child{
+			margin-left:0px;
+		}
+		.select_Liter_minitable > tbody > tr > td > span > input:last-child{
+			margin-left:40px;
+		}
+		.select_Liter_minitable > tbody > tr > td > span{
+		line-height:40px;
+		}
+		.select_Liter_minitable-input1 {
+		width:100px;
+		float:left;
+		}
+	    
+	    
+	    /*기본혜택-리터당 적립폼 */
+
+    	#select_Liter_Save>div>div{
+    		margin:30px;
+    	}
+   		#select_Liter_Save_Second>input{
+    		width:200px;
+    		display: inline;
+    	}
+    	#select_Liter_Save_Second>select{
+    		width:250px;
+    		display: inline;
+    	}
+    	#select_Liter_Save_Third>label{
+    		vertical-align: top;
+    	}
+    	#select_Liter_Save_Third>textarea{
+    	 	width:1350px;	
+    	 	display:inline;
+    	}
+    	#select_Liter_Save_Forth>input{
+    		width:188px;
+    		display: inline;
+    	}	
+    	#select_Liter_Save_Fifth>input{
+    		width:120px;
+    		display: inline;
+    	}
+    	#select_Liter_Save_Fifth>:last-child{
+    		width:120x;
+    		display: inline;
+    	}
+    	#select_Liter_Save_Sixth>table{
+    		width:1350px;	
+    		display:inline;
+    	}
+    	#select_Liter_Save_Seventh>label{
+    		vertical-align: top;
+    	}
+    	#select_Liter_Save_Seventh>textarea{
+    		width:1350px;
+    		display: inline;
+    	}
+		#select_Liter_Save_Select{	
+			display: flex;
+			justify-content: right;
+	    }
+	    
+	    /*기본혜택-현장할인폼 */
+    	.select_Spot_Discount>div>div{
+    		margin:30px;
+    	}
+   		#select_Spot_Discount_Second>input{
+    		width:200px;
+    		display: inline;
+    	}
+    	#select_Spot_Discount_Second>select{
+    		width:250px;
+    		display: inline;
+    	}
+    	#select_Spot_Discount_Third>label{
+    		vertical-align: top;
+    	}
+    	#select_Spot_Discount_Third>textarea{
+    	 	width:1350px;	
+    	 	display:inline;
+    	}
+    	#select_Spot_Discount_Forth>input{
+    		width:188px;
+    		display: inline;
+    	}	
+    	#select_Spot_Discount_Fifth>input{
+    		width:120px;
+    		display: inline;
+    	}
+    	#select_Spot_Discount_Fifth>:last-child{
+    		width:120x;
+    		display: inline;
+    	}
+    	#select_Spot_Discount_Sixth>table{
+    		width:1350px;	
+    		display:inline;
+    	}
+    	#select_Spot_Discount_Seventh>label{
+    		vertical-align: top;
+    	}
+    	#select_Spot_Discount_Seventh>textarea{
+    		width:1350px;
+    		display: inline;
+    	}
+		#select_Spot_Discount_Select{	
+			display: flex;
+			justify-content: right;
+	    }
+	    
+	       /*현장할인 minitable*/
+		.select_Spot_Discount_minitable > thead {
+			background-color: gainsboro;
+		}
+		.select_Spot_Discount_minitable > thead> tr > th {
+			font-weight: bold;
+		}
+		.select_Spot_Discount_minitable > tbody > tr > td{
+			padding:15px;
+		}
+		.select_Spot_Discount_minitable > tbody > tr >:first-child{
+			float:center;
+		}
+		.select_Spot_Discount_minitable > tbody > tr > td > span > input{
+			text-align: right;
+		}
+		.select_Spot_Discount_minitable > tbody > tr > td > span > input:first-child{
+			margin-left:0px;
+		}
+		.select_Spot_Discount_minitable > tbody > tr > td > span > input:last-child{
+			margin-left:40px;
+		}
+		.select_Spot_Discount_minitable > tbody > tr > td > span{
+		line-height:40px;
+		}
+		.select_Spot_Discount_minitable-input1 {
+		width:100px;
+		float:left;
+		}
+	    
+	    
+	    
+	    
+	    /*기본혜택-표준화 불가능 혜택폼 */
+	   
+    	.select_Imposible>div>div{
+    		margin:30px;
+    	}
+   		#select_Imposible_Second>input{
+    		width:800px;
+    		display: inline;
+    	}
+    	#select_Imposible_Third>input{
+    	 	width:1350px;	
+    	 	display:inline;
+    	}
+    	#select_Imposible_Forth>label{
+    	 	vertical-align: top;
+    	}
+    	#select_Imposible_Forth>textarea{
+    	 	width:1350px;	
+    	 	display:inline;	
+    	}
+    	
+		#select_Imposible_Select{	
+			display: flex;
+			justify-content: right;
+	    }  
+	    /*기본혜택- 페이지 제일 마지막 폼*/
+    	#footerDiv{	
+    		margin:30px;
+    	}
+    	
+    	#footerDiv>label{
+    		vertical-align: top;
+    	}
+    	#footerDiv>textarea{
+    		width:700px	;
+    		display:inline;
+    	}
+    	#footerDiv>input{
+    		width:350px;
+    		display:inline;
+    		vertical-align: top;
+    	}
+    	#footerDiv>button{	
+    		position: absolute;
+    		margin-left:15px;
+    	}
+    	
+    	.select_Save,.select_Liter_Discount,.select_Liter_Save,.select_Spot_Discount,
+    	.select_Imposible{
+    		display:none;
+    	}
+    	.select_discount_Form{
+    		display:block;
+    	}
+    	.form-control, .form-select{
+    		border-radius: 0%;
+    	}
+    	.public-benefit-textarea{
+    	
+    	 overflow-y:scroll;
+        overflow-x:hidden;
+        resize:none;
+        height:100px;
+        }
+    	.last-element {
+		padding-bottom:100px;
+		}
+		.business-search-btn{
+			height:40px;
+			width:40px;
+			margin-left: -6px;
+		    border: none
+		}
+
+  		/*할인에서 테이블 css*/
+	    #select_Save_Second,#select_Save_Third,#select_Save_Forth
+	    , #select_Save_Fifth, #select_Save_Sixth, #select_Save_Seventh    {
+	    	margin:30px;
+	    }
+	    #select_Liter_Discount_Second,#select_Liter_Discount_Third,#select_Liter_Discount_Forth,
+	    #select_Liter_Discount_Fifth,#select_Liter_Discount_Sixth,#select_Liter_Discount_Seventh{
+	    	margin:30px;
+	    }
+	    .searchBenefit{
+	    resize: none;
+	    margin-left:190px;
+	    }
+	    #select_Liter_Save_Div> div{
+	    margin:30px;
+	    }
+	    .minitable-minus-th{
+	    	background-color: white;
+	    	border : 1px solid white;
+	    }
+	    .minitable-minus-th >button{
+	    	background-color:white;
+	    	border:1px solid gainsboro;
+	    	width:30px;
+	    	height:30px;
+	    }
+	    .minitable-plus-btn{
+	    	width:35px;
+	    	height:35px;
+	    	margin:auto;
+	    	text-align: center;
+	    	background-color: white;
+	    	border:1px solid gainsboro;
+	    	margin-top:10px;
+	    }
+	    .minitable-border{
+	    border:1px solid gainsboro;
+	    }
+	    tbody > tr > td > input{
+	    text-align: right;
+	    }
+	    
+	    .form-input-right{
+	    width: 100px;
+	    display: inline;
+	    text-align: right;
+	    }
+	    /*할인에서 테이블 css end*/
+
+    /*첫번째 CSS 기본 입력 폼  
+      DIV를 한줄씩 묶어서 사용하고 적용함
+    */
+       /*기본혜택-할인폼 */
+       
+       .normal_discount>div>div{
+          margin:30px;
+       }
+         #normal_discount_Second>input{
+          width:200px;
+          display: inline;
+       }
+       #normal_discount_Second>select{
+          width:250px;
+          display: inline;
+       }
+       #normal_discount_Third>label{
+          vertical-align: top;
+       }
+       #normal_Liter_Discount_Third>textarea{
+           width:1350px;   
+           display:inline;
+       }
+       #normal_discount_Forth>input{
+          width:188px;
+          display: inline;
+       }   
+       #normal_discount_Fifth>input{
+          width:120px;
+          display: inline;
+       }
+       #normal_discount_Fifth>:last-child{
+          width:120px;
+          display: inline;
+       }
+       #normal_discount_Sixth>table{
+          width:1350px;   
+          display:inline;
+       }
+       #normal_discount_Seventh>label{
+          vertical-align: top;
+       }
+       #normal_discount_Seventh>textarea{
+          width:1350px;
+          display: inline;
+          height:200px;
+       }
+      .last-element-btn{   
+         display: flex;
+         justify-content: right;
+       }
+       .last-element-btn > button {
+          width:150px;
+          height:40px;
+       }
+       
+        /*normal_discount_minitable*/
+      .normal_discount_minitable > thead {
+         background-color: gainsboro;
+      }
+      .normal_discount_minitable > thead> tr > th {
+         font-weight: bold;
+      }
+      .normal_discount_minitable > tbody > tr > td{
+         padding:15px;
+      }
+      .normal_discount_minitable > tbody > tr >:first-child{
+         float:center;
+      }
+      .normal_discount_minitable > tbody > tr > td > span > input{
+         text-align: right;
+      }
+      .normal_discount_minitable > tbody > tr > td > span > input:first-child{
+         margin-left:0px;
+      }
+      .normal_discount_minitable > tbody > tr > td > span > input:last-child{
+         margin-left:40px;
+      }
+      .normal_discount_minitable > tbody > tr > td > span{
+      line-height:40px;
+      }
+      .normal_discount_minitable-input1 {
+      width:100px;
+      float:left;
+      }
+   
+       /*기본혜택 적립 폼 */
+       
+       .normal_Save>div>div{
+          margin:30px;
+       }
+         #normal_Save_Second>input{
+          width:200px;
+          display: inline;
+       }
+       #normal_Save_Second>select{
+          width:250px;
+          display: inline;
+       }
+       #normal_Save_Third>label{
+          vertical-align: top;
+       }
+       #normal_Save_Third>textarea{
+           width:1350px;   
+           display:inline;
+       }
+       #normal_Save_Forth>input{
+          width:188px;
+          display: inline;
+       }   
+       #normal_Save_Fifth>input{
+          width:120px;
+          display: inline;
+       }
+       #normal_Save_Fifth>:last-child{
+          width:120x;
+          display: inline;
+       }
+       #normal_Save_Sixth>table{
+          width:1350px;   
+          display:inline;
+       }
+       #normal_Save_Seventh>label{
+          vertical-align: top;
+       }
+       #normal_Save_Seventh>textarea{
+          width:1350px;
+          display: inline;
+          height:200px;
+       }
+       #normal_Save_Select{   
+         display: flex;
+         justify-content: right;
+       }
+       
+       /*normal_save_minitable*/
+      .normal_save_minitable > thead {
+         background-color: gainsboro;
+      }
+      .normal_save_minitable > thead> tr > th {
+         font-weight: bold;
+      }
+      .normal_save_minitable > tbody > tr > td{
+         padding:15px;
+      }
+      .normal_save_minitable > tbody > tr >:first-child{
+         float:center;
+      }
+      .normal_save_minitable > tbody > tr > td > span > input{
+         text-align: right;
+      }
+      .normal_save_minitable > tbody > tr > td > span > input:first-child{
+         margin-left:0px;
+      }
+      .normal_save_minitable > tbody > tr > td > span > input:last-child{
+         margin-left:40px;
+      }
+      .normal_save_minitable > tbody > tr > td > span{
+      line-height:40px;
+      }
+      .normal_save_minitable-input1 {
+      width:100px;
+      float:left;
+      }
+       
+       /*기본혜택-리터당 할인폼 */
+          
+       .normal_Liter_Discount>div>div{
+          margin:30px;
+       }
+         #normal_Liter_Discount_Second>input{
+          width:200px;
+          display: inline;
+       }
+       #normal_Liter_Discount_Second>select{
+          width:250px;
+          display: inline;
+       }
+       #normal_Liter_Discount_Third>label{
+          vertical-align: top;
+       }
+       #normal_Liter_Discount_Third>textarea{
+           width:1350px;   
+           display:inline;
+       }
+       #normal_Liter_Discount_Forth>input{
+          width:188px;
+          display: inline;
+       }   
+       #normal_Liter_Discount_Fifth>input{
+          width:120px;
+          display: inline;
+       }
+       #normal_Liter_Discount_Fifth>:last-child{
+          width:120x;
+          display: inline;
+       }
+       #normal_Liter_Discount_Sixth>table{
+          width:1350px;   
+          display:inline;
+       }
+       #normal_Liter_Discount_Seventh>label{
+          vertical-align: top;
+       }
+       #normal_Liter_Discount_Seventh>textarea{
+          width:1350px;
+          display: inline;
+          height:200px;
+       }
+      .last-element-btn{   
+         display: flex;
+         justify-content: right;
+       }
+       .last-element-btn > button {
+          width:150px;
+          height:40px;
+       }
+       
+        /*normal_Liter_minitable*/
+      .normal_Liter_minitable > thead {
+         background-color: gainsboro;
+      }
+      .normal_Liter_minitable > thead> tr > th {
+         font-weight: bold;
+      }
+      .normal_Liter_minitable > tbody > tr > td{
+         padding:15px;
+      }
+      .normal_Liter_minitable > tbody > tr >:first-child{
+         float:center;
+      }
+      .normal_Liter_minitable > tbody > tr > td > span > input{
+         text-align: right;
+      }
+      .normal_Liter_minitable > tbody > tr > td > span > input:first-child{
+         margin-left:0px;
+      }
+      .normal_Liter_minitable > tbody > tr > td > span > input:last-child{
+         margin-left:40px;
+      }
+      .normal_Liter_minitable > tbody > tr > td > span{
+      line-height:40px;
+      }
+      .normal_Liter_minitable-input1 {
+      width:100px;
+      float:left;
+      }
+       
+       
+       /*기본혜택-리터당 적립폼 */
+
+       #normal_Liter_Save>div>div{
+          margin:30px;
+       }
+         #normal_Liter_Save_Second>input{
+          width:200px;
+          display: inline;
+       }
+       #normal_Liter_Save_Second>select{
+          width:250px;
+          display: inline;
+       }
+       #normal_Liter_Save_Third>label{
+          vertical-align: top;
+       }
+       #normal_Liter_Save_Third>textarea{
+           width:1350px;   
+           display:inline;
+       }
+       #normal_Liter_Save_Forth>input{
+          width:188px;
+          display: inline;
+       }   
+       #normal_Liter_Save_Fifth>input{
+          width:120px;
+          display: inline;
+       }
+       #normal_Liter_Save_Fifth>:last-child{
+          width: 330px;
+          display: inline;
+       }
+       #normal_Liter_Save_Sixth>table{
+          width:1350px;   
+          display:inline;
+       }
+       #normal_Liter_Save_Seventh>label{
+          vertical-align: top;
+       }
+       #normal_Liter_Save_Seventh>textarea{
+          width:1350px;
+          display: inline;
+          height:200px;
+       }
+      #normal_Liter_Save_Select{   
+         display: flex;
+         justify-content: right;
+       }
+       
+       /*기본혜택-현장할인폼 */
+       .normal_Spot_Discount>div>div{
+          margin:30px;
+       }
+         #normal_Spot_Discount_Second>input{
+          width:200px;
+          display: inline;
+       }
+       #normal_Spot_Discount_Second>select{
+          width:250px;
+          display: inline;
+       }
+       #normal_Spot_Discount_Third>label{
+          vertical-align: top;
+       }
+       #normal_Spot_Discount_Third>textarea{
+           width:1350px;   
+           display:inline;
+       }
+       #normal_Spot_Discount_Forth>input{
+          width:188px;
+          display: inline;
+       }   
+       #normal_Spot_Discount_Fifth>input{
+          width:120px;
+          display: inline;
+       }
+       #normal_Spot_Discount_Fifth>:last-child{
+          width:120x;
+          display: inline;
+       }
+       #normal_Spot_Discount_Sixth>table{
+          width:1350px;   
+          display:inline;
+       }
+       #normal_Spot_Discount_Seventh>label{
+          vertical-align: top;
+       }
+       #normal_Spot_Discount_Seventh>textarea{
+          width:1350px;
+          display: inline;
+          height:200px;
+       }
+      #normal_Spot_Discount_Select{   
+         display: flex;
+         justify-content: right;
+       }
+       
+          /*현장할인 minitable*/
+      .normal_Spot_Discount_minitable > thead {
+         background-color: gainsboro;
+      }
+      .normal_Spot_Discount_minitable > thead> tr > th {
+         font-weight: bold;
+      }
+      .normal_Spot_Discount_minitable > tbody > tr > td{
+         padding:15px;
+      }
+      .normal_Spot_Discount_minitable > tbody > tr >:first-child{
+         float:center;
+      }
+      .normal_Spot_Discount_minitable > tbody > tr > td > span > input{
+         text-align: right;
+      }
+      .normal_Spot_Discount_minitable > tbody > tr > td > span > input:first-child{
+         margin-left:0px;
+      }
+      .normal_Spot_Discount_minitable > tbody > tr > td > span > input:last-child{
+         margin-left:40px;
+      }
+      .normal_Spot_Discount_minitable > tbody > tr > td > span{
+      line-height:40px;
+      }
+      .normal_Spot_Discount_minitable-input1 {
+      width:100px;
+      float:left;
+      }
+       
+       
+       
+       
+       /*기본혜택-표준화 불가능 혜택폼 */
+      
+       .normal_Imposible>div>div{
+          margin:30px;
+       }
+         #normal_Imposible_Second>input{
+          width:800px;
+          display: inline;
+       }
+       #normal_Imposible_Third>input{
+           width:1350px;   
+           display:inline;
+       }
+       #normal_Imposible_Forth>label{
+           vertical-align: top;
+       }
+       #normal_Imposible_Forth>textarea{
+           width:1350px;   
+           display:inline;   
+           height:200px;
+       }
+       
+      #normal_Imposible_Select{   
+         display: flex;
+         justify-content: right;
+       }  
+       /*기본혜택- 페이지 제일 마지막 폼*/
+       #footerDiv{   
+          margin:30px;
+       }
+       
+       #footerDiv>label{
+          vertical-align: top;
+       }
+       #footerDiv>textarea{
+          width:700px   ;
+          display:inline;
+       }
+       #footerDiv>input{
+          width:350px;
+          display:inline;
+          vertical-align: top;
+       }
+       #footerDiv>button{   
+          position: absolute;
+          margin-left:15px;
+       }
+       
+       .normal_Save,.normal_Liter_Discount,.normal_Liter_Save,.normal_Spot_Discount,
+       .normal_Imposible{
+          display:none;
+       }
+       .normal_discount_Form{
+          display:block;
+       }
+       .form-control, .form-select{
+          border-radius: 0%;
+       }
+       .public-benefit-textarea{
+       
+        overflow-y:scroll;
+        overflow-x:hidden;
+        resize:none;
+        height:100px;
+        }
+       .last-element {
+      padding-bottom:100px;
+      }
+      .business-search-btn{
+         height:40px;
+         width:40px;
+         margin-left: -6px;
+          border: none
+      }
+
+        /*할인에서 테이블 css*/
+       #normal_Save_Second,#normal_Save_Third,#normal_Save_Forth
+       , #normal_Save_Fifth, #normal_Save_Sixth, #normal_Save_Seventh    {
+          margin:30px;
+       }
+       #normal_Liter_Discount_Second,#normal_Liter_Discount_Third,#normal_Liter_Discount_Forth,
+       #normal_Liter_Discount_Fifth,#normal_Liter_Discount_Sixth,#normal_Liter_Discount_Seventh{
+          margin:30px;
+       }
+       .searchBenefit{
+       resize: none;
+       margin-left:190px;
+       }
+       #normal_Liter_Save_Div> div{
+       margin:30px;
+       }
+       .minitable-minus-th{
+          background-color: white;
+          border : 1px solid white;
+       }
+       .minitable-minus-th >button{
+          background-color:white;
+          border:1px solid gainsboro;
+          width:30px;
+          height:30px;
+       }
+       .minitable-plus-btn{
+          width:35px;
+          height:35px;
+          margin:auto;
+          text-align: center;
+          background-color: white;
+          border:1px solid gainsboro;
+          margin-top:10px;
+       }
+       .minitable-border{
+       border:1px solid gainsboro;
+       }
+       tbody > tr > td > input{
+       text-align: right;
+       }
+       
+       .form-input-right{
+       width: 100px;
+       display: inline;
+       text-align: right;
+       }
+       /*할인에서 테이블 css end*/
+
+
+
+
+/*첫번째 CSS 기본 입력 폼  
+	DIV를 한줄씩 묶어서 사용하고 적용함
+*/
+#firstForm{
+ 	box-shadow: 3px 3px 3px 3px ghostwhite;
+ }
+ 	
+#firstForm>div{
+ 	margin:30px;
+ 	margin-top:3px;
+}
+ 	
+.form-label{
+	width:10%;
+	margin-left:30px;
+	font-weight: bold;
+}
+  	
+#topButton{
+  	 margin-bottom:30px;
+}
+
+#topButton>:nth-child(1){
+	width:150px;
+	height:40px;
+}
+
+#topButton>:nth-child(2){
+	width:150px;
+	height:40px;
+}
+  	
+#menuList{
+	margin-right:50px;
+	float:right;
+	background-color: white;
+	border: 1px solid black;
+	width:150px;
+	height:40px;
+}
+
+#firstDiv{
+	height: 60px;	
+}
+
+#firstDiv>label{
+	padding-top:15px;	
+	width:30%; 
+	margin-left:63px;
+}
+
+#firstDiv>label>a{
+	text-decoration:none !important ;
+	font-weight: normal ;	
+	color:gray;
+}
+
+#firstDiv>label>a:hover{ 
+   	color:#236ADE;	
+}
+
+#firstDiv>button{
+	float:right;	
+	margin-left:10px;
+	margin-right:50px;
+	margin-top:10px;
+}
+#firstDiv>:nth-child(3){
+	margin-right: 5px;	
+}
+
+#secondDiv>input{
+	margin-top:30px;
+	width:200px;	
+ 	display: inline;	
+}
+ 	
+#secondDiv>:nth-child(6){
+ 	width:559px;
+}
+ 	
+#thirdDiv>:nth-child(5){
+ 	margin-left:70px;
+ 	width:100px;
+}
+ 	
+#thirdDiv>:nth-child(6){
+ 	width:797px;
+ 	display:inline;	
+ }
+ 	
+#forthDiv>input{
+ 	width:150px	;
+ 	display: inline;
+ }
+ 	
+#forthDiv>:nth-child(2){
+	width:1350px;
+}
+ 	
+#fifthDiv>input{
+	width:1350px;	
+	display :inline;
+}
+#sixthDiv>input{
+	width:1350px;	
+	display :inline;
+}
+#seventhDiv>select{
+	width:300px;
+	display :inline;
+}
+#seventhDiv>button{
+	width:150px;
+	height:40px;
+}
+#seventhDiv>div{
+	display :inline;
+	float : right;	
+	margin-right:10px;
+}
+#eigthDiv>input{
+	width:1310px;	
+	display:inline;
+}
+#ninthDiv>div>input.form-check-input{
+	vertical-align:sub;	
+	margin-left:20px;	
+}
+#ninthDiv>div>label{
+	width:140px;
+}	
+#ninthDivOne{
+	margin:30px;
+}
+#ninthDivOne>input.form-control{
+	width:200px;
+	display:inline;
+	vertical-align: middle;
+	margin-right:20px;
+	text-align:right;
+}
+#ninthDivTwo>input.form-control{
+	width:200px;
+	display:inline;
+	vertical-align: middle;
+	margin-right:20px;
+	text-align:right
+}
+
+#ninthDivThree{
+	margin:30px;
+}
+#ninthDivThree>input.form-control{
+	width:200px;
+	display:inline;
+	vertical-align: middle;
+	margin-right:20px;
+	text-align:right
+}	
+.form-First-label{
+	margin-left:0px;
+	font-weight: bold;
+}
+#ninthDivTwo{
+	margin:30px;
+}
+#tenthDiv>input{
+	width:1350px;	
+	display:inline;
+}
+#eleventhDiv>table{
+	display:inline;
+}
+#twelfthDiv>label{
+	vertical-align: top;
+}
+#twelfthDiv>textarea{
+	width:1350px;	
+	display: inline;
+}
+#thirteenDiv>label{
+	vertical-align: top;
+}
+#thirteenDiv>textarea{
+	width:1350px;	
+	display: inline;
+}
+#fourteenthDiv>label{
+	vertical-align: top;
+}
+#fourteenthDiv>textarea{
+	width:1350px;	
+	display: inline;
+}
+#fifteenthDiv>label{
+	vertical-align: top;
+}
+#fifteenthDiv>textarea{
+	width:1350px;	
+	display: inline;
+}
+
+/*기본혜택-할인폼 */
+
+#normal_discount_Second>input{
+	width:200px;
+	display: inline;
+}
+#normal_discount_Second>select{
+	width:250px;
+	display: inline;
+}
+#normal_discount_Third>label{
+	vertical-align: top;
+}
+#normal_discount_Third>textarea{
+ 	width:1350px;	
+ 	display:inline;
+}
+#searchBenefit{
+	margin-left:190px;
+}
+#normal_discount_Forth>input{
+	width:188px;
+	display: inline;
+}	
+#normal_discount_Fifth>input{
+	width:120px;
+	display: inline;
+}
+#normal_discount_Sixth>table{
+	width:1350px;	
+	display:inline;
+}
+#normal_discount_Seventh>label{
+	vertical-align: top;
+}
+#normal_discount_Seventh>textarea{
+	width:1350px;
+	display: inline;
+}
+
+/*기본혜택 적립 폼 */
+ 	
+.normal_Save>div>div{
+	margin:30px;
+}
+#normal_Save_Second>input{
+	width:200px;
+	display: inline;
+}
+#normal_Save_Second>select{
+	width:250px;
+	display: inline;
+}
+#normal_Save_Third>label{
+	vertical-align: top;
+}
+#normal_Save_Third>textarea{
+ 	width:1350px;	
+ 	display:inline;
+}
+#normal_Save_Forth>input{
+	width:188px;
+	display: inline;
+}	
+#normal_Save_Fifth>input{
+	width:120px;
+	display: inline;
+}
+#normal_Save_Fifth>:last-child{
+	width:120px;
+	display: inline;
+}
+#normal_Save_Sixth>table{
+	width:1350px;	
+	display:inline;
+}
+#normal_Save_Seventh>label{
+	vertical-align: top;
+}
+#normal_Save_Seventh>textarea{
+	width:1350px;
+	display: inline;
+}
+#normal_Save_Select{	
+	display: flex;
+	justify-content: right;
+	padding-bottom:30px;
+}
+#normal_Save_Select>button{
+	width:150px;
+	height:40px;	
+}
+  
+/*기본혜택-리터당 할인폼 */
+	
+.normal_Liter_Discount>div>div{
+	margin:30px;
+}
+#normal_Liter_Discount_Second>input{
+	width:200px;
+	display: inline;
+}
+#normal_Liter_Discount_Second>select{
+	width:250px;
+	display: inline;
+}
+#normal_Liter_Discount_Third>label{
+	vertical-align: top;
+}
+#normal_Liter_Discount_Third>textarea{
+ 	width:1350px;	
+ 	display:inline;
+}
+#normal_Liter_Discount_Forth>input{
+	width:188px;
+	display: inline;
+}	
+#normal_Liter_Discount_Fifth>input{
+	width:120px;
+	display: inline;
+}
+#normal_Liter_Discount_Fifth>:last-child{
+	width:120px;
+	display: inline;
+}
+#normal_Liter_Discount_Sixth>table{
+	width:1350px;	
+	display:inline;
+}
+#normal_Liter_Discount_Seventh>label{
+	vertical-align: top;
+}
+#normal_Liter_Discount_Seventh>textarea{
+	width:1350px;
+	display: inline;
+}
+#normal_Liter_Discount_Select{	
+	display: flex;
+	justify-content: right;
+}
+   
+/*기본혜택-리터당 적립폼 */
+
+.normal_Liter_Save>div>div{
+	margin:30px;
+}
+#normal_Liter_Save_Second>input{
+	width:200px;
+	display: inline;
+}
+#normal_Liter_Save_Second>select{
+	width:250px;
+	display: inline;
+}
+#normal_Liter_Save_Third>label{
+	vertical-align: top;
+}
+#normal_Liter_Save_Third>textarea{
+ 	width:1350px;	
+ 	display:inline;
+}
+#normal_Liter_Save_Forth>input{
+	width:188px;
+	display: inline;
+}	
+#normal_Liter_Save_Fifth>input{
+	width:120px;
+	display: inline;
+}
+#normal_Liter_Save_Fifth>:last-child{
+	width:330px;
+	display: inline;
+}
+#normal_Liter_Save_Sixth>table{
+	width:1350px;	
+	display:inline;
+}
+#normal_Liter_Save_Seventh>label{
+	vertical-align: top;
+}
+#normal_Liter_Save_Seventh>textarea{
+	width:1350px;
+	display: inline;
+}
+#normal_Liter_Save_Select{	
+	display: flex;
+	justify-content: right;
+}
+   
+/*기본혜택-현장할인폼 */
+
+.normal_Spot_Discount>div>div{
+	margin:30px;
+}
+#normal_Spot_Discount_Second>input{
+	width:200px;
+	display: inline;
+}
+#normal_Spot_Discount_Second>select{
+	width:250px;
+	display: inline;
+}
+#normal_Spot_Discount_Third>label{
+	vertical-align: top;
+}
+#normal_Spot_Discount_Third>textarea{
+ 	width:1350px;	
+ 	display:inline;
+}
+#normal_Spot_Discount_Forth>input{
+	width:188px;
+	display: inline;
+}	
+#normal_Spot_Discount_Fifth>input{
+	width:120px;
+	display: inline;
+}
+#normal_Spot_Discount_Fifth>:last-child{
+	width:330px;
+	display: inline;
+}
+#normal_Spot_Discount_Sixth>table{
+	width:1350px;	
+	display:inline;
+}
+#normal_Spot_Discount_Seventh>label{
+	vertical-align: top;
+}
+#normal_Spot_Discount_Seventh>textarea{
+	width:1350px;
+	display: inline;
+}
+#normal_Spot_Discount_Select{	
+	display: flex;
+	justify-content: right;
+}
+/*기본혜택-표준화 불가능 혜택폼 */
+
+.normal_Imposible>div>div{
+	margin:30px;
+}
+#normal_Imposible_Second>input{
+	width:800px;
+	display: inline;
+}
+#normal_Imposible_Third>input{
+ 	width:1350px;	
+ 	display:inline;
+}
+#normal_Imposible_Forth>label{
+ 	vertical-align: top;
+}
+#normal_Imposible_Forth>textarea{
+ 	width:1350px;	
+ 	display:inline;	
+}
+#normal_Imposible_Select{	
+	display: flex;
+	justify-content: right;
+}  
+ /*기본혜택- 페이지 제일 마지막 폼*/
+#footerDiv{	
+	margin:30px;
+}
+
+#footerDiv>label{
+	vertical-align: top;
+}
+#footerDiv>textarea{
+	width:700px	;
+	display:inline;
+}
+#footerDiv>input{
+	width:280px;
+	display:inline;
+	vertical-align: top;
+}
+#footerDiv>button{	
+	position: absolute;
+	margin-left:25px;
+	width:150px;
+	height:40px;
+}
+#totalForm{
+	background-color: red;
+}
+.main-detail-bg{
+	 background-color: white;
+	 box-shadow: 2px 2px 2px 2px #e9ecef;
+}
+.form-control{
+	resize:none;
+ }
+.form-control{
+	border-radius: 0%;
+}
+.form-select{
+	border-radius: 0%;
+}
+#public-benefit-tab > li > button{
+   width:150px;
+   margin-left:5px;
+   text-align: left;
+   color:black;
+}
+.public-benefit-detail-tab{
+      border:1px solid gainsboro;
+      border-bottom: 1px solid white;
+}
+.public-benefit-form-label{
+	float:left;
+	   font-weight:bold;
+	   width:10%;
+	   margin-left:20px;
+	   margin-right:20px;
+}
+.public-benefit-input9{
+	width:80%;
+	float:left;
+}
+.public-benefit-tab-title > *{
+   margin-bottom:10px;
+}
+.public-benefit-date{
+   margin-left:5px;
+}
+.normal_Save,.normal_Liter_Discount,.normal_Liter_Save,.normal_Spot_Discount,
+.normal_Imposible{
+	display:none;
+}
+#normal_Total,#select_Total,#special_Total{
+	display:none;
+}
+
+#normal_discount{
+	margin:30px;
+}
+#normal_discount>div{
+	margin-bottom:30px;
+}
+#normal_discount_First{
+	margin:30px;
+}
+
+/* 선택형 혜택 Form css*/
+
+#select_Top>#select_Top_First{
+	margin:30px;
+}
+#select_Top>#select_Top_Second{
+	margin:30px;
+}
+#select_Top>#select_Top_Third{
+	margin:30px;
+}
+
+#select_Top>div>.form-label{
+	width:10%;
+	margin-left:30px;
+	font-weight: bold;
+}
+
+#select_Top_First>.form-control{
+	width:70px;
+	display:inline;
+	margin-right:10px;
+}
+
+#select_Top_Third>.form-control{
+	width:1350px;
+	display:inline;
+}
+
+/*선택형 혜택 할인폼 */
+
+#select_discount_Second>input{
+	width:200px;
+	display: inline;
+}
+#select_discount_Second>select{
+	width:250px;
+	display: inline;
+}
+#select_discount_Third>label{
+	vertical-align: top;
+}
+#select_discount_Third>textarea{
+ 	width:1350px;	
+ 	display:inline;
+}
+#searchBenefit{
+	margin-left:190px;
+}
+#select_discount_Forth>input{
+	width:188px;
+	display: inline;
+}	
+#select_discount_Fifth>input{
+	width:120px;
+	display: inline;
+}
+#select_discount_Sixth>table{
+	width:1350px;	
+	display:inline;
+}
+#select_discount_Seventh>label{
+	vertical-align: top;
+}
+#select_discount_Seventh>textarea{
+	width:1350px;
+	display: inline;
+	height:200px;
+}
+
+/*선택형 혜택 적립 폼 */
+ 	
+.select_Save>div>div{
+	margin:30px;
+}
+#select_Save_Second>input{
+	width:200px;
+	display: inline;
+}
+#select_Save_Second>select{
+	width:250px;
+	display: inline;
+}
+#select_Save_Third>label{
+	vertical-align: top;
+}
+#select_Save_Third>textarea{
+ 	width:1350px;	
+ 	display:inline;
+}
+#select_Save_Forth>input{
+	width:188px;
+	display: inline;
+}	
+#select_Save_Fifth>input{
+	width:120px;
+	display: inline;
+}
+#select_Save_Fifth>:last-child{
+	width:120x;
+	display: inline;
+}
+#select_Save_Sixth>table{
+	width:1350px;	
+	display:inline;
+}
+#select_Save_Seventh>label{
+	vertical-align: top;
+}
+#select_Save_Seventh>textarea{
+	width:1350px;
+	display: inline;
+	height:200px;
+}
+#select_Save_Select{	
+	display: flex;
+	justify-content: right;
+	padding-bottom:30px;
+}
+#select_Save_Select>button{
+	width:150px;
+	height:40px;	
+}
+  
+/*선택형 혜택-리터당 할인폼 */
+	
+.select_Liter_Discount>div>div{
+	margin:30px;
+}
+#select_Liter_Discount_Second>input{
+	width:200px;
+	display: inline;
+}
+#select_Liter_Discount_Second>select{
+	width:250px;
+	display: inline;
+}
+#select_Liter_Discount_Third>label{
+	vertical-align: top;
+}
+#select_Liter_Discount_Third>textarea{
+ 	width:1350px;	
+ 	display:inline;
+}
+#select_Liter_Discount_Forth>input{
+	width:188px;
+	display: inline;
+}	
+#select_Liter_Discount_Fifth>input{
+	width:120px;
+	display: inline;
+}
+#select_Liter_Discount_Fifth>:last-child{
+	width:120x;
+	display: inline;
+}
+#select_Liter_Discount_Sixth>table{
+	width:1350px;	
+	display:inline;
+}
+#select_Liter_Discount_Seventh>label{
+	vertical-align: top;
+}
+#select_Liter_Discount_Seventh>textarea{
+	width:1350px;
+	display: inline;
+	height:200px;
+}
+#select_Liter_Discount_Select{	
+	display: flex;
+	justify-content: right;
+}
+   
+/*선택형 혜택-리터당 적립폼 */
+
+.select_Liter_Save>div>div{
+	margin:30px;
+}
+#select_Liter_Save_Second>input{
+	width:200px;
+	display: inline;
+}
+#select_Liter_Save_Second>select{
+	width:250px;
+	display: inline;
+}
+#select_Liter_Save_Third>label{
+	vertical-align: top;
+}
+#select_Liter_Save_Third>textarea{
+ 	width:1350px;	
+ 	display:inline;
+}
+#select_Liter_Save_Forth>input{
+	width:188px;
+	display: inline;
+}	
+#select_Liter_Save_Fifth>input{
+	width:120px;
+	display: inline;
+}
+#select_Liter_Save_Fifth>:last-child{
+	width:330px;
+	display: inline;
+}
+#select_Liter_Save_Sixth>table{
+	width:1350px;	
+	display:inline;
+}
+#select_Liter_Save_Seventh>label{
+	vertical-align: top;
+}
+#select_Liter_Save_Seventh>textarea{
+	width:1350px;
+	display: inline;
+	height:200px;
+}
+#select_Liter_Save_Select{	
+	display: flex;
+	justify-content: right;
+}
+   
+/*선택형 혜택-현장할인폼 */
+
+.select_Spot_Discount>div>div{
+	margin:30px;
+}
+#select_Spot_Discount_Second>input{
+	width:200px;
+	display: inline;
+}
+#select_Spot_Discount_Second>select{
+	width:250px;
+	display: inline;
+}
+#select_Spot_Discount_Third>label{
+	vertical-align: top;
+}
+#select_Spot_Discount_Third>textarea{
+ 	width:1350px;	
+ 	display:inline;
+}
+#select_Spot_Discount_Forth>input{
+	width:188px;
+	display: inline;
+}	
+#select_Spot_Discount_Fifth>input{
+	width:120px;
+	display: inline;
+}
+#select_Spot_Discount_Fifth>:last-child{
+	width:330px;
+	display: inline;
+}
+#select_Spot_Discount_Sixth>table{
+	width:1350px;	
+	display:inline;
+}
+#select_Spot_Discount_Seventh>label{
+	vertical-align: top;
+}
+#select_Spot_Discount_Seventh>textarea{
+	width:1350px;
+	display: inline;
+	height:200px;
+}
+#select_Spot_Discount_Select{	
+	display: flex;
+	justify-content: right;
+}
+/*선택형 혜택-표준화 불가능 혜택폼 */
+
+.select_Imposible>div>div{
+	margin:30px;
+}
+#select_Imposible_Second>input{
+	width:800px;
+	display: inline;
+}
+#select_Imposible_Third>input{
+ 	width:1350px;	
+ 	display:inline;
+}
+#select_Imposible_Forth>label{
+ 	vertical-align: top;
+}
+#select_Imposible_Forth>textarea{
+ 	width:1350px;	
+ 	display:inline;	
+ 	height:200px;
+}
+#select_Imposible_Select{	
+	display: flex;
+	justify-content: right;
+}  
+ /*선택형 혜택- 페이지 제일 마지막 폼*/
+#footerDiv{	
+	margin:30px;
+}
+
+#footerDiv>label{
+	vertical-align: top;
+}
+#footerDiv>textarea{
+	width:700px	;
+	display:inline;
+}
+#footerDiv>input{
+	width:280px;
+	display:inline;
+	vertical-align: top;
+}
+#footerDiv>button{	
+	position: absolute;
+	margin-left:25px;
+	width:150px;
+	height:40px;
+}
+#totalForm{
+	background-color: red;
+}
+.main-detail-bg{
+	 background-color: white;
+	 box-shadow: 2px 2px 2px 2px #e9ecef;
+}
+.form-control{
+	resize:none;
+ }
+.form-control{
+	border-radius: 0%;
+}
+.form-select{
+	border-radius: 0%;
+}
+#public-benefit-tab > li > button{
+   width:150px;
+   margin-left:5px;
+   text-align: left;
+   color:black;
+}
+.public-benefit-detail-tab{
+      border:1px solid gainsboro;
+      border-bottom: 1px solid white;
+}
+.public-benefit-form-label{
+	float:left;
+	   font-weight:bold;
+	   width:10%;
+	   margin-left:20px;
+	   margin-right:20px;
+}
+.public-benefit-input9{
+	width:80%;
+	float:left;
+}
+.public-benefit-tab-title > *{
+   margin-bottom:10px;
+}
+.public-benefit-date{
+   margin-left:5px;
+}
+.select_Save,.select_Liter_Discount,.select_Liter_Save,.select_Spot_Discount,
+.select_Imposible{
+	display:none;
+}
+#select_Total,#select_Total,#special_Total{
+	display:none;
+}
+
+#select_discount{
+	margin:30px;
+}
+#select_discount>div{
+	margin-bottom:30px;
+}
+#select_discount_First{
+	margin:30px;
+}
+
+
+/* 특별혜택 Form css  */
+
+.special_voucher_Form,.special_lounge_Form,.special_parking_Form,.special_hotel_Form,
+.special_golf_Form,
+.special_extra_Form{
+	display:none;
+}
+.special_annual_Form{
+	display:block;
+}
+
+#special_discount_First{
+	margin:30px;
+}
+.special_annual_Form>div>div{
+	margin:30px;
+}
+
+.special-form-label{
+	width:10%;
+	margin-left:30px;
+	font-weight: bold;
+}
+
+#extraCheck{	
+	position: relative;
+	top:7px;
+}
+
+/* 스페셜 연회비 */
+
+#special_discount_First>div>.form-control{
+	margin-left:20px;
+	width:250px;
+	display:inline;
+}
+
+#special_annual_First>input{
+	width:310px;
+	display:inline;
+	
+}
+#special_annual_Second>input{
+	width: 1350px;
+	display:inline;
+}
+#special_annual_Third>input{
+	width: 1350px;
+	display:inline;
+}
+#special_annual_Fourth>label{
+	vertical-align: top;
+}
+#special_annual_Fourth>textarea {
+	width:1350px;	
+	display:inline;
+	height:200px;
+}
+
+/* 스페셜 바우처 */
+.special_voucher_Form>div>div{
+	margin:30px;
+}
+
+#special_voucher_First>div>.form-control{
+	margin-left:20px;
+	width:250px;
+	display:inline;
+}
+
+#special_voucher_First>input{
+	width:310px;
+	display:inline;
+	
+}
+#special_voucher_Second>input{
+	width: 1350px;
+	display:inline;
+}
+#special_voucher_Third>input{
+	width: 1350px;
+	display:inline;
+}
+#special_voucher_Fourth>label{
+	vertical-align: top;
+}
+#special_voucher_Fourth>textarea {
+	width:1350px;	
+	display:inline;
+	height:200px;
+}
+
+/* 스페셜 공항 라운지 */
+.special_lounge_Form>div>div{
+	margin:30px;
+}
+
+#special_lounge_First>div>.form-control{
+	margin-left:20px;
+	width:250px;
+	display:inline;
+}
+
+#special_lounge_First>input{
+	width:310px;
+	display:inline;
+	
+}
+#special_lounge_Second>input{
+	width: 1350px;
+	display:inline;
+}
+#special_lounge_Third>input{
+	width: 1350px;
+	display:inline;
+}
+#special_lounge_Fourth>label{
+	vertical-align: top;
+}
+#special_lounge_Fourth>textarea {
+	width:1350px;	
+	display:inline;
+	height:200px;
+}
+
+/* 스페셜 발레 파킹 */
+.special_parking_Form>div>div{
+	margin:30px;
+}
+
+#special_parking_First>div>.form-control{
+	margin-left:20px;
+	width:250px;
+	display:inline;
+}
+
+#special_parking_First>input{
+	width:310px;
+	display:inline;
+	
+}
+#special_parking_Second>input{
+	width: 1350px;
+	display:inline;
+}
+#special_parking_Third>input{
+	width: 1350px;
+	display:inline;
+}
+#special_parking_Fourth>label{
+	vertical-align: top;
+}
+#special_parking_Fourth>textarea {
+	width:1350px;	
+	display:inline;
+	height:200px;
+}
+
+/* 스페셜 호텔 서비스 */
+.special_hotel_Form>div>div{
+	margin:30px;
+}
+
+#special_hotel_First>div>.form-control{
+	margin-left:20px;
+	width:250px;
+	display:inline;
+}
+
+#special_hotel_First>input{
+	width:310px;
+	display:inline;
+	
+}
+#special_hotel_Second>input{
+	width: 1350px;
+	display:inline;
+}
+#special_hotel_Third>input{
+	width: 1350px;
+	display:inline;
+}
+#special_hotel_Fourth>label{
+	vertical-align: top;
+}
+#special_hotel_Fourth>textarea {
+	width:1350px;	
+	display:inline;
+	height:200px;
+}
+
+/* 스페셜 골프 서비스 */
+.special_golf_Form>div>div{
+	margin:30px;
+}
+
+#special_golf_First>div>.form-control{
+	margin-left:20px;
+	width:250px;
+	display:inline;
+}
+
+#special_golf_First>input{
+	width:310px;
+	display:inline;
+	
+}
+#special_golf_Second>input{
+	width: 1350px;
+	display:inline;
+}
+#special_golf_Third>input{
+	width: 1350px;
+	display:inline;
+}
+#special_golf_Fourth>label{
+	vertical-align: top;
+}
+#special_golf_Fourth>textarea {
+	width:1350px;	
+	display:inline;
+	height:200px;
+}
+
+/* 스페셜 기타 */
+.special_extra_Form>div>div{
+	margin:30px;
+}
+
+#special_extra_First>div>.form-control{
+	margin-left:20px;
+	width:250px;
+	display:inline;
+}
+
+#special_extra_First>input{
+	width:310px;
+	display:inline;
+	
+}
+#special_extra_Second>input{
+	width: 1350px;
+	display:inline;
+}
+#special_extra_Third>input{
+	width: 1350px;
+	display:inline;
+}
+#special_extra_Fourth>label{	
+	vertical-align: top;
+}
+#special_extra_Fourth>textarea {
+	width:1350px;	
+	display:inline;
+	height:200px;
+}
+
+#special_Total{
+	display:none;
+}
+#normal_Total{
+	display:block;
+}
+.btn-secondary{
+	width:150px;
+	height:40px;
+}
+
+/*  normal_From tab 추가 버튼 plus minus */
+			
+.normal-form-btns-group,.normal-form-full-btns-group{
+	position:absolute;
+	margin-top:-20px;
+	
+}
+.normal-form-btns-group > div > .normal-form-btn,
+.normal-form-full-btns-group > div > .normal-form-btn{
+	
+	background-color: white;
+	border-radius: 30px;
+	color:#236ade;
+	width:40px;
+	height:40px;
+	text-align:center;
+	margin:auto;
+	font-size:x-large;
+	box-shadow: 2px 2px 2px 2px #e9ecef;
+	border :0px;
+	margin-right:5px;
+}
+.normal-form-btns-group > :first-child {
+	float:left;
+	width:50%;
+}
+.normal-form-btns-group > :last-child{
+	float:right;
+	width:50%;
+}
+
+.normal-form-btns-group > :first-child >:last-child {
+	float:right;
+}
+.normal-form-full-btns-group > :first-child {
+	width:50%;
+	float:right;
+}
+
+/* select_Form tab 추가 버튼 plus minus */
+			
+.select-form-btns-group,.select-form-full-btns-group{
+	position:absolute;
+	margin-top:-20px;
+	
+}
+.select-form-btns-group > div > .select-form-btn,
+.select-form-full-btns-group > div > .select-form-btn{
+	
+	background-color: white;
+	border-radius: 30px;
+	color:#236ade;
+	width:40px;
+	height:40px;
+	text-align:center;
+	margin:auto;
+	font-size:x-large;
+	box-shadow: 2px 2px 2px 2px #e9ecef;
+	border :0px;
+	margin-right:5px;
+}
+.select-form-btns-group > :first-child {
+	float:left;
+	width:50%;
+}
+.select-form-btns-group > :last-child{
+	float:right;
+	width:50%;
+}
+
+.select-form-btns-group > :first-child >:last-child {
+	float:right;
+}
+.select-form-full-btns-group > :first-child {
+	width:50%;
+	float:right;
+}
+
+#nocancleButton{
+	float :right;
+	margin-right:5px;
+}
+
+/* special_Form tab 추가 버튼 plus minus */
+
+.special-form-btns-group,.special-form-full-btns-group{
+	position:absolute;
+	margin-top:-20px;
+	
+}
+.special-form-btns-group > div > .special-form-btn,
+.special-form-full-btns-group > div > .special-form-btn{
+	
+	background-color: white;
+	border-radius: 30px;
+	color:#236ade;
+	width:40px;
+	height:40px;
+	text-align:center;
+	margin:auto;
+	font-size:x-large;
+	box-shadow: 2px 2px 2px 2px #e9ecef;
+	border :0px;
+	margin-right:5px;
+}
+.special-form-btns-group > :first-child {
+	float:left;
+	width:50%;
+}
+.special-form-btns-group > :last-child{
+	float:right;
+	width:50%;
+}
+
+.special-form-btns-group > :first-child >:last-child {
+	float:right;
+}
+.special-form-full-btns-group > :first-child {
+	width:50%;
+	float:right;
+}
+
+
+/*product modal */
+
+
+.modal-background {
+   display: none;
+   position: absolute;
+   width: 100%;
+   height: 1000%;
+   background-color: rgba(0, 0, 0, 0.5);
+   top: 0;
+   left: 0;
+   z-index: 2000;
+}
+
+.modal-content {
+   width: 500px;
+   height: 350px;
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   margin: -250px 0 0 -250px;
+   background: white;
+   z-index: 2001;
+}
+
+.modal {
+   display: none;
+   z-index: 2001;
+}
+
+.modal-title {
+   font-size: 22px;
+   font-weight: bolder;
+}
+
+.benefit-modal {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   display: none;
+   z-index: 2001;
+}
+
+.modal-footer {
+   display: flex;
+}
+
+.benefotmodal-text1 {
+   color: blue;
+}
+
+.benefit-industry-search-text {
+   font-size: 18px;
+   color: #236ADE;
+   font-weight: bolder;
+   margin: 0px;
+   margin-left: 20px;
+}
+
+.benefit-industry-search-text3 {
+   font-size: 13px;
+   color: darkgrey;
+   margin: 0;
+   margin-left: 20px;
+}
+
+.modal-header {
+   margin: 20px;
+   padding: 0px 0px 10px 0px;
+   border-width: 3px;
+}
+
+/* .modal-body {
+	margin: 0px 0px 0px 10px;
+} */
+
+#OrganConfirmation_Modal_Body {
+	justify-content: center;
+    align-content: center;
+    display: inline-grid;
+    margin: 0px;
+}
+
+.modal-footer {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.select2-container {
+   z-index: 9999 !important;
+}
+
+.selectlistdiv2 {
+   display: inline;
+   margin-left: 20px;
+}
+
+.selectlistdiv1 {
+  margin-left: 50px;
+    padding-right: 60px;
+    line-height: 40px;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice
+   {
+   border-style: none;
+   border: none;
+   background-color: white;
+}
+/* modal 정리  */
+.select2-container--default .select2-results__option--highlighted[aria-selected]
+{	background-color:white;
+	color: #0d6efd;
+}
+.select2-container--default .select2-results__option[aria-selected=true]{
+	background-color: white;
+}
+
+.select2-results__option {
+   list-style: none;
+}
+
+.select2-results__message {
+   visibility: hidden;
+   display: none;
+}
+
+.select2-dropdown--below {
+   border-bottom: none;
+}
+/* 혜택저장 modal */
+.sava-benefits-text1 {
+   font-size: 20px;
+   font-weight: bolder;
+   text-align: center;
+}
+
+.SaveBenefitsModal {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   display: none;
+   z-index: 2001;
+}
+
+/* .modal-footer {
+   align-items: center;
+   display: flex;
+   justify-content: center;
+}
+ */
+#Sava-Benefits-Modal-Input-Again-Yes {
+   width: 100px;
+   margin-right: 10px;
+}
+
+#Sava-Benefits-Modal-Input-Again-No {
+   width: 150px;
+   background-color: grey;
+   border-color: gray;
+}
+
+/* 확정하기 modal */
+#Product_Immediately_Confirmed_Modal_Yes2{
+	width: 100px;
+    margin-right: 10px;
+}
+#Product_Immediately_Confirmed_Modal_Yes{
+	width: 100px;
+    margin-right: 10px;
+}
+#Organ-Confirmation-Modal-update-check-Again-Yes {
+   width: 100px;
+   margin-right: 10px;
+}
+
+#Organ-Confirmation-Modal-update-check-Again-No {
+   width: 100px;
+   height: 48px;
+   margin-left: 10px;
+   background-color: grey;
+   border-color: gray;
+}
+
+.Organ-Confirmation-Modal {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   display: none;
+   z-index: 2001;
+}
+
+#Product_TemporaryStorage_Modal_Content,#Product_Immediately_Confirmed_Modal_Content
+   {
+   height: 350px;
+}
+
+#Product_TemporaryStorage_Modal_Body,#Product_Immediately_Confirmed_Modal_Body {
+   justify-content: center;
+   align-content: center;
+   display: inline-grid;
+   margin: 0px;
+}
+
+#Product_TemporaryStorage_Modal_Yes, #Delete-Product-Check-Modal-check {
+    width: 100px;
+}
+
+#Product_Immediately_Confirmed_Modal_No,#Product_TemporaryStorage_Modal_No,#Product_Immediately_Confirmed_Modal_No2 {
+   	width: 100px;
+    height: 48px;
+    margin-left: 10px;
+    background-color: grey;
+    border-color: gray;
+}
+
+#Annual_Fee_Event_Modal_Content {
+   width: 600px;
+   height: auto;
+}
+
+
+#event_Modal_input {
+   margin: 10px 0px 10px 15px;
+   text-align: left;
+}
+
+.event_period1 {
+width:150px;
+   text-align: left;
+}
+
+.event_period2 {
+width:150px;
+    text-align: left;
+}
+#event_Modal_input1 {
+text-align:left;
+  float:right;
+   width: 400px;
+}
+#event_Modal_input3 {
+	width:400px;
+   text-align: left;
+}
+#Delete-Product-Modal-check{
+	  width: 100px;
+   margin-right: 10px;
+}
+#Delete-Product-Modal-cancle{
+   width: 100px;
+   height: 48px;
+   margin-left: 10px;
+   background-color: grey;
+   border-color: gray;
+}
+
+.product_modal_body_text {
+	font-size: 20px;	
+}
+
+.modal-footer {
+	margin : 0px 20px;
+	border-width: 2px;
+	
+}
+#select-form-0 > div {
+	box-shadow: 0px 8px 3px 3px ghostwhite;
+}
+#normal-form-0 > div {
+	box-shadow: 0px 8px 3px 3px ghostwhite;
+	
+}
+#special-form-0 > div {
+	box-shadow: 0px 8px 3px 3px ghostwhite;
+}

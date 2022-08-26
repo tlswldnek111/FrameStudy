@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/nav.css">
+<th:block th:replace="views/template/header :: linkFragment"></th:block>
+<script type="text/javascript" src="/js/NavSide.js"></script>
+<link rel="stylesheet" href="/css/productdetail.css">
+<style type="text/css">
+
+	#detail_Form>div{
+		padding:30px;
+	}
+	
+	#menuList{
+		margin-right:10px;
+	}
+
+	#detailpage_First>.form-control{
+		width:300px;	
+		display:inline;
+	}	
+	
+	#detailpage_Second>.form-label{
+		vertical-align: top;
+	}
+	
+	
+	#detailpage_Second>.form-control{
+		width:1350px;	
+		display:inline;
+	}
+	
+	#decide_Div{
+		display: flex;
+		float:right;
+		margin-right:30px;
+	}
+	
+	#business-list{
+		width:1350px;	
+		height:300px;
+		display:inline-block;
+		box-shadow: 3px 3px 3px 3px ghostwhite;
+		border :1px solid ghostwhite;
+		padding:10px;	
+		margin-bottom:10px;
+	}
+	.bi-x{
+		color:red;
+	}
+</style>
+ 
+</head>
+
+<script>
+
+//업종 디테일에서 입력하고 삭제하는 Jquery
+var i=0;
+$(function(){
+	$("input[name=input-change]").on("keyup",function(key){ 
+
+		var value=$('input[name=input-change]').val();
+
+		//enter를 눌렀을 때 현재값을 입력
+		if(key.keyCode==13) {        
+			$('#business-list').append('<span id='+i+'>'+'<span>'+value+'</span>'+'<i id='+i+' class="bi bi-x"></i>'+'  '+'</span>');  
+			$('input[name=input-change]').val('');   
+			i++;
+			console.log(i);
+		}   
+				
+		//버튼을 눌렀을 때 해당 span의 id값을 찾고 그 값을 삭제
+		$('.bi-x').on("click",function(){
+			console.log( $(this).attr("id"));
+			$('#'+$(this).attr("id")).detach();
+		})	   
+			 
+		});
+});
+	
+</script>
+
+
+<body>
+
+    <!-- nav -->
+    <th:block th:replace="views/template/nav :: navFragment"></th:block>
+    <!-- nav end -->
+
+    <!-- contents 내용 -->
+    <div class="main-container main-container-bg">
+
+        <!-- nav-side -->
+        <th:block th:replace="views/template/navside :: navsideFragment"></th:block>
+        <!-- nav-side end -->
+	<div class="main-contents" > 
+	<p id="main-contents-title" class="detail-title" >업종 관리</p>
+	    <div id="topButton">
+	    	<button type="button" class="btn btn-primary ">수정정보등록</button>
+	        <button id="menuList" type="button" class="btn ">목록</button>
+	    </div>	
+	    
+        <div id="firstDiv" class="main-detail-bg">    
+			<label class="form-label">업종카테고리 : 마트/편의점</label>
+		</div>
+		
+	        <!-- 상품관리 디테일 페이지 -->
+	      	<div id="detailPage" class="main-detail-bg">
+		        <!-- 첫번째 form 상태값 부터 특별사항까지 줄단위로 ID적용 -->
+	        	<form id="detail_Form">
+	        		<div id="detailpage_First">
+		        		<label class="form-label">업종명</label>
+	        			<input type="text" class="form-control"	>
+	        		</div>
+	        		<div id="detailpage_Second">
+		        		<label class="form-label">변경 이력</label> 
+		        		<div id="business-list" class="busniess-form-control"></div>
+						<label class="form-label"> </label>
+						<input type="text" name="input-change" class="form-control" placeholder="'Enter를 통해 가맹점을 추가할 수 있습니다.">
+	        		</div>	        	
+     			</form>    	
+     		</div> 
+        	<!-- form 제일 아래에 위치하는 div -->
+        	<div id="footerDiv" >
+        		<label class="form-label">변경 이력</label>
+        		<textarea class="form-control" rows="5">
+						그러므로 없으면, 넣는 봄바람이다. 따뜻한 인간이 튼튼하며, 거친 그들은 이 있음으로써 끓는 아니다. 인생을 우리의 찬미를 인생의 아니한 하여도 약동하다. 소담스러운 청춘의 사람은 이상이 그들은 쓸쓸하랴? 생생하며, 아니한 눈에 않는 청춘은 위하여서. 심장의 못할 가슴이 능히 두기 이성은 실로 때문이다. 할지라도 커다란 스며들어 새 거친 끓는 피에 내려온 것이 운다. 커다란 그림자는 내려온 그들의 얼음이 가는 뜨거운지라, 청춘의 할지니, 부패뿐이다. 얼음 가치를 있는 만천하의 이상의 아니한 위하여서.
+
+물방아 우리는 방황하였으며, 뼈 튼튼하며, 뛰노는 생생하며, 청춘에서만 피다. 찬미를 얼마	나 가치를 갑 우리의 이것이다. 피고, 그것은 때까지 영원히 하였으며, 뿐이다. 하는 끓는 아니한 보이는 날카로우나 천자만홍이 살 봄바람을 아름다우냐? 인도하겠다는 위하여 같이, 불러 하여도 약동하다. 사라지지 역사를 뭇 군영과 든 그리하였는가? 열락의 노래하며 청춘을 따뜻한 뼈 칼이다. 가치를 유소년에게서 주는 발휘하기 그들에게 봄바람이다. 생생하며, 심장의 풍부하게 얼마나 듣는다. 인생에 사랑의 것이 위하여서 천자만홍이 그것은 그들은 찾아다녀도, 인류의 것이다. 있는 우리 들어 위하여 있는가?
+				</textarea>
+        		<label class="form-label">변경 내역</label>
+        		<input type="text" class="form-control">
+        		<button type="button" class="btn btn-primary">검수요청</button>
+        	</div>
+        	
+        	<div id="decide_Div">
+        		<button type="button" class="btn btn-danger">확정하기</button>
+        	</div>
+        		
+    	</div>
+    <!-- contents 내용 -->
+    </div>	
+</body>
+
+</html>

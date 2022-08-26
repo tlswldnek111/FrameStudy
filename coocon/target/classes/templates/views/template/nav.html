@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+
+<th:block th:fragment="navFragment">
+	<div class="main-nav-container">
+		<header class="nav-container fixed-top">
+			<div class="nav-container-logo ">
+				<a href="/update" class="text-dark text-decoration-none"> 금융상품정보수집 </a> 
+				<small th:text="${session.LOGIN_USER.role}"></small>
+			</div>
+			<div class="nav-container-logout ">
+				<a type="button" id="logout" class="text-decoration-none text-dark "><i class="bi bi-person"></i> LOGOUT</a>
+			</div>
+			<script type="text/javascript">
+                	$(function(){
+                		$('#logout').click(function(){
+                			$('#logoutModal').toggle();
+                		})
+                		$('#logoutModalExp').click(function(){
+                			$('#logoutModal').toggle();
+                		})
+                		$('#logoutModalClose').click(function(){
+                			$('#logoutModal').toggle();
+                		})
+                	})
+                </script>
+                
+			<!-- 로그아웃 Form -->
+			<div id="logoutModal" class="modal" tabindex="-1">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">로그아웃</h4>
+							<button id="logoutModalExp" type="button" class="btn-close"
+								data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<h5>로그아웃 하시겠습니까?</h5>
+						</div>
+						<form method="get" action="/logout">
+							<div class="nav-btn-center">
+								<button id="logoutModalOk" type="submit"
+									class="btn btn-primary btn-lg" data-bs-dismiss="modal">확인</button>
+								<button id="logoutModalClose" type="button"
+									class="btn btn-secondary btn-lg">취소</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</header>
+	</div>
+	
+	
+	
+	
+            
+            <style>
+            .back-to-top {
+            border:0px;
+			    position: fixed;
+			    bottom: 80px;
+			    right: 30px;
+			    display: none;
+			    z-index:9999;
+			    width:50px;
+			    height:50px;
+			    color:white;
+			    background-color:#236ADE;
+			    border-radius:100px;
+			}
+			 .back-to-top:hover{
+			 	 color:#236ADE;
+			 }
+			.back-to-bottom {
+			border:0px;
+			    position: fixed;
+			    bottom: 25px;
+			    right: 30px;
+			    display: none;
+			    z-index:9999;
+			    width:50px;
+			    height:50px;
+		    	color:white;
+		     	background-color:#236ADE;
+		     	border-radius:100px;
+			}
+			.back-to-bottom:hover{
+			color:#236ADE;
+			}
+			.bi-arrow-up::before{
+			width:100%;
+			height:100%;
+			position:absolute;
+			left:0px;
+			top:13px;
+			}
+			.bi-arrow-down::before{
+				width:100%;
+				height:100%;
+				position:absolute;
+				left:0px;
+				top:14px;
+			}
+			.btn-light{
+			--bs-btn-hover-color:#236ADE;
+			}
+	        </style>
+            <script type="text/javascript">
+
+            $(document).ready(function(){
+            	$(window).scroll(function () {
+            			if ($(this).scrollTop() > 50) {
+            				$('#back-to-top').fadeIn();
+            				$('#back-to-bottom').fadeIn();
+            			} else {
+            				$('#back-to-top').fadeOut();
+            				$('#back-to-bottom').fadeOut();
+            			}
+            		});
+            		// scroll body to 0px on click
+            		$('#back-to-top').click(function () {
+            			$('body,html').animate({
+            				scrollTop: 0
+            			}, 100);
+            			return false;
+            		});
+            		
+            		$('#back-to-bottom').click(function () {
+            			$('body,html').animate({
+            				scrollTop: document.body.scrollHeight
+            			}, 100);
+            			return false;
+            		});
+            		
+            });
+            
+            
+            </script>
+           
+            <a id="back-to-top" href="#" class="btn btn-light btn-lg back-to-top" role="button"><i class="bi bi-arrow-up"></i></a>
+	
+			<a id="back-to-bottom" href="#" class="btn btn-light btn-lg back-to-bottom" role="button"><i class="bi bi-arrow-down"></i></a>
+	
+	
+	
+	
+</th:block>
+
+</html>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.project.coocon.mapper.ProductMapper">
+     <resultMap type="Product" id="findProductAndProductHistory">
+        <id column="card_code" property="cardCode"/>
+        <result column="card_name" property="cardName"/>
+        <result column="image_url" property="imageUrl"/>
+        <result column="product_url" property="productUrl"/>
+        <result column="apply_url" property="applyUrl"/>
+        <result column="organ_name" property="organName"/>
+        <result column="card_status" property="cardStatus"/>
+        <result column="card_category" property="cardCategory"/>
+        <result column="card_created" property="cardCreated"/>
+        <result column="annual_event" property="annualEvent"/>
+        <result column="domestic_only" property="domesticOnly"/>
+        <result column="union_pay" property="unionPay"/>
+        <result column="master" property="master"/>
+        <result column="amex" property="amex"/>
+        <result column="visa" property="visa"/>
+        <result column="jcb" property="jcb"/>
+        <result column="ect" property="ect"/>
+        <result column="annual_signify" property="annualSignify"/>
+        <result column="integrated_detail" property="integratedDetail"/>
+        <result column="treatment_condition" property="treatmentCondition"/>
+        <result column="treatment_condition_detail" property="treatmentConditionDetail"/>
+        <result column="special_items" property="specialItems"/>
+        <association column="no" property="cardHistoryDomain" javaType="CardHistory">
+           <id column="no" property="no"/>
+           <result column="card_code" property="cardCode"/>
+           <result column="revisor" property="revisor"/>
+           <result column="revise_content" property="reviseContent"/>
+           <result column="revise_date" property="reviseDate"/>
+        </association>
+     </resultMap>
+     
+     <resultMap type="Product" id="findBasicAndBenefit">
+        <id column="card_code" property="cardCode"/>
+            <collection column="benefit_no" property="cardBasicBenefits" ofType="CardBasicBenefits" javaType="ArrayList">
+            <id column="benefit_no" property="benefitNo"/>
+            <result column="card_code" property="cardCode"/>
+            <result column="benefit_category" property="benefitCategory"/>
+            <result column="business_name" property="businessName"/>
+            <result column="month_max_money" property="monthMaxMoney"/>
+            <result column="day_max_money" property="dayMaxMoney"/>
+            <result column="per_min_money" property="perMinMoney"/>
+            <result column="per_max_money" property="perMaxMoney"/>
+            <result column="day_max_count" property="dayMaxCount"/>
+            <result column="month_max_count" property="monthMaxCount"/>
+            <result column="year_max_count" property="yearMaxCount"/>
+            <result column="specific_money" property="specificMoney"/>
+            <result column="specific_stock" property="specificStock"/>
+            <result column="method" property="method"/>
+            <result column="signify" property="signify"/>
+            <result column="benefit_name" property="benefitName"/>
+            <result column="benefit_summary" property="benefitSummary"/>
+            <result column="benefit_detail" property="benefitDetail"/>
+            <result column="package_name" property="packageName"/>
+            <result column="select_benefit" property="selectBenefit"/>
+            <collection column="no" property="cardBenefitTable" ofType="CardBenefitTable" javaType="ArrayList" >
+               <id column="no" property="no"/>
+               <result column="benefit_no" property="benefitNo"/>
+               <result column="price" property="price"/>
+               <result column="limit" property="limit"/>
+               <result column="correspond" property="correspond"/>
+               <result column="per_money" property="perMoney"/>
+               <result column="per_rate" property="perRate"/>
+            </collection>
+        </collection>
+     </resultMap>
+     
+     <resultMap type="Product" id="selectProductDetailSpecial">
+      <id column="card_code" property="cardCode" />
+      <result column="card_name" property="cardName" />
+      <result column="image_url" property="imageUrl" />
+      <result column="product_url" property="productUrl" />
+      <result column="apply_url" property="applyUrl" />
+      <result column="organ_name" property="organName" />
+      <result column="card_status" property="cardStatus" />
+      <result column="card_category" property="cardCategory" />
+      <result column="card_created" property="cardCreated" />
+      <result column="annual_event" property="annualEvent" />
+      <result column="domestic_only" property="domesticOnly" />
+      <result column="union_pay" property="unionPay" />
+      <result column="master" property="master" />
+      <result column="amex" property="amex" />
+      <result column="visa" property="visa" />
+      <result column="jcb" property="jcb" />
+      <result column="ect" property="ect" />
+      <result column="annual_signify" property="annualSignify" />
+      <result column="integrated_detail" property="integratedDetail" />
+      <result column="treatment_condition" property="treatmentCondition" />
+      <result column="treatment_condition_detail" property="treatmentConditionDetail" />
+      <result column="special_items" property="specialItems" />
+      <collection column="no" property="cardSpecialBenefit" ofType="CardSpecialBenefit" javaType="ArrayList">
+         <id column="no" property="no" />
+         <result column="card_code" property="cardCode" />
+         <result column="benefit_method" property="benefitMethod" />
+         <result column="offer_price" property="offerPrice" />
+         <result column="offer_count" property="offerCount" />
+         <result column="year_max_offer" property="yearMaxOffer" />
+         <result column="possible_place" property="possiblePlace" />
+         <result column="benefit_summary" property="benefitSummary" />
+         <result column="signify" property="signify" />
+         <result column="benefit_ect" property="benefitEct" />
+      </collection>
+   </resultMap>
+     
+     
+     
+      <insert id="insertCommonTable" parameterType="CardBenefitTable">
+       INSERT INTO card_benefit_table(benefit_no, price, "limit", correspond, per_money, per_rate)  VALUES 
+        <foreach collection="list" item="item" separator="," open="" close="">
+         (
+		 (select DISTINCT ON(card_code) benefit_no from card_basic_benefits where card_code = #{item.cardCode} and select_benefit = #{item.selectBenefit} order by card_code, benefit_no desc),
+		 #{item.price},
+		 #{item.limit},
+		 #{item.correspond},
+		 #{item.perMoney},
+		 #{item.perRate}
+		 )
+        </foreach>
+	 </insert>
+ 
+ 
+ 	<insert id="insertIntegratedTable" parameterType="ProductIntegrated">
+      INSERT INTO card_integrated_table(price, discount, saving, approval, rate, card_code)   VALUES 
+        <foreach collection="list" item="item" separator="," open="" close="">
+        (#{item.price},#{item.discount},#{item.saving},#{item.approval},#{item.rate},#{item.cardCode})
+        </foreach>
+	 </insert>
+ 
+ 
+  </mapper>

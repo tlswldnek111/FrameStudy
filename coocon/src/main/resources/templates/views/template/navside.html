@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+   <th:block th:fragment="navsideFragment">
+   
+            <div class="nav-side-container">
+               <div class="nav-side-item"></div>
+                <div class="nav-side-item">
+                    <a href="/update" class="nav-side-item-a text-decoration-none">업데이트 조회</a>
+                </div>
+                <div class="nav-side-item">
+                    <a href="/product" class="nav-side-item-a text-decoration-none">상품 관리</a>
+                </div>
+                <div class="nav-side-item">
+                    <a href="/organ" class="nav-side-item-a text-decoration-none">기관 관리</a>
+                </div>
+                <div class="nav-side-item" th:if="${session.LOGIN_USER.role} == 'Admin'">
+	                <a href="/user?status=전체&role=전체&keyword=" class="nav-side-item-a text-decoration-none">회원 관리</a>
+                </div>
+            </div>  
+   </th:block>
+     
+</html>

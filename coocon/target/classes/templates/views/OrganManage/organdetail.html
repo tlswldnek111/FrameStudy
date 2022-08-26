@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="UTF-8">
+    <title>C&C Organ</title>
+    <link rel="icon" href="/imgs/favicon.png">
+    <html xmlns:th="http://www.thymeleaf.org">
+    <th:block th:replace="views/template/header :: linkFragment"></th:block>
+	<link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/organdetail.css">
+	<link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+	<script defer src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+    <script defer type="text/javascript" src="/js/NavSide.js"></script>
+    <script defer type="text/javascript" src="/js/MathCalc.js"></script>
+	<script defer type="text/javascript" src="/js/organForm.js"></script>
+	<script defer type="text/javascript" src="/js/organDetailSelect.js"></script>
+	<script defer type ="text/javascript" src="/js/organUpdate.js"></script>
+	<script defer type ="text/javascript" src="/js/organModal.js"></script>
+<link rel="stylesheet" href="https://uicdn.toast.com/select-box/latest/toastui-select-box.css">
+<script src="https://uicdn.toast.com/select-box/latest/toastui-select-box.js"></script>
+	</head>
+	
+</head>
+
+<body>
+	<input id="role" type="hidden" th:value="${session.LOGIN_USER.role}">
+	<input id="username" type="hidden" th:value="${session.LOGIN_USER.username}">
+ <!-- nav -->
+    <th:block th:replace="views/template/nav :: navFragment"></th:block>
+    <!-- nav end -->
+
+    <!-- contents 내용 -->
+    <div class="main-container main-container-bg">
+
+        <!-- nav-side -->
+        <th:block th:replace="views/template/navside :: navsideFragment"></th:block>
+        <!-- nav-side end -->
+
+    		
+			    
+        <!-- 기관관리 detail 내용 -->
+       <!--organ detail contents-->
+    <div class="main-contents">
+			<p id="main-contents-title" class="detail-title">기관 관리</p>
+        <!-- btns -->
+        <div id="btns-group"  class="row">
+            <div>
+                <button id="main-contents-update-btn" class="main-contents-updates-btn " type="button" onClick="mainContentsBackground();">수정정보 등록</button>
+                <button class="main-contents-cancle-btn">목록</button>
+            </div>
+        </div>
+        <!--btns end-->
+        
+	 
+        <!--상태값, 기관명, 상품분류-->
+         
+         <div id="organ-detail-title-bg" >
+            <div class="row organ-detail-title-1" >
+                <div>
+                    <p>상태값 : <span class="organ-date-expire-no">기간 만료</span></p>
+                </div>
+            </div>
+         </div>   
+            <!-- 배경색 시작 white -->
+		<div class="main-detail-bg ">       
+            <div class="row organ-detail-title-2">
+                <div>
+                    <label>기관명  </label> 
+                    <input id="organ-detail-name" type="text" disabled />
+                </div>
+                <div>
+                    <label>상품 분류 </label> 
+                    <select id="organ-detail-product" disabled>
+                        <option >전체</option>
+                        <option value="1">예금</option>
+                        <option value="2">적금</option>
+                        <option value="3">대출</option>
+                        <option value="4" selected>카드</option>
+                    </select>
+                </div>
+            </div>
+        
+    	<!--상태값, 기관명, 상품분류 end-->
+		
+
+	 
+            <!--tabs-->
+            <ul class="nav nav-tabs" id="organ-detail-tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active organ-detail-tab " id="home-tab" data-bs-toggle="tab" data-bs-target="#card-event-tab" type="button" role="tab" aria-controls="card-event-tab" aria-selected="true" onClick="mainContentsBackground();">
+                    카드 연회비 이벤트</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link organ-detail-tab " id="profile-tab" data-bs-toggle="tab" data-bs-target="#public-benefit-tab" type="button" role="tab" aria-controls="public-benefit-tab" aria-selected="false" onClick="mainContentsBackground();">
+                    공동 혜택</button>
+                </li>
+              </ul>
+             <!--tabs end-->
+
+<script>
+//카드 연회비 이벤트에서 이벤트저장 버튼을 클릭하면 값들이 모두 disabled 되게 하기
+
+</script>
+
+             <!-- tab 내용 -->
+         <div class="tab-content " id="myTabContent">
+               <!--card event tab detail 상세-->
+                <div class="tab-pane fade show active" id="card-event-tab" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                  	<!-- 0 -->
+                    <div id="card-event-tab-detail-0">
+                        <div class="row">
+                            <label class="card-event-tab-detail-label">이벤트명</label>
+                            <input class="card-event-tab-detail-input form-control" type="text"  onchange="inputUp(this)" maxlength="300"/>
+                        </div>
+                        <div class="row ">
+                            <label class="card-event-tab-detail-label">URL</label>
+                            <input class="card-event-tab-detail-input form-control" type="text" onchange="inputUp(this)" maxlength="300"/>
+                        </div>
+                        <div class="row ">
+                            <label class="card-event-tab-detail-label">이벤트 대상</label>
+                            <input class="card-event-tab-detail-input form-control" type="text" onchange="inputUp(this)" maxlength="300"/>
+                        </div>
+                        <div class="row ">
+                            <div class="card-event-tab-detail-left">
+                                <label class="card-event-tab-detail-date-label ">이벤트기간</label>
+                                <div class=" card-event-tab-detail-input ">
+                                    <input type="date" onchange="inputUp(this)" >
+                                    <span> - </span>
+                                    <input type="date" onchange="inputUp(this)" >
+                                </div>
+                            </div>
+                            <div class="card-event-tab-detail-right ">
+                                <label class="card-event-tab-detail-date-label">연회비 지원 방법</label>
+                               <div>
+                                    
+                                     <input id="radio-cashback" type="radio" value="cashback" name="annual_apply-0"  >
+                                     <label for="huey">캐시백</label>
+
+                                      <input id="radio-freepass" type="radio" value="freepass" name="annual_apply-0" >
+                                      <label for="huey">면제</label>
+                               </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="card-event-tab-detail-label">이벤트 내용</label>
+                            <textarea id="card-event-tab-event-content" onchange="inputUp(this)" class="card-event-tab-detail-input form-control" ></textarea>
+                        </div>
+                        <div class="row">
+                            <label class="card-event-tab-detail-label">이벤트 상세</label>
+                            <textarea id="card-event-tab-event-detail" onchange="inputUp(this)" class="card-event-tab-detail-input form-control" ></textarea>
+                        </div>
+                        <div class="row">
+                            <label class="card-event-tab-detail-label">대상카드 선택</label>
+                            <input id="card-event-tab-card-hashtag" class="card-event-tab-detail-input form-control" type="text" name="cardSelects-0" disabled>
+                          	 <label class="card-event-tab-detail-label"></label>
+                          	<input id="autoComplete" class="card-event-tab-detail-input form-control" placeholder="'Enter'를 통해 대상카드를 추가할 수 있습니다." onkeyup="inputUpCardSelect(this)" type="text" name="Auto-card-0" disabled>
+                          	
+                        </div>
+                        <div class="row">
+                            <label class="card-event-tab-detail-label">유의사항</label>
+                            <textarea id="card-event-tab-event-detail" onchange="inputUp(this)" class="card-event-tab-detail-input form-control" ></textarea>
+                        </div>                    
+	                    <!--이벤트 저장 버튼-->
+	                    <div class="row">
+	                        <div>
+	                       	 	<button class="btn card-event-tab-event-reset">초기화</button>
+	                            <button id="card-event-tab-btn-0" class="btn btn-primary card-event-tab-event-save">이벤트 저장</button>
+	                        </div>
+	                    </div>
+	                    <!--이벤트 저장 버튼 end-->
+	                    <!-- 폼을 추가하는 버튼 -->
+	                    <div class="row">
+						</div>
+	                    <!-- 폼을 추가하는 버튼 end -->
+                    </div>
+                    <!-- 0 end -->
+                   
+                </div>
+                <!--card event tab detail 상세 end-->
+
+
+
+				<!-- public-beneft-tab -->
+                <div class="tab-pane fade" id="public-benefit-tab" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                    
+                  
+						
+
+					<!-- tab1 내용 -->
+					<div class="tab-pane fade show active public-tab" id="public-tab-1" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+						
+						<div id="public-benefit-tab-title-1" class="public-benefit-tab-title">
+							<div class="row" >
+                            	<label class="public-benefit-form-label">패키지명</label>
+                            	<input class="public-benefit-input9 form-control" type="text" maxlength="300" onchange="inputUp(this)"/>
+                     	   </div>
+                     	   <div class="row" >
+                            	<label class="public-benefit-form-label">URL</label>
+                            	<input class="public-benefit-input9 form-control" type="text" maxlength="300" onchange="inputUp(this)"/>
+                     	   </div>
+                     	   <div class="row">
+                     	  		<label class="public-benefit-form-label ">이벤트기간</label>
+                                <div class="public-benefit-input9 public-benefit-date">
+                                    <input type="date" value="2019-09-22" onchange="inputUp(this)">
+                                    <span> - </span>
+                                    <input type="date" value="2019-09-30" onchange="inputUp(this)" >
+                                </div>
+                     	   </div>
+                     	   
+                     	  <div class="row"> 
+		        			<label class="public-benefit-form-label">혜택 내용</label> 
+		        			<textarea class="form-control public-benefit-contents" rows="3" onchange="inputUp(this)">혜택 내용</textarea>
+		        			</div>
+                     	  <div class="row"> 
+		        			<label class="public-benefit-form-label">유의 사항</label> 
+		        			<textarea class="form-control public-benefit-contents" rows="3" onchange="inputUp(this)">유의사항</textarea>
+		        			</div> 
+                     	   
+						</div>
+						
+						<!-- 공동 혜택 탭 저장 -->
+						<div class="normal-forms">
+						
+							<div id="normal-form-0"  class="normal-form">
+								<th:block th:replace="views/Organmanage/normalForm :: detailbenefitFragment"></th:block>
+								<div class="row">
+								</div>
+							</div>
+							
+							
+						</div>
+						<!-- 공동 혜택 탭 저장 end-->
+						
+					</div>
+					
+					
+                </div>
+				<!-- public-beneft-tab end -->
+                
+        </div>
+           <!-- tab 내용 end -->
+    </div> 
+        
+				<div class="row card-event-tab-last-div">
+                    <div >
+                        <label class="card-last-tab-label">변경 이력</label>
+                        <textarea id="organ-update-past" class="form-control organ-update-textarea"></textarea>
+                    </div>
+                    <div >
+                        <label class="card-last-tab-label">변경 내역</label>
+                        <input id="organ-update-now" class="form-control organ-update-textarea" type="text" onkeyup="hisotryUp(this)">
+                        <button id="organ-update-commit" class="btn btn-primary ">확정하기</button>
+                     </div>
+                </div>
+    </div>
+    <!--organ detail contents end-->
+
+        <!-- 기관관리 detail 내용 end-->
+        
+    </div>
+        
+        
+        <th:block th:replace="views/Organmanage/organmodal :: organManageModal"></th:block>
+        
+</body>
+</html>

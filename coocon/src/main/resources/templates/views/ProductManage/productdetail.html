@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>C&C Product</title>
+<link rel="icon" href="/imgs/favicon.png">
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/nav.css">
+<th:block th:replace="views/template/header :: linkFragment"></th:block>
+<script type="text/javascript" src="/js/NavSide.js"></script>
+<script type="text/javascript" src="/js/MathCalc.js"></script>
+<script type="text/javascript" src="/js/productForm.js"></script>
+<script type="text/javascript" src="/js/productSelect.js"></script>
+<script type="text/javascript" src="/js/productUpdate.js"></script>
+<script type="text/javascript" src="/js/productModal.js"></script>
+<link rel="stylesheet" href="/css/productdetail.css">
+<link rel="stylesheet" href="https://uicdn.toast.com/select-box/latest/toastui-select-box.css">
+<script src="https://uicdn.toast.com/select-box/latest/toastui-select-box.js"></script>
+
+<style type="text/css">
+
+#historybar{
+   background-color : #e9ecef;
+   display:inline-block;
+   width:700px; 
+   height:150px;   
+   overflow-y:scroll;
+   white-space:nowrap;
+   
+}
+
+#hisotymenu{
+   margin:0px;
+}
+
+</style>
+ 
+</head>
+
+<body>
+	<input id="role" type="hidden" th:value="${session.LOGIN_USER.role}">
+	<input id="username" type="hidden" th:value="${session.LOGIN_USER.username}">
+
+    <!-- nav -->
+    <th:block th:replace="views/template/nav :: navFragment"></th:block>
+    <!-- nav end -->
+
+    <!-- contents 내용 -->
+    <div class="main-container main-container-bg">
+
+        <!-- nav-side -->
+        <th:block th:replace="views/template/navside :: navsideFragment"></th:block>
+        <!-- nav-side end -->
+   <div class="main-contents" > 
+   <p id="main-contents-title" class="detail-title" >상품 관리</p>
+       <div id="topButton">
+          <button id="changeButton" type="button" class="btn btn-primary ">수정정보등록</button>
+           <button id="menuList" type="button" class="btn ">목록</button>
+           <button id="nocancleButton" type="button" class="btn btn-primary">변경없이 확정하기</button>
+       </div>   
+        <div id="firstDiv" class="main-detail-bg" th:each="list:${productList}">    
+          <label class="form-label">상태값 : 
+            <span th:if="${list.cardStatus=='신규'}" style="color: #236ADE; font-weight : bold">신규등록</span>
+            <span th:unless="${list.cardStatus=='신규'}" >신규등록</span> 
+            <span> / </span>
+            <span th:if="${list.cardStatus=='변경'}"style="color: #236ADE; font-weight : bold">변경발생</span>
+            <span th:unless="${list.cardStatus=='변경'}">변경발생</span>
+            <span> / </span>
+            <span th:if="${list.cardStatus=='삭제발생'}" style="color: #236ADE; font-weight : bold">상품삭제</span>
+            <span th:unless="${list.cardStatus=='삭제발생'}">상품삭제</span> 
+            <span> / </span>
+            <span th:if="${list.cardStatus=='임시저장'}"style="color: #236ADE; font-weight : bold">임시저장</span>
+            <span th:unless="${list.cardStatus=='임시저장'}">임시저장</span>
+            <span> / </span>
+            <span th:if="${list.cardStatus=='삭제확정'}"style="color: #236ADE; font-weight : bold">삭제확정</span>
+            <span th:unless="${list.cardStatus=='삭제확정'}">삭제확정</span>
+         </label>
+        </div>
+        <!-- 상품관리 디테일 페이지 -->
+         <div id="detailPage" class="main-detail-bg" th:each="list:${productList}">
+           <!-- 첫번째 form 상태값 부터 특별사항까지 줄단위로 ID적용 -->
+           <form id="firstForm" >
+            <div id="secondDiv">
+               <label class="form-label">기관명 </label>
+               <input type="text" class="form-control form-disabled" th:value="${list.organName}">
+               <label class="form-label">상품 분류 </label>
+               <input type="text" class="form-control form-disabled" th:value="${list.cardCategory}">
+               <label class="form-label">수집 경로 </label>
+               <input type="text" value="모바일" class="form-control form-disabled">   
+            </div>
+         
+            <div id="thirdDiv">
+               <label class="form-label" >상세 분류</label>
+               <div class="form-check form-check-inline">
+                   <input class="form-check-input" type="radio" name="inlineRadioOptions" value="신용카드" th:attr="checked=${list.cardCategory.toString()== '신용카드' ? 'true' : 'false'}">
+                    신용카드
+               </div>
+               <div class="form-check form-check-inline">
+                   <input class="form-check-input" type="radio" name="inlineRadioOptions" value="체크카드" th:attr="checked=${list.cardCategory.toString()== '체크카드' ? 'true' : 'false'}">
+                    체크카드
+               </div>
+               <div class="form-check form-check-inline">
+                   <input class="form-check-input" type="radio" name="inlineRadioOptions" value="하이브리드카드" th:attr="checked=${list.cardCategory.toString()== '하이브리드카드' ? 'true' : 'false'}">
+                    하이브리드카드
+               </div>
+               <label class="form-label">상품명</label>
+                    <input type="text" class="form-control form-disabled" th:value="${list.cardName}">   
+            </div>
+             <div id="forthDiv">
+               <label class="form-label " >URL</label>
+               <input type="text" class="form-control form-disabled" th:value="${list.productUrl}">   
+            </div>
+            <div id="fifthDiv">
+                <label class="form-label">상품 코드</label>
+                    <input type="text" class="form-control form-disabled" th:value="${list.cardCode}">
+            </div>
+            <div id="sixthDiv">
+                <label class="form-label">상품 특징</label>
+                    <input type="text" class="form-control" onchange="inputUp(this)" th:value="${list.productSpecific} == null ? ${''} : ${list.productSpecific}">
+            </div>
+             <div id="seventhDiv">
+               <label class="form-label">카드이미지</label>
+               <a type="button" class="btn btn-secondary" target='_blank' th:href="@{${list.imageUrl}}">이미지보기</a>
+               <label class="form-label" style="padding-left: 50px;">공통혜택</label>
+               <input type="text" class="form-control form-disabled" style="width: 1000px; float: right;"/>
+  
+            </div> 
+            <div id="eigthDiv">
+               <label class="form-label">연회비 이벤트</label>
+                    <input id="annualEvent" type="text" class="form-control form-disabled" th:value="${list.annualEvent} == null ? ${''} : ${list.annualEvent}" onchange="inputUp(this)">   
+                    <button id="annualButton" class="business-search-btn button-control" type="button"><i class="bi bi-search"></i></button>
+            </div>
+             <div id="ninthDiv">
+               <div id="ninthDivOne">
+                  <label class="form-First-label">연회비</label>  
+                   
+                  <input id="check-label-0" class="form-check-input" type="checkbox" th:attr="checked=${list.domesticOnly != 0 ? 'true' : 'false'}">
+                  <label class="form-label">국내전용</label>
+                  <input id="text-label-0" type="text" class="form-control check-form-control" onkeyup="chkNumber(this)" th:value="${list.domesticOnly} == ${0} ? ${''} : ${#numbers.formatInteger(list.domesticOnly,0,'COMMA')}" onchange="inputUp(this)">   
+                  
+                  <input id="check-label-1" class="form-check-input" type="checkbox" th:attr="checked=${list.master != 0 ? 'true' : 'false'}">
+                  <label class="form-label">Master</label>
+                  <input id="text-label-1" type="text" class="form-control check-form-control" onkeyup="chkNumber(this)" th:value="${list.master} == ${0} ? ${''} : ${#numbers.formatInteger(list.master,0,'COMMA')}" onchange="inputUp(this)">
+                  
+                  <input id="check-label-2" class="form-check-input" type="checkbox" th:attr="checked=${list.visa != 0 ? 'true' : 'false'}">
+                  <label class="form-label">VISA</label>
+                  <input id="text-label-2" type="text" class="form-control check-form-control" onkeyup="chkNumber(this)" th:value="${list.visa} == ${0} ? ${''} : ${#numbers.formatInteger(list.visa,0,'COMMA')}" onchange="inputUp(this)">
+               </div>
+               <div id="ninthDivTwo">
+                  <label class="form-First-label"></label>
+                  <input id="check-label-3" class="form-check-input" type="checkbox" th:attr="checked=${list.unionPay != 0 ? 'true' : 'false'}">
+                  <label class="form-label">UNION PAY(UPI)</label>
+                  <input id="text-label-3" type="text" class="form-control check-form-control" onkeyup="chkNumber(this)" th:value="${list.unionPay} == ${0} ? ${''} : ${#numbers.formatInteger(list.unionPay,0,'COMMA')}" onchange="inputUp(this)">   
+                  
+                  <input id="check-label-4" class="form-check-input" type="checkbox" th:attr="checked=${list.amex != 0 ? 'true' : 'false'}">
+                  <label class="form-label">AMEX</label>
+                  <input id="text-label-4" type="text" class="form-control check-form-control" onkeyup="chkNumber(this)" th:value="${list.amex} == ${0} ? ${''} : ${#numbers.formatInteger(list.amex,0,'COMMA')}" onchange="inputUp(this)">   
+                  
+                  <input id="check-label-5" class="form-check-input" type="checkbox" th:attr="checked=${list.jcb != 0 ? 'true' : 'false'}">
+                  <label class="form-label">JCB</label>
+                  <input id="text-label-5" type="text" class="form-control check-form-control" onkeyup="chkNumber(this)" th:value="${list.jcb} == ${0} ? ${''} : ${#numbers.formatInteger(list.jcb,0,'COMMA')}" onchange="inputUp(this)">   
+               </div>
+               <div id="ninthDivThree">
+                  <label class="form-First-label"></label>
+                  <input id="check-label-6" class="form-check-input" type="checkbox" th:attr="checked=${list.ect != 0 ? 'true' : 'false'}">
+                  <label class="form-label">기타</label>
+                  <input id="text-label-6" type="text" class="form-control check-form-control" onkeyup="chkNumber(this)" th:value="${list.ect} == ${0} ? ${''} : ${#numbers.formatInteger(list.ect,0,'COMMA')}" onchange="inputUp(this)">
+               </div>
+            </div>
+             <div id="tenthDiv">
+               <label class="form-label">연회비 특이사항</label>
+                    <input type="text" class="form-control" onchange="inputUp(this)" th:attr="value=${list.annualSignify}" >             
+            </div>
+             
+            <div class="main-forms">
+                <div id="main-form-0"  class="main-form main_normalForm">
+                   <th:block th:replace="views/ProductManage/main_normalForm:: detailbenefitFragment"></th:block>
+                   <div class="row">
+                  </div>
+               </div>
+            </div>
+            
+            <div id=twelfthDiv>
+               <label class="form-label"> 통합실적기준 상세</label>
+               <textarea class="form-control" rows="8" th:text="${list.integratedDetail}" onchange="inputUp(this)">
+               </textarea>
+            </div>
+             <div id="thirteenDiv">
+               <label class="form-label">우대조건 </label>
+               <textarea class="form-control" rows="1" th:text="${list.treatmentCondition}" onchange="inputUp(this)">
+               </textarea>
+            </div>
+            <div id=fourteenthDiv>
+               <label class="form-label"> 우대조건 상세</label>
+               <textarea class="form-control" rows="4" th:text="${list.treatmentConditionDetail}" onchange="inputUp(this)">
+               </textarea>
+            </div> 
+            <div id=fifteenthDiv>
+               <label class="form-label"> 특별사항 </label>
+               <textarea class="form-control" rows="11"th:text="${list.specialItems}" onchange="inputUp(this)">
+               </textarea>
+            </div>
+           </form> 
+         
+         
+          <div id="benefitTab">
+                 <div class="tab-pane" id="public-benefit-tab" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                   <ul class="nav nav-tabs" id="public-benefit-tab" role="tablist">
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link active public-benefit-detail-tab " id="home-tab1" data-bs-toggle="tab" data-bs-target="#normal_Total" type="button" role="tab" aria-controls="card-event-tab" aria-selected="true">기본 혜택</button>
+                      </li>
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link public-benefit-detail-tab " id="home-tab2" data-bs-toggle="tab" data-bs-target="#select_Total" type="button" role="tab" aria-controls="card-event-tab" aria-selected="true">선택형 혜택</button>
+                      </li>
+                       <li class="nav-item" role="presentation">
+                        <button class="nav-link public-benefit-detail-tab " id="home-tab3" data-bs-toggle="tab" data-bs-target="#special_Total" type="button" role="tab" aria-controls="card-event-tab" aria-selected="true">특별 혜택</button>
+                      </li>
+                    </ul>      
+                </div>
+         </div>           
+            
+   <!--기본 혜택 -> 혜택방식 -> 할인 -->
+      <div id="normal_Total" class="tab-pane fade show active normal-forms" role="tabpanel" aria-labelledby="home-tab1" tabindex="0">
+          <div id="normal-form-0"  class="normal-form">
+             <th:block th:replace="views/ProductManage/product_normalForm :: detailbenefitFragment"></th:block>
+         </div>
+       </div>
+       
+            <!-- 선택형 혜택 start -->
+				<div id="select_Total" class="tab-pane fade show active"
+					role="tabpanel" aria-labelledby="home-tab2" tabindex="0">
+					<div id="select_Top">
+						<div id=select_Top_First>
+							<label class="form-label">선택한도</label> <input id="maximumBenefit"
+								type="text" class="form-control" onchange="inputUp(this)">개
+							혜택 중 <input type="text" class="form-control"
+								onchange="inputUp(this)" maxlength="3" onkeyup="chkNumber(this)" th:attr="value=${list.selectCount} ">개
+							혜택 선택가능
+						</div>
+	
+						<div id=select_Top_Third
+							style="margin-bottom: 30px; border-bottom: 1px solid gainsboro;">
+							<label class="form-label">패키지명</label> <input type="text"
+								class="form-control" onchange="inputUp(this)"
+								th:attr="value=${list.packageName}" style="margin-bottom: 30px;">
+						</div>
+
+						<div class="select-forms">
+
+							<div id="select-form-0" class="select-form">
+								<th:block
+									th:replace="views/ProductManage/product_selectForm :: detailbenefitFragment"></th:block>
+							</div>
+						</div>
+
+					</div>
+
+
+				</div>
+				<!-- 선택형 혜택 end -->
+           
+            <!-- 특별 혜택 -->
+            
+             <div id="special_Total" class="tab-pane fade special-forms" role="tabpanel" aria-labelledby="home-tab3" tabindex="0">
+              <div id="special-form-0"  class="special-form">
+                <th:block th:replace="views/ProductManage/product_specialForm :: detailbenefitFragment"></th:block>
+                <div class="row">
+               </div>
+            </div>
+                 
+          </div>    
+          
+         <!-- 특별 혜택 end-->
+            
+         </div>  
+           
+         
+           <!-- form 제일 아래에 위치하는 div -->
+           <div>
+              <div id="footerDiv">
+                 <label class="form-label">변경 이력</label>
+                 <div id="historybar" class="form-control form-disabled" rows="5"> 
+                 	<p id="hisotymenu" th:each="cardHistory : ${cardHistory}">
+	                 	<th:block th:if ="${#strings.length(cardHistory.revisor)==2}" th:text="${#dates.format(cardHistory.reviseDate, 'yyyy-MM-dd HH:mm ')} +${cardHistory.revisor}+'&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ㅣ'+${cardHistory.reviseContent}" >
+	                 	</th:block>
+	                 	<th:block th:if ="${#strings.length(cardHistory.revisor)==3	}" th:text="${#dates.format(cardHistory.reviseDate, 'yyyy-MM-dd HH:mm ')} +${cardHistory.revisor}+'&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspㅣ'+${cardHistory.reviseContent}">
+						</th:block>
+						<th:block th:if ="${#strings.length(cardHistory.revisor)==4}" th:text="${#dates.format(cardHistory.reviseDate, 'yyyy-MM-dd HH:mm ')} +${cardHistory.revisor}+'&nbsp&nbsp&nbsp ㅣ'+${cardHistory.reviseContent}">
+						</th:block> 
+					</p>
+                 </div>                
+                 <label class="form-label">변경 내역</label>
+                 <input type="text" class="form-control" onchange="inputUp(this)"  onkeyup="hisotryUp(this)">
+                 <button type="button" class="btn btn-primary btn-disabled">확정하기</button>
+              </div>
+           </div>
+           
+       </div>    
+    <!-- contents 내용 -->
+    </div>   
+    <th:block th:replace="views/ProductManage/productmodal :: productmanagemodal"></th:block>
+</body>
+
+</html>

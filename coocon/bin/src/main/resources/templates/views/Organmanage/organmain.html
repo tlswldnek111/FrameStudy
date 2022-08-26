@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <html xmlns:th="http://www.thymeleaf.org">
+    <th:block th:replace="views/template/header :: linkFragment"></th:block>
+    <link rel="stylesheet" href="/css/nav.css">
+    <script type="text/javascript" src="/js/NavSide.js"></script>
+    
+    <!-- 기관관리 페이지 css -->
+
+    <style type="text/css">
+    	.organ-form{
+    		margin-bottom: 30px;
+            padding: 30px;
+            border: 1px gainsboro solid;
+            background-color: white;
+            
+    	}
+
+        .form-select {
+            width: 350px;
+            display: inline;
+            margin: 20px;
+        }
+
+        .form-control {
+            width: 350px;
+            display: inline;
+            margin: 20px;
+            margin-right: 20px;
+        }
+
+        #organHigh>input {
+            width: 200px;
+        }
+
+        label {
+            width: 100px;
+        }
+
+        #choiceView {
+            width: 100px;
+            float: right;
+        }
+
+        #searchButton {
+            padding-top: 30px;
+            width: max-content;
+            margin: 0 auto;
+        }
+		#searchButton > button{
+			color:white;
+			
+		}
+
+        #padginationButton {
+            margin-top: 20px;
+            width: max-content;
+            margin: 0 auto;
+        }
+       
+        .organ-td-state{
+       	 color:red;
+       	 text-decoration: none;
+        }
+        .organ-td-state:hover{
+        	color:red;
+        }
+        .organ-td-state:hover,.organ-td-organ-name:hover{
+       	 text-decoration: underline;
+        }
+        .organ-table-bg{
+        	background-color: white;
+        	box-shadow: 2px 2px 2px 2px #e9ecef;
+        }
+        .organ-td-organ-name{
+        	text-decoration: none;
+        }
+    </style>
+    <!-- 기관관리 페이지 css end -->
+
+    <!-- 추가할 내용
+1. table 데이터값 정렬하기
+2. 마우스 over 및 밑줄 기능 구현하기
+3. 텍스트 색상변경 css 기능 수정하기
+4. 글자 수 및 정렬하기 
+  -->
+
+</head>
+
+<body >
+
+    <!-- nav -->
+    <th:block th:replace="views/template/nav :: navFragment"></th:block>
+    <!-- nav end -->
+
+    <!-- contents 내용 -->
+    <div class="main-container main-container-bg">
+
+        <!-- nav-side -->
+        <th:block th:replace="views/template/navside :: navsideFragment"></th:block>
+        <!-- nav-side end -->
+
+    		
+			    
+        <!-- 기관관리 내용 -->
+        <div class="main-contents">
+
+            <div>
+                <h3 id="main-contents-title">기관 관리</h3>
+                
+                <form class="organ-form">
+                    <div id="organHigh">
+                        <label for="inputProduct" class="col-form-label">상품 분류</label>
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>전체</option>
+                            <option value="1">예금</option>
+                            <option value="2">적금</option>
+                            <option value="3">대출</option>
+                            <option value="4">카드</option>
+                        </select>
+                        <label class="col-form-label">상태값</label>
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>전체</option>
+                            <option value="1">확정</option>
+                            <option value="2">기간만료</option>
+                        </select>
+                        <label for="organSearch">기관명 검색</label>
+                        <input type="text" class="form-control">
+                    </div>
+
+                    <div>
+                      <div id="searchButton">
+                            <button class="btn btn-primary">조회하기 
+                            <i class="bi bi-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div>
+                <select id="choiceView" class="form-select" aria-label="Default select example">
+                    <option selected>10개씩</option>
+                    <option value="1">25개씩</option>
+                    <option value="2">50개씩</option>
+                </select>
+            </div>
+
+            <div>
+                <table class="table organ-table-bg">
+                    <thead class="text-bg-secondary p-3">
+                        <tr>
+                            <th class="text-center">번호</th>
+                            <th class="text-center">상품분류</th>
+                            <th style="width: 500px;">기관명</th>
+                            <th>상태값</th>
+                            <th class="text-center">등록일자</th>
+                            <th class="text-center">최종 수정일자</th>
+                            <th class="text-center">최종수정자</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">1</td>
+                            <td class="text-center">카드</td>
+                            <td><a href="/" class="organ-td-organ-name">롯데카드</a></td>
+                            <td><a href="/" class="organ-td-state">기간만료</a></td>
+                            <td class="text-center">2021.09.12</td>
+                            <td class="text-center">2022.06.02</td>
+                            <td class="text-center">조연희</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">2</td>
+                            <td class="text-center">카드</td>
+                            <td><a href="/" class="organ-td-organ-name">비씨카드</a></td>
+                            <td>확정</td>
+                            <td class="text-center">2021.09.13</td>
+                            <td class="text-center">2022.06.02</td>
+                            <td class="text-center">조연희</td>
+                        </tr>
+                       <tr>
+                            <td class="text-center">3</td>
+                            <td class="text-center">카드</td>
+                            <td><a href="/" class="organ-td-organ-name">농협카드</a></td>
+                            <td>확정</td>
+                            <td class="text-center">2021.08.12</td>
+                            <td class="text-center">2022.02.13</td>
+                            <td class="text-center">이종수</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="padginationButton">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- 기관관리 내용 end -->
+
+    </div>
+    <!-- contents 내용 -->
+</body>
+
+</html>

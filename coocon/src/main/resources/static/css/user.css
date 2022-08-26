@@ -1,0 +1,229 @@
+#search-form {
+	margin-bottom: 30px;
+	padding: 30px;
+	border: 1px gainsboro solid;
+	background-color: white;
+}
+
+#searchButton {
+	padding-top: 30px;
+	width: max-content;
+	margin: 0 auto;
+}
+
+#selctbox {
+	width: 100px;
+	float: right;
+}
+
+.form-select {
+	width: 350px;
+	display: inline;
+	margin: 20px;
+}
+
+#selectBox {
+	width: 100px;
+	float: right;
+}
+
+.form-control {
+	width: 350px;
+	display: inline;
+	margin: 20px;
+	margin-right: 20px;
+}
+
+.table {
+	text-align: center;
+	background-color: white;
+}
+
+#userlist {
+	width: 100%;
+	height: 470px;
+	overflow-y: scroll;
+	position: relative;
+}
+
+#userlist thead th {
+	background-color: #5A606A;
+	color: white;
+	position: sticky;
+	top: 0px;
+}
+
+table>tbody>tr>td:nth-child(4):hover {
+	text-decoration: underline;
+}
+
+#userlist .usertable-tbody tr td .approval-wait {
+	text-decoration: none;
+	color: red;
+}
+
+#userlist .usertable-tbody tr td .approval-wait:hover {
+	text-decoration: underline;
+	color: red;
+}
+
+#userlist .usertable-tbody tr td .init-request {
+	text-decoration: none;
+	color: red;
+}
+
+#userlist .usertable-tbody tr td .init-request:hover {
+	text-decoration: underline;
+	color: red;
+}
+
+table .usertable-tbody td a {
+	text-decoration: none;
+	color: black;
+}
+
+.finish-approval {
+	text-decoration: none;
+	color: black;
+}
+
+.finish-approval:hover {
+	text-decoration: underline;
+	color: black;
+}
+
+.form-selet:hover {
+	text-decoration: underline;
+}
+
+.approve-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+
+.modal-background .modal-background-user .modal-background-reset {
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	top: 0;
+	left: 0;
+	z-index: 1;
+}
+
+.modal-close {
+	width: 26px;
+	height: 26px;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+.modal-content {
+	width: 700px;
+	height: 400px;
+	position: fixed;
+	top: 50%;
+	left: 46%;
+	margin: -250px 0 0 -250px;
+	background: white;
+	z-index: 2;
+}
+
+.userchange-fin {
+	/* display: none; */
+	width: 700px;
+	height: 400px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin: -250px 0 0 -250px;
+	background: white;
+	z-index: 2;
+}
+
+.modal-body {
+	padding-left:140px;
+	margin-top:15px;
+}
+
+.approva {
+	display: flex;
+	align-items: center;
+	margin: auto;
+	margin-bottom: 0px;
+	padding-left:0px;
+}
+
+.approvamodal-text>p {
+	font-size: 25px;
+	text-align: center;
+}
+
+.modal-footer {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+#am-username, #am-email, #am-deptname, #um-username, #um-email,
+	#um-deptname, #ipm-username, #ipm-email, #ipm-deptname {
+	margin: 10px 70px;
+	height: 40px;
+	width: 300px;
+	padding-left: 15px;
+}
+
+#Modal-close {
+	background-color: #5A606A;
+	border-color: #5A606A;
+}
+
+#btn-acept-hold {
+	background-color: #5A606A;
+	border-color: #5A606A;
+}
+
+.usermain label {
+	margin-left: 50px;
+}
+
+#paginationButton {
+	margin-top: 20px;
+	width: max-content;
+	margin: 0 auto;
+}
+
+#choiceView {
+	width: 100px;
+	float: right;
+}
+
+.nosearchresult {
+	height: 440px;
+	align-content: center;
+}
+
+.nosearchresult>div {
+	padding-top: 200px;
+}
+.usertable-tbody > tr > td:nth-child(1) {
+	width:280px;
+}
+.usertable-tbody > tr > td:nth-child(2) {
+	width:220px;
+}
+.usertable-tbody > tr > td:nth-child(3) {
+	width:550px;
+}
+.usertable-tbody > tr > td:nth-child(4) {
+	width:300px;
+}
+.usertable-tbody > tr > td:nth-child(5) {
+	width:220px;
+}

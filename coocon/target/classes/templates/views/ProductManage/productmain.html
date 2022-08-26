@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>C&C Product</title>
+<link rel="icon" href="/imgs/favicon.png">
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/nav.css">
+<th:block th:replace="views/template/header :: linkFragment"></th:block>
+<script type="text/javascript" src="/js/NavSide.js"></script>
+<script type="text/javascript" src="/js/MathCalc.js"></script>
+<script type="text/javascript" src="/js/productNameAuto.js"></script>
+<script type="text/javascript" src="/js/organNameAuto.js"></script>
+
+<!-- 상품관리 페이지 css -->
+<style type="text/css">
+.product-form {
+	margin-bottom: 30px;
+	padding: 30px;
+	border: 1px gainsboro solid;
+	background-color: white;
+}
+
+.form-select {
+	width: 350px;
+	display: inline;
+	margin: 20px;
+}
+
+.form-control {
+	width: 350px;
+	display: inline;
+	margin: 20px;
+	margin-right: 20px;
+}
+
+#productHigh>input {
+	width: 200px;
+}
+
+.product-label {
+	width: 100px;
+}
+
+a {
+	text-decoration: none !important;
+}
+
+table {
+	text-align: center;
+	background-color: white;
+	box-shadow: 2px 2px 2px 2px #e9ecef;
+}
+
+#maintable {
+  width: 100%;
+  height: 470px;
+  overflow-y: scroll;
+  position: relative;
+}
+
+#maintable thead th {
+  background-color:#5A606A;
+  color:white;
+  position: sticky;
+  top: 0px;
+}
+
+table>tbody>tr>td:nth-child(4) {
+	text-align: left;
+	color: #236ADE;
+}
+
+table>tbody>tr>td:nth-child(4):hover {
+	text-decoration: underline;
+}
+
+#productName {
+	width: 890px;
+	float: right;
+} 
+
+#choiceView {
+	width: 100px;
+	float: right;
+}
+
+#searchBtn {
+	padding-top: 30px;
+	width: max-content;
+	margin: 0 auto;
+}
+
+#paginationButton {
+	margin-top: 20px;
+	width: max-content;
+	margin: 0 auto;
+}
+
+.nosearchresult {
+	height: 440px;
+	align-content: center;
+}
+
+.nosearchresult>div {
+	padding-top: 200px;
+}
+
+.ui-autocomplete {
+	max-height: 100px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding-right: 20px;
+}
+.ui-autocomplete .highlight {
+    color: #236ade; 
+}
+
+</style>
+
+</head>
+<body>
+	<!-- nav -->
+	<th:block th:replace="views/template/nav :: navFragment"></th:block>
+	<!-- nav end -->
+
+	<!-- contents 내용 -->
+	<div class="main-container main-container-bg">
+
+		<!-- nav-side -->
+		<th:block th:replace="views/template/navside :: navsideFragment"></th:block>
+		<!-- nav-side end -->
+
+		<!-- 상품관리 내용 -->
+		<div class="main-contents">
+			<div>
+				<h3 id="main-contents-title">상품 관리</h3>
+				<div class="product-form">
+					<div id="productHigh">
+						<label for="inputProduct" class="col-form-label product-label">상품분류</label>
+						<select class="form-select" id="cardCategory" name="cardCategory" aria-label="Default select example">
+							<option selected value="">전체</option>
+							<option value="카드">카드</option>
+						</select>
+						 <label for="inputState" class="col-form-label product-label">상태값</label>
+						<select class="form-select" id="cardStatus" name="cardStatus" aria-label="Default select example">
+							<option selected value="">전체</option>
+							<option value="신규" th:selected="${cri.searchCardStatus}==${'신규'}">신규</option>
+							<option value="삭제발생" th:selected="${cri.searchCardStatus}==${'삭제발생'}">삭제발생</option>
+							<option value="변경" th:selected="${cri.searchCardStatus}==${'변경'}">변경</option>
+							<option value="임시저장" th:selected="${cri.searchCardStatus}==${'임시저장'}">임시저장</option>
+							<option value="확정" th:selected="${cri.searchCardStatus}==${'확정'}">확정</option>
+							<option value="삭제확정" th:selected="${cri.searchCardStatus}==${'삭제확정'}">삭제확정</option>
+						</select>
+						<label for="inputState" class="product-label">등록일자</label>
+						 <input type="date" th:value="${cri.searchStartDate}" id="startDate" name="startDate" onchange="inputUp(this)">
+						<span> - </span>
+						 <input type="date" th:value="${cri.searchEndDate}" id="endDate" name="endDate" onchange="inputUp(this)">
+					</div>
+
+					<div>
+						<label for="organName" class="product-label">기관명 검색</label> 
+						<input type="text" name="organName" id="organName" th:value="${cri.searchOrganName}" class="form-control" onkeyup="searchTypeRestrict(this);">
+						 <label for="productName" class="product-label">상품명</label>
+						   
+						  	<input type="text" name="productName" id="productName" th:value="${cri.searchProductName}" class="form-control" onkeyup="searchTypeRestrict(this);">
+						  
+						  
+						<div id="searchBtn">
+							<button class="btn btn-primary" name="searchBtn">조회하기 <i class="bi bi-search"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div>
+				<select id="choiceView" class="form-select" aria-label="Default select example" onchange="showValue(this)">
+					<option value="10" th:selected="${cri.perPageNum}==${10}">10개씩</option>
+					<option value="25" th:selected="${cri.perPageNum}==${25}">25개씩</option>
+					<option value="50" th:selected="${cri.perPageNum}==${50}">50개씩</option>
+				</select>
+			</div>
+
+			<div id="maintable">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>번호</th>
+							<th>상품분류</th>
+							<th>기관명</th>
+							<th>상품명</th>
+							<th>상태값</th>
+							<th>등록일자</th>
+							<th>최종 수정일자</th>
+							<th>최종수정자</th>
+						</tr>
+					</thead>
+					<tbody>
+						<td class="nosearchresult" th:if="${paging.totalCount}==0" colspan="8"><div>조회결과가 없습니다.</div></td>
+						<tr th:each="list,num: ${list}" th:action="@{/product/detail/}+${list.cardCode}">
+						<td class="text-center" th:text="${paging.totalCount-((paging.cri.page-1)*(paging.cri.perPageNum)) -  num.index }" ></td>     
+							<td>카드</td>
+							<td th:text="${list.organName}"></td>
+							<td><a href="productdetail.html" th:href="@{/product/}+${list.cardCode}" th:text="${list.cardName}"></a></td>
+							<td th:text="${list.cardStatus}" th:style="${list.cardStatus.toString().equals('신규') or list.cardStatus.toString.equals('삭제발생') or list.cardStatus.toString.equals('변경') ? 'color:red; text-decoration:underline' : list.cardStatus.toString.equals('임시저장') ? 'color:gray; text-decoration:underline' : 'color:black'}"></td>
+							<td th:text="${list.cardCreated}"></td>
+							<td th:text="${list.cardHistoryDomain.reviseDate} == null ? '-' : ${#dates.format(list.cardHistoryDomain.reviseDate, 'yyyy-MM-dd')}"></td>
+                     		<td id="testmodal" th:text="${list.cardHistoryDomain.revisor} == null ? '-' : ${list.cardHistoryDomain.revisor}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+			<div id="paginationButton">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination">
+						<li class="page-item" >
+							<a class="page-link" aria-label="First" th:href="@{/product(page=${1},perPageNum=${paging.cri.perPageNum},cardStatus=${cri.searchCardStatus},startDate=${cri.searchStartDate}, endDate=${cri.searchEndDate},organName=${cri.searchOrganName},productName=${cri.searchProductName})}">
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+						<li class="page-item">
+						<div th:if="${paging.startPage}-1 == 0">
+							<a class="page-link" aria-label="Prev" th:href="@{/product(page=${1},perPageNum=${paging.cri.perPageNum},cardStatus=${cri.searchCardStatus},startDate=${cri.searchStartDate}, endDate=${cri.searchEndDate},organName=${cri.searchOrganName},productName=${cri.searchProductName})}">
+									<span aria-hidden="true">&lt;</span>
+							</a>
+							</div>
+							
+						<div th:unless="${paging.startPage}-1 == 0">
+							<a class="page-link" aria-label="Prev" th:href="@{/product(page=${paging.startPage}-1,perPageNum=${paging.cri.perPageNum},cardStatus=${cri.searchCardStatus},startDate=${cri.searchStartDate}, endDate=${cri.searchEndDate},organName=${cri.searchOrganName},productName=${cri.searchProductName})}">
+									<span aria-hidden="true">&lt;</span>
+							</a>
+							</div>
+						</li>
+						<li
+							th:each="idx,iterStat : ${#numbers.sequence(paging.startPage,paging.endPage)}" th:classappend="${paging.cri.page} == ${idx} ? active : null">
+							<a class="page-link" th:href="@{/product(page=${idx},perPageNum=${paging.cri.perPageNum},cardStatus=${cri.searchCardStatus},startDate=${cri.searchStartDate}, endDate=${cri.searchEndDate},organName=${cri.searchOrganName},productName=${cri.searchProductName})}" th:if="${paging.totalCount} > 0" th:text="${idx}"></a>
+						</li>
+						<li class="page-item" >
+							<div th:if="${paging.endPage} == ${paging.totalPageCount}">
+							<a class="page-link" aria-label="Next" th:href="@{/product(page=${paging.endPage},perPageNum=${paging.cri.perPageNum},cardStatus=${cri.searchCardStatus},startDate=${cri.searchStartDate}, endDate=${cri.searchEndDate},organName=${cri.searchOrganName},productName=${cri.searchProductName})}">
+								<span aria-hidden="true">&gt;</span>
+							</a>
+							</div>
+							<div th:unless="${paging.endPage} == ${paging.totalPageCount}">
+							<a class="page-link" aria-label="Next" th:href="@{/product(page=${paging.endPage}+1,perPageNum=${paging.cri.perPageNum},cardStatus=${cri.searchCardStatus},startDate=${cri.searchStartDate}, endDate=${cri.searchEndDate},organName=${cri.searchOrganName},productName=${cri.searchProductName})}">
+								<span aria-hidden="true">&gt;</span>
+							</a>
+							</div>
+						</li>
+						<li class="page-item" >
+							<a class="page-link" aria-label="Last" th:href="@{/product(page=${paging.totalPageCount},perPageNum=${paging.cri.perPageNum},cardStatus=${cri.searchCardStatus},startDate=${cri.searchStartDate}, endDate=${cri.searchEndDate},organName=${cri.searchOrganName},productName=${cri.searchProductName})}">
+									<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		<!-- 상품관리 내용 end -->
+
+	</div>
+	<!-- contents 내용 -->
+	<script type="text/javascript">
+     
+     /* 밑에 url부분들은 찾아서 수정 해야할 듯.. */
+  
+    const showValue = (target) =>{ 
+    	
+    	 var cardStatus = $('#cardStatus').val();
+        	var startDate = $('#startDate').val();
+        	var endDate = $('#endDate').val();
+        	var organName = $('#organName').val();
+        	var productName = $('#productName').val();
+        	
+        	var url = newURL+'product?page=1&perPageNum='+target.value;
+        	url = url + '&cardStatus=' + cardStatus;
+        	url = url + '&startDate=' + startDate;
+        	url = url + '&endDate=' + endDate;
+        	url = url + '&organName=' + organName;
+        	url = url + '&productName=' + productName;
+
+        	location.href=url;
+   		}
+    
+    $(document).on('click','#searchBtn', function(e){
+    	e.preventDefault();
+    	  
+        var cardStatus = $('#cardStatus').val();
+       	var startDate = $('#startDate').val();
+       	var endDate = $('#endDate').val();
+       	var productName = $('#productName').val();
+       	var organName = $('#organName').val();
+    	
+    	var url = newURL+'product?page=1&perPageNum='+$('#choiceView')[0].value;
+    	url = url + '&cardStatus=' + cardStatus;
+    	url = url + '&startDate=' + startDate;
+    	url = url + '&endDate=' + endDate;
+    	url = url + '&productName=' + productName;
+    	url = url + '&organName=' + organName;
+    	
+    	location.href=url;
+    	
+    });
+    </script>
+</body>
+</html>

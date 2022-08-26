@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<th:block th:fragment="detailbenefitFragment">
+	<body>
+		<div th:each="basic, num:${basicBenefit}" class ="normal-normal" th:if="${!#lists.isEmpty(basic)}" th:attr="id='normal-all-'+${num.index}">
+			<div id="normal_discount_First">
+				<label class="form-label">혜택 방식</label>
+				<div class="form-check form-check-inline">
+					<input id="radio_normal_start" class="form-check-input benefit-re"
+						type="radio" th:name="normal+${num.index}" value="0"
+						th:attr="radiock=${basic.benefitCategory.toString() == '할인' ? 'true' : 'false'}">
+					할인
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input benefit-re" type="radio"
+						th:name="normal+${num.index}" value="1"
+						th:attr="radiock=${basic.benefitCategory.toString() == '적립' ? 'true' : 'false'}">
+					적립
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input benefit-re" type="radio"
+						th:name="normal+${num.index}" value="2"
+						th:attr="radiock=${basic.benefitCategory.toString() == '리터당 할인' ? 'true' : 'false'}">
+					리터당 할인
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input benefit-re" type="radio"
+						th:name="normal+${num.index}" value="3"
+						th:attr="radiock=${basic.benefitCategory.toString() == '리터당 적립' ? 'true' : 'false'}">
+					리터당 적립
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input benefit-re" type="radio"
+						th:name="normal+${num.index}" value="4"
+						th:attr="radiock=${basic.benefitCategory.toString() == '현장 할인' ? 'true' : 'false'}">
+					현장 할인
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input benefit-re" type="radio"
+						th:name="normal+${num.index}" value="5"
+						th:attr="radiock=${basic.benefitCategory.toString() == '표준화 불가능' ? 'true' : 'false'}">
+					표준화 불가능 혜택
+				</div>
+			</div>
+
+			<div id="normal_Forms">
+				<!--기본 혜택 -> 혜택방식 -> 할인 -->
+				<form class="normal_discount_Form">
+					<div id=normal_discount>
+						<div id="normal_discount_Second">
+							<label class="form-label"> 혜택 업종</label> <input type="text"
+								onchange="inputUp(this)"
+								class="form-control form-disabled normalDataOne plus-busniess-form"
+								th:value="${basic.businessName} == null ? ${''} : ${basic.businessName}">
+							<button class="business-search-btn button-control benefit-re" type="button">
+								<i class="bi bi-search"></i>
+							</button>
+						</div>
+						<div id="normal_discount_Forth">
+							<label class="form-label">월최대 할인금액</label> <input type="text"
+								class="form-control form-input-right benefit-re" onkeyup="chkNumber(this)"
+								onchange="inputUp(this)"
+								th:value="${basic.monthMaxMoney} == null ? ${''} : ${basic.monthMaxMoney}">
+							<label class="form-label">일최대 할인금액</label> <input type="text"
+								class="form-control form-input-right benefit-re" onkeyup="chkNumber(this)"
+								onchange="inputUp(this)"
+								th:value="${basic.dayMaxMoney} == null ? ${''} : ${basic.dayMaxMoney}">
+							<label class="form-label">건당 최소 인정금액</label> <input type="text"
+								class="form-control form-input-right benefit-re" onkeyup="chkNumber(this)"
+								onchange="inputUp(this)"
+								th:value="${basic.perMinMoney} == null ? ${''}: ${basic.perMinMoney}">
+							<label class="form-label">건당 최대 인정금액</label> <input type="text"
+								class="form-control form-input-right benefit-re" onkeyup="chkNumber(this)"
+								onchange="inputUp(this)"
+								th:value="${basic.perMaxMoney} == null ? ${''} : ${basic.perMaxMoney}">
+						</div>
+						<div id="normal_discount_Fifth">
+							<label class="form-label">일/월/년 최대 횟수 </label> <input type="text"
+								class="form-control form-input-right normalDataOne benefit-re"
+								placeholder="일" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)" maxlength="3"
+								th:value="${basic.dayMaxCount} == null ? ${''} : ${basic.dayMaxCount}">
+							<input type="text"
+								class="form-control form-input-right normalDataOne benefit-re"
+								placeholder="월" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)" maxlength="3"
+								th:value="${basic.monthMaxCount} == null ? ${''}: ${basic.monthMaxCount}">
+							<input type="text"
+								class="form-control form-input-right normalDataOne benefit-re"
+								placeholder="년" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)" maxlength="3"
+								th:value="${basic.yearMaxCount} == null ? ${''} : ${basic.yearMaxCount}">
+
+							<label class="form-label">특정금액 기준 할인 </label> <input type="text"
+								class="form-control form-input-right normalDataOne benefit-re"
+								placeholder="금액당" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)"
+								th:value="${basic.specificMoney} == null ? ${''} : ${basic.specificMoney}">
+							<input type="text"
+								class="form-control form-input-right normalDataOne benefit-re"
+								placeholder="할인" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)"
+								th:value="${basic.specificStock} == null ? ${''} : ${basic.specificStock}">
+						</div>
+						<div id="normal_discount_Sixth">
+							<label class="form-label">혜택 상세</label>
+							<table class="table normal_discount_minitable">
+								<thead class="text-center">
+									<tr>
+										<th class="minitable-border">실적 금액</th>
+										<th class="minitable-border">실적별 할인한도</th>
+										<th class="minitable-border">실적별 해당금액</th>
+										<th class="minitable-border">건당 할인금액</th>
+										<th class="minitable-border">건당 할인율</th>
+										<th class="minitable-minus-th"
+											style="background-color: white; border: 1px solid white;"></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr id="normal_discount-0"
+										class="table-value"
+										th:each="benefitDetail : ${basic.cardBenefitTable}">
+										<td class="minitable-border"><span><input
+												class="form-control normal_discount_minitable-input1 normalDataOne benefit-re"
+												type="text" onchange="inputUp(this)"
+												onkeyup="chkrealNumber(this)"
+												th:value="${benefitDetail.price} == null ? ${''} : ${benefitDetail.price}"
+												maxlength="3" />&nbsp; 만원 이상</span></td>
+										<td class="minitable-border"><input
+											class="form-control normalDataOne benefit-re" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)"
+											th:value="${benefitDetail.limit} == null ? ${''} : ${benefitDetail.limit}" />
+										</td>
+										<td class="minitable-border"><input
+											class="form-control normalDataOne benefit-re" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)"
+											th:value="${benefitDetail.correspond} == null ? ${''} : ${benefitDetail.correspond}" />
+										</td>
+										<td class="minitable-border"><input
+											class="form-control normalDataOne benefit-re" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)"
+											th:value="${benefitDetail.perMoney} == null ? ${''} : ${benefitDetail.perMoney}" />
+										</td>
+										<td class="minitable-border"><span><input
+												class="form-control normal_discount_minitable-input1 normalDataOne benefit-re"
+												onchange="inputUp(this)" type="text" onblur="maxNumberThree(this)"
+												onkeyup="chkNumber_decimal(this)"
+												th:value="${benefitDetail.perRate} == null ? ${''} : ${benefitDetail.perRate}" />&nbsp;
+												%</span></td>
+										<td class="minitable-minus-th">
+											<button id="normal_discount-0" class="benefit-re" type="button">-</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<!-- tr 추가 버튼 -->
+							<div class="row ">
+								<button id="normal-discount-plusbtn" class="minitable-plus-btn benefit-re"
+									type="button">+</button>
+							</div>
+							<!-- tr 추가 버튼 end-->
+						</div>
+						<div id="normal_discount_Seventh">
+							<label class="form-label">특이사항</label>
+							<textarea
+								class="form-control public-benefit-textarea normalDataOne benefit-re"
+								rows="3" onchange="inputUp(this)"
+								th:text="${basic.signify} == null ? ${''} : ${basic.signify}"></textarea>
+						</div>
+						<div class="last-element last-element-btn">
+							<button type="button" class="btn btn-reload benefit-re">초기화</button>
+							<button type="button" class="btn btn-primary btn-hidden btn-save">혜택저장</button>
+						</div>
+					</div>
+				</form>
+
+				<!--기본 혜택 -> 혜택방식 -> 할인 end -->
+
+				<!--기본 혜택 -> 혜택방식 -> 적립 -->
+				<form class="normal_Save">
+					<div id=normal_Save_Div>
+						<div id="normal_Save_Second">
+							<label class="form-label"> 혜택 업종</label> <input type="text"
+								onchange="inputUp(this)"
+								class="form-control form-disabled normalDataTwo plus-busniess-form"
+								th:value="${basic.businessName} == null ? ${''} : ${basic.businessName}">
+							<button class="business-search-btn button-control benefit-re" type="button">
+								<i class="bi bi-search"></i>
+							</button>
+						</div>
+						<div id="normal_Save_Forth">
+
+							<label class="form-label">월최대 적립금액</label> <input type="text"
+								class="form-control form-input-right normalDataTwo benefit-re"
+								onkeyup="chkNumber(this)" onchange="inputUp(this)"
+								th:value="${basic.monthMaxMoney} == null ? ${''} : ${basic.monthMaxMoney}">
+							<label class="form-label">일최대 적립금액</label> <input type="text"
+								class="form-control form-input-right normalDataTwo benefit-re"
+								onkeyup="chkNumber(this)" onchange="inputUp(this)"
+								th:value="${basic.dayMaxMoney} == null ? ${''} : ${basic.dayMaxMoney}">
+							<label class="form-label">건당 최소 인정금액</label> <input type="text"
+								class="form-control form-input-right normalDataTwo benefit-re"
+								onkeyup="chkNumber(this)" onchange="inputUp(this)"
+								th:value="${basic.perMinMoney} == null ? ${''}: ${basic.perMinMoney}">
+							<label class="form-label">건당 최대 인정금액</label> <input type="text"
+								class="form-control form-input-right normalDataTwo benefit-re"
+								onkeyup="chkNumber(this)" onchange="inputUp(this)"
+								th:value="${basic.perMaxMoney} == null ? ${''} : ${basic.perMaxMoney}">
+						</div>
+						<div id="normal_Save_Fifth">
+
+							<label class="form-label">일/월/년 최대 횟수 </label> <input type="text"
+								class="form-control form-input-right normalDataTwo benefit-re"
+								placeholder="일" onkeyup="chkNumber(this)"
+								onchange="inputUp(this)" maxlength="3"
+								th:value="${basic.dayMaxCount} == null ? ${''} : ${basic.dayMaxCount}">
+							<input type="text"
+								class="form-control form-input-right normalDataTwo benefit-re"
+								placeholder="월" onkeyup="chkNumber(this)"
+								onchange="inputUp(this)" maxlength="3"
+								th:value="${basic.monthMaxCount} == null ? ${''}: ${basic.monthMaxCount}">
+							<input type="text"
+								class="form-control form-input-right normalDataTwo benefit-re"
+								placeholder="년" onkeyup="chkNumber(this)"
+								onchange="inputUp(this)" maxlength="3"
+								th:value="${basic.yearMaxCount} == null ? ${''} : ${basic.yearMaxCount}">
+
+							<label class="form-label">특정금액 기준 할인 </label> <input type="text"
+								class="form-control form-input-right normalDataTwo benefit-re"
+								placeholder="금액당" onkeyup="chkNumber(this)"
+								onchange="inputUp(this)"
+								th:value="${basic.specificMoney} == null ? ${''} : ${basic.specificMoney}">
+							<input type="text"
+								class="form-control form-input-right normalDataTwo benefit-re"
+								placeholder="적립" onkeyup="chkNumber(this)"
+								onchange="inputUp(this)"
+								th:value="${basic.specificStock} == null ? ${''} : ${basic.specificStock}">
+
+						</div>
+						<div id="normal_Save_Sixth">
+							<label class="form-label">혜택 상세</label>
+
+							<table class="table normal_save_minitable">
+								<thead class="text-center">
+									<tr>
+										<th class="minitable-border">실적 금액</th>
+										<th class="minitable-border">실적별 적립한도</th>
+										<th class="minitable-border">실적별 해당금액</th>
+										<th class="minitable-border">건당 적립금액</th>
+										<th class="minitable-border">건당 적립률</th>
+										<th class="minitable-minus-th"
+											style="background-color: white; border: 1px solid white;"></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr id="normal_save-0"
+										class="table-value"
+										th:each="benefitDetail : ${basic.cardBenefitTable}">
+										<td class="minitable-border"><span><input
+												class="form-control normal_save_minitable-input1 normalDataTwo benefit-re"
+												type="text" onchange="inputUp(this)"
+												onkeyup="chkrealNumber(this)"
+												th:value="${benefitDetail.price} == null ? ${''} : ${benefitDetail.price}"
+												maxlength="3" />&nbsp; 만원 이상</span></td>
+										<td class="minitable-border"><input
+											class="form-control normalDataTwo benefit-re" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)"
+											th:value="${benefitDetail.limit} == null ? ${''} : ${benefitDetail.limit}" />
+										</td>
+										<td class="minitable-border"><input
+											class="form-control normalDataTwo benefit-re" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)"
+											th:value="${benefitDetail.correspond} == null ? ${''} : ${benefitDetail.correspond}" />
+										</td>
+										<td class="minitable-border"><input
+											class="form-control normalDataTwo benefit-re" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)"
+											th:value="${benefitDetail.perMoney} == null ? ${''} : ${benefitDetail.perMoney}" />
+										</td>
+										<td class="minitable-border"><span><input
+												class="form-control normal_save_minitable-input1 normalDataTwo benefit-re"
+												type="text" onchange="inputUp(this)"
+												onkeyup="chkNumber_decimal(this)" onblur="maxNumberThree(this)"
+												th:value="${benefitDetail.perRate} == null ? ${''} : ${benefitDetail.perRate}" />
+												%</span></td>
+										<td class="minitable-minus-th">
+											<button id="normal_discount-minus-0" class="benefit-re" type="button">-</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<!-- tr 추가 버튼 -->
+							<div class="row ">
+								<button id="normal-save-plusbtn" class="minitable-plus-btn benefit-re"
+									type="button">+</button>
+							</div>
+							<!-- tr 추가 버튼 end-->
+						</div>
+						<div id="normal_Save_Seventh">
+							<label class="form-label">특이사항</label>
+							<textarea
+								class="form-control public-benefit-textarea normalDataTwo benefit-re"
+								rows="3" onchange="inputUp(this)"
+								th:text="${basic.signify} == null ? ${''} : ${basic.signify}"></textarea>
+						</div>
+						<div class="last-element last-element-btn">
+							<button type="button" class="btn btn-reload">초기화</button>
+							<button type="button" class="btn btn-primary btn-hidden btn-save">혜택저장</button>
+						</div>
+					</div>
+				</form>
+				<!--기본 혜택 -> 혜택방식 -> 적립 end-->
+
+				<!--기본 혜택 -> 혜택방식 -> 리터당 할인 -->
+				<form class="normal_Liter_Discount">
+					<div id=normal_Liter_Discount_Div>
+						<div id="normal_Liter_Discount_Second">
+							<label class="form-label"> 혜택 업종</label> <input type="text"
+								onchange="inputUp(this)"
+								class="form-control form-disabled normalDataThree plus-busniess-form"
+								th:value="${basic.businessName} == null ? ${''} : ${basic.businessName}">
+							<button class="business-search-btn button-control benefit-re" type="button">
+								<i class="bi bi-search"></i>
+							</button>
+						</div>
+						<div id="normal_Liter_Discount_Forth">
+							<label class="form-label">월최대 할인금액</label> <input type="text"
+								class="form-control form-input-right normalDataThree benefit-re"
+								onkeyup="chkNumber(this)" onchange="inputUp(this)"
+								th:value="${basic.monthMaxMoney} == null ? ${''} : ${basic.monthMaxMoney}">
+
+							<label class="form-label">일최대 할인금액</label> <input type="text"
+								class="form-control form-input-right normalDataThree benefit-re"
+								onkeyup="chkNumber(this)" onchange="inputUp(this)"
+								
+								th:value="${basic.dayMaxMoney} == null ? ${''} : ${basic.dayMaxMoney}">
+								
+							<label class="form-label">건당 최소 인정금액</label> <input type="text"
+								class="form-control form-input-right normalDataThree benefit-re"
+								onkeyup="chkNumber(this)" onchange="inputUp(this)"
+								
+									th:value="${basic.perMinMoney} == null ? ${''}: ${basic.perMinMoney}">
+
+							<label class="form-label">건당 최대 인정금액</label> <input type="text"
+								class="form-control form-input-right normalDataThree benefit-re"
+								onkeyup="chkNumber(this)" onchange="inputUp(this)"
+								th:value="${basic.perMaxMoney} == null ? ${''} : ${basic.perMaxMoney}">
+						</div>
+						<div id="normal_Liter_Discount_Fifth">
+							<label class="form-label">일/월/년 최대 횟수 </label> <input type="text"
+								class="form-control form-input-right normalDataThree benefit-re" 
+								placeholder="일" onkeyup="chkNumber(this)"
+								onchange="inputUp(this)" maxlength="3"
+								th:value="${basic.dayMaxCount} == null ? ${''} : ${basic.dayMaxCount}">
+							<input type="text"
+								class="form-control form-input-right normalDataThree benefit-re"
+								placeholder="월" onkeyup="chkNumber(this)"
+								onchange="inputUp(this)" maxlength="3"
+								th:value="${basic.monthMaxCount} == null ? ${''}: ${basic.monthMaxCount}">
+							<input type="text"
+								class="form-control form-input-right normalDataThree benefit-re"
+								placeholder="년" onkeyup="chkNumber(this)"
+								onchange="inputUp(this)" maxlength="3"
+								th:value="${basic.yearMaxCount} == null ? ${''} : ${basic.yearMaxCount}">
+
+							<label class="form-label">특정금액 기준 할인 </label> <input type="text"
+								class="form-control form-input-right normalDataThree benefit-re"
+								placeholder="금액당" onkeyup="chkNumber(this)"
+								onchange="inputUp(this)"
+								th:value="${basic.specificMoney} == null ? ${''} : ${basic.specificMoney}">
+							<input type="text"
+								class="form-control form-input-right normalDataThree benefit-re"
+								placeholder="할인" onkeyup="chkNumber(this)"
+								onchange="inputUp(this)"
+								th:value="${basic.specificStock} == null ? ${''} : ${basic.specificStock}">
+						</div>
+						<div id="normal_Liter_Discount_Sixth">
+							<label class="form-label">혜택 상세</label>
+							<table class="table normal_Liter_minitable">
+								<thead class="text-center">
+									<tr>
+										<th class="minitable-border">실적 금액</th>
+										<th class="minitable-border">실적별 할인한도</th>
+										<th class="minitable-border">실적별 해당금액</th>
+										<th class="minitable-border">리터당 할인금액</th>
+										<th class="minitable-border">리터당 할인율</th>
+										<th class="minitable-minus-th"
+											style="background-color: white; border: 1px solid white;"></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr id="normal_Liter_Discount-0"
+										class="table-value"
+										th:each="benefitDetail : ${basic.cardBenefitTable}">
+										<td class="minitable-border"><span><input
+												class="form-control normal_Liter_minitable-input1 normalDataThree benefit-re"
+												onchange="inputUp(this)" type="text"
+												onkeyup="chkrealNumber(this)" maxlength="3"
+												th:value="${benefitDetail.price} == null ? ${''} : ${benefitDetail.price}" />&nbsp;
+												만원 이상</span></td>
+										<td class="minitable-border"><input
+											class="form-control normalDataThree benefit-re" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)"
+											th:value="${benefitDetail.limit} == null ? ${''} : ${benefitDetail.limit}" />
+										</td>
+										<td class="minitable-border"><input
+											class="form-control normalDataThree benefit-re" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)"
+											th:value="${benefitDetail.correspond} == null ? ${''} : ${benefitDetail.correspond}" />
+										</td>
+										<td class="minitable-border"><input
+											class="form-control normalDataThree benefit-re" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)"
+											th:value="${benefitDetail.perMoney} == null ? ${''} : ${benefitDetail.perMoney}" />
+										</td>
+										<td class="minitable-border"><span><input
+												class="form-control normal_Liter_minitable-input1 normalDataThree benefit-re"
+												type="text" onchange="inputUp(this)"
+												onkeyup="chkNumber_decimal(this)" onblur="maxNumberThree(this)"
+												th:value="${benefitDetail.perRate} == null ? ${''} : ${benefitDetail.perRate}" />&nbsp;
+												%</span></td>
+										<td class="minitable-minus-th">
+											<button id="normal_Liter-minus-0" class="benefit-re" type="button">-</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<!-- tr 추가 버튼 -->
+							<div class="row ">
+								<button id="normal-save-plusbtn" class="minitable-plus-btn benefit-re"
+									type="button">+</button>
+							</div>
+							<!-- tr 추가 버튼 end-->
+						</div>
+						<div id="normal_Liter_Discount_Seventh">
+							<label class="form-label">특이사항</label>
+							<textarea
+								class="form-control public-benefit-textarea normalDataThree benefit-re"
+								onchange="inputUp(this)" rows="3"
+								th:text="${basic.signify} == null ? ${''} : ${basic.signify}"></textarea>
+						</div>
+						<div class="last-element last-element-btn">
+							<button type="button" class="btn btn-reload">초기화</button>
+							<button type="button" class="btn btn-primary btn-hidden btn-save">혜택저장</button>
+						</div>
+					</div>
+				</form>
+				<!--기본 혜택 -> 혜택방식 -> 리터당 할인 end -->
+
+
+				<!-- <!--기본 혜택 -> 혜택방식 -> 리터당적립 -->
+				<form class="normal_Liter_Save">
+					<div id=normal_Liter_Save_Div>
+						<div id="normal_Liter_Save_Second">
+							<label class="form-label"> 혜택 업종</label> <input type="text"
+								class="form-control form-disabled normalDataFour"
+								th:value="${basic.businessName} == null ? ${''} : ${basic.businessName}">
+							<button class="business-search-btn button-control benefit-re" type="button">
+								<i class="bi bi-search"></i>
+							</button>
+						</div>
+						<div id="normal_Liter_Save_Forth">
+							<label class="form-label">월최대 적립금액</label> <input type="text"
+								class="form-control form-input-right normalDataFour benefit-re"
+								onkeyup="chkNumber(this)" onchange="inputUp(this)"
+								th:value="${basic.monthMaxMoney} == null ? ${''} : ${basic.monthMaxMoney}">
+							<label class="form-label">일최대 적립금액</label> <input type="text"
+								class="form-control form-input-right normalDataFour benefit-re"
+								onkeyup="chkNumber(this)" onchange="inputUp(this)"
+								th:value="${basic.dayMaxMoney} == null ? ${''} : ${basic.dayMaxMoney}">
+							<label class="form-label">건당 최소 인정금액</label> <input type="text"
+								class="form-control form-input-right normalDataFour benefit-re"
+								onkeyup="chkNumber(this)" onchange="inputUp(this)"
+								th:value="${basic.perMinMoney} == null ? ${''}: ${basic.perMinMoney}">
+							<label class="form-label">건당 최대 인정금액</label> <input type="text"
+								class="form-control form-input-right normalDataFour benefit-re"
+								onkeyup="chkNumber(this)" onchange="inputUp(this)"
+								th:value="${basic.perMaxMoney} == null ? ${''} : ${basic.perMaxMoney}">
+						</div>
+						<div id="normal_Liter_Save_Fifth">
+							<label class="form-label">일/월/년 최대 횟수 </label> <input type="text"
+								class="form-control form-input-right normalDataFour benefit-re"
+								placeholder="일" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)" maxlength="3"
+								th:value="${basic.dayMaxCount} == ${0} ? ${''} : ${basic.dayMaxCount}">
+							<input type="text"
+								class="form-control form-input-right normalDataFour benefit-re"
+								placeholder="월" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)" maxlength="3"
+								th:value="${basic.monthMaxCount} == ${0} ? ${''} : ${basic.monthMaxCount}">
+							<input type="text"
+								class="form-control form-input-right normalDataFour benefit-re"
+								placeholder="년" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)" maxlength="3"
+								th:value="${basic.yearMaxCount} == ${0} ? ${''} : ${basic.yearMaxCount}">
+
+							<label class="form-label">특정금액 기준 할인 </label> <input type="text"
+								class="form-control form-input-right normalDataFour benefit-re"
+								placeholder="금액당" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)"
+								th:value="${basic.specificMoney} == null ? ${''} : ${basic.specificMoney}">
+							<input type="text"
+								class="form-control form-input-right normalDataFour benefit-re"
+								placeholder="적립" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)"
+								th:value="${basic.specificStock} == null ? ${''} : ${basic.specificStock}">
+							<label class="form-label">적립방식</label> <input type="text"
+								class="form-control form-input-right normalDataFour benefit-re"
+								onchange="inputUp(this)"
+								th:value="${basic.method} == null ? ${''} : ${basic.method}">
+						</div>
+						<div id="normal_Liter_Save_Sixth">
+							<label class="form-label">혜택 상세</label>
+							<table class="table normal_Liter_minitable">
+								<thead class="text-center">
+									<tr>
+										<th class="minitable-border">실적 금액</th>
+										<th class="minitable-border">실적별 적립한도</th>
+										<th class="minitable-border">실적별 해당금액</th>
+										<th class="minitable-border">리터당 적립금액</th>
+										<th class="minitable-border">리터당 적립률</th>
+										<th class="minitable-minus-th"
+											style="background-color: white; border: 1px solid white;"></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr id="normal_Liter_Save-0"
+										class="table-value"
+										th:each="benefitDetail : ${basic.cardBenefitTable}">
+										<td class="minitable-border"><span><input
+												class="form-control normal_Liter_minitable-input1 normalDataFour benefit-re"
+												onchange="inputUp(this)" type="text"
+												onkeyup="chkrealNumber(this)" maxlength="3"
+												th:value="${benefitDetail.price} == null ? ${''} : ${benefitDetail.price}" />&nbsp;
+												만원 이상</span></td>
+										<td class="minitable-border"><input
+											class="form-control normalDataFour benefit-re" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)"
+											th:value="${benefitDetail.limit} == null ? ${''} : ${benefitDetail.limit}" />
+										</td>
+										<td class="minitable-border"><input
+											class="form-control normalDataFour benefit-re" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)"
+											th:value="${benefitDetail.correspond} == null ? ${''} : ${benefitDetail.correspond}" />
+										</td>
+										<td class="minitable-border"><input
+											class="form-control normalDataThree benefit-re" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)"
+											th:value="${benefitDetail.perMoney} == null ? ${''} : ${benefitDetail.perMoney}" />
+										</td>
+										<td class="minitable-border"><span><input
+												class="form-control normal_Liter_minitable-input1 normalDataFour benefit-re"
+												onchange="inputUp(this)" type="text"
+												onkeyup="chkNumber_decimal(this)" onblur="maxNumberThree(this)"
+												th:value="${benefitDetail.perRate} == null ? ${''} : ${benefitDetail.perRate}" />&nbsp;
+												%</span></td>
+										<td class="minitable-minus-th"
+											style="background-color: white; border: 1px solid white;">
+											<button id="normal_Liter-minus-0" class="benefit-re" type="button">-</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<!-- tr 추가 버튼 -->
+							<div class="row ">
+								<button id="normal-save-plusbtn" class="minitable-plus-btn benefit-re" 
+									type="button">+</button>
+							</div>
+							<!-- tr 추가 버튼 end-->
+						</div>
+						<div id="normal_Liter_Save_Seventh">
+							<label class="form-label">특이사항</label>
+							<textarea
+								class="form-control public-benefit-textarea normalDataFour benefit-re"
+								rows="3" onchange="inputUp(this)"
+								th:text="${basic.signify} == null ? ${''} : ${basic.signify}"></textarea>
+						</div>
+						<div class="last-element last-element-btn">
+							<button type="button" class="btn btn-reload">초기화</button>
+							<button type="button" class="btn btn-primary btn-hidden btn-save">혜택저장</button>
+						</div>
+					</div>
+				</form>
+				<!-- 기본 혜택 -> 혜택방식 -> 리터당적립 end -->
+
+				<!-- 기본 혜택 -> 혜택방식 -> 현장 할인 -->
+				<form class="normal_Spot_Discount">
+					<div id=normal_Spot_Discount_Div>
+
+						<div id="normal_Spot_Discount_Second">
+							<label class="form-label"> 혜택 업종</label> <input type="text"
+								onchange="inputUp(this)"
+								class="form-control form-disabled normalDataFive plus-busniess-form"
+								th:value="${basic.businessName} == null ? ${''} : ${basic.businessName}">
+							<button class="business-search-btn button-control benefit-re" type="button">
+								<i class="bi bi-search"></i>
+							</button>
+						</div>
+						<div id="normal_Spot_Discount_Forth">
+							<label class="form-label">월최대 할인금액</label> <input type="text"
+								class="form-control form-input-right normalDataFive benefit-re"
+								onchange="inputUp(this)" onkeyup="chkNumber(this)"
+								th:value="${basic.monthMaxMoney} == null ? ${''} : ${basic.monthMaxMoney}">
+							<label class="form-label">일최대 할인금액</label> <input type="text"
+								class="form-control form-input-right normalDataFive benefit-re"
+								onchange="inputUp(this)" onkeyup="chkNumber(this)"
+								th:value="${basic.dayMaxMoney} == null ? ${''} : ${basic.dayMaxMoney}">
+							<label class="form-label">건당 최소 인정금액</label> <input type="text"
+								class="form-control form-input-right normalDataFive benefit-re"
+								onchange="inputUp(this)" onkeyup="chkNumber(this)"
+								th:value="${basic.perMinMoney} == null ? ${''}: ${basic.perMinMoney}">
+							<label class="form-label">건당 최대 인정금액</label> <input type="text"
+								class="form-control form-input-right normalDataFive benefit-re"
+								onchange="inputUp(this)" onkeyup="chkNumber(this)"
+								th:value="${basic.perMaxMoney} == null ? ${''} : ${basic.perMaxMoney}">
+						</div>
+						<div id="normal_Spot_Discount_Fifth">
+							<label class="form-label">일/월/년 최대 횟수 </label> <input type="text"
+								class="form-control form-input-right normalDataFive benefit-re"
+								placeholder="일" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)" maxlength="3"
+								th:value="${basic.dayMaxCount} == ${0} ? ${''} : ${basic.dayMaxCount}">
+							<input type="text"
+								class="form-control form-input-right normalDataFive benefit-re"
+								placeholder="월" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)" maxlength="3"
+								th:value="${basic.monthMaxCount} == ${0} ? ${''} : ${basic.monthMaxCount}">
+							<input type="text"
+								class="form-control form-input-right normalDataFive benefit-re"
+								placeholder="년" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)" maxlength="3"
+								th:value="${basic.yearMaxCount} == ${0} ? ${''} : ${basic.yearMaxCount}">
+
+							<label class="form-label">특정금액 기준 할인 </label> <input type="text"
+								class="form-control form-input-right normalDataFive benefit-re" 
+								placeholder="금액당" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)"
+								th:value="${basic.specificMoney} == null ? ${''} : ${basic.specificMoney}">
+							<input type="text"
+								class="form-control form-input-right normalDataFive benefit-re"
+								placeholder="할인" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)"
+								th:value="${basic.specificStock} == null ? ${''} : ${basic.specificStock}">
+							<label class="form-label">할인방식</label> <input type="text"
+								class="form-control form-input-right normalDataFive benefit-re"
+								onchange="inputUp(this)"
+								th:value="${basic.method} == null ? ${''} : ${basic.method}">
+						</div>
+						<div id="normal_Spot_Discount_Sixth">
+							<label class="form-label">혜택 상세</label>
+							<table class="table normal_Spot_Discount_minitable">
+								<thead class="text-center">
+									<tr>
+										<th class="minitable-border">실적 금액</th>
+										<th class="minitable-border">실적별 할인한도</th>
+										<th class="minitable-border">실적별 해당금액</th>
+										<th class="minitable-border">건당 할인금액</th>
+										<th class="minitable-border">건당 할인율</th>
+										<th class="minitable-minus-th"
+											style="background-color: white; border: 1px solid white;"></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr id="normal_Spot_Discount-0"
+										class="table-value"
+										th:each="benefitDetail : ${basic.cardBenefitTable}">
+										<td class="minitable-border "><span><input
+												class="form-control normal_Spot_Discount_minitable-input1 normalDataFive benefit-re"
+												onchange="inputUp(this)" type="text"
+												onkeyup="chkrealNumber(this)" maxlength="3"
+												th:value="${benefitDetail.price} == null ? ${''} : ${benefitDetail.price}" />&nbsp;
+												만원 이상</span></td>
+										<td class="minitable-border "><input
+											class="form-control normalDataFive benefit-re" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)"
+											th:value="${benefitDetail.limit} == null ? ${''} : ${benefitDetail.limit}" />
+										</td>
+										<td class="minitable-border "><input
+											class="form-control normalDataFive benefit-re" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)"
+											th:value="${benefitDetail.correspond} == null ? ${''} : ${benefitDetail.correspond}" />
+										</td>
+										<td class="minitable-border "><input
+											class="form-control normalDataFive benefit-re" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)"
+											th:value="${benefitDetail.perMoney} == null ? ${''} : ${benefitDetail.perMoney}" />
+										</td>
+										<td class="minitable-border "><span><input
+												class="form-control normal_Spot_Discount_minitable-input1 normalDataFive benefit-re"
+												onchange="inputUp(this)" type="text"
+												onkeyup="chkNumber_decimal(this)" onblur="maxNumberThree(this)"
+												th:value="${benefitDetail.perRate} == null ? ${''} : ${benefitDetail.perRate}" />&nbsp;
+												%</span></td>
+										<td class="minitable-minus-th">
+											<button id="normal_Spot_Discount-minus-0" class="benefit-re" type="button">-</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<!-- tr 추가 버튼 -->
+							<div class="row ">
+								<button id="normal-save-plusbtn" class="minitable-plus-btn benefit-re"
+									type="button">+</button>
+							</div>
+							<!-- tr 추가 버튼 end-->
+
+						</div>
+						<div id="normal_Spot_Discount_Seventh">
+							<label class="form-label">특이사항</label>
+							<textarea
+								class="form-control public-benefit-textarea normalDataFive benefit-re"
+								onchange="inputUp(this)" rows="3" th:text="${basic.signify} == null ? ${''} : ${basic.signify}"></textarea>
+						</div>
+						<div class="last-element last-element-btn">
+							<button type="button" class="btn btn-reload">초기화</button>
+							<button type="button" class="btn btn-primary btn-hidden btn-save">혜택저장</button>
+						</div>
+					</div>
+				</form>
+				<!-- 기본 혜택 -> 혜택방식 -> 현장 할인 end     -->
+
+				<!-- 기본 혜택 -> 혜택방식 -> 표준화 불가능 혜택     -->
+				<form class="normal_Imposible">
+					<div id=normal_Imposible_Div>
+
+						<div id="normal_Imposible_Second">
+							<label class="form-label"> 혜택 이름</label> <input type="text"
+								class="form-control normalDataSix beneftiName benefit-re" onchange="inputUp(this)"
+								th:value="${basic.benefitName} == null ? ${''} : ${basic.benefitName}">
+						</div>
+						<div id="normal_Imposible_Third">
+							<label class="form-label"> 혜택 요약</label> <input type="text"
+								class="form-control normalDataSix benefit-re" onchange="inputUp(this)"
+								th:value="${basic.benefitSummary} == null ? ${''} : ${basic.benefitSummary}">
+						</div>
+						<div id="normal_Imposible_Forth">
+							<label class="form-label">혜택 상세</label>
+							<textarea
+								class="form-control public-benefit-textarea normalDataSix benefit-re"
+								rows="10" onchange="inputUp(this)"
+								th:text="${basic.benefitDetail} == null ? ${''} : ${basic.benefitDetail}"></textarea>
+						</div>
+						<div class="last-element last-element-btn">
+							<button type="button" class="btn btn-reload">초기화</button>
+							<button type="button" class="btn btn-primary btn-hidden btn-save">혜택저장</button>
+						</div>
+					</div>
+				</form>
+				<!--기본 혜택 -> 혜택방식 -> 표준화 불가능 혜택 end -->
+			</div>
+			<div class="row formrow"></div>
+		</div>
+
+		<!-- =================================================================== -->
+		<!-- 데이터가 새로 들어왔을 때는 혜택이 아예 없기 때문에 null이면 기본 폼만 나오게 -->
+		<!-- =================================================================== -->
+		
+		<div class ="normal-normal" th:unless="${!#lists.isEmpty(basicBenefit)}" th:attr="id='normal-all-0'">
+			<div id="normal_discount_First">
+				<label class="form-label">혜택 방식</label>
+				<div class="form-check form-check-inline">
+					<input id="radio_normal_discount" class="form-check-input"
+						type="radio" value="0" th:name="normal0" checked>
+					할인
+				</div>
+				<div class="form-check form-check-inline">
+					<input id="radio_normal_save" class="form-check-input" type="radio"
+						value="1" th:name="normal0"> 적립
+				</div>
+				<div class="form-check form-check-inline">
+					<input id="radio_normal_litter_discount" class="form-check-input"
+						type="radio" value="2" th:name="normal0"> 리터당
+					할인
+				</div>
+				<div class="form-check form-check-inline">
+					<input id="radio_normal_litter_discount" class="form-check-input"
+						type="radio" value="3" th:name="normal0"> 리터당
+					적립
+				</div>
+				<div class="form-check form-check-inline">
+					<input id="radio_normal_spot" class="form-check-input" type="radio"
+						value="4" th:name="normal0"> 현장 할인
+				</div>
+				<div class="form-check form-check-inline">
+					<input id="radio_normal_disabled" class="form-check-input"
+						type="radio" value="5" th:name="normal0"> 표준화
+					불가능 혜택
+				</div>
+			</div>
+
+			<div id="normal_Forms">
+				<!--기본 혜택 -> 혜택방식 -> 할인 -->
+				<form class="normal_discount_Form">
+					<div id=normal_discount>
+						<div id="normal_discount_Second">
+							<label class="form-label"> 혜택 업종</label> <input type="text"
+								onchange="inputUp(this)"
+								class="form-control form-disabled normalDataOne plus-busniess-form">
+							<button class="business-search-btn button-control" type="button">
+								<i class="bi bi-search"></i>
+							</button>
+						</div>
+						<div id="normal_discount_Forth">
+							<label class="form-label">월최대 할인금액</label> <input type="text"
+								class="form-control form-input-right normalDataOne" 
+								onchange="inputUp(this)" onkeyup="chkNumber(this)"> <label
+								class="form-label">일최대 할인금액</label> <input type="text"
+								class="form-control form-input-right normalDataOne"
+								onchange="inputUp(this)" onkeyup="chkNumber(this)"> <label
+								class="form-label">건당 최소 인정금액</label> <input type="text"
+								class="form-control form-input-right normalDataOne"
+								onchange="inputUp(this)" onkeyup="chkNumber(this)"> <label
+								class="form-label">건당 최대 인정금액</label> <input type="text"
+								class="form-control form-input-right normalDataOne"
+								onchange="inputUp(this)" onkeyup="chkNumber(this)">
+						</div>
+						<div id="normal_discount_Fifth">
+							<label class="form-label">일/월/년 최대 횟수 </label> <input type="text"
+								class="form-control form-input-right normalDataOne"
+								placeholder="일" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)" maxlength="3"> <input
+								type="text" class="form-control form-input-right normalDataOne"
+								placeholder="월" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)" maxlength="3"> <input
+								type="text" class="form-control form-input-right normalDataOne"
+								placeholder="년" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)" maxlength="3"> <label
+								class="form-label">특정금액 기준 할인 </label> <input type="text"
+								class="form-control form-input-right normalDataOne "
+								placeholder="금액당" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)"> <input type="text"
+								class="form-control form-input-right normalDataOne "
+								placeholder="할인" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)">
+						</div>
+						<div id="normal_discount_Sixth">
+							<label class="form-label">혜택 상세</label>
+							<table class="table normal_discount_minitable">
+								<thead class="text-center">
+									<tr>
+										<th class="minitable-border">실적 금액</th>
+										<th class="minitable-border">실적별 할인한도</th>
+										<th class="minitable-border">실적별 해당금액</th>
+										<th class="minitable-border">건당 할인금액</th>
+										<th class="minitable-border">건당 할인율</th>
+										<th class="minitable-minus-th"
+											style="background-color: white; border: 1px solid white;">
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr id="normal_discount-0">
+										<td class="minitable-border"><span><input
+												class="form-control normal_discount_minitable-input1 normalDataOne"
+												type="text" onchange="inputUp(this)"
+												onkeyup="chkrealNumber(this)" maxlength="3" />&nbsp; 만원 이상</span></td>
+										<td class="minitable-border"><input
+											class="form-control normalDataOne" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)" /></td>
+										<td class="minitable-border"><input
+											class="form-control normalDataOne" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)" /></td>
+										<td class="minitable-border"><input
+											class="form-control normalDataOne" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)" /></td>
+										<td class="minitable-border"><span><input
+												class="form-control normal_discount_minitable-input1 normalDataOne"
+												onchange="inputUp(this)" type="text" onblur="maxNumberThree(this)"
+												onkeyup="chkNumber_decimal(this)" />&nbsp; %</span></td>
+										<td class="minitable-minus-th">
+											<button id="normal_discount-0" type="button">-</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<!-- tr 추가 버튼 -->
+							<div class="row ">
+								<button id="normal-discount-plusbtn" class="minitable-plus-btn"
+									type="button">+</button>
+							</div>
+							<!-- tr 추가 버튼 end-->
+						</div>
+						<div id="normal_discount_Seventh">
+							<label class="form-label">특이사항</label>
+							<textarea
+								class="form-control public-benefit-textarea normalDataOne"
+								rows="3" onchange="inputUp(this)"></textarea>
+						</div>
+						<div class="last-element last-element-btn">
+							<button type="button" class="btn btn-reload">초기화</button>
+							<button type="button" class="btn btn-primary btn-hidden btn-save">혜택저장</button>
+						</div>
+					</div>
+				</form>
+
+
+				<!--기본 혜택 -> 혜택방식 -> 할인 end -->
+
+				<!--기본 혜택 -> 혜택방식 -> 적립 -->
+				<form class="normal_Save">
+					<div id=normal_Save_Div>
+						<div id="normal_Save_Second">
+							<label class="form-label"> 혜택 업종</label> <input type="text"
+								onchange="inputUp(this)"
+								class="form-control form-disabled normalDataTwo plus-busniess-form">
+							<button class="business-search-btn button-control" type="button">
+								<i class="bi bi-search"></i>
+							</button>
+						</div>
+						<div id="normal_Save_Forth">
+							<label class="form-label">월최대 적립금액</label> <input type="text"
+								class="form-control form-input-right normalDataTwo"
+								onkeyup="chkNumber(this)" onchange="inputUp(this)"> <label
+								class="form-label">일최대 적립금액</label> <input type="text"
+								class="form-control form-input-right normalDataTwo"
+								onkeyup="chkNumber(this)" onchange="inputUp(this)"> <label
+								class="form-label">건당 최소 인정금액</label> <input type="text"
+								class="form-control form-input-right normalDataTwo"
+								onkeyup="chkNumber(this)" onchange="inputUp(this)"> <label
+								class="form-label">건당 최대 인정금액</label> <input type="text"
+								class="form-control form-input-right normalDataTwo"
+								onkeyup="chkNumber(this)" onchange="inputUp(this)">
+						</div>
+						<div id="normal_Save_Fifth">
+
+							<label class="form-label">일/월/년 최대 횟수 </label> <input type="text"
+								class="form-control form-input-right normalDataTwo"
+								placeholder="일" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)" maxlength="3"> <input
+								type="text" class="form-control form-input-right normalDataTwo"
+								placeholder="월" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)" maxlength="3"> <input
+								type="text" class="form-control form-input-right normalDataTwo"
+								placeholder="년" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)" maxlength="3"> <label
+								class="form-label">특정금액 기준 할인 </label> <input type="text"
+								class="form-control form-input-right normalDataTwo"
+								placeholder="금액당" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)"> <input type="text"
+								class="form-control form-input-right normalDataTwo"
+								placeholder="적립" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)">
+
+						</div>
+						<div id="normal_Save_Sixth">
+							<label class="form-label">혜택 상세</label>
+
+							<table class="table normal_save_minitable">
+								<thead class="text-center">
+									<tr>
+										<th class="minitable-border">실적 금액</th>
+										<th class="minitable-border">실적별 적립한도</th>
+										<th class="minitable-border">실적별 해당금액</th>
+										<th class="minitable-border">건당 적립금액</th>
+										<th class="minitable-border">건당 적립률</th>
+										<th class="minitable-minus-th"
+											style="background-color: white; border: 1px solid white;">
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr id="normal_save-0" class="table-value">
+										<td class="minitable-border"><span><input
+												class="form-control normal_save_minitable-input1 normalDataTwo"
+												type="text" onchange="inputUp(this)"
+												onkeyup="chkrealNumber(this)" maxlength="3" />&nbsp; 만원 이상</span></td>
+										<td class="minitable-border"><input
+											class="form-control normalDataTwo" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)" /></td>
+										<td class="minitable-border"><input
+											class="form-control normalDataTwo" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)" /></td>
+										<td class="minitable-border"><input
+											class="form-control normalDataTwo" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)" /></td>
+										<td class="minitable-border"><span><input
+												class="form-control normal_save_minitable-input1 normalDataTwo"
+												type="text" onchange="inputUp(this)" onblur="maxNumberThree(this)"
+												onkeyup="chkNumber_decimal(this)" />&nbsp; %</span></td>
+										<td class="minitable-minus-th">
+											<button id="normal_discount-minus-0" type="button">-</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<!-- tr 추가 버튼 -->
+							<div class="row ">
+								<button id="normal-save-plusbtn" class="minitable-plus-btn"
+									type="button">+</button>
+							</div>
+							<!-- tr 추가 버튼 end-->
+						</div>
+						<div id="normal_Save_Seventh">
+							<label class="form-label">특이사항</label>
+							<textarea
+								class="form-control public-benefit-textarea normalDataTwo"
+								rows="3" onchange="inputUp(this)"></textarea>
+						</div>
+						<div class="last-element last-element-btn">
+							<button type="button" class="btn btn-reload">초기화</button>
+							<button type="button" class="btn btn-primary btn-hidden btn-save">혜택저장</button>
+						</div>
+					</div>
+				</form>
+				<!--기본 혜택 -> 혜택방식 -> 적립 end-->
+
+				<!--기본 혜택 -> 혜택방식 -> 리터당 할인 -->
+				<form class="normal_Liter_Discount">
+					<div id=normal_Liter_Discount_Div>
+						<div id="normal_Liter_Discount_Second">
+							<label class="form-label"> 혜택 업종</label> <input type="text"
+								onchange="inputUp(this)"
+								class="form-control form-disabled normalDataThree plus-busniess-form">
+							<button class="business-search-btn button-control" type="button">
+								<i class="bi bi-search"></i>
+							</button>
+						</div>
+						<div id="normal_Liter_Discount_Forth">
+							<label class="form-label">월최대 할인금액</label> <input type="text"
+								class="form-control form-input-right normalDataThree"
+								onkeyup="chkNumber(this)" onchange="inputUp(this)"> <label
+								class="form-label">일최대 할인금액</label> <input type="text"
+								class="form-control form-input-right normalDataThree"
+								onkeyup="chkNumber(this)" onchange="inputUp(this)"> <label
+								class="form-label">건당 최소 인정금액</label> <input type="text"
+								class="form-control form-input-right normalDataThree"
+								onkeyup="chkNumber(this)" onchange="inputUp(this)"> <label
+								class="form-label">건당 최대 인정금액</label> <input type="text"
+								class="form-control form-input-right normalDataThree"
+								onkeyup="chkNumber(this)" onchange="inputUp(this)">
+						</div>
+						<div id="normal_Liter_Discount_Fifth">
+							<label class="form-label">일/월/년 최대 횟수 </label> <input type="text"
+								class="form-control form-input-right normalDataThree"
+								placeholder="일" onkeyup="chkNumber(this)"
+								onchange="inputUp(this)" maxlength="3"> <input
+								type="text"
+								class="form-control form-input-right normalDataThree"
+								placeholder="월" onkeyup="chkNumber(this)"
+								onchange="inputUp(this)" maxlength="3"> <input
+								type="text"
+								class="form-control form-input-right normalDataThree"
+								placeholder="년" onkeyup="chkNumber(this)"
+								onchange="inputUp(this)" maxlength="3"> <label
+								class="form-label">특정금액 기준 할인 </label> <input type="text"
+								class="form-control form-input-right normalDataThree"
+								placeholder="금액당" onkeyup="chkNumber(this)"
+								onchange="inputUp(this)"> <input type="text"
+								class="form-control form-input-right normalDataThree"
+								placeholder="할인" onkeyup="chkNumber(this)"
+								onchange="inputUp(this)">
+						</div>
+						<div id="normal_Liter_Discount_Sixth">
+							<label class="form-label">혜택 상세</label>
+							<table class="table normal_Liter_minitable">
+								<thead class="text-center">
+									<tr>
+										<th class="minitable-border">실적 금액</th>
+										<th class="minitable-border">실적별 할인한도</th>
+										<th class="minitable-border">실적별 해당금액</th>
+										<th class="minitable-border">리터당 할인금액</th>
+										<th class="minitable-border">리터당 할인율</th>
+										<th class="minitable-minus-th"
+											style="background-color: white; border: 1px solid white;">
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr id="normal_Liter_Discount-0" class="table-value">
+										<td class="minitable-border"><span><input
+												class="form-control normal_Liter_minitable-input1 normalDataThree"
+												onchange="inputUp(this)" type="text"
+												onkeyup="chkrealNumber(this)" maxlength="3" />&nbsp; 만원 이상</span></td>
+										<td class="minitable-border"><input
+											class="form-control normalDataThree" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)" /></td>
+										<td class="minitable-border"><input
+											class="form-control normalDataThree" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)" /></td>
+										<td class="minitable-border"><input
+											class="form-control normalDataThree" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)" /></td>
+										<td class="minitable-border"><span><input
+												class="form-control normal_Liter_minitable-input1 normalDataThree"
+												type="text" onchange="inputUp(this)" onblur="maxNumberThree(this)"
+												onkeyup="chkNumber_decimal(this)" />&nbsp; %</span></td>
+										<td class="minitable-minus-th">
+											<button id="normal_Liter-minus-0" type="button">-</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<!-- tr 추가 버튼 -->
+							<div class="row ">
+								<button id="normal-save-plusbtn" class="minitable-plus-btn"
+									type="button">+</button>
+							</div>
+							<!-- tr 추가 버튼 end-->
+						</div>
+						<div id="normal_Liter_Discount_Seventh">
+							<label class="form-label">특이사항</label>
+							<textarea
+								class="form-control public-benefit-textarea normalDataThree"
+								onchange="inputUp(this)" rows="3"></textarea>
+						</div>
+						<div class="last-element last-element-btn">
+							<button type="button" class="btn btn-reload">초기화</button>
+							<button type="button" class="btn btn-primary btn-hidden btn-save">혜택저장</button>
+						</div>
+					</div>
+				</form>
+				<!--기본 혜택 -> 혜택방식 -> 리터당 할인 end -->
+
+
+				<!-- <!--기본 혜택 -> 혜택방식 -> 리터당적립 -->
+				<form class="normal_Liter_Save">
+					<div id=normal_Liter_Save_Div>
+						<div id="normal_Liter_Save_Second">
+							<label class="form-label"> 혜택 업종</label> <input type="text"
+								class="form-control form-disabled normalDataFour">
+							<button class="business-search-btn button-control" type="button">
+								<i class="bi bi-search"></i>
+							</button>
+						</div>
+						<div id="normal_Liter_Save_Forth">
+							<label class="form-label">월최대 적립금액</label> <input type="text"
+								class="form-control form-input-right normalDataFour"
+								onkeyup="chkNumber(this)" onchange="inputUp(this)"> <label
+								class="form-label">일최대 적립금액</label> <input type="text"
+								class="form-control form-input-right normalDataFour"
+								onkeyup="chkNumber(this)" onchange="inputUp(this)"> <label
+								class="form-label">건당 최소 인정금액</label> <input type="text"
+								class="form-control form-input-right normalDataFour"
+								onkeyup="chkNumber(this)" onchange="inputUp(this)"> <label
+								class="form-label">건당 최대 인정금액</label> <input type="text"
+								class="form-control form-input-right normalDataFour"
+								onkeyup="chkNumber(this)" onchange="inputUp(this)">
+						</div>
+						<div id="normal_Liter_Save_Fifth">
+							<label class="form-label">일/월/년 최대 횟수 </label> <input type="text"
+								class="form-control form-input-right normalDataFour"
+								placeholder="일" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)" maxlength="3"> <input
+								type="text" class="form-control form-input-right normalDataFour"
+								placeholder="월" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)" maxlength="3"> <input
+								type="text" class="form-control form-input-right normalDataFour"
+								placeholder="년" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)" maxlength="3"> <label
+								class="form-label">특정금액 기준 할인 </label> <input type="text"
+								class="form-control form-input-right normalDataFour"
+								placeholder="금액당" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)"> <input type="text"
+								class="form-control form-input-right normalDataFour"
+								placeholder="적립" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)"> <label class="form-label">적립방식</label>
+							<input type="text"
+								class="form-control form-input-right normalDataFour"
+								onchange="inputUp(this)">
+						</div>
+						<div id="normal_Liter_Save_Sixth">
+							<label class="form-label">혜택 상세</label>
+							<table class="table normal_Liter_minitable">
+								<thead class="text-center">
+									<tr>
+										<th class="minitable-border">실적 금액</th>
+										<th class="minitable-border">실적별 적립한도</th>
+										<th class="minitable-border">실적별 해당금액</th>
+										<th class="minitable-border">리터당 적립금액</th>
+										<th class="minitable-border">리터당 적립률</th>
+										<th class="minitable-minus-th"
+											style="background-color: white; border: 1px solid white;">
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr id="normal_Liter_Save-0">
+										<td class="minitable-border"><span><input
+												class="form-control normal_Liter_minitable-input1 normalDataFour"
+												onchange="inputUp(this)" type="text"
+												onkeyup="chkrealNumber(this)" maxlength="3" />&nbsp; 만원 이상</span></td>
+										<td class="minitable-border"><input
+											class="form-control normalDataFour" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)" /></td>
+										<td class="minitable-border"><input
+											class="form-control normalDataFour" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)" /></td>
+										<td class="minitable-border"><input
+											class="form-control normalDataThree" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)" /></td>
+										<td class="minitable-border"><span><input
+												class="form-control normal_Liter_minitable-input1 normalDataFour"
+												onchange="inputUp(this)" type="text" onblur="maxNumberThree(this)"
+												onkeyup="chkNumber_decimal(this)" />&nbsp; %</span></td>
+										<td class="minitable-minus-th"
+											style="background-color: white; border: 1px solid white;">
+											<button id="normal_Liter-minus-0" type="button">-</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<!-- tr 추가 버튼 -->
+							<div class="row ">
+								<button id="normal-save-plusbtn" class="minitable-plus-btn"
+									type="button">+</button>
+							</div>
+							<!-- tr 추가 버튼 end-->
+						</div>
+						<div id="normal_Liter_Save_Seventh">
+							<label class="form-label">특이사항</label>
+							<textarea
+								class="form-control public-benefit-textarea normalDataFour"
+								rows="3" onchange="inputUp(this)"></textarea>
+						</div>
+						<div class="last-element last-element-btn">
+							<button type="button" class="btn btn-reload">초기화</button>
+							<button type="button" class="btn btn-primary btn-hidden btn-save">혜택저장</button>
+						</div>
+					</div>
+				</form>
+				<!-- 기본 혜택 -> 혜택방식 -> 리터당적립 end -->
+
+				<!-- 기본 혜택 -> 혜택방식 -> 현장 할인 -->
+				<form class="normal_Spot_Discount">
+					<div id=normal_Spot_Discount_Div>
+
+						<div id="normal_Spot_Discount_Second">
+							<label class="form-label"> 혜택 업종</label> <input type="text"
+								onchange="inputUp(this)"
+								class="form-control form-disabled normalDataFive plus-busniess-form">
+							<button class="business-search-btn button-control" type="button">
+								<i class="bi bi-search"></i>
+							</button>
+						</div>
+						<div id="normal_Spot_Discount_Forth">
+							<label class="form-label">월최대 할인금액</label> <input type="text"
+								class="form-control form-input-right normalDataFive"
+								onchange="inputUp(this)" onkeyup="chkNumber(this)"> <label
+								class="form-label">일최대 할인금액</label> <input type="text"
+								class="form-control form-input-right normalDataFive"
+								onchange="inputUp(this)" onkeyup="chkNumber(this)"> <label
+								class="form-label">건당 최소 인정금액</label> <input type="text"
+								class="form-control form-input-right normalDataFive"
+								onchange="inputUp(this)" onkeyup="chkNumber(this)"> <label
+								class="form-label">건당 최대 인정금액</label> <input type="text"
+								class="form-control form-input-right normalDataFive"
+								onchange="inputUp(this)" onkeyup="chkNumber(this)">
+						</div>
+						<div id="normal_Spot_Discount_Fifth">
+							<label class="form-label">일/월/년 최대 횟수 </label> <input type="text"
+								class="form-control form-input-right normalDataFive"
+								placeholder="일" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)" maxlength="3"> <input
+								type="text" class="form-control form-input-right normalDataFive"
+								placeholder="월" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)" maxlength="3"> <input
+								type="text" class="form-control form-input-right normalDataFive"
+								placeholder="년" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)" maxlength="3"> <label
+								class="form-label">특정금액 기준 할인 </label> <input type="text"
+								class="form-control form-input-right normalDataFive"
+								placeholder="금액당" onchange="inputUp(this)"
+								onkeyup="chkNumber(this)"> <input type="text"
+								class="form-control form-input-right normalDataFive"
+								placeholder="할인" onchange="inputUp(this)" 
+								onkeyup="chkNumber(this)"> <label class="form-label">할인방식</label>
+							<input type="text"
+								class="form-control form-input-right normalDataFive"
+								onchange="inputUp(this)">
+						</div>
+						<div id="normal_Spot_Discount_Sixth">
+							<label class="form-label">혜택 상세</label>
+							<table class="table normal_Spot_Discount_minitable">
+								<thead class="text-center">
+									<tr>
+										<th class="minitable-border">실적 금액</th>
+										<th class="minitable-border">실적별 할인한도</th>
+										<th class="minitable-border">실적별 해당금액</th>
+										<th class="minitable-border">건당 할인금액</th>
+										<th class="minitable-border">건당 할인율</th>
+										<th class="minitable-minus-th"
+											style="background-color: white; border: 1px solid white;">
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr id="normal_Spot_Discount-0" class="table-value">
+										<td class="minitable-border "><span><input
+												class="form-control normal_Spot_Discount_minitable-input1 normalDataFive"
+												onchange="inputUp(this)" type="text"
+												onkeyup="chkrealNumber(this)" maxlength="3" />&nbsp; 만원 이상</span></td>
+										<td class="minitable-border "><input
+											class="form-control normalDataFive" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)" /></td>
+										<td class="minitable-border "><input
+											class="form-control normalDataFive" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)" /></td>
+										<td class="minitable-border "><input
+											class="form-control normalDataFive" type="text"
+											onchange="inputUp(this)" onkeyup="chkNumber(this)" /></td>
+										<td class="minitable-border "><span><input
+												class="form-control normal_Spot_Discount_minitable-input1 normalDataFive"
+												onchange="inputUp(this)" type="text" onblur="maxNumberThree(this)"
+												onkeyup="chkNumber_decimal(this)" />&nbsp; %</span></td>
+										<td class="minitable-minus-th">
+											<button id="normal_Spot_Discount-minus-0" type="button">-</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<!-- tr 추가 버튼 -->
+							<div class="row ">
+								<button id="normal-save-plusbtn" class="minitable-plus-btn"
+									type="button">+</button>
+							</div>
+							<!-- tr 추가 버튼 end-->
+
+						</div>
+						<div id="normal_Spot_Discount_Seventh">
+							<label class="form-label">특이사항</label>
+							<textarea
+								class="form-control public-benefit-textarea normalDataFive"
+								onchange="inputUp(this)" rows="3"></textarea>
+						</div>
+						<div class="last-element last-element-btn">
+							<button type="button" class="btn btn-reload">초기화</button>
+							<button type="button" class="btn btn-primary btn-hidden btn-save">혜택저장</button>
+						</div>
+					</div>
+				</form>
+				<!-- 기본 혜택 -> 혜택방식 -> 현장 할인 end     -->
+
+				<!-- 기본 혜택 -> 혜택방식 -> 표준화 불가능 혜택     -->
+				<form class="normal_Imposible">
+					<div id=normal_Imposible_Div>
+
+						<div id="normal_Imposible_Second">
+							<label class="form-label"> 혜택 이름</label> <input type="text"
+								class="form-control normalDataSix beneftiName" onchange="inputUp(this)">
+						</div>
+						<div id="normal_Imposible_Third">
+							<label class="form-label"> 혜택 요약</label> <input type="text"
+								class="form-control normalDataSix" onchange="inputUp(this)">
+						</div>
+						<div id="normal_Imposible_Forth">
+							<label class="form-label">혜택 상세</label>
+							<textarea
+								class="form-control public-benefit-textarea normalDataSix"
+								rows="10" onchange="inputUp(this)"></textarea>
+						</div>
+						<div class="last-element last-element-btn">
+							<button type="button" class="btn btn-reload">초기화</button>
+							<button type="button" class="btn btn-primary btn-hidden btn-save">혜택저장</button>
+						</div>
+					</div>
+				</form>
+				<!--기본 혜택 -> 혜택방식 -> 표준화 불가능 혜택 end -->
+
+			</div>
+			<div class="row formrow"></div>
+		</div>
+	</body>
+</th:block>
+</html>

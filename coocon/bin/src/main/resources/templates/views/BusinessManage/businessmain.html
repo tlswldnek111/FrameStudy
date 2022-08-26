@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <html xmlns:th="http://www.thymeleaf.org">
+    <link rel="stylesheet" href="/css/nav.css">
+    <th:block th:replace="views/template/header :: linkFragment"></th:block>
+    <script type="text/javascript" src="/js/NavSide.js"></script>
+    
+    <!-- 상품관리 페이지 css -->
+    <style type="text/css">
+        .product-form {
+            margin-bottom: 30px;
+            padding: 30px;
+            border: 1px gainsboro solid;
+            background-color: white;
+        }
+
+        .form-select {
+            width: 350px;
+            display: inline;
+            margin: 20px;
+        }
+
+        .form-control {
+            width: 350px;
+            display: inline;
+            margin: 20px;
+            margin-right: 20px;
+        }
+
+        #productHigh>input {
+            width: 200px;
+        }
+
+        .product-label {
+            width: 100px;
+        }
+        
+        a { 
+              text-decoration:none !important ;
+        }
+        
+        #maintable{
+           text-align:center;
+           background-color: white;
+           box-shadow: 2px 2px 2px 2px #e9ecef;
+        }
+        
+        #maintable>tbody>tr>td:nth-child(4){
+           text-align:left;
+           color:#236ADE;
+        }
+        
+        #maintable>tbody>tr>td:nth-child(4):hover   { 
+           text-decoration:underline;
+        }
+
+        #productName {
+            width: 890px;
+            float:right;
+        }
+
+        #choiceView {
+            width: 100px;
+            float: right;
+        }
+
+        #searchButton {
+            padding-top: 30px;
+            width: max-content;
+            margin: 0 auto;
+        }
+
+        #padginationButton {
+            margin-top: 20px;
+            width: max-content;
+            margin: 0 auto;
+        }
+    </style>
+    <!-- 상품관리 페이지 css end -->
+
+    <!-- 추가할 내용
+   1. table 데이터 값 정렬하기
+   2. 마우스 over 및 및줄 기능 구현하기
+   3. 텍스트 색상변경 css 기능 수정하기
+   4. 글자 수 및 정렬하기 
+   
+   7/10 추가 사항 
+   1.nav.css 파일 분리
+   2.productmain.html 파일을 기준으로 프레임 잡고, 나머지(business, organ) 변경
+   3.test 하기위해 컨트롤러 추가
+     -->
+     
+</head>
+
+<body>
+
+    <!-- nav -->
+    <th:block th:replace="views/template/nav :: navFragment"></th:block>
+    <!-- nav end -->
+
+    <!-- contents 내용 -->
+    <div class="main-container main-container-bg">
+
+        <!-- nav-side -->
+        <th:block th:replace="views/template/navside :: navsideFragment"></th:block>
+        <!-- nav-side end -->
+
+        <!-- 상품관리 내용 -->
+        <div class="main-contents">
+
+            <div>
+                <h3 id="main-contents-title" >상품 관리</h3>
+                <form class="product-form">
+                    <div id="productHigh">
+                        <label for="inputProduct" class="col-form-label product-label">상품 분류</label>
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>전체</option>
+                            <option value="1">예금</option>
+                            <option value="2">적금</option>
+                            <option value="3">대출</option>
+                            <option value="4">카드</option>
+                        </select>
+                        <label for="inputState" class="col-form-label product-label">상태값</label>
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>전체</option>
+                            <option value="1">확정</option>
+                            <option value="2">신규</option>
+                            <option value="3">변경</option>
+                            <option value="4">삭제발생</option>
+                            <option value="5">기간만료</option>
+                            <option value="6">임시저장</option>
+                        </select>
+                        <label for="inputState" class="product-label">등록일자</label>
+                        <input type="date" value="2019-09-22">
+                        <span> - </span>
+                        <input type="date" value="2019-09-22">
+                    </div>
+
+                    <div>
+                        <label for="organSearch" class="product-label">기관명 검색</label>
+                        <input type="text" class="form-control">
+                        <label for="organSearch" class="product-label">상품명</label>
+                        <input id="productName" type="text" class="form-control">
+                        <div id="searchButton">
+                            <button type="primary" class="btn btn-primary">조회하기 <i
+                                    class="bi bi-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div>
+                <select id="choiceView" class="form-select" aria-label="Default select example">
+                    <option selected>10개씩</option>
+                    <option value="1">25개씩</option>
+                    <option value="2">50개씩</option>
+                </select>
+            </div>
+
+            <div>
+                <table id="maintable" class="table">
+                    <thead class="text-bg-secondary p-3">
+                        <tr>
+                            <th>고유번호</th>
+                            <th>상품분류</th>
+                            <th>기관명</th>
+                            <th>상품명</th>
+                            <th>상태값</th>
+                            <th>등록일자</th>
+                            <th>최종 수정일자</th>
+                            <th>최종수정자</th>
+                        </tr>
+                    </thead>
+                    <tbody >
+                        <tr>
+                            <th>1</th>
+                            <td>카드</td>
+                            <td>롯데카드</td>
+                            <td><a href="productdetail">롯데 햇살론카드<a/></td>
+                            <td>기간만료</td>
+                            <td>2021.09.12</td>
+                            <td>2022.06.02</td>
+                            <td>조연희</td>
+                        </tr>
+                        <tr>
+                            <th>2</th>
+                            <td>카드</td>
+                            <td>비씨카드</td>
+                            <td>[DGB대구]DGB 펫러브카드</td>
+                            <td>확정</td>
+                            <td>2021.09.13</td>
+                            <td>2022.06.02</td>
+                            <td>조연희</td>
+                        </tr>
+                        <tr>
+                            <th>3</th>
+                            <td>카드</td>
+                            <td>농협카드</td>
+                            <td>ON PLATINUM카드(아시아나클럽)</td>
+                            <td>확정</td>
+                            <td>2021.08.12</td>
+                            <td>2022.02.13</td>
+                            <td>이종수</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="padginationButton">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">   
+              
+                        <li class="page-item"><a class="page-link bi bi-chevron-left" href="#"></a></li>
+                        <li class="page-item"><a class="page-link bi bi-chevron-double-left" href="#"></a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link bi bi-chevron-right" href="#"></a></li>
+                        <li class="page-item"><a class="page-link bi bi-chevron-double-right" href="#"></a></li>
+           
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+        <!-- 상품관리 내용 end -->
+
+    </div>
+    <!-- contents 내용 -->
+</body>
+
+</html>

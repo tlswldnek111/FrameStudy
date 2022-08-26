@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>C&C User</title>
+<link rel="icon" href="/imgs/favicon.png">
+<th:block th:replace="views/template/header :: linkFragment"></th:block>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="/css/user.css">
+<link rel="stylesheet" href="/css/nav.css">
+<script type="text/javascript" src="/js/NavSide.js"></script>
+<script type="text/javascript" src="/js/user.js"></script>
+<script type="text/javascript" src="/js/MathCalc.js"></script>
+
+<body>
+	<!-- nav -->
+	<th:block th:replace="views/template/nav :: navFragment"></th:block>
+	<!-- nav end -->
+
+	<!-- contents 내용 -->
+	<div class="main-container main-container-bg">
+
+		<!-- nav-side -->
+		<th:block th:replace="views/template/navside :: navsideFragment"></th:block>
+		<!-- nav-side end -->
+
+		<!-- 회원 관리 내용 -->
+		<div class="main-contents">
+			<div>
+				<h3 id="main-contents-title">회원 관리</h3>
+				<form id="search-form">
+					<div class="usermain">
+						<label for="inputProduct" class="col-form-label">상태</label> <select
+							id="status" name="status" class="form-select"
+							aria-label="Default select example">
+							<option value="전체" selected>전체</option>
+							<option value="승인완료" th:selected="${cri.status}==${'승인완료'}"
+								class="approva">승인완료</option>
+							<option value="승인대기" th:selected="${cri.status}==${'승인대기'}"
+								class="hold">승인대기</option>
+							<option value="초기화요청" th:selected="${cri.status}==${'초기화요청'}"
+								class="hold">초기화요청</option>
+						</select> <label for="inputState">사용자 구분</label> <select id="role"
+							name="role" class="form-select"
+							aria-label="Default select example">
+							<option value="전체" selected>전체</option>
+							<option value="Admin" th:selected="${cri.role}==${'Admin'}">관리자</option>
+							<option value="User" th:selected="${cri.role}==${'User'}">사용자</option>
+						</select> <label for="userInfo">검색어</label> <input id="keyword" type="text"
+							name="keyword" th:value="${cri.keyword}" class="form-control" onkeyup="searchTypeRestrict(this);"
+							placeholder="사용자명, 이메일">
+					</div>
+					<div id="searchButton">
+						<button type="submit" class="btn btn-primary">
+							조회하기 <i class="bi bi-search"></i>
+						</button>
+					</div>
+				</form>
+			</div>
+			<div>
+				<select id="choiceView" class="form-select"
+					aria-label="Default select example">
+					<option value="10" th:selected="${cri.perPageNum}==${10}">10개씩</option>
+					<option value="25" th:selected="${cri.perPageNum}==${25}">25개씩</option>
+					<option value="50" th:selected="${cri.perPageNum}==${50}">50개씩</option>
+				</select>
+			</div>
+
+			<div id="userlist">
+				<table class="table usertablehead">
+					<thead>
+						<tr>
+							<th>사용자 구분</th>
+							<th>사용자명</th>
+							<th>이메일</th>
+							<th>부서명</th>
+							<th>상태</th>
+						</tr>
+					</thead>
+
+					<tbody class="usertable-tbody">
+						<td class="nosearchresult" th:if="${paging.totalCount}==0"
+							colspan="8"><div>조회결과가 없습니다.</div></td>
+						<tr th:each="user : ${userList}">
+							<td th:if="${user.role} == 'Admin'" th:text="관리자"
+								class="userRole"></td>
+							<td th:if="${user.role} == 'User'" th:text="사용자" class="userRole"></td>
+							<td th:text="${user.username}"></td>
+							<td th:text="${user.email}"></td>
+							<td th:text="${user.deptname}">
+							<td th:switch="${user.status}">
+								<a th:case="'승인완료'"
+								th:text="${user.status}" class="approval-success" type="button">
+								</a>
+								<a th:case="'승인대기'" th:text="${user.status}"
+								class="approval-wait" type="button"></a>
+								 <a th:case="'초기화요청'" th:text="${user.status}" 
+								 class="init-request" type="button"></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="paginationButton">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination">
+						<li class="page-item"><a class="page-link" aria-label="First"
+							th:href="@{/user(page=${1},perPageNum=${paging.cri.perPageNum},status=${paging.cri.status},role=${paging.cri.role},keyword=${paging.cri.keyword})}">
+								<span aria-hidden="true">&laquo;</span>
+						</a></li>
+						<li class="page-item">
+							<div th:if="${paging.startPage}-1 == 0">
+								<a class="page-link" aria-label="Prev"
+									th:href="@{/user(page=${1},perPageNum=${paging.cri.perPageNum},status=${paging.cri.status},role=${paging.cri.role},keyword=${paging.cri.keyword})}">
+									<span aria-hidden="true">&lt;</span>
+								</a>
+							</div>
+							<div th:unless="${paging.startPage}-1 == 0">
+								<a class="page-link" aria-label="Prev"
+									th:href="@{/user(page=${paging.startPage}-1,perPageNum=${paging.cri.perPageNum},status=${paging.cri.status},role=${paging.cri.role},keyword=${paging.cri.keyword})}">
+									<span aria-hidden="true">&lt;</span>
+								</a>
+							</div>
+						</li>
+						<li
+							th:each="idx,iterStat : ${#numbers.sequence(paging.startPage,paging.endPage)}"
+							th:classappend="${paging.cri.page} == ${idx} ? active : null">
+							<a class="page-link"
+							th:href="@{/user(page=${idx},perPageNum=${paging.cri.perPageNum},status=${paging.cri.status},role=${paging.cri.role},keyword=${paging.cri.keyword})}"
+							th:if="${paging.totalCount} > 0" th:text="${idx}"></a>
+						</li>
+
+						<li class="page-item">
+							<div th:if="${paging.endPage} == ${paging.totalPageCount}">
+								<a class="page-link" aria-label="Next"
+									th:href="@{/user(page=${paging.endPage},perPageNum=${paging.cri.perPageNum},status=${paging.cri.status},role=${paging.cri.role},keyword=${paging.cri.keyword})}">
+									<span aria-hidden="true">&gt;</span>
+								</a>
+							</div>
+
+							<div th:unless="${paging.endPage} == ${paging.totalPageCount}">
+								<a class="page-link" aria-label="Next"
+									th:href="@{/user(page=${paging.endPage}+1,perPageNum=${paging.cri.perPageNum},status=${paging.cri.status},role=${paging.cri.role},keyword=${paging.cri.keyword})}">
+									<span aria-hidden="true">&gt;</span>
+								</a>
+							</div>
+						</li>
+
+						<li class="page-item"><a class="page-link" aria-label="Last"
+							th:href="@{/user(page=${paging.totalPageCount},perPageNum=${paging.cri.perPageNum},status=${paging.cri.status},role=${paging.cri.role},keyword=${paging.cri.keyword})}">
+								<span aria-hidden="true">&raquo;</span>
+						</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+	<!--승인관리 form-->
+	<div class="modal-background"></div>
+	<div id="approvalModal" class="modal approve-modal" tabindex="-1">
+		<div class="modal-wrap approve-modal-wrap">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<h3 class="modal-title">승인관리</h3>
+					<button id="approvalModalClose" type="button" class="btn-close"
+						data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+
+				<div class="modal-body">
+					<form id="approvalModal-form">
+						<div class="modal-body-wrap">
+							<table class="table-body-wrap" id="approvaltable">
+								<tbody>
+									<tr>
+										<th scope="row">성명</th>
+										<td><input type="text" name="username" id="am-username" disabled="disabled"></td>
+									</tr>
+									<tr>
+										<th scope="row">이메일</th>
+										<td><input type="text" name="email" id="am-email" disabled="disabled"></td>
+									</tr>
+									<tr>
+										<th scope="row">부서명</th>
+										<td><input type="text" name="department" id="am-deptname" disabled="disabled"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+				</div>
+				<div class="modal-footer">
+					<div class="btn-letf">
+						<button id="btn-accept" type="submit"
+							class="btn btn-primary btn-lg">승인</button>
+					</div>
+					<div class="footer-btn-center">
+						<button id="btn-accept-hold" type="button"
+							class="btn btn-secondary btn-lg">승인 보류</button>
+					</div>
+					<div class="footer-btn-right">
+						<button id="Modal-close" type="button"
+							class="btn btn-secondary btn-lg">취소</button>
+					</div>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!--승인관리 form end-->
+
+	<!-- 승인관리 승인완료 form -->
+	<div id="approval-check-Modal" class="modal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">승인관리</h3>
+					<button id="approval-checkModal-Close" type="button"
+						class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body approva">
+					<div class="approvamodal-text">
+						<p style="margin-bottom: 0px;">사용자 계정이 승인완료 되었습니다.</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="footer-btn-center">
+						<button id="approvalModal-success" type="button"
+							class="btn btn-primary btn-lg" data-bs-dismiss="modal">확인</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 승인관리 승인완료 form end-->
+
+	<!-- 승인관리 승인(보류)거절 form-->
+	<div id="approval-refuse-Modal" class="modal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">승인관리</h3>
+					<button id="approval-holdModal-Close" type="button"
+						class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body approva">
+					<div class="approvamodal-text">
+						<p style="margin-bottom: 0px;">사용자 계정이 승인거절 되었습니다.</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="footer-btn-center">
+						<button id="approvalModal-hold" type="button"
+							class="btn btn-primary btn-lg" data-bs-dismiss="modal">확인</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--승인관리 승인거절 form end -->
+
+	<!--사용자관리 form-->
+	<div id="user-manage-modal" class="modal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">사용자관리</h3>
+					<button id="userManageModalClose" type="button" class="btn-close"
+						data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+
+				<div class="modal-body">
+					<div class="modal-body-wrap">
+
+						<table class="table-body-wrap">
+							<tbody>
+								<tr>
+									<th scope="row">성명</th>
+									<td><input type="text" name="username" id="um-username"></td>
+								</tr>
+								<tr>
+									<th scope="row">이메일</th>
+									<td><input type="text" name="email" id="um-email"></td>
+								</tr>
+								<tr>
+									<th scope="row">부서명</th>
+									<td><input type="text" name="department" id="um-deptname"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="-btn-letf">
+						<button id="btn-user-change" type="submit"
+							class="btn btn-primary btn-lg">변경</button>
+					</div>
+					<div class="footer-btn-center">
+						<button id="btn-user-delete" type="submit"
+							class="btn btn-danger btn-lg">삭제</button>
+					</div>
+					<div class="footer-btn-right">
+						<button id="btn-user-close" type="submit"
+							class="btn btn-secondary btn-lg">취소</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 사용자관리- 사용자 계정 변경 완료 form -->
+	<div id="userChange-finish-Modal" class="modal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">사용자계정 변경완료</h3>
+					<button id="UserChange-finish-Modal-Close" type="button"
+						class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body approva">
+					<div class="approvamodal-text">
+						<p style="margin-bottom: 0px;">사용자 계정 정보가 변경되었습니다.</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="footer-btn-center">
+						<button id="userchange-check" type="button"
+							class="btn btn-primary btn-lg" data-bs-dismiss="modal">확인</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 사용자관리- 사용자계정 - 변경 - 삭제 에러 form -->
+	<div id="userChange-delete-err-Modal" class="modal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">삭제 실패</h3>
+					<button id="userchange-delete-err-close" type="button"
+						class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body approva">
+					<div class="approvamodal-text">
+						<p style="margin-bottom: 0px;">해당 계정은 삭제가 불가능합니다.</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="footer-btn-center">
+						<button id="userchange-delete-err-closeBtn" type="button"
+							class="btn btn-primary btn-lg" data-bs-dismiss="modal">확인</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 사용자관리- 사용자계정 - 변경 - 삭제 질문 form -->
+	<div id="userChange-delete-Modal" class="modal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">사용자계정 삭제</h3>
+					<button id="userChange-delete-close-Modal" type="button"
+						class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body approva">
+					<div class="approvamodal-text">
+						<p style="margin-bottom: 0px;">사용자 계정을 정말 삭제하시습니까?</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="footer-btn-letf">
+						<button id="userchange-deleteQ-check" type="button"
+							class="btn btn-primary btn-lg" data-bs-dismiss="modal">확인</button>
+					</div>
+					<div class="footer-btn-right">
+						<button id="userchange-delete-cancle" type="button"
+							class="btn btn-secondary btn-lg" data-bs-dismiss="modal">취소</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 사용자관리- 사용자계정 - 변경 - 삭제 완료 form -->
+	<div id="userChange-delete-fin-Modal" class="modal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">사용자계정 삭제완료</h3>
+					<button id="userChange-delete-fin-close-Modal" type="button"
+						class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body approva">
+					<div class="approvamodal-text">
+						<p style="margin-bottom: 0px;">사용자 계정 삭제가 완료되었습니다.</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="footer-btn-center">
+						<button id="userchange-delete-fin" type="button"
+							class="btn btn-primary btn-lg" data-bs-dismiss="modal">확인</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 회원관리-비밀번호 초기화 요청 form -->
+	<div class="modal-background-reset"></div>
+	<div id="PwResetModal" class="modal pwreset-modal" tabindex="-1">
+		<div class="modal-wrap pwreset-modal-wrap">
+			<div class="modal-content PwResetRqModal">
+				<div class="modal-header">
+					<h3 class="modal-title">비밀번호 초기화요청</h3>
+					<button id="PwResetModalClose" type="button" class="btn-close"
+						data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+
+				<div class="modal-body">
+					<div class="modal-body-wrap">
+						<table class="table-body-wrap">
+							<tbody>
+								<tr>
+									<th scope="row">성명</th>
+									<td><input type="text" name="username" id="ipm-username" disabled></td>
+								</tr>
+								<tr>
+									<th scope="row">이메일</th>
+									<td><input type="text" name="email" id="ipm-email" disabled></td>
+								</tr>
+								<tr>
+									<th scope="row">부서명</th>
+									<td><input type="text" name="department" id="ipm-deptname" disabled></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="-btn-letf">
+						<button id="btnPwResetAccept" type="submit"
+							class="btn btn-primary btn-lg">승인</button>
+					</div>
+					<div class="footer-btn-center">
+						<button id="btnPwResetHold" type="button"
+							class="btn btn-secondary btn-lg">승인보류</button>
+					</div>
+					<div class="footer-btn-right">
+						<button id="btnPwResetCancle" type="button"
+							class="btn btn-secondary btn-lg">취소</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 회원관리-비밀번호 초기화 요청 성공 form -->
+	<div id="PwResetModalFin" class="modal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">비밀번호 초기화요청</h3>
+					<button id="PwResetFinModalCloseBtn" type="button"
+						class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body approva">
+					<div class="approvamodal-text">
+						<p style="margin-bottom: 0px;">해당 계정의 비밀번호가 초기화되었습니다.</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="footer-btn-center">
+						<button id="btnPwResetAcceptFin" type="button"
+							class="btn btn-primary btn-lg" data-bs-dismiss="modal">확인</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 회원관리-비밀번호 초기화 요청 보류 form -->
+	<div id="PwResetModalHold" class="modal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">비밀번호 초기화요청</h3>
+					<button id="PwResetHoldModalCloseBtn" type="button"
+						class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body approva">
+					<div class="approvamodal-text">
+						<p style="margin-bottom: 0px;">해당 계정의 비밀번호 초기화 요청이 보류되었습니다.</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="footer-btn-center">
+						<button id="btnPwResetAccepHold" type="button"
+							class="btn btn-primary btn-lg" data-bs-dismiss="modal">확인</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

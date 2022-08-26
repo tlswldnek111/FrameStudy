@@ -1,0 +1,269 @@
+
+@keyframes rotate_image1{
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+@keyframes rotate_image2{
+  100% {
+      transform: rotate(360deg);
+  }
+}
+
+body{
+  position: relative;
+}
+
+.back1{
+  animation: rotate_image1 30s linear infinite;transform-origin: 50% 50%;
+  z-index: -2;
+  top: 0px;
+  left: 0px;
+  margin-top: 100px;
+  margin-left: 850px;
+  width: 800px;
+  height: 600px;
+  position: absolute;
+}
+
+.back2{
+  background-repeat: no-repeat;
+  animation: rotate_image2 30s linear infinite;transform-origin: 50% 50%;
+  margin-top: 110px;
+  margin-left: 880px;
+  height: 670px;
+  width: 700px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+#login{
+  position: absolute;
+  margin-top: 3%;
+  margin-left: 16%;
+  width: 80%;
+  height: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0px;
+}
+
+#login .loginImg.container{
+  width: 40%;
+  height: 100%;
+  margin-top: 150px;
+}
+#login .loginImg.container img{
+  margin-top: 30%;
+  height: 200px;
+  width: 300px;
+  margin-bottom: 20px;
+  
+}
+
+#login .vh-100{
+  width: 60%;
+}
+
+#login .vh-100 .card.text-dark {
+  /* justify-content: flex-start; */
+  width: 500px;
+  margin-left: -90px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.headerText {
+  padding-bottom: 20px;
+}
+
+.loginSearch {
+  padding-right: 32px;
+  padding-top: 25px;
+}
+
+.loginSearch ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+.loginSearch ul .division {
+  border: 0.5px solid grey;
+  height: 25px;
+}
+
+.loginSearch ul li {
+  padding: 0px 20px;
+}
+
+.loginSearch a {
+  text-decoration: none;
+  color: gray;
+}
+
+#signUpModal .modal-dialog{
+  width: 45%;
+}
+#signUpModal .modal-dialog,.modal-lg .modal-content{
+  margin-top: -100px;
+  margin-bottom: -144.688px;
+}
+
+#findPwModal .modal-dialog{
+  margin-top: -30px;
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
+  padding: 25px 45px;
+}
+
+.modal-body-wrap {
+  margin: 0px;
+  width: 100%;
+  background-color: #f7f8fb;
+  border: 1px solid rgb(223, 219, 219);
+}
+
+.modal-body-wrap ul {
+  margin-bottom: -2px;
+  margin-left: 20px;
+}
+
+.modal-body-wrap ul li {
+  font-weight: bold;
+}
+
+.modal-body-wrap ul li:first-child {
+  padding-top: 35px;
+}
+
+.modal-body-wrap ul li:nth-child(2) {
+  padding: 10px 0px;
+}
+
+.modal-body-wrap ul li:last-child {
+  padding-bottom: 35px;
+}
+
+.table-body{
+  padding-top: 30px; 
+}
+.table-body-wrap tbody tr {
+  margin-top: 20px;
+  border: 20px 0px;
+}
+.table-body-wrap tbody tr:first-child {
+  border-top: 1px solid rgb(223, 219, 219);
+}
+.table-body-wrap tbody tr{
+  border-top: 1px solid rgb(223, 219, 219);
+  border-bottom: 1px solid rgb(223, 219, 219);
+}
+.table-body-wrap tbody tr:last-child {
+  border-bottom: 1px solid rgb(223, 219, 219);
+}
+.table-body-wrap tbody tr {
+  height: 60px;
+}
+.table-body-wrap tbody tr th{
+  background-color: #f7f8fb;
+  padding-left: 20px;
+  width: 100%;
+}
+.table-body-wrap tbody tr th span{
+  text-align: center;
+  display: inline-block;
+  color: red;
+}
+
+#signUpModal .table-body-wrap tbody tr td input{
+  margin-left: 20px;
+  height: 40px;
+  width: 400px;
+  padding-left: 15px;
+}
+
+#signUpModal .table-body-wrap div{
+  display: flex;
+}
+#signUpModal .table-body-wrap div input:first-child{
+  width: 300px;
+}
+#signUpModal .table-body-wrap div button{
+  margin-left: 10px;
+}
+
+
+#findPwModal .table-body-wrap tbody tr td input{
+  margin-left: 20px;
+  height: 40px;
+  width: 250px;
+  padding-left: 15px;
+}
+
+.modal-footer .footer-btn-center {
+  width: 100%;
+  text-align: center;
+}
+
+#signUpModal .modal-dialog.modal-lg .modal-content {
+  background-color: #fefefe;
+  margin: 20% auto;
+  border: 1px solid #888;
+  height: 70%;
+}
+
+#findPwModal .modal-dialog .modal-content {
+  background-color: #fefefe;
+  margin: 40% auto;
+  border: 1px solid #888;
+  height: 70%;
+}
+
+.modal-body p{
+  text-align: center;
+  padding: 10px 0px;
+  margin: auto 0px;
+}
+
+.modal-footer button{
+  text-align: center;
+}
+
+#emailErrorModal>.modal-dialog, 
+#pwErrorModal>.modal-dialog, 
+#loginErrorModal>.modal-dialog,
+#requiredErrorModal>.modal-dialog,
+#dupliErrorModal>.modal-dialog,
+#dupliSuccessModal>.modal-dialog,
+#dupliCheckModal>.modal-dialog,
+#pwDisCorModal>.modal-dialog,
+#emailPatternModal>.modal-dialog,
+#successSingUpModal>.modal-dialog,
+#successPwInitModal>.modal-dialog,
+#failPwInitModal>.modal-dialog,
+#resetPwModal>.modal-dialog,
+#resetPwErrorModal>.modal-dialog,
+#resetPwSuccessModal>.modal-dialog,
+#approvalWaitModal>.modal-dialog,
+#inputPwModal>.modal-dialog{
+	margin-top:13%;
+}

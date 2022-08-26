@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="UTF-8">
+   <title>Insert title here</title>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+   <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
+      type="text/css" />
+   <script type="text/javascript">
+      var cardcount = 0; //데이터 갯수
+      var p = 0; //페이지 수
+      var s = 3; //몇개씩
+      var display = 0;
+      var pagenum=0; //pageid
+      var pagenext=0;
+      function changeSelect() {
+         var selectList = document.getElementById("category");
+         p=0;
+         pagenext=0;
+         pagenum=0;
+         s = selectList.options[selectList.selectedIndex].value;
+         $.ajax({
+            url: "http://localhost:8080/api/emp/p/" + p + "/" + s,
+            type: 'get',
+            dataType: "json",
+            success: (data) => {
+               console.log("changeSelect - item생성");
+               $('#item').children().remove();
+               $.each(data, (index, item) => {
+                  $("#item").append("<tr><td>" + item.sabun + "</td><td>" + item.pay + "</td><td>" + item.ename + "</td></tr>");
+               });
+            },
+            complete: () => {
+            }
+         });
+         $.ajax({
+            url: "http://localhost:8080/api/size",
+            type: 'get',
+            dataType: "text",
+            success: (data) => {
+               console.log("changeSelect - 페이지 생성");
+               $('.create-page').remove();
+               cardcount = parseInt(data);
+               if (cardcount % s != 0) {
+                  cardcount = Math.floor((cardcount / s) + 1)
+               } else {
+                  cardcount = Math.floor(cardcount / s)
+               }
+               
+               for (var i = cardcount; i >= 1; i--) {
+            	pagenum=Math.floor(i/10);
+               	if(i%10==0){
+               		pagenum=(i/10)-1;
+               	}
+                  $('#bil').after('<li class="page-item"><a class="page-link create-page" href="#"></a></li>');
+                  $('.pagination').children().children().eq(2).addClass("page" + pagenum).text(i);
+               }
+               for(var i= 0;i<Math.ceil(cardcount/10);i++){
+               		$('.page'+i).hide();
+               }
+               $('.page'+pagenext).show();
+               $('#bil').hide();
+               $('#bidl').hide();
+               $('#bir').show();
+               $('#bidr').show();
+            	
+               $(".create-page").click(function () {
+                  console.log($(this).text());
+                  p = parseInt($(this).text()) - 1;
+                  $.ajax({
+                     url: "http://localhost:8080/api/emp/p/" + p + "/" + s,
+                     type: 'get',
+                     dataType: "json",
+                     success: (data) => {
+                        $('#item').children().remove();
+                        $.each(data, (index, item) => {
+                           $("#item").append("<tr><td>" + item.sabun + "</td><td>" + item.pay + "</td><td>" + item.ename + "</td></tr>");
+                        });
+                     }
+                  });
+               });
+               // << 버튼
+               $(".bi-chevron-double-left").click(function () {
+                  p = 0
+                  $.ajax({
+                     url: "http://localhost:8080/api/emp/p/" + p + "/" + s,
+                     type: 'get',
+                     dataType: "json",
+                     success: (data) => {
+                        $('#item').children().remove();
+                        $.each(data, (index, item) => {
+                           $("#item").append("<tr><td>" + item.sabun + "</td><td>" + item.pay + "</td><td>" + item.ename + "</td></tr>");
+                        });
+                        $('.page'+pagenext).hide();
+                      	 $('#bil').hide();
+                      	 $('#bidl').hide();
+                      	  $('#bir').show();
+                    	  $('#bidr').show();
+                        pagenext=0;
+	                     $('.page'+pagenext).show();
+                     }
+                  });
+               });
+               // < 버튼
+               $(".bi-chevron-left").click(function () {
+            	   p=Math.floor((p-10)/10)*10;
+                   $.ajax({
+                      url: "http://localhost:8080/api/emp/p/" + p + "/" + s,
+                      type: 'get',
+                      dataType: "json",
+                      success: (data) => {
+                         $('#item').children().remove();
+                         $.each(data, (index, item) => {
+                            $("#item").append("<tr><td>" + item.sabun + "</td><td>" + item.pay + "</td><td>" + item.ename + "</td></tr>");
+                         });
+                         $('.page'+pagenext).hide();
+                         if(pagenext==1){
+                       	  $('#bil').hide();
+                          	  $('#bidl').hide();
+                          	  $('#bir').show();
+                          	  $('#bidr').show();
+                         }
+                         $('#bir').show();
+                         $('#bidr').show();
+                         pagenext--;
+	                      $('.page'+pagenext).show();
+                      }
+                   });
+                });
+               // >> 버튼
+               $(".bi-chevron-double-right").click(function () {
+                  p = cardcount-1;
+                   $.ajax({
+                      url: "http://localhost:8080/api/emp/p/" + p + "/" + s,
+                      type: 'get',
+                      dataType: "json",
+                      success: (data) => {
+                         $('#item').children().remove();
+                         $.each(data, (index, item) => {
+                            $("#item").append("<tr><td>" + item.sabun + "</td><td>" + item.pay + "</td><td>" + item.ename + "</td></tr>");
+                         });
+                         $('.page'+pagenext).hide();
+                         $('#bil').show();
+                         $('#bidl').show();
+                         $('#bir').hide();
+                         $('#bidr').hide();
+                         pagenext=Math.floor(cardcount/10);                         	                          	  
+	                     $('.page'+pagenext).show();
+                      }
+                   });
+                });
+               // > 버튼
+               $(".bi-chevron-right").click(function () {
+            	   p=Math.ceil((p+1)/10)*10;
+            	   p=10;
+                   $.ajax({
+                      url: "http://localhost:8080/api/emp/p/" + p + "/" + s,
+                      type: 'get',
+                      dataType: "json",
+                      success: (data) => {
+                         $('#item').children().remove();
+                         $.each(data, (index, item) => {
+                            $("#item").append("<tr><td>" + item.sabun + "</td><td>" + item.pay + "</td><td>" + item.ename + "</td></tr>");
+                         });
+                         //$('.page'+pagenext).hide();
+                         
+                         if(Math.floor(cardcount/10)==(pagenext+1)){
+                       	  $('#bil').show();
+                          $('#bidl').show();
+                       	  $('#bir').hide();
+                       	  $('#bidr').hide();
+                         }
+                         $('#bil').show();
+                         $('#bidl').show();
+                         pagenext++;
+                         $('.page1').show();
+                      }
+                   });
+                });
+            }
+         });
+      }
+      /* mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm */
+      $(function () {
+          $.ajax({
+             url: "http://localhost:8080/api/emp/p/" + p + "/" + s,
+             type: 'get',
+             dataType: "json",
+             success: (data) => {
+                console.log("ready 함수 아이템");
+                $.each(data, (index, item) => {
+                   $("#item").append("<tr><td>" + item.sabun + "</td><td>" + item.pay + "</td><td>" + item.ename + "</td></tr>");
+                });
+             },
+             complete: () => {
+             }
+          });
+          $.ajax({
+             url: "http://localhost:8080/api/size",
+             type: 'get',
+             dataType: "text",
+             success: (data) => {
+                console.log("ready 함수 size");
+                console.log(data);
+                cardcount = parseInt(data);
+                console.log(cardcount);
+                if (cardcount % s != 0) {
+                   cardcount = Math.floor((cardcount / s) + 1)
+                   if(cardcount >10){
+                   display=10;                     
+                   }
+                } else {
+                   cardcount = Math.floor(cardcount / s)
+                }
+                for (var i = cardcount; i >= 1; i--) {
+                	pagenum=Math.floor(i/10);
+                	if(i%10==0){
+                		pagenum=(i/10)-1;
+                	}
+                   $('#bil').after('<li class="page-item"><a class="page-link create-page" href="#"></a></li>');
+                   $('.pagination').children().children().eq(2).addClass("page" + pagenum).text(i);
+                }
+                for(var i= 0;i<Math.ceil(cardcount/10);i++){
+                	$('.page'+i).hide();
+                }
+                $('.page'+pagenext).show();
+                $('#bil').hide();
+             	$('#bidl').hide();
+				    
+                $(".create-page").click(function () {
+                   console.log($(this).text());
+                   p = parseInt($(this).text()) - 1;
+                   $.ajax({
+                      url: "http://localhost:8080/api/emp/p/" + p + "/" + s,
+                      type: 'get',
+                      dataType: "json",
+                      success: (data) => {
+                         $('#item').children().remove();
+                         $.each(data, (index, item) => {
+                            $("#item").append("<tr><td>" + item.sabun + "</td><td>" + item.pay + "</td><td>" + item.ename + "</td></tr>");
+                         });
+                      }
+                   });
+                });
+                // << 버튼
+                $(".bi-chevron-double-left").click(function () {
+                   p = 0
+                   $.ajax({
+                      url: "http://localhost:8080/api/emp/p/" + p + "/" + s,
+                      type: 'get',
+                      dataType: "json",
+                      success: (data) => {
+                         $('#item').children().remove();
+                         $.each(data, (index, item) => {
+                            $("#item").append("<tr><td>" + item.sabun + "</td><td>" + item.pay + "</td><td>" + item.ename + "</td></tr>");
+                         });
+                         $('.page'+pagenext).hide();
+                       	 $('#bil').hide();
+                       	 $('#bidl').hide();
+                       	  $('#bir').show();
+                     	  $('#bidr').show();
+                         pagenext=0;
+	                     $('.page'+pagenext).show();
+                      }
+                   });
+                });
+                // < 버튼
+                $(".bi-chevron-left").click(function () {
+                	p=Math.floor((p-10)/10)*10;
+                    $.ajax({
+                       url: "http://localhost:8080/api/emp/p/" + p + "/" + s,
+                       type: 'get',
+                       dataType: "json",
+                       success: (data) => {
+                          $('#item').children().remove();
+                          $.each(data, (index, item) => {
+                             $("#item").append("<tr><td>" + item.sabun + "</td><td>" + item.pay + "</td><td>" + item.ename + "</td></tr>");
+                          });
+                          $('.page'+pagenext).hide();
+                          if(pagenext==1){
+                        	  $('#bil').hide();
+                           	  $('#bidl').hide();
+                           	  $('#bir').show();
+                           	  $('#bidr').show();
+                          }
+                          $('#bir').show();
+                          $('#bidr').show();
+                          pagenext--;
+	                      $('.page'+pagenext).show();
+                       }
+                    });
+                 });
+                // >> 버튼
+                $(".bi-chevron-double-right").click(function () {
+                   p = cardcount-1;
+                    $.ajax({
+                       url: "http://localhost:8080/api/emp/p/" + p + "/" + s,
+                       type: 'get',
+                       dataType: "json",
+                       success: (data) => {
+                          $('#item').children().remove();
+                          $.each(data, (index, item) => {
+                             $("#item").append("<tr><td>" + item.sabun + "</td><td>" + item.pay + "</td><td>" + item.ename + "</td></tr>");
+                          });
+                          $('.page'+pagenext).hide();
+                          $('#bil').show();
+                          $('#bidl').show();
+                          $('#bir').hide();
+                          $('#bidr').hide();
+                          pagenext=Math.floor(cardcount/10);                         	                          	  
+	                      $('.page'+pagenext).show();
+                       }
+                    });
+                 });
+                // > 버튼
+                $(".bi-chevron-right").click(function () {
+                   p=Math.ceil((p+1)/10)*10;
+                    $.ajax({
+                       url: "http://localhost:8080/api/emp/p/" + p + "/" + s,
+                       type: 'get',
+                       dataType: "json",
+                       success: (data) => {
+                          $('#item').children().remove();
+                          $.each(data, (index, item) => {
+                             $("#item").append("<tr><td>" + item.sabun + "</td><td>" + item.pay + "</td><td>" + item.ename + "</td></tr>");
+                          });
+                          $('.page'+pagenext).hide();
+                          if(Math.floor(cardcount/10)==(pagenext+1)){
+                        	  $('#bil').show();
+                              $('#bidl').show();
+                        	  $('#bir').hide();
+                        	  $('#bidr').hide();
+                          }
+                          $('#bil').show();
+                          $('#bidl').show();
+                          pagenext++;
+	                      $('.page'+pagenext).show();
+                       }
+                    });
+                 });
+             }
+          });
+       });
+      $(document).ready(function () {
+         $("#nav").load("../template/nav.html");
+         $('#chat').load("./../template/chat.html");
+         $('#footer').load("./../template/footer.html");
+      });
+
+   </script>
+   <style type="text/css">
+      .body {
+         width: 1631px;
+      }
+
+      #mainDiv {
+         width: 1600px;
+         margin: 31px;
+      }
+
+      form {
+         margin-bottom: 30px;
+         padding: 30px;
+         border: 1px gainsboro solid;
+      }
+
+      .form-select {
+         width: 300px;
+         display: inline;
+         margin: 30px;
+      }
+
+      .form-control {
+         width: 300px;
+         display: inline;
+         margin: 30px;
+      }
+
+      form>div>label {
+         margin-right: 30px;
+      }
+
+      #productName {
+         width: 900px;
+      }
+
+      #choiceView {
+         margin-right: 200px;
+         width: 30px;
+         float: right;
+      }
+
+      #searchButton {
+         padding-top: 30px;
+         width: max-content;
+         margin: 0 auto;
+      }
+
+      #padginationButton {
+         margin-top: 20px;
+         width: max-content;
+         margin: 0 auto;
+      }
+   </style>
+</head>
+
+<body>
+
+   <div id="mainDiv">
+      <diV>
+         <h3>상품 관리</h3>
+         <form>
+            <div id="productHigh">
+               <label for="inputProduct" class="col-form-label">상품 분류</label>
+               <select class="form-select" aria-label="Default select example">
+                  <option selected>전체</option>
+                  <option value="1">예금</option>
+                  <option value="2">적금</option>
+                  <option value="3">대출</option>
+                  <option value="4">카드</option>
+               </select>
+               <label for="inputState" class="col-form-label">상태값</label>
+               <select class="form-select" aria-label="Default select example">
+                  <option selected>전체</option>
+                  <option value="1">확정</option>
+                  <option value="2">신규</option>
+                  <option value="3">변경</option>
+                  <option value="4">삭제발생</option>
+                  <option value="5">기간만료</option>
+                  <option value="6">임시저장</option>
+               </select>
+               <label for="inputState">등록일자</label>
+               <input type="date" value="2019-09-22">
+               <span> - </span>
+               <input type="date" value="2019-09-22">
+            </div>
+
+            <div>
+               <label for="organSearch">기관명 검색</label>
+               <input type="text" class="form-control">
+               <label for="organSearch">상품명</label>
+               <input id="productName" type="text" class="form-control">
+               <div id="searchButton">
+                  <button type="primary" style="color: white;" class="btn btn-primary">조회하기</button>
+               </div>
+            </div>
+
+         </form>
+      </diV>
+
+      <div id="choiceView">
+         <select id="category" onchange="changeSelect()" class="form-select" aria-label="Default select example">
+            <option id="count10" value="2" selected>3개씩</option>
+            <option id="count25" value="3">4개씩</option>
+            <option id="count50" value="5">5개씩</option>
+         </select>
+      </div>
+
+      <div>
+         <table class="table">
+            <thead class="text-bg-secondary p-3">
+               <tr>
+                  <th>순번</th>
+                  <th>상품분류</th>
+                  <th>기관명</th>
+               </tr>
+            </thead>
+            <tbody id="item">
+
+            </tbody>
+         </table>
+      </div>
+      <div id="padginationButton">
+         <nav aria-label="Page navigation example">
+            <ul class="pagination">
+               <li id="bidl" class="page-item"><a class="page-link bi bi-chevron-double-left" href="#"></a></li>
+               <li id="bil" class="page-item"><a class="page-link bi bi-chevron-left" href="#"></a></li>
+               <li id="bir" class="page-item"><a class="page-link bi bi-chevron-right" href="#"></a></li>
+               <li id="bidr" class="page-item"><a class="page-link bi bi-chevron-double-right" href="#"></a></li>
+            </ul>
+         </nav>
+      </div>
+   </div>
+
+</body>
+</html>

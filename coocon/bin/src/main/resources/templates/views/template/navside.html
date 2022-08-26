@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+   <th:block th:fragment="navsideFragment">
+   
+            <div class="nav-side-container">
+               <div class="nav-side-item"></div>
+                <div class="nav-side-item">
+                    <a href="/update" class="nav-side-item-a text-decoration-none">업데이트 조회</a>
+                </div>
+                <div class="nav-side-item">
+                    <a href="/product" class="nav-side-item-a text-decoration-none">상품 관리</a>
+                </div>
+                <div class="nav-side-item">
+                    <a href="/organ" class="nav-side-item-a text-decoration-none">기관 관리</a>
+                </div>
+                <div class="nav-side-item">
+                    <a href="/business" class="nav-side-item-a text-decoration-none">업종 관리</a>
+                </div>
+                <script type="text/javascript">
+                	if(sessionStorage.getItem('userRole') == 'Admin'){
+                		$('.nav-side-container').append('<div class="nav-side-item"><a href="/user" class="nav-side-item-a text-decoration-none">회원 관리</a></div>')
+                	}
+                </script>
+            </div>  
+   </th:block>
+     
+</html>

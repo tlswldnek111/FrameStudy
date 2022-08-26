@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.project.coocon.mapper.OrganMapper">
+  
+  	<resultMap type="Organ" id="findOrganAndOrganHistory">
+  		<id column="organ_name" property="organName"/>
+  		<result column="organ_module" property="organModule"/>
+  		<result column="organ_status" property="organStatus"/>
+  		<result column="organ_created" property="organCreated"/>
+  		<result column="organ_status" property="organStatus"/>
+  		<association property="organHistory" javaType="OrganHistory">
+  			<id column="no" property="no"/>
+  			<result column="organ_name" property="organName"/>
+  			<result column="revisor" property="revisor"/>
+  			<result column="revise_content" property="reviseContent"/>
+  			<result column="revise_date" property="reviseDate"/>
+  		</association>
+  	</resultMap>
+  	
+  	
+  	<resultMap type="Organ" id="findOrganDetail">
+  		<id column="organ_name" property="organName"/>
+  		<result column="organ_module" property="organModule"/>
+  		<result column="organ_status" property="organStatus"/>
+  		<result column="organ_created" property="organCreated"/>
+  		
+  		<association property="organCommonBenefit" javaType="OrganCommonBenefit">
+  			<id column="organ_name" property="organName"/>
+  			<result column="organ_name" property="organName"/>
+  			<result column="package_name" property="packageName"/>
+  			<result column="benefit_url" property="benefitUrl"/>
+  			<result column="cbEventStart" property="eventStart"/>
+  			<result column="cbEventEnd" property="eventEnd"/>
+  			<result column="benefit_content" property="benefitContent"/>
+  			<result column="cbEventSignify" property="eventSignify"/>
+  			<collection property="commonBenefits" ofType="CommonBenefit" javaType="ArrayList" >
+	  			<id column="organ_benefit_noes" property="benefitNo"/>
+	  			<result column="organ_name" property="organName"/>
+	  			<result column="benefit_category" property="benefitCategory"/>
+	  			<result column="business_name" property="businessName"/>
+	  			<result column="month_max_money" property="monthMaxMoney"/>
+	  			<result column="day_max_money" property="dayMaxMoney"/>
+	  			<result column="per_min_money" property="perMinMoney"/>
+	  			<result column="per_max_money" property="perMaxMoney"/>
+	  			<result column="day_max_count" property="dayMaxCount"/>
+	  			<result column="month_max_count" property="monthMaxCount"/>
+	  			<result column="year_max_count" property="yearMaxCount"/>
+	  			<result column="specific_money" property="specificMoney"/>
+	  			<result column="specific_stock" property="specificStock"/>
+	  			<result column="method" property="method"/>
+	  			<result column="signify" property="signify"/>
+	  			<result column="benefit_name" property="benefitName"/>
+	  			<result column="benefit_summary" property="benefitSummary"/>
+	  			<result column="benefit_detail" property="benefitDetail"/>
+		  			<collection property="commonBenefitTables" ofType="CommonBenefitTable" javaType="ArrayList" >
+			  			<id column="benefit_table_no" property="no"/>
+			  			<result column="table_benefit_no" property="benefitNo"/>
+			  			<result column="price" property="price"/>
+			  			<result column="limit" property="limit"/>
+			  			<result column="correspond" property="correspond"/>
+			  			<result column="per_money" property="perMoney"/>
+			  			<result column="per_rate" property="perRate"/>
+		  			</collection>
+  			</collection>
+  		</association>
+  		
+  		<collection property="organAnnuals" ofType="OrganAnnual" javaType="ArrayList" >
+  			<id column="annual_no" property="no"/>
+  			<result column="organ_name" property="organName"/>
+  			<result column="organ_module" property="organModule"/>
+  			<result column="event_name" property="eventName"/>
+  			<result column="event_url" property="eventUrl"/>
+  			<result column="event_target" property="eventTarget"/>
+  			<result column="event_start" property="eventStart"/>
+  			<result column="event_end" property="eventEnd"/>
+  			<result column="annual_apply" property="annualApply"/>
+  			<result column="event_content" property="eventContent"/>
+  			<result column="event_detail" property="eventDetail"/>
+  			<result column="selected_card" property="selectedCard"/>
+  			<result column="event_signify" property="eventSignify"/>
+  		</collection>
+  		
+  		
+  	</resultMap>
+  	
+  	<select id="OnefindOrganDetail" parameterType="map" resultMap="findOrganDetail">
+  	 select * , case when organ_benefit_no is null then 0 else organ_benefit_no end as organ_benefit_noes from (
+        select no as annual_no, B.organ_name as first_organ, B.organ_module, A.event_name, A.event_url, A.event_target,event_start,event_end,annual_apply,event_content,event_detail,selected_card,event_signify
+                from organ_annual as A left outer join (select organ_name, organ_module from organ) as B 
+                on A.organ_name = B.organ_name  order by event_end desc ) as first,
+     (  select A.organ_name as RealOrgan ,A.event_start as cbEventStart, A.event_end as cbEventEnd, A.event_signify as cbEventSignify,* 
+        from organ_common_benefit as A left outer join
+        (select common_benefit_table.no as benefit_table_no, *,common_benefit_table.benefit_no as table_benefit_no, common_benefit.benefit_no as organ_benefit_no
+        from common_benefit left outer join common_benefit_table 
+        on common_benefit.benefit_no=common_benefit_table.benefit_no
+         ) as B on A.organ_name = B.organ_name order by benefit_category , cast(B.price as int) desc) as second
+         where first.first_organ = second.RealOrgan and first.organ_module = #{organModule}
+        
+  	</select>
+  	
+  <insert id="insertCommonTable" parameterType="CommonBenefitTable">
+        insert into common_benefit_table(benefit_no, price, "limit", correspond, per_money, per_rate)  values
+        <foreach collection="list" item="item" separator="," open="" close="">
+           ((SELECT max(benefit_no) as benefitNo FROM common_benefit where organ_name = #{item.organName}), #{item.price}, #{item.limit}, #{item.correspond}, #{item.perMoney}, #{item.perRate})
+        </foreach>
+ </insert>
+ 
+  <insert id="insertOrganAnnual" parameterType="OrganAnnual">
+        INSERT INTO organ_annual(organ_name, event_name, event_url, event_target, event_start, event_end, annual_apply, event_content, event_detail, selected_card, event_signify)  values
+        <foreach collection="list" item="item" separator="," open="" close="">
+        (#{item.organName}, #{item.eventName}, #{item.eventUrl}, #{item.eventTarget},#{item.eventStart},#{item.eventEnd},#{item.annualApply}, #{item.eventContent},#{item.eventDetail},#{item.selectedCard}, #{item.eventSignify})
+        </foreach>
+ </insert>
+  	
+  </mapper>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+   <th:block th:fragment="detailbenefitFragment">
+   
+    <!-- 상품관리 페이지 css -->
+    <style type="text/css">
+    
+    /*첫번째 CSS 기본 입력 폼  
+      DIV를 한줄씩 묶어서 사용하고 적용함
+    */
+       /*기본혜택-할인폼 */
+       
+       .main_discount>div>div{
+          margin:30px;
+       }
+         #main_discount_Second>input{
+          width:200px;
+          display: inline;
+       }
+       #main_discount_Second>select{
+          width:250px;
+          display: inline;
+       }
+       #main_discount_Third>label{
+          vertical-align: top;
+       }
+       #main_discount_Forth>input{
+          width:188px;
+          display: inline;
+       }   
+       #main_discount_Fifth>input{
+          width:120px;
+          display: inline;
+       }
+       #main_discount_Fifth>:last-child{
+          width:330px;
+          display: inline;
+       }
+       #main_discount_Sixth>table{
+          width:1350px;   
+          display:inline;
+       }
+       #main_discount_Seventh>label{
+          vertical-align: top;
+       }
+       #main_discount_Seventh>textarea{
+          width:1350px;
+          display: inline;
+       }
+      .last-element-btn{   
+         display: flex;
+         justify-content: right;
+       }
+       .last-element-btn > button {
+          width:150px;
+          height:40px;
+       }
+       
+        /*main_discount_minitable*/
+      .main_discount_minitable > thead {
+         background-color: gainsboro;
+      }
+      .main_discount_minitable > thead> tr > th {
+         font-weight: bold;
+      }
+      .main_discount_minitable > tbody > tr > td{
+         padding:15px;
+      }
+      .main_discount_minitable > tbody > tr >:first-child{
+         float:center;
+      }
+      .main_discount_minitable > tbody > tr > td > span > input{
+         text-align: right;
+      }
+      .main_discount_minitable > tbody > tr > td > span > input:first-child{
+         margin-left:0px;
+      }
+      .main_discount_minitable > tbody > tr > td > span > input:last-child{
+         margin-left:40px;
+      }
+      .main_discount_minitable > tbody > tr > td > span{
+      line-height:40px;
+      }
+      .main_discount_minitable-input1 {
+      width:100px;
+      float:left;
+      }
+      
+       .minitable-minus-th{
+          background-color: white;
+          border : 1px solid white;
+       }
+       .minitable-minus-th >button{
+          background-color:white;
+          border:1px solid gainsboro;
+          width:30px;
+          height:30px;
+       }
+       .minitable-plus-btn{
+          width:35px;
+          height:35px;
+          margin:auto;
+          text-align: center;
+          background-color: white;
+          border:1px solid gainsboro;
+          margin-top:10px;
+       }
+       .minitable-border{
+       border:1px solid gainsboro;
+       }
+       tbody > tr > td > input{
+       text-align: right;
+       }
+       
+       .form-input-right{
+       width: 100px;
+       display: inline;
+       text-align: right;
+       }
+       /*할인에서 테이블 css end*/
+    </style>
+</head>
+
+<body>
+          <!-- 
+          1. 할인 = main_discount_Form
+          2. 적립 = main_Save
+          3. 리터당 할인 = main_Liter_Discount
+          4. 리터당 적립 = main_Liter_Save
+          5. 현장 할인 = main_Spot_Discount
+          6. 표준화 불가능 혜택 = main_Imposible
+           -->   
+<!--  복사할때, 아래의 div 전체복사 -->
+
+                    <div id="main_discount_Sixth">
+                       <label class="form-label">혜택 상세</label>
+                      <table class="table main_discount_minitable">
+                       <thead class="text-center">
+                         <tr>
+                          <th class="minitable-border">실적 금액</th>
+                           <th class="minitable-border">실적별 할인한도</th>
+                           <th class="minitable-border">실적별 해당금액</th>
+                           <th class="minitable-border">건당 할인금액</th>
+                           <th class="minitable-border">건당 할인율</th>
+                           <th class="minitable-minus-th" style="background-color: white; border:1px solid white;"></th>
+                         </tr>
+                       </thead>
+                       <tbody>   
+                          <tr id="main_discount-0">
+                        <tr th:each="detail : ${cardDetail}">
+                             <td class="minitable-border" ><span><input class="form-control main_discount_minitable-input1" type="text" onchange="inputUp(this)" onkeyup="chkNumber(this)" onblur="specialMaxCount(this)" th:value="${detail.price == null} ? ${''} : ${detail.price}"  maxlength="5" />&nbsp; 만원 이상</span></td>
+                              <td class="minitable-border" ><input class="form-control" type="text" onchange="inputUp(this)" onkeyup="chkNumber(this)" th:value="${detail.discount == null} ? ${''} : ${detail.discount}"/></td>
+                              <td class="minitable-border" ><input class="form-control" type="text" onchange="inputUp(this)" onkeyup="chkNumber(this)" th:value="${detail.saving == null} ? ${''} : ${detail.saving}"/></td>
+                              <td class="minitable-border" ><input class="form-control" type="text" onchange="inputUp(this)" onkeyup="chkNumber(this)" th:value="${detail.approval == null} ? ${''} : ${detail.approval}"/></td>
+                              <td class="minitable-border" ><span><input class="form-control main_discount_minitable-input1" onblur="maxNumberThree(this)" type="text" onchange="inputUp(this)" onkeyup="chkNumberWithMinus(this)" th:value="${detail.rate == null} ? ${''} : ${detail.rate}"/>&nbsp; %</span></td>
+                              <td class="minitable-minus-th"><button id="main_discount-0" type="button">-</button></td>    
+                          </tr>
+                       </tbody>
+                     </table>        
+                     <!-- tr 추가 버튼 -->
+                     <div class="row " >
+                        <button id="main-discount-plusbtn" class="minitable-plus-btn" type="button">+</button>
+                     </div>    
+                     <!-- tr 추가 버튼 end-->                 
+                    </div>
+
+
+         
+</th:block>
+</html>

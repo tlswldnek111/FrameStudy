@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/nav.css">
+<th:block th:replace="views/template/header :: linkFragment"></th:block>
+<script type="text/javascript" src="/js/NavSide.js"></script>
+</head>
+<!-- 업데이트 조회 페이지 css -->
+<style type="text/css">
+#organContent { 
+	border-left: 1px gainsboro solid;
+}
+
+#organContent>h3 {
+	font-weight: bolder;
+	color: black;
+	font-size: 150%;
+}
+
+#pageButton {
+	margin-top: 20px;
+	width: max-content;
+	margin: 0 auto;
+}
+
+.Countview {
+	size: 1600px;
+}
+
+.Countview>div {
+	height: 200px;
+	text-align: left;
+	box-shadow: 3px 3px #e9ecef;
+}
+
+/* 전체 조회 */
+.countview-lg-3:nth-child(4) {
+	background-color: #236ADE;
+	color: white;
+}
+
+.number-wrap {
+	padding-left: 30px;
+	margin-top: 60px;
+}
+
+.update-number {
+	font-size: 60px;
+	font-weight: bolder;
+}
+
+.Countview {
+	width: 1600px;
+	background-color: white;
+	/* margin: 5px -5px 10px 30px; */
+}
+
+.Countview>.countview-lg-3 {
+	flex: 0 0 auto;
+	width: 24.73%;
+}
+
+.number-wrap {
+	padding-left: 30px;
+	margin-top: 60px;
+}
+
+/* 조회일시  */
+.Dateinquiry {
+	margin: 15px 30px 15px 0px;
+	color: grey;
+}
+
+#main-cotents-title {
+	font-weight: bolder;
+	padding-left: 30px;
+	margin-bottom: 30px;
+}
+
+#listTable {
+	width: 1600px;
+	margin: 30px 0px 0px 0px;
+	border-collapse: collapse;
+	text-align: center;
+}
+
+.listtable-th {
+	font-weight: bolder;
+	width: 150px;
+	font-weight: bold;
+	vertical-align: middle;
+	color: #fff;
+}
+
+/* 리스트테이블 상단바 라운드
+ .listtable-th>th:first-child {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.listtable-th>th:last-child {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+ */
+#listTable td:first-child {
+	width: 350px;
+	padding: 10px;
+}
+
+#listTable .even {
+	background: #F7F8FF;
+}
+
+.table {
+	box-shadow: 2px 2px 2px 2px #e9ecef;
+	margin-bottom: 20px;
+	border-color: #e9ecef;
+	/* background: #F7F8FB; */
+	/* 리스트테이블 상단바 라운드 
+	border-radius: 5px; */
+}
+
+.update-table-tbody {
+	background-color: white;
+}
+
+.update-td-update-name {
+	text-decoration: none;
+}
+
+.update-td-update-name:hover {
+	text-decoration: underline;
+}
+</style>
+<body>
+	<!-- nav -->
+	<th:block th:replace="views/template/nav :: navFragment"></th:block>
+	<!-- nav end -->
+
+	<!-- contents 내용 -->
+	<div class="main-container main-container-bg">
+
+		<!-- nav-side -->
+		<th:block th:replace="views/template/navside :: navsideFragment"></th:block>
+		<!-- nav-side end -->
+
+		<!-- 업데이트 조회 내용 -->
+		<div class="main-contents">
+
+
+			<!-- 업데이트 contents -->
+			<!-- 업데이트 조회와 카운트 뷰  -->
+			<div class="Dashboard">
+				<h3 id="main-contents-title">업데이트 조회</h3>
+				<div class="Countview">
+					<div class="btn countview-lg-3">
+						<div class="number-wrap">
+							<span class="update-number">0</span><br>신규
+						</div>
+					</div>
+					<div class="btn countview-lg-3">
+						<div class="number-wrap">
+							<span class="update-number">0</span><br>삭제 발생
+						</div>
+					</div>
+					<div class="btn countview-lg-3">
+						<div class="number-wrap">
+							<span class="update-number">0</span><br>변경
+						</div>
+					</div>
+					<div class="btn countview-lg-3">
+						<div class="number-wrap">
+							<span class="update-number">0</span><br>전체
+						</div>
+					</div>
+				</div>
+				<p class="Dateinquiry">조회일시</p>
+			</div>
+			<div id="listTable" class="mb-3 row">
+				<table class="table">
+					<thead class="text-bg-secondary p-3">
+						<tr class="listtable-th">
+							<th>상품분류</th>
+							<th>전체상품</th>
+							<th>신규상품</th>
+							<th>삭제상품</th>
+							<th>변경상품</th>
+						</tr>
+					</thead>
+					<tbody class="update-table-tbody">
+						<tr>
+							<td><a href="#" class="update-td-update-name">예금</a></td>
+							<td>23</td>
+							<td>0</td>
+							<td><a href="#" class="update-td-update-name">1</a></td>
+							<td><a href="#" class="update-td-update-name">2</a></td>
+						</tr>
+						<tr>
+							<td>적금</td>
+							<td>36</td>
+							<td>0</td>
+							<td>0</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<td>대출</td>
+							<td>23</td>
+							<td>0</td>
+							<td>0</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<td>카드</td>
+							<td>23</td>
+							<td>0</td>
+							<td>0</td>
+							<td>0</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<nav id="pageButton" aria-label="Page navigation example">
+				<ul class="pagination">
+					<li class="page-item"><a class="page-link" href="#"
+						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+					</a></li>
+					<li class="page-item"><a class="page-link" href="#">1</a></li>
+					<li class="page-item"><a class="page-link" href="#">2</a></li>
+					<li class="page-item"><a class="page-link" href="#">3</a></li>
+					<li class="page-item"><a class="page-link" href="#"
+						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+					</a></li>
+				</ul>
+			</nav>
+
+
+			<!-- 업데이트 contents end-->
+
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<th:block th:fragment="productmanagemodal">
+
+      <div class="modal-background"></div>
+      <!-- 삭제 -> 삭제하시겠습니까? modal -->
+      <div id="product-delete-Modal" class="modal ProductDeleteModal"
+         tabindex="-1">
+         <div class="modal-wrap approve-modal-wrap">
+            <div class="modal-content">
+               <div class="modal-header">
+
+                  <h5 class="modal-title">
+                     상품 삭제
+                     </h5>
+                     <button id="Delete-Product-Modal-Close-Btn" type="button"
+                        class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+               </div>
+               <div class="modal-body" id="Product_TemporaryStorage_Modal_Body">
+                  <div class="delete-modal-text1" style="text-align:center;">
+                           <h5 >* 해당 상품을 정말 삭제하시겠습니까?</h5>
+                   </div>
+               </div>
+               <div class="modal-footer" style="padding-top: 20px">
+
+                  <div class="footer-btn-letf">
+                     <button id="Delete-Product-Modal-check" type="button"
+                        class="btn btn-primary btn-lg" data-bs-dismiss="modal">확인</button>
+                  </div>
+                  <div class="footer-btn-right">
+                     <button id="Delete-Product-Modal-cancle" type="button"
+                        class="btn btn-secondary btn-lg" data-bs-dismiss="modal">취소</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- 삭제 -> 확인 -> 삭제되었습니다 modal -->
+      <div id="product-delete-Check-Modal"
+         class="modal ProductDeleteCheckModal" tabindex="-1">
+         <div class="modal-wrap approve-modal-wrap">
+            <div class="modal-content">
+               <div class="modal-header">
+
+                  <h5 class="modal-title">
+                     상품 삭제
+                     </h5>
+                     <button id="Delete-Product-Check-Modal-Close-Btn" type="button"
+                        class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body" id="Product_TemporaryStorage_Modal_Body">
+						<div class="delete-modal-text1">
+                          <h5 style="margin-bottom: 0px;">상품이 삭제되었습니다.</h5>
+                       </div>
+               </div>
+               <div class="modal-footer" style="padding-top: 20px">
+
+                  <div class="footer-btn-center">
+                     <button id="Delete-Product-Check-Modal-check" type="button"
+                        class="btn btn-primary btn-lg" data-bs-dismiss="modal">확인</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- 혜택업종 -->
+      <div id="Benefit-Industry-Selection-Modal" class="modal benefit-modal"
+         tabindex="-1">
+         <div class="modal-wrap approve-modal-wrap">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h3 class="modal-title">혜택 업종 선택하기</h3>
+                  <button id="Benefit-Industry-Selecetion-Close" type="button"
+                     class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <!-- modal-body -->
+               <div class="modal-body">
+ 						<div class="benefit-industry-search-text">
+                           <p style="margin: 0px 15px 0px 0px;">혜택 업종 찾기</p>
+                        </div>
+  						<div class="benefit-industry-search-text3">
+                              <p>해당 업종이 맞는지 확인해주세요.</p>
+                           </div>
+ 						<br>
+                
+                       
+                         <div class="selectlistdiv1">
+							<span>혜택 해당 업종 </span>
+							  <div id="select-box" ></div>
+						</div>
+                       
+               </div>
+
+               <div class="modal-footer">
+                  <div class="btn-letf">
+                     <span id="selecteresult" style="color: #236ADE"></span> <span>을/를
+                        혜택 업종으로</span>
+                     <button id="btn-acept" type="submit"
+                        class="btn btn-primary btn-lg">등록</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+
+      <!-- 혜택업종 -->
+
+
+      <!-- 카드=확정하기-modal-start-->
+      <div id="Organ-Confirmation-Modal"
+         class="modal OrganConfirmationModal" tabindex="-1">
+         <div class="modal-wrap approve-modal-wrap">
+            <div class="modal-content">
+               <div class="modal-header" style="padding-bottom: 20px">
+                  <button id="Organ-Confirmation-Modal-Close" type="button"
+                     class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div id="OrganConfirmation_Modal_Body" class="modal-body">
+               	 <div class="sava-benefits-text1">
+                           <h5 class="product_modal_body_text">수정하시겠습니까?</h5>
+                   </div>
+               </div>
+               <div class="modal-footer" style="padding-top: 20px">
+
+                  <div class="footer-btn-letf">
+                     <button id="Organ-Confirmation-Modal-update-check-Again-Yes"
+                        type="button" class="btn btn-primary btn-lg"
+                        data-bs-dismiss="modal">확인</button>
+                  </div>
+                  <div class="footer-btn-right">
+                     <button id="Organ-Confirmation-Modal-update-check-Again-No"
+                        type="button" class="btn btn-secondary btn-lg"
+                        data-bs-dismiss="modal">취소</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!--  혜택저장  -->
+      <div id="Save-Benefits-Modal" class="modal SaveBenefitsModal"
+         tabindex="-1">
+         <div class="modal-wrap approve-modal-wrap">
+            <div class="modal-content">
+               <div class="modal-header" style="padding-bottom: 20px">
+                  <button id="Save-Benefits-Modal-Close" type="button"
+                     class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body" id="Product_TemporaryStorage_Modal_Body">
+                    <div class="sava-benefits-text1">
+                           <h5>빈 값이 있습니다.</h5>
+                           <h5>다시 입력해주세요.</h5>
+                      </div>
+               </div>
+               <div class="modal-footer" style="padding-top: 20px">
+
+                  <div class="footer-btn-right">
+                     <button id="Sava-Benefits-Modal-Input-Again-No" type="button"
+                        class="btn btn-primary btn-lg" data-bs-dismiss="modal">돌아가기</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      
+
+      <!-- 상품 > 임시저장 modal -->
+      <div id="Product_TemporaryStorage_Modal"
+         class="modal temporarystoragemodal " tabindex="-1">
+         <div class="modal-wrap approve-modal-wrap">
+            <div id="Product_TemporaryStorage_Modal_Content"
+               class="modal-content">
+               <div class="modal-header">
+                  <h3 class="modal-title">임시저장</h3>
+                  <button id="Product_TemporaryStorage_Modal_Close_Button"
+                     type="button" class="btn-close" data-bs-dismiss="modal"
+                     aria-label="Close"></button>
+               </div>
+               <div id="Product_TemporaryStorage_Modal_Body" class="modal-body">
+                		<div class="Product_TemporaryStorage_Modal_text1">
+                           <h5 style="margin-bottom: 0px; font-size: 20px; ">임시저장 하시겠습니까?</h5>
+                        </div>
+               </div>
+               <div id="Product_TemporaryStorage_Modal_Footer"
+                  class="modal-footer">
+                  <div class="footer-btn-letf">
+                     <button id="Product_TemporaryStorage_Modal_Yes" type="button"
+                        class="btn btn-primary btn-lg" data-bs-dismiss="modal">확인</button>
+                  </div>
+                  <div class="footer-btn-right">
+                     <button id="Product_TemporaryStorage_Modal_No" type="button"
+                        class="btn btn-primary btn-lg" data-bs-dismiss="modal">취소</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- 상품 > 변겅없이 확정하기 modal  -->
+      <div id="Product_Immediately_Confirmed_Modal"
+         class="modal immediatelyconfirmedmodal" tabindex="-1">
+         <div class="modal-wrap approve-modal-wrap">
+            <div id="Product_Immediately_Confirmed_Modal_Content"
+               class="modal-content">
+               <div class="modal-header" style="padding-bottom: 5px">
+                  <h3 class="modal-title">확정</h3>
+                  <button id="Product_Immediately_Confirmed_Modal_Close_Button"
+                     type="button" class="btn-close" data-bs-dismiss="modal"
+                     aria-label="Close"></button>
+               </div>
+               <div id="Product_Immediately_Confirmed_Modal_Body"
+                  class="modal-body">
+                   <div class="Product_Immediately_Confirmed_Modal_text1"
+                           style="margin-bottom: 0px; font-size: 20px;">
+                           <h5>변경없이 확정 하시겠습니까?</h5>
+                   </div>
+               </div>
+               <div id="Product_Immediately_Confirmed_Modal_footer"
+                  class="modal-footer" style="padding-top: 20px">
+                  <div class="footer-btn-right">
+                     <button id="Product_Immediately_Confirmed_Modal_Yes"
+                        type="button" class="btn btn-primary btn-lg"
+                        data-bs-dismiss="modal">확인</button>
+                  </div>
+                  <div class="footer-btn-left">
+                     <button id="Product_Immediately_Confirmed_Modal_No" type="button"
+                        class="btn btn-primary btn-lg" data-bs-dismiss="modal">취소</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+    
+      
+       <!-- 상품 > 수정 취소 modal  -->
+      <div id="Product_Immediately_Confirmed_Modal2"
+         class="modal immediatelyconfirmedmodal" tabindex="-1">
+         <div class="modal-wrap approve-modal-wrap">
+            <div id="Product_Immediately_Confirmed_Modal_Content"
+               class="modal-content">
+               <div class="modal-header" style="padding-bottom: 20px">
+                  <h3 class="modal-title"></h3>
+                  <button id="Product_Immediately_Confirmed_Modal_Close_Button2"
+                     type="button" class="btn-close" data-bs-dismiss="modal"
+                     aria-label="Close"></button>
+               </div>
+               <div id="Product_Immediately_Confirmed_Modal_Body"
+                  class="modal-body">
+                   <div class="Product_Immediately_Confirmed_Modal_text1"
+                           style="margin-bottom: 0px; font-size: 20px;">
+                           <h5>수정을 취소하시겠습니까?</h5>
+                   </div>
+               </div>
+               <div id="Product_Immediately_Confirmed_Modal_footer"
+                  class="modal-footer" style="padding-top: 20px">
+                  <div class="footer-btn-right">
+                     <button id="Product_Immediately_Confirmed_Modal_Yes2"
+                        type="button" class="btn btn-primary btn-lg"
+                        data-bs-dismiss="modal">확인</button>
+                  </div>
+                  <div class="footer-btn-left">
+                     <button id="Product_Immediately_Confirmed_Modal_No2" type="button"
+                        class="btn btn-primary btn-lg" data-bs-dismiss="modal">취소</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+    
+      
+      
+      
+      
+      
+      
+      <!-- 연회비 이벤트 modal  -->
+
+     
+      <div id="Annual_Fee_Event_Modal" class="modal annualfeeeventmodal"
+         tabindex="-1">
+         <div class="modal-wrap approve-modal-wrap">
+            <div id="Annual_Fee_Event_Modal_Content" class="modal-content">
+               <div class="modal-header" style="padding-bottom: 5px">
+                  <h3 class="modal-title">연회비 이벤트</h3>
+                  <button id="Annual_Fee_Event_Modal_Close_Button" type="button"
+                     class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div id="Annual_Fee_Event_Modal_Body" class="modal-body" style="
+    margin-left: 10px;
+    margin-right: 10px;
+">
+               	<div class="row">
+	               	<span style="width:150px">이벤트명</span>
+	               	<input type="text" id="event_Modal_input1" disabled>
+               	</div>
+               <div class="row" style="margin-top: 30px;margin-bottom: 30px;">
+               		<span style="width:150px">이벤트 기간</span>
+               		<input type="text" id="event_Modal_input2" class="event_period1" disabled>
+               		<span style="width:30px">  ~ </span>
+               		<input type="text"id="event_Modal_input2" class="event_period2" disabled>
+               </div>
+               <div class="row">
+               		<span style="width:150px">연회비 지원 방법</span>
+               		<input type="text" id="event_Modal_input3" disabled>
+               </div>
+               </div>
+               <div id="Annual_Fee_Event_Button_footer" class="modal-footer"
+                  style="padding-top: 20px">
+                  <div class="footer-btn-center">
+                   <button id="Annual_Fee_Event_Button_Detail" type="button"
+                        class="btn btn-primary btn-lg" data-bs-dismiss="modal" 
+                        style="width: 200px;
+    height: 48px;
+    margin-left: 10px;" >자세히 보기</button>
+    
+                     <button id="Annual_Fee_Event_Button_Check" type="button"
+                        class="btn btn-primary btn-lg" data-bs-dismiss="modal" 
+                        style="width: 100px;
+    height: 48px;
+    margin-left: 10px;
+    background-color: grey;
+    border-color: gray;" >닫기</button>
+                  </div>
+
+               </div>
+            </div>
+         </div>
+      </div>
+<div class="loading-background"></div>
+<div class="loader" style="position: fixed;left: 50%;top: 50%;">Loading...</div>
+
+</th:block>
+</html>

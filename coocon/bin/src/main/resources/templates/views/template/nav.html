@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+
+<th:block th:fragment="navFragment">
+	<div class="main-nav-container">
+		<header class="nav-container fixed-top">
+			<div class="nav-container-logo nav-container-col-2">
+				<a href="/" class="text-dark text-decoration-none"> 금융상품정보수집 </a> <small
+					id="userRole"></small>
+				<script type="text/javascript">
+						$(function(){
+							$('#userRole').text(sessionStorage.getItem('userRole'));
+						});
+				</script>
+			</div>
+			<div class="nav-container-col-2"></div>
+			<div class="nav-container-col-2"></div>
+			<div class="nav-container-col-2"></div>
+			<div class="nav-container-logout nav-container-col-2">
+				<a href="#none" id="logout" class="text-decoration-none text-dark "><i class="bi bi-person"></i> LOGOUT</a>
+			</div>
+			<script type="text/javascript">
+                	$(function(){
+                		$('#logout').click(function(){
+                			$('#logoutModal').toggle();
+                		})
+                		
+                		$('#logoutModalOk').click(function(){
+                			$('#logoutModal').toggle();
+                			sessionStorage.clear();
+                			window.location.replace('/');
+                		})
+                		$('#logoutModalExp').click(function(){
+                			$('#logoutModal').toggle();
+                		})
+                		$('#logoutModalClose').click(function(){
+                			$('#logoutModal').toggle();
+                		})
+                	})
+                </script>
+                
+			<!-- 로그아웃 Form -->
+			<div id="logoutModal" class="modal" tabindex="-1">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">로그아웃</h4>
+							<button id="logoutModalExp" type="button" class="btn-close"
+								data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<h5>로그아웃 하시겠습니까?</h5>
+						</div>
+						
+							<div class="footer-btn-center">
+								<button id="logoutModalOk" type="button"
+									class="btn btn-primary btn-lg" data-bs-dismiss="modal">확인</button>
+								<button id="logoutModalClose" type="button"
+									class="btn btn-secondary btn-lg">취소</button>
+							</div>
+					</div>
+				</div>
+			</div>
+		</header>
+	</div>
+</th:block>
+
+</html>

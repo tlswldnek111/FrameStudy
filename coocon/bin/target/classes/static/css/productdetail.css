@@ -1,0 +1,841 @@
+/*첫번째 CSS 기본 입력 폼  
+	DIV를 한줄씩 묶어서 사용하고 적용함
+*/
+#firstForm{
+ 	box-shadow: 3px 3px 3px 3px ghostwhite;
+ }
+ 	
+#firstForm>div{
+ 	margin:30px;
+ 	margin-top:3px;
+}
+ 	
+.form-label{
+	width:10%;
+	margin-left:30px;
+	font-weight: bold;
+}
+  	
+#topButton{
+  	 margin-bottom:30px;
+}
+
+#topButton>:nth-child(1){
+	width:150px;
+	height:40px;
+}
+
+#topButton>:nth-child(2){
+	background-color: white;
+	border: 1px solid black;
+	width:150px;
+	height:40px;
+}
+  	
+#menuList{
+	margin-right:50px;
+	float:right;
+	background-color: white;
+	border: 1px solid black;
+	width:150px;
+	height:40px;
+}
+
+#firstDiv{
+	height: 60px;	
+}
+
+#firstDiv>label{
+	padding-top:15px;	
+	width:30%; 
+	margin-left:63px;
+}
+
+#firstDiv>label>a{
+	text-decoration:none !important ;
+	font-weight: normal ;	
+	color:gray;
+}
+
+#firstDiv>label>a:hover{ 
+   	color:#236ADE;	
+}
+
+#firstDiv>button{
+	float:right;	
+	margin-left:10px;
+	margin-right:50px;
+	margin-top:10px;
+}
+#firstDiv>:nth-child(3){
+	margin-right: 5px;	
+}
+
+#secondDiv>input{
+	margin-top:30px;
+	width:200px;	
+ 	display: inline;	
+}
+ 	
+#secondDiv>:nth-child(6){
+ 	width:555px;
+}
+ 	
+#thirdDiv>:nth-child(5){
+ 	margin-left:70px;
+ 	width:100px;
+}
+ 	
+#thirdDiv>:nth-child(6){
+ 	width:790px;
+ 	display:inline;	
+ }
+ 	
+#forthDiv>input{
+ 	width:150px	;
+ 	display: inline;
+ }
+ 	
+#forthDiv>:nth-child(2){
+	width:1000px;
+}
+ 	
+#fifthDiv>input{
+	width:1350px;	
+	display :inline;
+}
+#sixthDiv>input{
+	width:1350px;	
+	display :inline;
+}
+#seventhDiv>select{
+	width:300px;
+	display :inline;
+}
+#seventhDiv>button{
+	width:150px;
+	height:40px;
+}
+#seventhDiv>div{
+	display :inline;
+	float : right;	
+	margin-right:10px;
+}
+#eigthDiv>input{
+	width:1350px;	
+	display:inline;
+}
+#ninthDiv>div>input.form-check-input{
+	vertical-align:sub;	
+	margin-left:80px;	
+}
+#ninthDiv>div>label{
+	width:80px;
+}	
+#ninthDivOne{
+	margin:30px;
+}
+#ninthDivOne>input.form-control{
+	width:100px;
+	display:inline;
+	vertical-align: middle;
+	margin-right:20px;
+}
+#ninthDivTwo>input.form-control{
+	width:100px;
+	display:inline;
+	vertical-align: middle;
+	margin-right:20px;
+}
+
+#ninthDivThree{
+	margin:30px;
+}
+#ninthDivThree>input.form-control{
+	width:100px;
+	display:inline;
+	vertical-align: middle;
+	margin-right:20px;
+}	
+.form-First-label{
+	margin-left:0px;
+	font-weight: bold;
+}
+#ninthDivTwo{
+	margin:30px;
+}
+#tenthDiv>input{
+	width:1350px;	
+	display:inline;
+}
+#eleventhDiv>table{
+	display:inline;
+}
+#twelfthDiv>label{
+	vertical-align: top;
+}
+#twelfthDiv>textarea{
+	width:1350px;	
+	display: inline;
+}
+#thirteenDiv>label{
+	vertical-align: top;
+}
+#thirteenDiv>textarea{
+	width:1350px;	
+	display: inline;
+}
+#fourteenthDiv>label{
+	vertical-align: top;
+}
+#fourteenthDiv>textarea{
+	width:1350px;	
+	display: inline;
+}
+#fifteenthDiv>label{
+	vertical-align: top;
+}
+#fifteenthDiv>textarea{
+	width:1350px;	
+	display: inline;
+}
+
+/*기본혜택-할인폼 */
+
+#normal_discount_Second>input{
+	width:200px;
+	display: inline;
+}
+#normal_discount_Second>select{
+	width:250px;
+	display: inline;
+}
+#normal_discount_Third>label{
+	vertical-align: top;
+}
+#normal_discount_Third>textarea{
+ 	width:1350px;	
+ 	display:inline;
+}
+#searchBenefit{
+	margin-left:190px;
+}
+#normal_discount_Forth>input{
+	width:188px;
+	display: inline;
+}	
+#normal_discount_Fifth>input{
+	width:120px;
+	display: inline;
+}
+#normal_discount_Sixth>table{
+	width:1350px;	
+	display:inline;
+}
+#normal_discount_Seventh>label{
+	vertical-align: top;
+}
+#normal_discount_Seventh>textarea{
+	width:1350px;
+	display: inline;
+}
+
+/*기본혜택 적립 폼 */
+ 	
+.normal_Save{
+	box-shadow: 3px 3px 3px 3px ghostwhite;  
+}
+.normal_Save>div>div{
+	margin:30px;
+}
+#normal_Save_Second>input{
+	width:200px;
+	display: inline;
+}
+#normal_Save_Second>select{
+	width:250px;
+	display: inline;
+}
+#normal_Save_Third>label{
+	vertical-align: top;
+}
+#normal_Save_Third>textarea{
+ 	width:1350px;	
+ 	display:inline;
+}
+#normal_Save_Forth>input{
+	width:188px;
+	display: inline;
+}	
+#normal_Save_Fifth>input{
+	width:120px;
+	display: inline;
+}
+#normal_Save_Fifth>:last-child{
+	width:330px;
+	display: inline;
+}
+#normal_Save_Sixth>table{
+	width:1350px;	
+	display:inline;
+}
+#normal_Save_Seventh>label{
+	vertical-align: top;
+}
+#normal_Save_Seventh>textarea{
+	width:1350px;
+	display: inline;
+}
+#normal_Save_Select{	
+	display: flex;
+	justify-content: right;
+	padding-bottom:30px;
+}
+#normal_Save_Select>button{
+	width:150px;
+	height:40px;	
+}
+  
+/*기본혜택-리터당 할인폼 */
+	
+.normal_Liter_Discount{
+	box-shadow: 3px 3px 3px 3px ghostwhite;    	
+}
+.normal_Liter_Discount>div>div{
+	margin:30px;
+}
+#normal_Liter_Discount_Second>input{
+	width:200px;
+	display: inline;
+}
+#normal_Liter_Discount_Second>select{
+	width:250px;
+	display: inline;
+}
+#normal_Liter_Discount_Third>label{
+	vertical-align: top;
+}
+#normal_Liter_Discount_Third>textarea{
+ 	width:1350px;	
+ 	display:inline;
+}
+#normal_Liter_Discount_Forth>input{
+	width:188px;
+	display: inline;
+}	
+#normal_Liter_Discount_Fifth>input{
+	width:120px;
+	display: inline;
+}
+#normal_Liter_Discount_Fifth>:last-child{
+	width:330px;
+	display: inline;
+}
+#normal_Liter_Discount_Sixth>table{
+	width:1350px;	
+	display:inline;
+}
+#normal_Liter_Discount_Seventh>label{
+	vertical-align: top;
+}
+#normal_Liter_Discount_Seventh>textarea{
+	width:1350px;
+	display: inline;
+}
+#normal_Liter_Discount_Select{	
+	display: flex;
+	justify-content: right;
+}
+   
+/*기본혜택-리터당 적립폼 */
+.normal_Liter_Save{
+	box-shadow: 3px 3px 3px 3px ghostwhite;    	
+}
+.normal_Liter_Save>div>div{
+	margin:30px;
+}
+#normal_Liter_Save_Second>input{
+	width:200px;
+	display: inline;
+}
+#normal_Liter_Save_Second>select{
+	width:250px;
+	display: inline;
+}
+#normal_Liter_Save_Third>label{
+	vertical-align: top;
+}
+#normal_Liter_Save_Third>textarea{
+ 	width:1350px;	
+ 	display:inline;
+}
+#normal_Liter_Save_Forth>input{
+	width:188px;
+	display: inline;
+}	
+#normal_Liter_Save_Fifth>input{
+	width:120px;
+	display: inline;
+}
+#normal_Liter_Save_Fifth>:last-child{
+	width:330px;
+	display: inline;
+}
+#normal_Liter_Save_Sixth>table{
+	width:1350px;	
+	display:inline;
+}
+#normal_Liter_Save_Seventh>label{
+	vertical-align: top;
+}
+#normal_Liter_Save_Seventh>textarea{
+	width:1350px;
+	display: inline;
+}
+#normal_Liter_Save_Select{	
+	display: flex;
+	justify-content: right;
+}
+   
+/*기본혜택-현장할인폼 */
+.normal_Spot_Discount{
+	box-shadow: 3px 3px 3px 3px ghostwhite;    	
+}
+.normal_Spot_Discount>div>div{
+	margin:30px;
+}
+#normal_Spot_Discount_Second>input{
+	width:200px;
+	display: inline;
+}
+#normal_Spot_Discount_Second>select{
+	width:250px;
+	display: inline;
+}
+#normal_Spot_Discount_Third>label{
+	vertical-align: top;
+}
+#normal_Spot_Discount_Third>textarea{
+ 	width:1350px;	
+ 	display:inline;
+}
+#normal_Spot_Discount_Forth>input{
+	width:188px;
+	display: inline;
+}	
+#normal_Spot_Discount_Fifth>input{
+	width:120px;
+	display: inline;
+}
+#normal_Spot_Discount_Fifth>:last-child{
+	width:330px;
+	display: inline;
+}
+#normal_Spot_Discount_Sixth>table{
+	width:1350px;	
+	display:inline;
+}
+#normal_Spot_Discount_Seventh>label{
+	vertical-align: top;
+}
+#normal_Spot_Discount_Seventh>textarea{
+	width:1350px;
+	display: inline;
+}
+#normal_Spot_Discount_Select{	
+	display: flex;
+	justify-content: right;
+}
+/*기본혜택-표준화 불가능 혜택폼 */
+.normal_Imposible{
+	box-shadow: 3px 3px 3px 3px ghostwhite;    	
+}
+.normal_Imposible>div>div{
+	margin:30px;
+}
+#normal_Imposible_Second>input{
+	width:800px;
+	display: inline;
+}
+#normal_Imposible_Third>input{
+ 	width:1350px;	
+ 	display:inline;
+}
+#normal_Imposible_Forth>label{
+ 	vertical-align: top;
+}
+#normal_Imposible_Forth>textarea{
+ 	width:1350px;	
+ 	display:inline;	
+}
+#normal_Imposible_Select{	
+	display: flex;
+	justify-content: right;
+}  
+ /*기본혜택- 페이지 제일 마지막 폼*/
+#footerDiv{	
+	margin:30px;
+}
+
+#footerDiv>label{
+	vertical-align: top;
+}
+#footerDiv>textarea{
+	width:700px	;
+	display:inline;
+}
+#footerDiv>input{
+	width:280px;
+	display:inline;
+	vertical-align: top;
+}
+#footerDiv>button{	
+	position: absolute;
+	margin-left:25px;
+	width:150px;
+	height:40px;
+}
+#totalForm{
+	background-color: red;
+}
+.main-detail-bg{
+	 background-color: white;
+	 box-shadow: 2px 2px 2px 2px #e9ecef;
+}
+.form-control{
+	resize:none;
+ }
+.form-control{
+	border-radius: 0%;
+}
+.form-select{
+	border-radius: 0%;
+}
+#public-benefit-tab > li > button{
+   width:120px;
+   margin-left:5px;
+   text-align: left;
+   color:black;
+}
+.public-benefit-detail-tab{
+      border:1px solid gainsboro;
+      border-bottom: 1px solid white;
+}
+.public-benefit-form-label{
+	float:left;
+	   font-weight:bold;
+	   width:10%;
+	   margin-left:20px;
+	   margin-right:20px;
+}
+.public-benefit-input9{
+	width:80%;
+	float:left;
+}
+.public-benefit-tab-title > *{
+   margin-bottom:10px;
+}
+.public-benefit-date{
+   margin-left:5px;
+}
+.normal_Save,.normal_Liter_Discount,.normal_Liter_Save,.normal_Spot_Discount,
+.normal_Imposible{
+	display:none;
+}
+#normal_Total,#select_Total,#special_Total{
+	display:none;
+}
+
+#normal_discount{
+	margin:30px;
+}
+#normal_discount>div{
+	margin-bottom:30px;
+}
+#normal_discount_First{
+	margin:30px;
+}
+
+/* 선택형 혜택 Form css*/
+
+#select_Top>div{
+	margin:30px;
+}
+
+#select_Top>div>.form-label{
+	width:10%;
+	margin-left:30px;
+	font-weight: bold;
+}
+
+#select_Top_First>.form-control{
+	width:50px;
+	display:inline;
+	margin-right:10px;
+}
+
+#select_Top_Third>.form-control{
+	width:1350px;
+	display:inline;
+}
+
+/* 특별혜택 Form css  */
+
+.special_voucher_Form,.special_lounge_Form,.special_parking_Form,.special_hotel_Form,
+.special_golf_Form,
+.special_extra_Form{
+	display:none;
+}
+.special_annual_Form{
+	display:block;
+}
+
+#special_discount_First{
+	margin:30px;
+}
+.special_annual_Form>div>div{
+	margin:30px;
+}
+
+.special-form-label{
+	width:10%;
+	margin-left:30px;
+	font-weight: bold;
+}
+
+#extraCheck{	
+	position: relative;
+	top:7px;
+}
+
+/* 스페셜 연회비 */
+
+#special_discount_First>div>.form-control{
+	margin-left:20px;
+	width:250px;
+	display:inline;
+}
+
+#special_annual_First>input{
+	width:310px;
+	display:inline;
+	
+}
+#special_annual_Second>input{
+	width: 1350px;
+	display:inline;
+}
+#special_annual_Third>input{
+	width: 1350px;
+	display:inline;
+}
+#special_annual_Fourth>label{
+	vertical-align: top;
+}
+#special_annual_Fourth>textarea {
+	width:1350px;	
+	display:inline;
+}
+
+/* 스페셜 바우처 */
+.special_voucher_Form>div>div{
+	margin:30px;
+}
+
+#special_voucher_First>div>.form-control{
+	margin-left:20px;
+	width:250px;
+	display:inline;
+}
+
+#special_voucher_First>input{
+	width:310px;
+	display:inline;
+	
+}
+#special_voucher_Second>input{
+	width: 1350px;
+	display:inline;
+}
+#special_voucher_Third>input{
+	width: 1350px;
+	display:inline;
+}
+#special_voucher_Fourth>label{
+	vertical-align: top;
+}
+#special_voucher_Fourth>textarea {
+	width:1350px;	
+	display:inline;
+}
+
+/* 스페셜 공항 라운지 */
+.special_lounge_Form>div>div{
+	margin:30px;
+}
+
+#special_lounge_First>div>.form-control{
+	margin-left:20px;
+	width:250px;
+	display:inline;
+}
+
+#special_lounge_First>input{
+	width:310px;
+	display:inline;
+	
+}
+#special_lounge_Second>input{
+	width: 1350px;
+	display:inline;
+}
+#special_lounge_Third>input{
+	width: 1350px;
+	display:inline;
+}
+#special_lounge_Fourth>label{
+	vertical-align: top;
+}
+#special_lounge_Fourth>textarea {
+	width:1350px;	
+	display:inline;
+}
+
+/* 스페셜 발레 파킹 */
+.special_parking_Form>div>div{
+	margin:30px;
+}
+
+#special_parking_First>div>.form-control{
+	margin-left:20px;
+	width:250px;
+	display:inline;
+}
+
+#special_parking_First>input{
+	width:310px;
+	display:inline;
+	
+}
+#special_parking_Second>input{
+	width: 1350px;
+	display:inline;
+}
+#special_parking_Third>input{
+	width: 1350px;
+	display:inline;
+}
+#special_parking_Fourth>label{
+	vertical-align: top;
+}
+#special_parking_Fourth>textarea {
+	width:1350px;	
+	display:inline;
+}
+
+/* 스페셜 호텔 서비스 */
+.special_hotel_Form>div>div{
+	margin:30px;
+}
+
+#special_hotel_First>div>.form-control{
+	margin-left:20px;
+	width:250px;
+	display:inline;
+}
+
+#special_hotel_First>input{
+	width:310px;
+	display:inline;
+	
+}
+#special_hotel_Second>input{
+	width: 1350px;
+	display:inline;
+}
+#special_hotel_Third>input{
+	width: 1350px;
+	display:inline;
+}
+#special_hotel_Fourth>label{
+	vertical-align: top;
+}
+#special_hotel_Fourth>textarea {
+	width:1350px;	
+	display:inline;
+}
+
+/* 스페셜 골프 서비스 */
+.special_golf_Form>div>div{
+	margin:30px;
+}
+
+#special_golf_First>div>.form-control{
+	margin-left:20px;
+	width:250px;
+	display:inline;
+}
+
+#special_golf_First>input{
+	width:310px;
+	display:inline;
+	
+}
+#special_golf_Second>input{
+	width: 1350px;
+	display:inline;
+}
+#special_golf_Third>input{
+	width: 1350px;
+	display:inline;
+}
+#special_golf_Fourth>label{
+	vertical-align: top;
+}
+#special_golf_Fourth>textarea {
+	width:1350px;	
+	display:inline;
+}
+
+/* 스페셜 기타 */
+.special_extra_Form>div>div{
+	margin:30px;
+}
+
+#special_extra_First>div>.form-control{
+	margin-left:20px;
+	width:250px;
+	display:inline;
+}
+
+#special_extra_First>input{
+	width:310px;
+	display:inline;
+	
+}
+#special_extra_Second>input{
+	width: 1350px;
+	display:inline;
+}
+#special_extra_Third>input{
+	width: 1350px;
+	display:inline;
+}
+#special_extra_Fourth>label{	
+	vertical-align: top;
+}
+#special_extra_Fourth>textarea {
+	width:1350px;	
+	display:inline;
+}
+
+#special_Total{
+	display:none;
+}
+#normal_Total{
+	display:block;
+}
+.btn-secondary{
+	width:150px;
+	height:40px;
+}

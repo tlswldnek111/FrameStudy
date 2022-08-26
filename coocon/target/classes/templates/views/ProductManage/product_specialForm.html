@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+   <th:block th:fragment="detailbenefitFragment">
+   
+</head>
+
+<body>
+
+   <!-- 특별 혜택  radio button-->
+<div class="special-special" th:each="special, specialnum: ${specialDetail}" th:if="${special.benefitMethod != null}" th:attr="id='special-all-'+${specialnum.index}">
+   <div id="special_discount_First" >
+      <label class="form-label">혜택 방식</label>
+      <div class="form-check form-check-inline">
+            <input id=radio_special_start class="form-check-input benefit-re" type="radio" th:name="'special'+${specialnum.index}" value="0" th:attr="radiock=${special.benefitMethod.toString() == '연회비 혜택' ? 'true' : 'false'}">
+               연회비 혜택
+      </div>
+      <div class="form-check form-check-inline">
+            <input class="form-check-input benefit-re" type="radio" th:name="'special'+${specialnum.index}"value="1" th:attr="radiock=${special.benefitMethod.toString() == '바우처 제공' ? 'true' : 'false'}">
+               바우처 제공
+      </div>
+      <div class="form-check form-check-inline">
+            <input class="form-check-input benefit-re" type="radio" th:name="'special'+${specialnum.index}" value="2" th:attr="radiock=${special.benefitMethod.toString() == '공항 라운지' ? 'true' : 'false'}">
+            공항 라운지
+            </div> 
+      <div class="form-check form-check-inline">
+            <input class="form-check-input benefit-re" type="radio" th:name="'special'+${specialnum.index}"value="3" th:attr="radiock=${special.benefitMethod.toString() == '발레파킹' ? 'true' : 'false'}">
+               발레파킹
+      </div> 
+      <div class="form-check form-check-inline">
+            <input class="form-check-input benefit-re" type="radio" th:name="'special'+${specialnum.index}" value="4" th:attr="radiock=${special.benefitMethod.toString() == '호텔 서비스' ? 'true' : 'false'}">
+               호텔 서비스
+      </div> 
+      <div class="form-check form-check-inline">
+            <input class="form-check-input benefit-re" type="radio" th:name="'special'+${specialnum.index}" value="5" th:attr="radiock=${special.benefitMethod.toString() == '골프 서비스' ? 'true' : 'false'}">
+               골프 서비스   
+      </div> 
+      <div class="form-check form-check-inline">
+            <input id="extraCheck" class="form-check-input benefit-re" type="radio" th:name="'special'+${specialnum.index}" value="6" th:attr="radiock=${special.benefitMethod.toString() == '기타' ? 'true' : 'false'}">
+               기타
+            <input id="extraInput" type="text" class="form-control benefit-re" onchange="inputUp(this)" readonly th:attr="value=${special.benefitMethod.toString()== '기타' ? special.benefitEct : '' }">
+      </div> 
+    </div>
+             
+        <!-- radio button end-->    
+   
+                    
+         <!-- 특별 혜택 -->
+         
+      <div id="special_form_All">
+          <form class="special_annual_Form" th:each="radio:${specialnum.current}">   
+        <input type="hidden">
+             <div id="special_annual_Div">
+                <div id="special_annual_First">
+                   <label class="special-form-label">제공 비용</label>
+                   <input type="text" class="form-control benefit-re" onchange="inputUp(this)" onkeyup="chkNumber(this)" th:value="${radio.offerPrice} == null ? ${''} : ${radio.offerPrice}">
+                   <label class="special-form-label">제공 횟수</label>
+                   <input type="text" class="form-control benefit-re" onchange="inputUp(this)" maxlength="5" onkeyup="chkNumber(this)" onblur="specialMaxCount(this)" th:value="${radio.offerCount} == null ? ${''} : ${radio.offerCount}">
+                   <label class="special-form-label">연 최대 제공 횟수</label>
+                   <input type="text" class="form-control benefit-re" onchange="inputUp(this)" maxlength="5" onkeyup="chkNumber(this)" onblur="specialMaxCount(this)" th:value="${radio.yearMaxOffer} == null ? ${''} : ${radio.yearMaxOffer}">
+                </div>
+              <div id="special_annual_Second">
+                 <label class="special-form-label">사용처</label>
+                 <input type="text" class="form-control benefit-re" onchange="inputUp(this)" th:attr="value=${radio.benefitMethod.toString()== '연회비 혜택' ? radio.possiblePlace : '' }">
+              </div>
+              <div id="special_annual_Third">
+                 <label class="special-form-label">혜택 요약</label>
+                 <input type="text" class="form-control benefit-re" onchange="inputUp(this)" th:value="${radio.benefitSummary} == null ? ${''} : ${radio.benefitSummary}">
+              </div>
+              <div id="special_annual_Fourth">
+                 <label class="special-form-label">특이사항</label>    
+                 <textarea class="form-control public-benefit-textarea benefit-re" rows="12" onchange="inputUp(this)" th:text="${radio.signify} == null ? ${''} : ${radio.signify}"></textarea>
+            </div>
+            <div id="normal_Save_Select">
+              	<button type="button" class="btn btn-reload">초기화</button>
+               <button type="button" class="btn btn-primary btn-hidden benefit_save">혜택저장</button>
+              </div>   
+             </div>
+          </form>
+          
+          <form class="special_voucher_Form" th:each="radio:${specialnum.current}">
+             <input type="hidden" value="바우처"/>
+             <div id="special_voucher_Div">
+                <div id="special_voucher_First">
+                   <label class="special-form-label">제공 비용</label>
+                   <input type="text" class="form-control benefit-re" onchange="inputUp(this)" onkeyup="chkNumber(this)"  th:value="${radio.offerPrice} == null ? ${''} : ${radio.offerPrice}">
+               <label class="special-form-label">제공 횟수</label>
+               <input type="text" class="form-control benefit-re" onchange="inputUp(this)"  maxlength="5" onkeyup="chkNumber(this)" onblur="specialMaxCount(this)" th:value="${radio.offerCount} == null ? ${''} : ${radio.offerCount}">
+               <label class="special-form-label">연 최대 제공 횟수</label>
+               <input type="text" class="form-control benefit-re" onchange="inputUp(this)" maxlength="5" onkeyup="chkNumber(this)" onblur="specialMaxCount(this)" th:value="${radio.yearMaxOffer} == null ? ${''} : ${radio.yearMaxOffer}">
+                </div>
+              <div id="special_voucher_Second">	
+                 <label class="special-form-label">사용처</label>
+                 <input type="text" class="form-control benefit-re" onchange="inputUp(this)" th:attr="value=${radio.benefitMethod.toString()== '바우처 제공' ? radio.possiblePlace : '' }">
+              </div>
+              <div id="special_voucher_Third">
+                 <label class="special-form-label">혜택 요약</label>
+                 <input type="text" class="form-control benefit-re" onchange="inputUp(this)" th:attr="value=${radio.benefitMethod.toString()== '바우처 제공' ? radio.benefitSummary : '' }">
+              </div>
+              <div id="special_voucher_Fourth">
+                 <label class="special-form-label">특이사항</label>
+                 <textarea class="form-control public-benefit-textarea benefit-re" rows="12" onchange="inputUp(this)" th:text="${radio.benefitMethod.toString()} == '바우처 제공' ? ${radio.Signify} : '' "></textarea>
+            </div>
+            <div id="normal_Save_Select">
+            	  <button type="button" class="btn btn-reload">초기화</button>
+                  <button type="button" class="btn btn-primary btn-hidden benefit_save">혜택저장</button>
+              </div>   
+             </div>
+          </form>
+          
+          <form class="special_lounge_Form" th:each="radio:${specialnum.current}">
+             <input type="hidden" value="공항 라운지"/>
+             <div id="special_lounge_Div">
+                <div id="special_lounge_First">
+                   <label class="special-form-label">제공 비용</label>
+               <input type="text" class="form-control benefit-re"  onkeyup="chkNumber(this)"  onchange="inputUp(this)" th:value="${radio.offerPrice} == null ? ${''} : ${radio.offerPrice}">
+               <label class="special-form-label">제공 횟수</label>
+               <input type="text" class="form-control benefit-re"  maxlength="5" onkeyup="chkNumber(this)"  onchange="inputUp(this)" onblur="specialMaxCount(this)" th:value="${radio.offerCount} == null ? ${''} : ${radio.offerCount}">
+               <label class="special-form-label">연 최대 제공 횟수</label>
+               <input type="text" class="form-control benefit-re"  maxlength="5" onkeyup="chkNumber(this)"  onchange="inputUp(this)" onblur="specialMaxCount(this)" th:value="${radio.yearMaxOffer} == null ? ${''} : ${radio.yearMaxOffer}">
+                </div>
+              <div id="special_lounge_Second">
+                 <label class="special-form-label">사용처</label>
+                 <input type="text" class="form-control benefit-re" onchange="inputUp(this)" th:attr="value=${radio.benefitMethod.toString()== '공항 라운지' ? radio.possiblePlace : '' }">
+              </div>
+              <div id="special_lounge_Third">
+                 <label class="special-form-label">혜택 요약</label>
+                 <input type="text" class="form-control benefit-re" onchange="inputUp(this)" th:attr="value=${radio.benefitMethod.toString()== '공항 라운지' ? radio.benefitSummary : '' }">
+              </div>
+              <div id="special_lounge_Fourth">
+                 <label class="special-form-label">특이사항</label>
+                 <textarea class="form-control public-benefit-textarea benefit-re" rows="12" onchange="inputUp(this)" th:text="${radio.benefitMethod.toString()} == '공항 라운지' ? ${radio.Signify} : '' "></textarea>
+            </div>
+            <div id="normal_Save_Select">
+            	<button type="button" class="btn btn-reload">초기화</button>
+               <button type="button" class="btn btn-primary btn-hidden benefit_save">혜택저장</button>
+              </div>   
+             </div>
+          </form>
+          <form class="special_parking_Form" th:each="radio:${specialnum.current}">
+             <input type="hidden" value="발레파킹"/>
+             <div id="special_parking_Div">
+                <div id="special_parking_First">
+                   <label class="special-form-label">제공 비용</label>
+               <input type="text" class="form-control benefit-re" onkeyup="chkNumber(this)"  onchange="inputUp(this)" th:value="${radio.offerPrice} == null ? ${''} : ${radio.offerPrice}">
+               <label class="special-form-label">제공 횟수</label>
+               <input type="text" class="form-control benefit-re"  maxlength="5" onkeyup="chkNumber(this)"  onchange="inputUp(this)" onblur="specialMaxCount(this)"  th:value="${radio.offerCount} == null ? ${''} : ${radio.offerCount}">
+               <label class="special-form-label">연 최대 제공 횟수</label>
+               <input type="text" class="form-control benefit-re"  maxlength="5" onkeyup="chkNumber(this)"  onchange="inputUp(this)" onblur="specialMaxCount(this)" th:value="${radio.yearMaxOffer} == null ? ${''} : ${radio.yearMaxOffer}">
+                </div>
+              <div id="special_parking_Second">
+                 <label class="special-form-label">사용처</label>
+                 <input type="text" class="form-control benefit-re" onchange="inputUp(this)" th:attr="value=${radio.benefitMethod.toString()== '발레파킹' ? radio.possiblePlace : '' }">
+              </div>
+              <div id="special_parking_Third">
+                 <label class="special-form-label">혜택 요약</label>
+                 <input type="text" class="form-control benefit-re" onchange="inputUp(this)" th:attr="value=${radio.benefitMethod.toString()== '발레파킹' ? radio.benefitSummary : '' }">
+              </div>
+              <div id="special_parking_Fourth">
+                 <label class="special-form-label">특이사항</label>
+                 <textarea class="form-control public-benefit-textarea benefit-re" rows="12" onchange="inputUp(this)" th:text="${radio.benefitMethod.toString()} == '발레파킹' ? ${radio.Signify} : '' "></textarea>
+            </div>
+            <div id="normal_Save_Select">
+            	<button type="button" class="btn btn-reload">초기화</button>
+               <button type="button" class="btn btn-primary btn-hidden benefit_save">혜택저장</button>
+              </div>   
+             </div>
+          </form>
+          <form class="special_hotel_Form" th:each="radio:${specialnum.current}">
+             <input type="hidden" value="호텔 서비스"/>
+             <div id="special_hotel_Div">
+                <div id="special_hotel_First">
+                   <label class="special-form-label">제공 비용</label>
+               <input type="text" class="form-control benefit-re"  onkeyup="chkNumber(this)"  onchange="inputUp(this)" th:value="${radio.offerPrice} == null ? ${''} : ${radio.offerPrice}">
+               <label class="special-form-label">제공 횟수</label>
+               <input type="text" class="form-control benefit-re"  maxlength="5" onkeyup="chkNumber(this)"   onchange="inputUp(this)" onblur="specialMaxCount(this)" th:value="${radio.offerCount} == null ? ${''} : ${radio.offerCount}">
+               <label class="special-form-label">연 최대 제공 횟수</label>
+               <input type="text" class="form-control benefit-re"  maxlength="5" onkeyup="chkNumber(this)"  onchange="inputUp(this)" onblur="specialMaxCount(this)" th:value="${radio.yearMaxOffer} == null ? ${''} : ${radio.yearMaxOffer}">
+                </div>
+              <div id="special_hotel_Second">
+                 <label class="special-form-label">사용처</label>
+                 <input type="text" class="form-control benefit-re" onchange="inputUp(this)" th:attr="value=${radio.benefitMethod.toString()== '호텔 서비스' ? radio.possiblePlace : '' }">
+              </div>
+              <div id="special_hotel_Third">
+                 <label class="special-form-label">혜택 요약</label>
+                 <input type="text" class="form-control benefit-re" onchange="inputUp(this)" th:attr="value=${radio.benefitMethod.toString()== '호텔 서비스' ? radio.benefitSummary : '' }">
+              </div>
+              <div id="special_hotel_Fourth">
+                 <label class="special-form-label">특이사항</label>
+                 <textarea class="form-control public-benefit-textarea benefit-re" rows="12" onchange="inputUp(this)" th:text="${radio.benefitMethod.toString()} == '호텔 서비스' ? ${radio.Signify} : '' "></textarea>
+            </div>
+            <div id="normal_Save_Select">
+            	<button type="button" class="btn btn-reload">초기화</button>
+               <button type="button" class="btn btn-primary btn-hidden benefit_save">혜택저장</button>
+              </div>   
+             </div>
+          </form>
+          <form class="special_golf_Form" th:each="radio:${specialnum.current}">
+             <input type="hidden" value="골프 서비스"/>
+             <div id="special_golf_Div">
+                <div id="special_golf_First">
+                  <label class="special-form-label">제공 비용</label>
+               <input type="text" class="form-control benefit-re"  onkeyup="chkNumber(this)"  onchange="inputUp(this)" th:value="${radio.offerPrice} == null ? ${''} : ${radio.offerPrice}">
+               <label class="special-form-label">제공 횟수</label>
+               <input type="text" class="form-control benefit-re"  maxlength="5" onkeyup="chkNumber(this)"  onchange="inputUp(this)" onblur="specialMaxCount(this)" th:value="${radio.offerCount} == null ? ${''} : ${radio.offerCount}">
+               <label class="special-form-label">연 최대 제공 횟수</label>
+               <input type="text" class="form-control benefit-re"  maxlength="5" onkeyup="chkNumber(this)"  onchange="inputUp(this)" onblur="specialMaxCount(this)" th:value="${radio.yearMaxOffer} == null ? ${''} : ${radio.yearMaxOffer}">
+                </div>
+              <div id="special_golf_Second">
+                 <label class="special-form-label">사용처</label>
+                 <input type="text" class="form-control benefit-re" onchange="inputUp(this)" th:attr="value=${radio.benefitMethod.toString()== '골프 서비스' ? radio.possiblePlace : '' }" >
+              </div>
+              <div id="special_golf_Third">
+                 <label class="special-form-label">혜택 요약</label>
+                 <input type="text" class="form-control benefit-re" onchange="inputUp(this)" th:attr="value=${radio.benefitMethod.toString()== '골프 서비스' ? radio.benefitSummary : '' }">
+              </div>
+              <div id="special_golf_Fourth">
+                 <label class="special-form-label">특이사항</label>
+                 <textarea class="form-control public-benefit-textarea benefit-re" rows="12" onchange="inputUp(this)" th:text="${radio.benefitMethod.toString()} == '골프 서비스' ? ${radio.Signify} : '' "></textarea>
+            </div>
+            <div id="normal_Save_Select">
+            	  <button type="button" class="btn btn-reload">초기화</button>
+                  <button type="button" class="btn btn-primary btn-hidden benefit_save">혜택저장</button>
+              </div>   
+             </div>
+          </form>
+          
+          <form class="special_extra_Form" th:each="radio:${specialnum.current}">
+             <input type="hidden" value="기타 "/>
+             <div id="special_extra_Div">
+                <div id="special_extra_First">
+                   <label class="special-form-label">제공 비용</label>
+               <input type="text" class="form-control benefit-re"  onkeyup="chkNumber(this)"  onchange="inputUp(this)" th:value="${radio.offerPrice} == null ? ${''} : ${radio.offerPrice}">
+               <label class="special-form-label">제공 횟수</label>
+               <input type="text" class="form-control benefit-re"  maxlength="5" onkeyup="chkNumber(this)"  onchange="inputUp(this)" onblur="specialMaxCount(this)" th:value="${radio.offerCount} == null ? ${''} : ${radio.offerCount}">
+               <label class="special-form-label">연 최대 제공 횟수</label>
+               <input type="text" class="form-control benefit-re"  maxlength="5" onkeyup="chkNumber(this)"  onchange="inputUp(this)" onblur="specialMaxCount(this)" th:value="${radio.yearMaxOffer} == null ? ${''} : ${radio.yearMaxOffer}">
+                </div>
+              <div id="special_extra_Second">
+                 <label class="special-form-label">사용처</label>
+                 <input type="text" class="form-control benefit-re" onchange="inputUp(this)" th:attr="value=${radio.benefitMethod.toString()== '기타' ? radio.possiblePlace : '' }">
+              </div>
+              <div id="special_extra_Third">
+                 <label class="special-form-label">혜택 요약</label>
+                 <input type="text" class="form-control benefit-re" onchange="inputUp(this)" th:attr="value=${radio.benefitMethod.toString()== '기타' ? radio.benefitSummary : '' }">
+              </div>
+              <div id="special_extra_Fourth">
+                 <label class="special-form-label">특이사항</label>
+                 <textarea class="form-control public-benefit-textarea benefit-re" rows="12" onchange="inputUp(this)" th:text="${radio.benefitMethod.toString()} == '기타' ? ${radio.Signify} : '' "></textarea>
+            </div>
+            <div id="normal_Save_Select">
+            	  <button type="button" class="btn btn-reload">초기화</button>
+                  <button type="button" class="btn btn-primary btn-hidden benefit_save">혜택저장</button>
+              </div>   
+             </div>
+          </form>
+          </div>
+          <div class="row formrow"></div>
+<!-- 특별 혜택 end -->  
+   </div>
+   <!-- 특별 혜택 값 없을 때 시작 -->     
+   <!-- 특별 혜택 값 없을 때 시작 --> 
+   <!-- 특별 혜택 값 없을 때 시작 --> 
+   <!-- 특별 혜택  radio button-->
+<div class="special-special" th:each="special, specialnum: ${specialDetail}" th:unless="${special.benefitMethod != null}" th:attr="id='special-all-'+${specialnum.index}">
+   <div id="special_discount_First" >
+      <label class="form-label">혜택 방식</label>
+      <div class="form-check form-check-inline">
+            <input id=radio_special_start class="form-check-input" type="radio" value="0" th:name="'special'+${specialnum.index}" checked>
+               연회비 혜택
+      </div>
+      <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" value="1" th:name="'special'+${specialnum.index}" >
+               바우처 제공
+      </div>
+      <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" value="2" th:name="'special'+${specialnum.index}">
+            공항 라운지
+            </div> 
+      <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" value="3" th:name="'special'+${specialnum.index}">
+               발레파킹
+      </div>
+      <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" value="4" th:name="'special'+${specialnum.index}">
+               호텔 서비스
+      </div> 
+      <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" value="5" th:name="'special'+${specialnum.index}">
+               골프 서비스   
+      </div> 
+      <div class="form-check form-check-inline">
+            <input id="extraCheck" class="form-check-input" type="radio" value="6" th:name="'special'+${specialnum.index}" >
+               기타
+            <input id="extraInput" type="text" class="form-control" >
+      </div> 
+    </div>
+      <div id="special_form_All">
+          <form class="special_annual_Form">   
+        <input type="hidden">
+             <div id="special_annual_Div">
+                <div id="special_annual_First">
+                   <label class="special-form-label">제공 비용</label>
+                   <input type="text" class="form-control"  onkeyup="chkNumber(this)"  onchange="inputUp(this)">
+                   <label class="special-form-label">제공 횟수</label>
+                   <input type="text" class="form-control"  maxlength="5" onkeyup="chkNumber(this)"  onchange="inputUp(this)" onblur="specialMaxCount(this)">
+                   <label class="special-form-label">연 최대 제공 횟수</label>
+                   <input type="text" class="form-control"  maxlength="5" onkeyup="chkNumber(this)"  onchange="inputUp(this)" onblur="specialMaxCount(this)">
+                </div>
+              <div id="special_annual_Second">
+                 <label class="special-form-label">사용처</label>
+                 <input type="text" class="form-control" onchange="inputUp(this)">
+              </div>
+              <div id="special_annual_Third">
+                 <label class="special-form-label">혜택 요약</label>
+                 <input type="text" class="form-control" onchange="inputUp(this)">
+              </div>
+              <div id="special_annual_Fourth">
+                 <label class="special-form-label">특이사항</label>    
+                 <textarea class="form-control public-benefit-textarea" rows="12" onchange="inputUp(this)"></textarea>
+            </div>
+            <div id="normal_Save_Select">
+            	<button type="button" class="btn btn-reload">초기화</button>
+               <button type="button" class="btn btn-primary btn-hidden benefit_save">혜택저장</button>
+              </div>   
+             </div>
+          </form>
+          
+          <form class="special_voucher_Form">
+             <input type="hidden" value="바우처"/>
+             <div id="special_voucher_Div">
+                <div id="special_voucher_First">
+                   <label class="special-form-label">제공 비용</label>
+                   <input type="text" class="form-control" onchange="inputUp(this)" onkeyup="chkNumber(this)" >
+               <label class="special-form-label">제공 횟수</label>
+               <input type="text" class="form-control" onchange="inputUp(this)"  maxlength="5" onkeyup="chkNumber(this)" onblur="specialMaxCount(this)" >
+               <label class="special-form-label">연 최대 제공 횟수</label>
+               <input type="text" class="form-control" onchange="inputUp(this)"  maxlength="5" onkeyup="chkNumber(this)" onblur="specialMaxCount(this)" >
+                </div>
+              <div id="special_voucher_Second">
+                 <label class="special-form-label">사용처</label>
+                 <input type="text" class="form-control" onchange="inputUp(this)">
+              </div>
+              <div id="special_voucher_Third">
+                 <label class="special-form-label">혜택 요약</label>
+                 <input type="text" class="form-control" onchange="inputUp(this)">
+              </div>
+              <div id="special_voucher_Fourth">
+                 <label class="special-form-label">특이사항</label>
+                 <textarea class="form-control public-benefit-textarea" rows="12" onchange="inputUp(this)"></textarea>
+            </div>
+            <div id="normal_Save_Select">
+            	  <button type="button" class="btn btn-reload">초기화</button>
+                  <button type="button" class="btn btn-primary btn-hidden benefit_save">혜택저장</button>
+              </div>   
+             </div>
+          </form>
+          
+          <form class="special_lounge_Form">
+             <input type="hidden" value="공항 라운지"/>
+             <div id="special_lounge_Div">
+                <div id="special_lounge_First">
+                   <label class="special-form-label">제공 비용</label>
+               <input type="text" class="form-control" onchange="inputUp(this)"  onkeyup="chkNumber(this)"  >
+               <label class="special-form-label">제공 횟수</label>
+               <input type="text" class="form-control" onchange="inputUp(this)"  maxlength="5" onkeyup="chkNumber(this)" onblur="specialMaxCount(this)" >
+               <label class="special-form-label">연 최대 제공 횟수</label>
+               <input type="text" class="form-control" onchange="inputUp(this)"  maxlength="5" onkeyup="chkNumber(this)" onblur="specialMaxCount(this)" >
+                </div>
+              <div id="special_lounge_Second">
+                 <label class="special-form-label">사용처</label>
+                 <input type="text" class="form-control" onchange="inputUp(this)" >
+              </div>
+              <div id="special_lounge_Third">
+                 <label class="special-form-label">혜택 요약</label>
+                 <input type="text" class="form-control" onchange="inputUp(this)" >
+              </div>
+              <div id="special_lounge_Fourth">
+                 <label class="special-form-label">특이사항</label>
+                 <textarea class="form-control public-benefit-textarea" rows="12" onchange="inputUp(this)"></textarea>
+            </div>
+            <div id="normal_Save_Select">
+            	<button type="button" class="btn btn-reload">초기화</button>
+               <button type="button" class="btn btn-primary btn-hidden benefit_save">혜택저장</button>
+              </div>   
+             </div>
+          </form>
+          <form class="special_parking_Form">
+             <input type="hidden" value="발레파킹"/>
+             <div id="special_parking_Div">
+                <div id="special_parking_First">
+                   <label class="special-form-label">제공 비용</label>
+               <input type="text" class="form-control" onchange="inputUp(this)"  onkeyup="chkNumber(this)" >
+               <label class="special-form-label">제공 횟수</label>
+               <input type="text" class="form-control" onchange="inputUp(this)"  maxlength="5" onkeyup="chkNumber(this)" onblur="specialMaxCount(this)" >
+               <label class="special-form-label">연 최대 제공 횟수</label>
+               <input type="text" class="form-control" onchange="inputUp(this)"  maxlength="5" onkeyup="chkNumber(this)" onblur="specialMaxCount(this)" >
+                </div>
+              <div id="special_parking_Second">
+                 <label class="special-form-label">사용처</label>
+                 <input type="text" class="form-control" onchange="inputUp(this)" >
+              </div>
+              <div id="special_parking_Third">
+                 <label class="special-form-label">혜택 요약</label>
+                 <input type="text" class="form-control" onchange="inputUp(this)" >
+              </div>
+              <div id="special_parking_Fourth">
+                 <label class="special-form-label">특이사항</label>
+                 <textarea class="form-control public-benefit-textarea" rows="12" onchange="inputUp(this)"></textarea>
+            </div>
+            <div id="normal_Save_Select">
+               <button type="button" class="btn btn-reload">초기화</button>
+               <button type="button" class="btn btn-primary btn-hidden benefit_save">혜택저장</button>
+              </div>   
+             </div>
+          </form>
+          <form class="special_hotel_Form" >
+             <input type="hidden" value="호텔 서비스"/>
+             <div id="special_hotel_Div">
+                <div id="special_hotel_First">
+                   <label class="special-form-label">제공 비용</label>
+               <input type="text" class="form-control" onchange="inputUp(this)" onkeyup="chkNumber(this)" >
+               <label class="special-form-label">제공 횟수</label>
+               <input type="text" class="form-control" onchange="inputUp(this)" maxlength="5" onkeyup="chkNumber(this)" onblur="specialMaxCount(this)" >
+               <label class="special-form-label">연 최대 제공 횟수</label>
+               <input type="text" class="form-control" onchange="inputUp(this)"  maxlength="5" onkeyup="chkNumber(this)" onblur="specialMaxCount(this)" >
+                </div>
+              <div id="special_hotel_Second">
+                 <label class="special-form-label">사용처</label>
+                 <input type="text" class="form-control" onchange="inputUp(this)" >
+              </div>
+              <div id="special_hotel_Third">
+                 <label class="special-form-label">혜택 요약</label>
+                 <input type="text" class="form-control" onchange="inputUp(this)" >
+              </div>
+              <div id="special_hotel_Fourth">
+                 <label class="special-form-label">특이사항</label>
+                 <textarea class="form-control public-benefit-textarea" rows="12" onchange="inputUp(this)" ></textarea>
+            </div>
+            <div id="normal_Save_Select">
+            	<button type="button" class="btn btn-reload">초기화</button>
+               <button type="button" class="btn btn-primary btn-hidden benefit_save">혜택저장</button>
+              </div>   
+             </div>
+          </form>
+          <form class="special_golf_Form">
+             <input type="hidden" value="골프 서비스"/>
+             <div id="special_golf_Div">
+                <div id="special_golf_First">
+                  <label class="special-form-label">제공 비용</label>
+               <input type="text" class="form-control" onchange="inputUp(this)" onkeyup="chkNumber(this)" >
+               <label class="special-form-label">제공 횟수</label>
+               <input type="text" class="form-control" onchange="inputUp(this)"  maxlength="5" onkeyup="chkNumber(this)" onblur="specialMaxCount(this)" >
+               <label class="special-form-label">연 최대 제공 횟수</label>
+               <input type="text" class="form-control" onchange="inputUp(this)"  maxlength="5" onkeyup="chkNumber(this)" onblur="specialMaxCount(this)" >
+                </div>
+              <div id="special_golf_Second">
+                 <label class="special-form-label">사용처</label>
+                 <input type="text" class="form-control" onchange="inputUp(this)" >
+              </div>
+              <div id="special_golf_Third">
+                 <label class="special-form-label">혜택 요약</label>
+                 <input type="text" class="form-control" onchange="inputUp(this)" >
+              </div>
+              <div id="special_golf_Fourth">
+                 <label class="special-form-label">특이사항</label>
+                 <textarea class="form-control public-benefit-textarea" rows="12" onchange="inputUp(this)"></textarea>
+            </div>
+            <div id="normal_Save_Select">
+            	  <button type="button" class="btn btn-reload">초기화</button>
+                  <button type="button" class="btn btn-primary btn-hidden benefit_save">혜택저장</button>
+              </div>   
+             </div>
+          </form>
+          
+          <form class="special_extra_Form">
+             <input type="hidden" value="기타 "/>
+             <div id="special_extra_Div">
+                <div id="special_extra_First">
+                   <label class="special-form-label">제공 비용</label>
+               <input type="text" class="form-control" onchange="inputUp(this)"  onkeyup="chkNumber(this)" >
+               <label class="special-form-label">제공 횟수</label>
+               <input type="text" class="form-control" onchange="inputUp(this)"  maxlength="5" onkeyup="chkNumber(this)" onblur="specialMaxCount(this)" >
+               <label class="special-form-label">연 최대 제공 횟수</label>
+               <input type="text" class="form-control" onchange="inputUp(this)"  maxlength="5" onkeyup="chkNumber(this)" onblur="specialMaxCount(this)" >
+                </div>
+              <div id="special_extra_Second">
+                 <label class="special-form-label">사용처</label>
+                 <input type="text" class="form-control" onchange="inputUp(this)">
+              </div>
+              <div id="special_extra_Third">
+                 <label class="special-form-label">혜택 요약</label>
+                 <input type="text" class="form-control" onchange="inputUp(this)">
+              </div>
+              <div id="special_extra_Fourth">
+                 <label class="special-form-label">특이사항</label>
+                 <textarea class="form-control public-benefit-textarea" rows="12" onchange="inputUp(this)"></textarea>
+            </div>
+            <div id="normal_Save_Select">
+            	  <button type="button" class="btn btn-reload">초기화</button>
+                  <button type="button" class="btn btn-primary btn-hidden benefit_save">혜택저장</button>
+              </div>   
+             </div>
+          </form>
+          </div>
+          <div class="row formrow"></div>
+<!-- 특별 혜택 end -->  
+   </div>
+         
+</th:block>
+</html>

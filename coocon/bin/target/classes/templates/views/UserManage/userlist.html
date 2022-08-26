@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/nav.css">
+<th:block th:replace="views/template/header :: linkFragment"></th:block>
+<script type="text/javascript" src="/js/NavSide.js"></script>
+</head>
+<style>
+.main-container {
+	width: 1900px;
+	height: 1020px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.user-form {
+	margin-bottom: 30px;
+	padding: 30px;
+	border: 1px gainsboro solid;
+	background-color: white;
+}
+
+#searchButton {
+	padding-top: 30px;
+	width: max-content;
+	margin: 0 auto;
+}
+
+/* .form-select:hover {
+	background-color: white;
+} */
+/* .selectedBox-opsion:hover {
+	background-color: white;
+} */
+#selctbox {
+	width: 100px;
+	float: right;
+}
+
+.form-select {
+	width: 350px;
+	display: inline;
+	margin: 20px;
+}
+
+#selectBox {
+	width: 100px;
+	float: right;
+}
+
+.form-control {
+	width: 350px;
+	display: inline;
+	margin: 20px;
+	margin-right: 20px;
+}
+
+#userlist {
+	width: 1600px;
+	margin-left: 265px;
+	border-collapse: collapse;
+	text-align: center;
+}
+
+.user-table {
+	margin: 30px 0px 30px;
+	width: 100%;
+	margin-top: 30px;
+	border-collapse: collapse;
+	text-align: center;
+	box-shadow: 2px 2px 2px 2px #e9ecef;
+	margin-bottom: 20px;
+	border-color: #e9ecef;
+}
+
+.usertable-th {
+	font-weight: bolder;
+	width: 150px;
+	font-weight: bold;
+	vertical-align: middle;
+	color: #fff;
+}
+
+#userlist td:first-child {
+	width: 350px;
+	padding: 10px;
+}
+
+#usetable .even {
+	background: #F7F8FF;
+}
+
+.usertable {
+	box-shadow: 2px 2px 2px 2px #e9ecef;
+	margin-bottom: 20px;
+	background-color: white;
+	border-color: #e9ecef;
+}
+
+.waiting-approval {
+	text-decoration: none;
+	color: red;
+}
+
+.waiting-approval:hover {
+	text-decoration: underline;
+	color: red;
+}
+
+.finish-approval {
+	text-decoration: none;
+	color: black;
+}
+
+.finish-approval:hover {
+	text-decoration: underline;
+	color: black;
+}
+
+.reset-rquest {
+	text-decoration: none;
+	color: red;
+	}
+	
+.reset-rquest:hover {
+	text-decoration: underline;
+	color: red;
+}
+
+.form-selet:hover {
+	text-decoration: underline;
+}
+
+.approve-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+
+.usermanag-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+
+/*  .approve-modal-wrap {
+	width: 500px;
+	height: 300px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin: -250px 0 0 -250px;
+	background: #eee;
+	z-index: 2;
+} */
+.modal-background .modal-background-user .modal-background-reset {
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	top: 0;
+	left: 0;
+	z-index: 1;
+}
+
+.modal-close {
+	width: 26px;
+	height: 26px;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+.modal-content {
+	width: 700px;
+	height: 400px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin: -250px 0 0 -250px;
+	background: white;
+	z-index: 2;
+}
+
+.userchange-fin {
+	/* display: none; */
+	width: 700px;
+	height: 400px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin: -250px 0 0 -250px;
+	background: white;
+	z-index: 2;
+}
+
+.modal-body {
+	padding: 25px 45px;
+	/* align-items: center; */
+}
+
+.approva {
+	display: flex;
+	align-items: center;
+	margin: auto;
+	margin-bottom: 0px;
+}
+
+.approvamodal-text>p {
+	font-size: 25px;
+	text-align: center;
+}
+
+.table-body-wrap>tbody>tr>th {
+	padding-left: 20px;
+}
+
+.modal-footer {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+#Approvainput {
+	margin: 10px 70px;
+	height: 40px;
+	width: 300px;
+	padding-left: 15px;
+	magin: 10px;
+}
+</style>
+
+<body>
+	<!-- nav -->
+	<th:block th:replace="views/template/nav :: navFragment"></th:block>
+	<!-- nav end -->
+
+	<!-- contents 내용 -->
+	<div class="main-container main-container-bg">
+
+		<!-- nav-side -->
+		<th:block th:replace="views/template/navside :: navsideFragment"></th:block>
+		<!-- nav-side end -->
+
+		<!-- 회원 관리 내용 -->
+		<div class="main-contents">
+			<div>
+				<h3 id="main-contents-title">회원 관리</h3>
+				<form class="user-form">
+					<form id="searchBox">
+						<div class="usermain">
+							<label for="inputProduct" class="col-form-label">상태</label> <select
+								class="form-select" aria-label="Default select example">
+								<option selected>전체</option>
+								<option value="1" class="approva">승인완료</option>
+								<option value="2" class="hold">승인대기</option>
+							</select> <label for="inputState">사용자 구분</label> <select
+								class="form-select" aria-label="Default select example">
+								<option selected>전체</option>
+								<option value="1">관리자</option>
+								<option value="2">사용자</option>
+							</select> <label for="organSearch">검색어</label> <input type="text"
+								class="form-control" placeholder="사용자명, 이메일"
+								onclick="clearFilter()">
+						</div>
+						<div id="searchButton">
+							<button type="submit" class="btn btn-primary">
+								조회하기 <i class="bi bi-search"></i>
+							</button>
+						</div>
+					</form>
+				</form>
+			</div>
+
+			<select id="selectBox" class="form-select"
+				aria-label="Default select example">
+				<option selected>10개씩</option>
+				<option value="1">25개씩</option>
+				<option value="2">50개씩</option>
+			</select>
+		</div>
+
+		<div id="userlist">
+			<table class="table usertable">
+				<thead class="text-bg-secondary p-3">
+					<tr class="usertable-th">
+						<th>사용자 구분</th>
+						<th>사용자명</th>
+						<th>이메일</th>
+						<th>부서명</th>
+						<th>상태</th>
+					</tr>
+				</thead>
+				<tbody class="usertable-tbody">
+					<tr>
+						<td>사용자</td>
+						<td>이동수</td>
+						<td>dsdsdsdsdsds@coocon.net</td>
+						<td>쿠콘상품센터</td>
+						<td><a class="waiting-approval" id="waiting-approvalBtn"
+							href="#">승인대기</a></td>
+					</tr>
+					<tr>
+						<td>사용자</td>
+						<td>정원주</td>
+						<td>dsdsdsdsdsds@coocon.net</td>
+						<td>쿠콘상품센터</td>
+						<td><a href="#" class="reset-rquest" id="PwResetRequeste">초기화요청</a></td>
+					</tr>
+					<tr>
+						<td>사용자</td>
+						<td>이동수</td>
+						<td>dsdsdsdsdsds@coocon.net</td>
+						<td>쿠콘상품센터</td>
+						<td><a class="finish-approval" id="finish-approvalBtn"
+							href="#">승인완료</a></td>
+					</tr>
+					<tr>
+						<td>사용자</td>
+						<td>이동수</td>
+						<td>dsdsdsdsdsds@coocon.net</td>
+						<td>쿠콘상품센터</td>
+						<td>승인완료</td>
+					</tr>
+					<tr>
+						<td>사용자</td>
+						<td>이동수</td>
+						<td>dsdsdsdsdsds@coocon.net</td>
+						<td>쿠콘상품센터</td>
+						<td>승인완료</td>
+					</tr>
+					<tr>
+						<td>사용자</td>
+						<td>이동수</td>
+						<td>dsdsdsdsdsds@coocon.net</td>
+						<td>쿠콘상품센터</td>
+						<td>승인완료</td>
+					</tr>
+					<tr>
+						<td>사용자</td>
+						<td>이동수</td>
+						<td>dsdsdsdsdsds@coocon.net</td>
+						<td>쿠콘상품센터</td>
+						<td>승인완료</td>
+					</tr>
+					<tr>
+						<td>사용자</td>
+						<td>이동수</td>
+						<td>dsdsdsdsdsds@coocon.net</td>
+						<td>쿠콘상품센터</td>
+						<td>승인완료</td>
+					</tr>
+					<tr>
+						<td>사용자</td>
+						<td>이동수</td>
+						<td>dsdsdsdsdsds@coocon.net</td>
+						<td>쿠콘상품센터</td>
+						<td>승인완료</td>
+					</tr>
+					<tr>
+						<td>사용자</td>
+						<td>이동수</td>
+						<td>dsdsdsdsdsds@coocon.net</td>
+						<td>쿠콘상품센터</td>
+						<td>승인완료</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<nav id="pageButton" aria-label="Page navigation example">
+			<ul class="pagination">
+				<li class="page-item"><a class="page-link" href="#"
+					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+				</a></li>
+				<li class="page-item"><a class="page-link" href="#">1</a></li>
+				<li class="page-item"><a class="page-link" href="#">2</a></li>
+				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item"><a class="page-link" href="#"
+					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+				</a></li>
+			</ul>
+		</nav>
+	</div>
+
+	<!--승인관리 form-->
+	<div class="modal-background"></div>
+	<div id="approvalModal" class="modal approve-modal" tabindex="-1">
+		<div class="modal-wrap approve-modal-wrap">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<h3 class="modal-title">승인관리</h3>
+					<button id="approvalModalClose" type="button" class="btn-close"
+						data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+
+				<div class="modal-body">
+					<div class="modal-body-wrap">
+
+						<table class="table-body-wrap">
+							<tbody>
+								<tr>
+									<th scope="row">성명</th>
+									<td><input type="text" name="username" id="Approvainput"></td>
+								</tr>
+								<tr>
+									<th scope="row">이메일</th>
+									<td><input type="text" name="email" id="Approvainput"></td>
+								</tr>
+								<tr>
+									<th scope="row">부서명</th>
+									<td><input type="text" name="department" id="Approvainput"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="-btn-letf">
+						<button id="btn-acept" type="submit"
+							class="btn btn-primary btn-lg">승인</button>
+					</div>
+					<div class="footer-btn-center">
+						<button id="btn-acept-hold" type="submit"
+							class="btn btn-primary btn-lg">승인 보류</button>
+					</div>
+					<div class="footer-btn-right">
+						<button id="Modal-close" type="submit"
+							class="btn btn-primary btn-lg">취소</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$('#waiting-approvalBtn').on('click', function() {
+			$('#approvalModal').toggle();
+		})
+		$('#approvalModalClose').click(function() {
+			$('#approvalModal').toggle();
+		})
+		$('#Modal-close').click(function() {
+			$('#approvalModal').toggle();
+		})
+		$('#btn-acept').click(function() {
+			$('#approva-check-Modul').toggle();
+		})
+		$('#btn-acept-hold').click(function() {
+			$('#approva-refuse-Modul').toggle();
+		})
+	</script>
+	<!--승인관리 form end-->
+
+	<!-- 승인관리 승인완료 form -->
+	<div id="approva-check-Modul" class="modal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">승인관리</h3>
+					<button id="approval-checkModal-Close" type="button"
+						class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body approva">
+					<div class="approvamodal-text">
+						<p style="margin-bottom: 0px;">사용자 계정이 승인완료 되었습니다.</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="footer-btn-center">
+						<button id="approvalModal-check" type="button"
+							class="btn btn-primary btn-lg" data-bs-dismiss="modal">확인</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$('#approval-checkModal-Close').click(function() {
+			$('.modal-background').css('display', 'none');
+			$('#approvalModal').css('display', 'none');
+			$('#approva-check-Modul').toggle();
+		})
+		$('#approvalModal-check').click(function() {
+			$('.modal-background').css('display', 'none');
+			$('#approvalModal').css('display', 'none');
+			$('#approva-check-Modul').toggle();
+		})
+	</script>
+	<!-- 승인관리 승인완료 form end-->
+
+	<!-- 승인관리 승인거절 form-->
+	<div id="approva-refuse-Modul" class="modal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">승인관리</h3>
+					<button id="approval-holdModal-Close" type="button"
+						class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body approva">
+					<div class="approvamodal-text">
+						<p style="margin-bottom: 0px;">사용자 계정이 승인거절 되었습니다.</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="footer-btn-center">
+						<button id="approvalModal-hold" type="button"
+							class="btn btn-primary btn-lg" data-bs-dismiss="modal">확인</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$('#approval-holdModal-Close').click(function() {
+			$('.modal-background').css('display', 'none');
+			$('#approvalModal').css('display', 'none');
+			$('#approva-refuse-Modul').toggle();
+		})
+		$('#approvalModal-hold').click(function() {
+			$('.modal-background').css('display', 'none');
+			$('#approvalModal').css('display', 'none');
+			$('#approva-refuse-Modul').toggle();
+		})
+	</script>
+	<!--승인관리 승인거절 form end -->
+
+	<!--사용자관리 form-->
+	<div class="modal-background-user"></div>
+	<div id="UserManageModal" class="modal usermanag-modal" tabindex="-1">
+		<div class="modal-wrap usermanage-modal-wrap">
+			<div class="modal-content userchange-fin">
+				<div class="modal-header">
+					<h3 class="modal-title">사용자관리</h3>
+					<button id="UserManageModalClose" type="button" class="btn-close"
+						data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+
+				<div class="modal-body">
+					<div class="modal-body-wrap">
+
+						<table class="table-body-wrap">
+							<tbody>
+								<tr>
+									<th scope="row">성명</th>
+									<td><input type="text" name="username" id="Approvainput"></td>
+								</tr>
+								<tr>
+									<th scope="row">이메일</th>
+									<td><input type="text" name="email" id="Approvainput"></td>
+								</tr>
+								<tr>
+									<th scope="row">부서명</th>
+									<td><input type="text" name="department" id="Approvainput"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="-btn-letf">
+						<button id="btn-user-change" type="submit"
+							class="btn btn-primary btn-lg">변경</button>
+					</div>
+					<div class="footer-btn-center">
+						<button id="btn-user-delete" type="submit"
+							class="btn btn-primary btn-lg">삭제</button>
+					</div>
+					<div class="footer-btn-right">
+						<button id="btn-user-close" type="submit"
+							class="btn btn-primary btn-lg">취소</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$('#finish-approvalBtn').on('click', function() {
+			$('#UserManageModal').toggle();
+		})
+		$('#btn-user-change').click(function() {
+			$('#UserChange-finish-Modal').toggle();
+		})
+		$('#btn-user-delete').click(function() {
+			$('#UserChange-deleteQ-Modal').toggle();
+		})
+		$('#btn-user-close').click(function() {
+			$('#UserManageModal').toggle();
+		})
+		$('#UserManageModalClose').click(function() {
+			$('#UserManageModal').toggle();
+		})
+	</script>
+
+	<!-- 사용자관리- 사용자 계정 변경 완료 form -->
+	<div id="UserChange-finish-Modal" class="modal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">사용자계정 변경완료</h3>
+					<button id="UserChange-finish-Modal-Close" type="button"
+						class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body approva">
+					<div class="approvamodal-text">
+						<p style="margin-bottom: 0px;">사용자 계정 정보가 변경되었습니다.</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="footer-btn-center">
+						<button id="userchange-check" type="button"
+							class="btn btn-primary btn-lg" data-bs-dismiss="modal">확인</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$('#UserChange-finish-Modal-Close').click(function() {
+			$('.modal-background').css('display', 'none');
+			$('#UserManageModal').css('display', 'none');
+			$('#UserChange-finish-Modal').toggle();
+		})
+		$('#userchange-check').click(function() {
+			$('.modal-background').css('display', 'none');
+			$('#UserManageModal').css('display', 'none');
+			$('#UserChange-finish-Modal').toggle();
+		})
+	</script>
+	<!-- 사용자관리- 사용자계정 - 변경 - 삭제 에러 form -->
+
+	<div id="UserChange-delete-err-Modal" class="modal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">삭제 실패</h3>
+					<button id="UserChange-delete-err-close-Modal" type="button"
+						class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body-delete-err">
+					<div class="userchange-delete-err-text">
+						<p style="margin-bottom: 0px;">해당 계정은 삭제가 불가능합니다.</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="footer-btn-center">
+						<button id="userchange-delete-err-check" type="button"
+							class="btn btn-primary btn-lg" data-bs-dismiss="modal">확인</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$('#userchange-delete-err-check').click(function() {
+			$('.modal-background').css('display', 'none');
+			$('#UserManageModal').css('display', 'none');
+			$('#UserChange-delete-err-Modal').toggle();
+		})
+		$('#UserChange-delete-err-close-Modal').click(function() {
+			$('.modal-background').css('display', 'none');
+			$('#UserManageModal').css('display', 'none');
+			$('UserChange-delete-err-Modal').toggle();
+		})
+	</script>
+
+	<!-- 사용자관리- 사용자계정 - 변경 - 삭제 질문 form -->
+	<div id="UserChange-deleteQ-Modal" class="modal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">사용자계정 삭제</h3>
+					<button id="UserChange-deleteQ-close-Modal" type="button"
+						class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body approva">
+					<div class="approvamodal-text">
+						<p style="margin-bottom: 0px;">사용자 계정을 정말 삭제하시습니까?</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="footer-btn-letf">
+						<button id="userchange-deleteQ-check" type="button"
+							class="btn btn-primary btn-lg" data-bs-dismiss="modal">확인</button>
+					</div>
+					<div class="footer-btn-right">
+						<button id="userchange-deleteQ-cancle" type="button"
+							class="btn btn-primary btn-lg" data-bs-dismiss="modal">취소</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$('#UserChange-deleteQ-Modal').click(function() {
+			$('.modal-background').css('display', 'none');
+			$('#UserManageModal').css('display', 'none');
+			$('#UserChange-deleteQ-Modal').toggle();
+		})
+		$('#userchange-deleteQ-check').click(function() {
+			$('.modal-background').css('display', 'none');
+			$('#UserManageModal').css('display', 'none');
+			$('#UserChange-delete-fin-Modal').toggle();
+		})
+		$('#userchange-deleteQ-cancle').click(function() {
+			$('.modal-background').css('display', 'none');
+			$('#UserManageModal').css('display', 'none');
+			$('UserChange-deleteQ-Modal').toggle();
+		})
+	</script>
+
+	<!-- 사용자관리- 사용자계정 - 변경 - 삭제 완료 form -->
+	<div id="UserChange-delete-fin-Modal" class="modal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">사용자계정 삭제완료</h3>
+					<button id="UserChange-delete-fin-close-Modal" type="button"
+						class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body approva">
+					<div class="approvamodal-text">
+						<p style="margin-bottom: 0px;">사용자 계정 삭제가 완료되었습니다.</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="footer-btn-center">
+						<button id="userchange-delete-fin" type="button"
+							class="btn btn-primary btn-lg" data-bs-dismiss="modal">확인</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$('#userchange-delete-fin').click(function() {
+			$('.modal-background').css('display', 'none');
+			$('#UserManageModal').css('display', 'none');
+			$('#UserChange-delete-fin-Modal').toggle();
+		})
+		$('#userchange-delete-fin-close-check').click(function() {
+			$('.modal-background').css('display', 'none');
+			$('#UserManageModal').css('display', 'none');
+			$('UserChange-delete-fin-Modal').toggle();
+		})
+	</script>
+
+	<!-- 회원관리-비밀번호 초기화 요청 form -->
+	<div class="modal-background-reset"></div>
+	<div id="PwResetModal" class="modal pwreset-modal" tabindex="-1">
+		<div class="modal-wrap pwreset-modal-wrap">
+			<div class="modal-content PwResetRqModal">
+				<div class="modal-header">
+					<h3 class="modal-title">비밀번호 초기화요청</h3>
+					<button id="PwResetModalClose" type="button" class="btn-close"
+						data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+
+				<div class="modal-body">
+					<div class="modal-body-wrap">
+						<table class="table-body-wrap">
+							<tbody>
+								<tr>
+									<th scope="row">성명</th>
+									<td><input type="text" name="username" id="Approvainput"></td>
+								</tr>
+								<tr>
+									<th scope="row">이메일</th>
+									<td><input type="text" name="email" id="Approvainput"></td>
+								</tr>
+								<tr>
+									<th scope="row">부서명</th>
+									<td><input type="text" name="department" id="Approvainput"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="-btn-letf">
+						<button id="btnPwResetAccept" type="submit"
+							class="btn btn-primary btn-lg">승인</button>
+					</div>
+					<div class="footer-btn-center">
+						<button id="btnPwResetHold" type="submit"
+							class="btn btn-primary btn-lg">승인보류</button>
+					</div>
+					<div class="footer-btn-right">
+						<button id="btnPwResetCancle" type="submit"
+							class="btn btn-primary btn-lg">취소</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$('#PwResetRequeste').on('click', function() {
+			$('#PwResetModal').toggle();
+		})
+		$('#btnPwResetAccept').click(function() {
+			$('#PwResetModalFin').toggle();
+		})
+		$('#btnPwResetHold').click(function() {
+			$('#PwResetModalHold').toggle();
+		})
+		$('#btnPwResetCancle').click(function() {
+			$('#PwResetModal').toggle();
+		})
+		$('#PwResetModalClose').click(function() {
+			$('#PwResetModal').toggle();
+		})
+	</script>
+
+	<!-- 회원관리-비밀번호 초기화 요청 성공 form -->
+	<div id="PwResetModalFin" class="modal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">비밀번호 초기화요청</h3>
+					<button id="PwResetFinModalCloseBtn" type="button"
+						class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body approva">
+					<div class="approvamodal-text">
+						<p style="margin-bottom: 0px;">해당 계정의 비밀번호가 초기화되었습니다.</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="footer-btn-center">
+						<button id="btnPwResetAcceptFin" type="button"
+							class="btn btn-primary btn-lg" data-bs-dismiss="modal">확인</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$('#btnPwResetAcceptFin').click(function() {
+			$('.modal-background').css('display', 'none');
+			$('#PwResetModal').css('display', 'none');
+			$('#PwResetModalFin').toggle();
+		})
+		$('#PwResetFinModalCloseBtn').click(function() {
+			$('.modal-background').css('display', 'none');
+			$('#PwResetModal').css('display', 'none');
+			$('#PwResetModalFin').toggle();
+		})
+	</script>
+
+	<!-- 회원관리-비밀번호 초기화 요청 보류 form -->
+	<div id="PwResetModalHold" class="modal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">비밀번호 초기화요청</h3>
+					<button id="PwResetHoldModalCloseBtn" type="button"
+						class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body approva">
+					<div class="approvamodal-text">
+						<p style="margin-bottom: 0px;">해당 계정의 비밀번호 초기화 요청이 보류되었습니다.</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="footer-btn-center">
+						<button id="btnPwResetAccepHold" type="button"
+							class="btn btn-primary btn-lg" data-bs-dismiss="modal">확인</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$('#btnPwResetAccepHold').click(function() {
+			$('.modal-background').css('display', 'none');
+			$('#PwResetModal').css('display', 'none');
+			$('#PwResetModalHold').toggle();
+		})
+		$('#PwResetHoldModalCloseBtn').click(function() {
+			$('.modal-background').css('display', 'none');
+			$('#PwResetModal').css('display', 'none');
+			$('#PwResetModalHold').toggle();
+		})
+	</script>
+
+</body>
+</html>

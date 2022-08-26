@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver 
+    url: jdbc:postgresql://coocon.c3wlv6jbqwu8.ap-northeast-2.rds.amazonaws.com:5432/coocon
+    username: postgres
+    password: cooconcoocon

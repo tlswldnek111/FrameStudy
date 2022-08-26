@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.coocon.mapper.CardDataMapper">
+	<resultMap type="CardData" id="originCardData">
+		<id column="card_code" property="cardCode"/>
+		<result column="card_name" property="cardName"/>
+		<result column="image_url" property="imageUrl"/>
+		<result column="product_url" property="productUrl"/>
+		<result column="apply_url" property="applyUrl"/>
+		<result column="organ_name" property="organName"/>
+		<result column="card_status" property="cardStatus"/>
+		<result column="card_created" property="cardCreated"/>
+		<result column="annual_fee" property="annulFee"/>
+		<result column="domestic_only" property="domesticOnly"/>
+		<result column="union_pay" property="unionPay"/>
+		<result column="master" property="master"/>
+		<result column="visa" property="visa"/>
+		<result column="job" property="job"/>
+		<result column="ect" property="ect"/>
+		<result column="annual_signify" property="annualSignify"/>
+		<result column="intergrated_detail" property="intergatedDetail"/>
+	</resultMap>
+</mapper>

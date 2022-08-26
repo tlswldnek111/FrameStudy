@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/nav.css">
+<th:block th:replace="views/template/header :: linkFragment"></th:block>
+<script type="text/javascript" src="/js/NavSide.js"></script>
+<link rel="stylesheet" href="/css/productdetail.css">
+ 
+</head>
+
+<script>
+$(window).on('load',function(){
+	
+	/* home-tab을 숨기고 보여주는 query */
+	$('#home-tab1').click(function(){
+		$('#normal_Total').show();
+		$('#select_Total').hide();
+		$('#special_Total').hide();
+	})
+	
+	$('#home-tab2').click(function(){
+		$('#special_Total').hide();
+		$('#select_Total').show();
+		$('#normal_Total').hide();
+	})
+	
+	$('#home-tab3').click(function(){
+		$('#normal_Total').hide();
+		$('#select_Total').hide();
+		$('#special_Total').show();
+	})
+	
+	/* 기본혜택 radio query */
+	$("input[name=discount-radio]").change(function(){
+	var radiocheck = $("input[name=discount-radio]:checked").val();
+	
+	$('#normal_Forms').children().each(function(idx,ele){
+		$(ele).css('display','none');
+	    if(idx==radiocheck) $(ele).css('display','block');
+	})
+			
+	})
+	
+	/* 선택형 혜택 radio query */
+	$("input[name=select-radio]").change(function(){
+	var radiocheck = $("input[name=select-radio]:checked").val();
+	
+	$('#select_Forms').children().each(function(idx,ele){
+		$(ele).css('display','none');
+	    if(idx==radiocheck) $(ele).css('display','block');
+	})
+			
+	})
+		
+	/* 특별	혜택 radio query */
+	$("input[name=special-radio]").change(function(){
+		var radiocheck = $("input[name=special-radio]:checked").val();
+		
+		$('#special_form_All').children().each(function(idx,ele){
+		$(ele).css('display','none');
+        if(idx==radiocheck) $(ele).css('display','block');
+    })
+			
+	})
+})
+
+</script>
+
+
+<body>
+
+    <!-- nav -->
+    <th:block th:replace="views/template/nav :: navFragment"></th:block>
+    <!-- nav end -->
+
+    <!-- contents 내용 -->
+    <div class="main-container main-container-bg">
+
+        <!-- nav-side -->
+        <th:block th:replace="views/template/navside :: navsideFragment"></th:block>
+        <!-- nav-side end -->
+	<div class="main-contents" > 
+	<p id="main-contents-title" class="detail-title" >상품 관리</p>
+	    <div id="topButton">
+	    	<button type="button" class="btn btn-primary ">수정정보등록</button>
+	        <button type="button" class="btn ">삭제</button>
+	        <button id="menuList" type="button" class="btn ">목록</button>
+	    </div>	
+	    
+        <div id="firstDiv" class="main-detail-bg">    
+			<label class="form-label">상태값 :
+				<a href="">신규등록 /</a>
+				<a href="">변경발생 /</a>
+				<a href="">상품삭제</a>
+			</label>
+			<button type="button" class="btn btn-outline-primary">상품정보 검증하기</button>
+			<button type="button" class="btn btn-outline-primary">신규Web페이지열기</button>
+		</div>
+		
+        <!-- 상품관리 디테일 페이지 -->
+      	<div id="detailPage" class="main-detail-bg">
+	        <!-- 첫번째 form 상태값 부터 특별사항까지 줄단위로 ID적용 -->
+        	<form id="firstForm">
+				<div id="secondDiv">
+					<label class="form-label">기관명 </label>
+                    <input type="text" class="form-control">
+                    <label class="form-label">상품 분류 </label>
+                    <input type="text" class="form-control">
+                    <label class="form-label">수집 경로 </label>
+                    <input type="text" class="form-control">	
+				</div>
+				<div id="thirdDiv">
+					<label class="form-label" >상세 분류</label>
+					<div class="form-check form-check-inline">
+	 					<input class="form-check-input" type="radio" name="inlineRadioOptions" value="option1">
+	  					신용카드
+					</div>
+					<div class="form-check form-check-inline">
+	 					<input class="form-check-input" type="radio" name="inlineRadioOptions" value="option1">
+	  					체크카드
+					</div>
+					<div class="form-check form-check-inline">
+	 					<input class="form-check-input" type="radio" name="inlineRadioOptions" value="option1">
+	  					하이브리드카드
+					</div>
+					<label class="form-label">상품명</label>
+                    <input type="text" class="form-control">	
+				</div>
+				<div id="forthDiv">
+					<label class="form-label" >URL</label>
+                    <input type="text" class="form-control">	
+                    <label class="form-label" >고유 번호</label>
+                    <input id="realNumber" type="text" class="form-control">	
+				</div>
+				<div id="fifthDiv">
+					 <label class="form-label">상품 코드</label>
+                    <input type="text" class="form-control">
+				</div>
+				<div id="sixthDiv">
+					 <label class="form-label">상품 특징</label>
+                    <input type="text" class="form-control">
+				</div>
+				<div id="seventhDiv">
+					<label class="form-label">카드이미지</label>
+					<button type="button" class="btn btn-secondary">이미지보기</button>
+					<label class="form-label">공통혜택</label>
+					<select class="form-select" aria-label="Default select example">
+					  <option selected>공통혜택</option>
+					  <option value="1">농협카드-채움</option>
+					  <option value="2">농협카드-채움</option>
+					</select>
+					<div>
+					  표준화 불가능 상품
+					  <input class="form-check-input" type="checkbox">
+					</div>  
+				</div>
+				<div id="eigthDiv">
+					<label class="form-label">연회비 이벤트</label>
+                    <input type="text" class="form-control">	
+				</div>
+				<div id="ninthDiv">
+					<div id="ninthDivOne">
+						<label class="form-First-label">연회비</label>	
+						<input class="form-check-input" type="checkbox">
+						<label class="form-label">국내전용</label>
+						<input type="text" class="form-control">	
+						<input class="form-check-input" type="checkbox">
+						<label class="form-label">Master</label>
+						<input type="text" class="form-control">
+						<input class="form-check-input" type="checkbox">
+						<label class="form-label">VISA</label>
+						<input type="text" class="form-control">
+					</div>
+					<div id="ninthDivTwo">
+						<label class="form-First-label"></label>
+						<input class="form-check-input" type="checkbox">
+						<label class="form-label">UNION PAY(UPI)</label>
+						<input type="text" class="form-control">	
+						<input class="form-check-input" type="checkbox">
+						<label class="form-label">AMEX</label>
+						<input type="text" class="form-control">	
+						<input class="form-check-input" type="checkbox">
+						<label class="form-label">JCB</label>
+						<input type="text" class="form-control">	
+					</div>
+					<div id="ninthDivThree">
+						<label class="form-First-label"></label>
+						<input class="form-check-input" type="checkbox">
+						<label class="form-label">기타</label>
+						<input type="text" class="form-control">
+					</div>
+				</div>
+				<div id="tenthDiv">
+					<label class="form-label">연회비 특이사항</label>
+                    <input type="text" class="form-control">	
+				</div>
+				<div id="eleventhDiv">
+					<label class="form-label">통합실적기준</label>
+					<table class="table table-bordered normal_discount_minitable">
+						<thead class="text-center">
+						    <tr>
+						      <th>실적 금액</th>
+						      <th>실적별 할인한도</th>
+						      <th>실적별 해당금액</th>
+						      <th>건당 할인금액</th>
+						      <th>건당 할인율</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr>
+						      <td><span><input class="form-control normal_discount_minitable-input1" type="text" value="30"/>&nbsp; 만원 이상</span></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><span><input class="form-control normal_discount_minitable-input1" type="text" value="30"/>&nbsp; %</span></td>
+						    </tr>
+						 </tbody>
+					</table>       		
+				</div>
+				<div id=twelfthDiv>
+					<label class="form-label"> 통합실적기준 상세</label>
+					<textarea class="form-control" rows="8">
+						그러므로 없으면, 넣는 봄바람이다. 따뜻한 인간이 튼튼하며, 거친 그들은 이 있음으로써 끓는 아니다. 인생을 우리의 찬미를 인생의 아니한 하여도 약동하다. 소담스러운 청춘의 사람은 이상이 그들은 쓸쓸하랴? 생생하며, 아니한 눈에 않는 청춘은 위하여서. 심장의 못할 가슴이 능히 두기 이성은 실로 때문이다. 할지라도 커다란 스며들어 새 거친 끓는 피에 내려온 것이 운다. 커다란 그림자는 내려온 그들의 얼음이 가는 뜨거운지라, 청춘의 할지니, 부패뿐이다. 얼음 가치를 있는 만천하의 이상의 아니한 위하여서.
+
+물방아 우리는 방황하였으며, 뼈 튼튼하며, 뛰노는 생생하며, 청춘에서만 피다. 찬미를 얼마나 가치를 갑 우리의 이것이다. 피고, 그것은 때까지 영원히 하였으며, 뿐이다. 하는 끓는 아니한 보이는 날카로우나 천자만홍이 살 봄바람을 아름다우냐? 인도하겠다는 위하여 같이, 불러 하여도 약동하다. 사라지지 역사를 뭇 군영과 든 그리하였는가? 열락의 노래하며 청춘을 따뜻한 뼈 칼이다. 가치를 유소년에게서 주는 발휘하기 그들에게 봄바람이다. 생생하며, 심장의 풍부하게 얼마나 듣는다. 인생에 사랑의 것이 위하여서 천자만홍이 그것은 그들은 찾아다녀도, 인류의 것이다. 있는 우리 들어 위하여 있는가?
+					</textarea>
+				</div>
+				<div id="thirteenDiv">
+					<label class="form-label">우대조건 </label>
+					<textarea class="form-control" rows="1">
+						 최근 3개월 동안 매달 10만원 이상 연속 이용 시 우대 서비스 적용
+					</textarea>
+				</div>
+				<div id=fourteenthDiv>
+					<label class="form-label"> 우대조건 상세</label>
+					<textarea class="form-control" rows="4">
+						그러므로 없으면, 넣는 봄바람이다. 따뜻한 인간이 튼튼하며, 거친 그들은 이 있음으로써 끓는 아니다. 인생을 우리의 찬미를 인생의 아니한 하여도 약동하다. 소담스러운 청춘의 사람은 이상이 그들은 쓸쓸하랴? 생생하며, 아니한 눈에 않는 청춘은 위하여서. 심장의 못할 가슴이 능히 두기 이성은 실로 때문이다. 할지라도 커다란 스며들어 새 거친 끓는 피에 내려온 것이 운다. 커다란 그림자는 내려온 그들의 얼음이 가는 뜨거운지라, 청춘의 할지니, 부패뿐이다. 얼음 가치를 있는 만천하의 이상의 아니한 위하여서.
+
+물방아 우리는 방황하였으며, 뼈 튼튼하며, 뛰노는 생생하며, 청춘에서만 피다. 찬미를 얼마나 가치를 갑 우리의 이것이다. 피고, 그것은 때까지 영원히 하였으며, 뿐이다. 하는 끓는 아니한 보이는 날카로우나 천자만홍이 살 봄바람을 아름다우냐? 인도하겠다는 위하여 같이, 불러 하여도 약동하다. 사라지지 역사를 뭇 군영과 든 그리하였는가? 열락의 노래하며 청춘을 따뜻한 뼈 칼이다. 가치를 유소년에게서 주는 발휘하기 그들에게 봄바람이다. 생생하며, 심장의 풍부하게 얼마나 듣는다. 인생에 사랑의 것이 위하여서 천자만홍이 그것은 그들은 찾아다녀도, 인류의 것이다. 있는 우리 들어 위하여 있는가?
+					</textarea>
+				</div>
+				<div id=fifteenthDiv>
+					<label class="form-label"> 특별사항 </label>
+					<textarea class="form-control" rows="11">
+						그러므로 없으면, 넣는 봄바람이다. 따뜻한 인간이 튼튼하며, 거친 그들은 이 있음으로써 끓는 아니다. 인생을 우리의 찬미를 인생의 아니한 하여도 약동하다. 소담스러운 청춘의 사람은 이상이 그들은 쓸쓸하랴? 생생하며, 아니한 눈에 않는 청춘은 위하여서. 심장의 못할 가슴이 능히 두기 이성은 실로 때문이다. 할지라도 커다란 스며들어 새 거친 끓는 피에 내려온 것이 운다. 커다란 그림자는 내려온 그들의 얼음이 가는 뜨거운지라, 청춘의 할지니, 부패뿐이다. 얼음 가치를 있는 만천하의 이상의 아니한 위하여서.
+
+물방아 우리는 방황하였으며, 뼈 튼튼하며, 뛰노는 생생하며, 청춘에서만 피다. 찬미를 얼마나 가치를 갑 우리의 이것이다. 피고, 그것은 때까지 영원히 하였으며, 뿐이다. 하는 끓는 아니한 보이는 날카로우나 천자만홍이 살 봄바람을 아름다우냐? 인도하겠다는 위하여 같이, 불러 하여도 약동하다. 사라지지 역사를 뭇 군영과 든 그리하였는가? 열락의 노래하며 청춘을 따뜻한 뼈 칼이다. 가치를 유소년에게서 주는 발휘하기 그들에게 봄바람이다. 생생하며, 심장의 풍부하게 얼마나 듣는다. 인생에 사랑의 것이 위하여서 천자만홍이 그것은 그들은 찾아다녀도, 인류의 것이다. 있는 우리 들어 위하여 있는가?
+					</textarea>
+				</div>
+        	</form> 
+			        	
+      	   <div id="benefitTab">
+           		<div class="tab-pane" id="public-benefit-tab" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+	                <ul class="nav nav-tabs" id="public-benefit-tab" role="tablist">
+	                   <li class="nav-item" role="presentation">
+	                     <button class="nav-link active public-benefit-detail-tab " id="home-tab1" data-bs-toggle="tab" data-bs-target="#normal_Total" type="button" role="tab" aria-controls="card-event-tab" aria-selected="true">기본 혜택</button>
+	                   </li>
+	                   <li class="nav-item" role="presentation">
+	                     <button class="nav-link public-benefit-detail-tab " id="home-tab2" data-bs-toggle="tab" data-bs-target="#select_Total" type="button" role="tab" aria-controls="card-event-tab" aria-selected="true">선택형 혜택</button>
+	                   </li>
+	                    <li class="nav-item" role="presentation">
+	                     <button class="nav-link public-benefit-detail-tab " id="home-tab3" data-bs-toggle="tab" data-bs-target="#special_Total" type="button" role="tab" aria-controls="card-event-tab" aria-selected="true">특별 혜택</button>
+	                   </li>
+	                 </ul>		
+                </div>
+			</div>  			
+				
+	<!--기본 혜택 -> 혜택방식 -> 할인 -->
+		<div id="normal_Total" class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab1" tabindex="0">
+      		<div id="normal_discount_First">
+      			<label class="form-label">혜택 방식</label>
+      			<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" name="discount-radio" value="0" checked>
+ 					할인
+				</div>
+				<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="discount-radio" value="1">
+	 					적립
+				</div>
+				<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="discount-radio" value="2">
+	 					리터당 할인
+				</div> 
+				<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="discount-radio" value="3">
+	 					리터당 적립
+				</div> 
+				<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="discount-radio" value="4">
+	 					현장 할인
+				</div> 
+				<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="discount-radio" value="5">
+	 					표준화 불가능 혜택
+				</div> 
+      		</div>
+	        		
+<!-- radio button end--> 	
+
+	  	<div id="normal_Forms">
+			<!--기본 혜택 -> 혜택방식 -> 할인 -->
+			<form class="normal_discount_Form">
+		   	 	<input type="hidden" value="할인"/>
+				<div id="normal_discount">
+			       
+	        		<div id="normal_discount_Second">
+	        			<label class="form-label"> 혜택 업종</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label"> 그룹코드</label>
+	        			<select class="form-select" aria-label="Default select example">
+						  <option selected>1</option>
+						  <option value="1">2</option>
+						  <option value="2">3</option>
+						</select>
+						<button type="button" class="btn btn-secondary">그룹확인</button>
+	        		</div>
+	        		<div id="normal_discount_Third"> 
+	        			<label class="form-label">혜택 가맹점</label> 
+	        			<textarea class="form-control" rows="3">
+							커비빈 커피나루 카페베네 카페드 쉐프
+						</textarea>
+						</br>
+						<textarea id=searchBenefit class="form-control" rows="1"></textarea>
+	        		</div>
+	        		<div id="normal_discount_Forth"> 
+	        			<label class="form-label">월최대 할인금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">일최대 할인금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">건당 최소 인정금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">건당 최대 인정금액</label>
+	        			<input type="text" class="form-control">
+	        		</div>
+	        		<div id="normal_discount_Fifth">
+	        			<label class="form-label">일/월/년 최대 횟수 </label>
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">특정금액 기준 할인 </label>
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        		</div>
+	        		<div id="normal_discount_Sixth">
+	        			<label class="form-label">혜택 상세</label>
+	 					<table class="table table-bordered normal_discount_minitable">
+						<thead class="text-center">
+						    <tr>
+						      <th>실적 금액</th>
+						      <th>실적별 할인한도</th>
+						      <th>실적별 해당금액</th>
+						      <th>건당 할인금액</th>
+						      <th>건당 할인율</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr>
+						      <td><span><input class="form-control normal_discount_minitable-input1" type="text" value="30"/>&nbsp; 만원 이상</span></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><span><input class="form-control normal_discount_minitable-input1" type="text" value="30"/>&nbsp; %</span></td>
+						    </tr>
+						  </tbody>
+						</table>       			
+	        		</div>
+	        		<div id="normal_discount_Seventh">
+	        			<label class="form-label">특이사항</label>
+	        			<textarea class="form-control" rows="3">
+							서비스 제외대상 : 백화점/할인점/아울렛/쇼핑몰
+						</textarea>
+	        		</div>
+		        	<div id="normal_Save_Select">
+						<button type="button" class="btn btn-primary">혜택저장</button>
+			        </div>	
+	        	</div>
+	        </form>
+    	
+	        	<!--기본 혜택 -> 혜택방식 -> 적립 --> 	        	
+	        <form class="normal_Save">
+	        	<div id=normal_Save_Div>
+	        		<div id="normal_Save_Second">
+		        		<label class="form-label"> 혜택 업종</label>
+		        		<input type="text" class="form-control">
+		        		<label class="form-label"> 그룹코드</label>
+		        		<select class="form-select" aria-label="Default select example">
+							<option selected>1</option>
+							<option value="1">2</option>
+							<option value="2">3</option>
+						</select>
+					</div>
+					<div id="normal_Save_Third">
+						<label class="form-label">혜택 가맹점</label> 
+	        			<textarea class="form-control" rows="3">
+							커비빈 커피나루 카페베네 카페드 쉐프
+						</textarea>
+						</br>
+						<textarea id=searchBenefit class="form-control" rows="1"></textarea>
+					</div>
+					<div id="normal_Save_Forth"> 
+	        			<label class="form-label">월최대 적립금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">일최대 적립금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">건당 최소 인정금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">건당 최대 인정금액</label>
+	        			<input type="text" class="form-control">
+	        		</div>
+	        		<div id="normal_Save_Fifth">
+	        			<label class="form-label">일/월/년 최대 횟수 </label>
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">특정금액 기준 적립 </label>
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">적립방식</label>
+	        			<input type="text" class="form-control">
+	        		</div>
+	        		<div id="normal_Save_Sixth">
+	        			<label class="form-label">혜택 상세</label>
+	 					<table class="table table-bordered normal_discount_minitable">
+						<thead class="text-center">
+						    <tr>
+						      <th>실적 금액</th>
+						      <th>실적별 할인한도</th>
+						      <th>실적별 해당금액</th>
+						      <th>건당 할인금액</th>
+						      <th>건당 할인율</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr>
+						      <td><span><input class="form-control normal_discount_minitable-input1" type="text" value="30"/>&nbsp; 만원 이상</span></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><span><input class="form-control normal_discount_minitable-input1" type="text" value="30"/>&nbsp; %</span></td>
+						    </tr>
+						  </tbody>
+						</table>       		
+	        		</div>
+	        		<div id="normal_Save_Seventh">
+	        			<label class="form-label">특이사항</label>
+	        			<textarea class="form-control" rows="3">
+							서비스 제외대상 : 	백화점/할인점/아울렛/쇼핑몰
+						</textarea>
+	        		</div>
+	        		<div id="normal_Save_Select">
+						<button type="button" class="btn btn-primary">혜택저장</button>
+	        		</div>	
+	        	</div>
+	        </form>	
+	        	
+	        <!--기본 혜택 -> 혜택방식 -> 리터당 할인 --> 	        	
+	        <form class="normal_Liter_Discount">
+	        	<div id=normal_Liter_Discount_Div>
+	        		<div id="normal_Liter_Discount_Second">
+		        		<label class="form-label"> 혜택 업종</label>
+		        		<input type="text" class="form-control">
+		        		<label class="form-label"> 그룹코드</label>
+		        		<select class="form-select" aria-label="Default select example">
+							<option selected>1</option>
+							<option value="1">2</option>
+							<option value="2">3</option>
+						</select>
+					</div>
+					<div id="normal_Liter_Discount_Third">
+						<label class="form-label">혜택 가맹점</label> 
+	        			<textarea class="form-control" rows="3">
+							커비빈 커피나루 카페베네 카페드 쉐프
+						</textarea>
+						</br>
+						<textarea id=searchBenefit class="form-control" rows="1"></textarea>
+					</div>
+					<div id="normal_Liter_Discount_Forth"> 
+	        			<label class="form-label">월최대 할인금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">일최대 할인금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">건당 최소 인정금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">건당 최대 인정금액</label>
+	        			<input type="text" class="form-control">
+	        		</div>
+	        		<div id="normal_Liter_Discount_Fifth">
+	        			<label class="form-label">일/월/년 최대 횟수 </label>
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">특정금액 기준 할인 </label>
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        		</div>
+	        		<div id="normal_Liter_Discount_Sixth">
+	        			<label class="form-label">혜택 상세</label>
+	 					<table class="table table-bordered normal_discount_minitable">
+						<thead class="text-center">
+						    <tr>
+						      <th>실적 금액</th>
+						      <th>실적별 할인한도</th>
+						      <th>실적별 해당금액</th>
+						      <th>건당 할인금액</th>
+						      <th>건당 할인율</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr>
+						      <td><span><input class="form-control normal_discount_minitable-input1" type="text" value="30"/>&nbsp; 만원 이상</span></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><span><input class="form-control normal_discount_minitable-input1" type="text" value="30"/>&nbsp; %</span></td>
+						    </tr>
+						  </tbody>
+						</table>       		
+	        		</div>
+	        		<div id="normal_Liter_Discount_Seventh">
+	        			<label class="form-label">특이사항</label>
+	        			<textarea class="form-control" rows="3">
+							서비스 제외대상 : 	백화점/할인점/아울렛/쇼핑몰
+						</textarea>
+	        		</div>
+					<div id="normal_Save_Select">
+							<button type="button" class="btn btn-primary">혜택저장</button>
+				    </div>	
+	        	</div>
+	        </form>
+	        	
+	        <!--기본 혜택 -> 혜택방식 -> 리터당적립 --> 	        	
+	        <form class="normal_Liter_Save">
+	        	<div id=normal_Liter_Save_Div>
+	        		
+	        		<div id="normal_Liter_Save_Second">
+		        		<label class="form-label"> 혜택 업종</label>
+		        		<input type="text" class="form-control">
+		        		<label class="form-label"> 그룹코드</label>
+		        		<select class="form-select" aria-label="Default select example">
+							<option selected>1</option>
+							<option value="1">2</option>
+							<option value="2">3</option>
+						</select>
+					</div>
+					<div id="normal_Liter_Save_Third">
+						<label class="form-label">혜택 가맹점</label> 
+	        			<textarea class="form-control" rows="3">
+							커비빈 커피나루 카페베네 카페드 쉐프
+						</textarea>
+						</br>
+						<textarea id=searchBenefit class="form-control" rows="1"></textarea>
+					</div>
+					<div id="normal_Liter_Save_Forth"> 
+	        			<label class="form-label">월최대 적립금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">일최대 적립금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">건당 최소 인정금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">건당 최대 인정금액</label>
+	        			<input type="text" class="form-control">
+	        		</div>
+	        		<div id="normal_Liter_Save_Fifth">
+	        			<label class="form-label">일/월/년 최대 횟수 </label>
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">특정금액 기준 적립 </label>
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">적립방식</label>
+	        			<input type="text" class="form-control">
+	        		</div>
+	        		<div id="normal_Liter_Save_Sixth">
+	        			<label class="form-label">혜택 상세</label>
+	 					<table class="table table-bordered normal_discount_minitable">
+						<thead class="text-center">
+						    <tr>
+						      <th>실적 금액</th>
+						      <th>실적별 할인한도</th>
+						      <th>실적별 해당금액</th>
+						      <th>건당 할인금액</th>
+						      <th>건당 할인율</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr>
+						      <td><span><input class="form-control normal_discount_minitable-input1" type="text" value="30"/>&nbsp; 만원 이상</span></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><span><input class="form-control normal_discount_minitable-input1" type="text" value="30"/>&nbsp; %</span></td>
+						    </tr>
+						  </tbody>
+						</table>       		
+	        		</div>
+	        		<div id="normal_Liter_Save_Seventh">
+	        			<label class="form-label">특이사항</label>
+	        			<textarea class="form-control" rows="3">
+							서비스 제외대상 : 	백화점/할인점/아울렛/쇼핑몰
+						</textarea>
+	        		</div>
+	        		<div id="normal_Save_Select">
+						<button type="button" class="btn btn-primary">혜택저장</button>
+			        </div>	
+	        	</div>
+	        </form>		
+	        
+	        <!--기본 혜택 -> 혜택방식 -> 현장 할인 --> 	        	
+	        <form class="normal_Spot_Discount">
+	        	<div id=normal_Spot_Discount_Div>
+	        		
+	        		<div id="normal_Spot_Discount_Second">
+		        		<label class="form-label"> 혜택 업종</label>
+		        		<input type="text" class="form-control">
+		        		<label class="form-label"> 그룹코드</label>
+		        		<select class="form-select" aria-label="Default select example">
+							<option selected>1</option>
+							<option value="1">2</option>
+							<option value="2">3</option>
+						</select>
+					</div>
+					<div id="normal_Spot_Discount_Third">
+						<label class="form-label">혜택 가맹점</label> 
+	        			<textarea class="form-control" rows="3">
+							커비빈 커피나루 카페베네 카페드 쉐프
+						</textarea>
+						</br>
+						<textarea id=searchBenefit class="form-control" rows="1"></textarea>
+					</div>
+					<div id="normal_Spot_Discount_Forth"> 
+	        			<label class="form-label">월최대 할인금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">일최대 할인금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">건당 최소 인정금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">건당 최대 인정금액</label>
+	        			<input type="text" class="form-control">
+	        		</div>
+	        		<div id="normal_Spot_Discount_Fifth">
+	        			<label class="form-label">일/월/년 최대 횟수 </label>
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">특정금액 기준 할인 </label>
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">할인방식</label>
+	        			<input type="text" class="form-control">
+	        		</div>
+	        		<div id="normal_Spot_Discount_Sixth">
+	        			<label class="form-label">혜택 상세</label>
+	 					<table class="table table-bordered normal_discount_minitable">
+						<thead class="text-center">
+						    <tr>
+						      <th>실적 금액</th>
+						      <th>실적별 할인한도</th>
+						      <th>실적별 해당금액</th>
+						      <th>건당 할인금액</th>
+						      <th>건당 할인율</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr>
+						      <td><span><input class="form-control normal_discount_minitable-input1" type="text" value="30"/>&nbsp; 만원 이상</span></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><span><input class="form-control normal_discount_minitable-input1" type="text" value="30"/>&nbsp; %</span></td>
+						    </tr>
+						  </tbody>
+						</table>       		
+	        		</div>
+	        		<div id="normal_Spot_Discount_Seventh">
+	        			<label class="form-label">특이사항</label>
+	        			<textarea class="form-control" rows="3">
+							서비스 제외대상 : 	백화점/할인점/아울렛/쇼핑몰
+						</textarea>
+	        		</div>
+					<div id="normal_Save_Select">
+						<button type="button" class="btn btn-primary">혜택저장</button>
+			        </div>	
+	        	</div>
+	        </form>
+	        
+	          <!--기본 혜택 -> 혜택방식 -> 표준화 불가능 혜택 --> 	        	
+	        <form class="normal_Imposible">
+	        	<div id=normal_Imposible_Div>
+	        		
+	        		<div id="normal_Imposible_Second">
+		        		<label class="form-label"> 혜택 이름</label>
+		        		<input type="text" class="form-control">
+					</div>
+					<div id="normal_Imposible_Third">
+						<label class="form-label"> 혜택 요약</label>
+		        		<input type="text" class="form-control">
+					</div>
+					<div id="normal_Imposible_Forth"> 
+	       				<label class="form-label">혜택 상세</label>
+	        			<textarea class="form-control" rows="10">
+							서비스 제외대상 : 	백화점/할인점/아울렛/쇼핑몰
+						</textarea>
+	        		</div>	
+					<div id="normal_Save_Select">
+						<button type="button" class="btn btn-primary">혜택저장</button>
+			        </div>	
+	        	</div>
+	        </form>
+	        </div>
+	       </div>
+	    
+	        <!-- 선택형 혜택 start -->	
+	        <!--선택형 혜택 -> 혜택방식 -> 할인 -->
+		<div id="select_Total" class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab2" tabindex="0">
+		    <div id="select_Top">
+		    	<div id=select_Top_First>
+		    		<label class="form-label">선택한도</label>
+	        		<input type="text" class="form-control">개 혜택 중
+	        		<input type="text" class="form-control">개 혜택 선택가능
+		    	</div>
+		    	<div id="select_Top_Second">
+	           		<div class="tab-pane" id="public-benefit-tab" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+		                <ul class="nav nav-tabs" id="public-benefit-tab" role="tablist">
+		                   <li class="nav-item" role="presentation">
+		                     <button class="nav-link active public-benefit-detail-tab " id="select-tab1" data-bs-toggle="tab" data-bs-target="#slect-package1" type="button" role="tab" aria-controls="card-event-tab" aria-selected="true">1</button>
+		                   </li>
+		                   <li class="nav-item" role="presentation">
+		                     <button class="nav-link public-benefit-detail-tab " id="select-tab2" data-bs-toggle="tab" data-bs-target="#slect-package2" type="button" role="tab" aria-controls="card-event-tab" aria-selected="true">2</button>
+		                   </li>
+		                    <li class="nav-item" role="presentation">
+		                     <button class="nav-link public-benefit-detail-tab " id="select-tab3" data-bs-toggle="tab" data-bs-target="#slect-package3" type="button" role="tab" aria-controls="card-event-tab" aria-selected="true">3</button>
+		                   </li>
+		                 </ul>		
+	                </div>
+				</div>  
+		    	<div id=select_Top_Third>
+		    		<label class="form-label">패키지명</label>
+	        		<input type="text" class="form-control">
+		    	</div>
+		    </div>
+	        
+      		<div id="normal_discount_First">
+      			<label class="form-label">혜택 방식</label>
+      			<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" name="select-radio" value="0" checked>
+ 					할인
+				</div>
+				<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="select-radio" value="1">
+	 					적립
+				</div>
+				<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="select-radio" value="2">
+	 					리터당 할인
+				</div> 
+				<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="select-radio" value="3">
+	 					리터당 적립
+				</div> 
+				<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="select-radio" value="4">
+	 					현장 할인
+				</div> 
+				<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="select-radio" value="5">
+	 					표준화 불가능 혜택
+				</div> 
+      		</div>
+	        		
+<!-- radio button end--> 	
+
+	  	<div id="select_Forms">
+			<!--선택형 혜택 -> 혜택방식 -> 할인 -->
+			<form class="normal_discount_Form">
+		   	 	<input type="hidden" value="할인"/>
+				<div id="normal_discount">
+			       
+	        		<div id="normal_discount_Second">
+	        			<label class="form-label"> 혜택 업종</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label"> 그룹코드</label>
+	        			<select class="form-select" aria-label="Default select example">
+						  <option selected>1</option>
+						  <option value="1">2</option>
+						  <option value="2">3</option>
+						</select>
+						<button type="button" class="btn btn-secondary">그룹확인</button>
+	        		</div>
+	        		<div id="normal_discount_Third"> 
+	        			<label class="form-label">혜택 가맹점</label> 
+	        			<textarea class="form-control" rows="3">
+							커비빈 커피나루 카페베네 카페드 쉐프
+						</textarea>
+						</br>
+						<textarea id=searchBenefit class="form-control" rows="1"></textarea>
+	        		</div>
+	        		<div id="normal_discount_Forth"> 
+	        			<label class="form-label">월최대 할인금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">일최대 할인금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">건당 최소 인정금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">건당 최대 인정금액</label>
+	        			<input type="text" class="form-control">
+	        		</div>
+	        		<div id="normal_discount_Fifth">
+	        			<label class="form-label">일/월/년 최대 횟수 </label>
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">특정금액 기준 할인 </label>
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        		</div>
+	        		<div id="normal_discount_Sixth">
+	        			<label class="form-label">혜택 상세</label>
+	 					<table class="table table-bordered normal_discount_minitable">
+						<thead class="text-center">
+						    <tr>
+						      <th>실적 금액</th>
+						      <th>실적별 할인한도</th>
+						      <th>실적별 해당금액</th>
+						      <th>건당 할인금액</th>
+						      <th>건당 할인율</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr>
+						      <td><span><input class="form-control normal_discount_minitable-input1" type="text" value="30"/>&nbsp; 만원 이상</span></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><span><input class="form-control normal_discount_minitable-input1" type="text" value="30"/>&nbsp; %</span></td>
+						    </tr>
+						  </tbody>
+						</table>       			
+	        		</div>
+	        		<div id="normal_discount_Seventh">
+	        			<label class="form-label">특이사항</label>
+	        			<textarea class="form-control" rows="3">
+							서비스 제외대상 : 백화점/할인점/아울렛/쇼핑몰
+						</textarea>
+	        		</div>
+		        	<div id="normal_Save_Select">
+						<button type="button" class="btn btn-primary">혜택저장</button>
+			        </div>	
+	        	</div>
+	        </form>
+    	
+	        	<!--선택형 혜택 -> 혜택방식 -> 적립 --> 	        	
+	        <form class="normal_Save">
+	        	<div id=normal_Save_Div>
+	        		<div id="normal_Save_Second">
+		        		<label class="form-label"> 혜택 업종</label>
+		        		<input type="text" class="form-control">
+		        		<label class="form-label"> 그룹코드</label>
+		        		<select class="form-select" aria-label="Default select example">
+							<option selected>1</option>
+							<option value="1">2</option>
+							<option value="2">3</option>
+						</select>
+					</div>
+					<div id="normal_Save_Third">
+						<label class="form-label">혜택 가맹점</label> 
+	        			<textarea class="form-control" rows="3">
+							커비빈 커피나루 카페베네 카페드 쉐프
+						</textarea>
+						</br>
+						<textarea id=searchBenefit class="form-control" rows="1"></textarea>
+					</div>
+					<div id="normal_Save_Forth"> 
+	        			<label class="form-label">월최대 적립금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">일최대 적립금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">건당 최소 인정금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">건당 최대 인정금액</label>
+	        			<input type="text" class="form-control">
+	        		</div>
+	        		<div id="normal_Save_Fifth">
+	        			<label class="form-label">일/월/년 최대 횟수 </label>
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">특정금액 기준 적립 </label>
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">적립방식</label>
+	        			<input type="text" class="form-control">
+	        		</div>
+	        		<div id="normal_Save_Sixth">
+	        			<label class="form-label">혜택 상세</label>
+	 					<table class="table table-bordered normal_discount_minitable">
+						<thead class="text-center">
+						    <tr>
+						      <th>실적 금액</th>
+						      <th>실적별 할인한도</th>
+						      <th>실적별 해당금액</th>
+						      <th>건당 할인금액</th>
+						      <th>건당 할인율</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr>
+						      <td><span><input class="form-control normal_discount_minitable-input1" type="text" value="30"/>&nbsp; 만원 이상</span></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><span><input class="form-control normal_discount_minitable-input1" type="text" value="30"/>&nbsp; %</span></td>
+						    </tr>
+						  </tbody>
+						</table>       		
+	        		</div>
+	        		<div id="normal_Save_Seventh">
+	        			<label class="form-label">특이사항</label>
+	        			<textarea class="form-control" rows="3">
+							서비스 제외대상 : 	백화점/할인점/아울렛/쇼핑몰
+						</textarea>
+	        		</div>
+	        		<div id="normal_Save_Select">
+						<button type="button" class="btn btn-primary">혜택저장</button>
+	        		</div>	
+	        	</div>
+	        </form>	
+	        	
+	        <!--선택형 혜택 -> 혜택방식 -> 리터당 할인 --> 	        	
+	        <form class="normal_Liter_Discount">
+	        	<div id=normal_Liter_Discount_Div>
+	        		<div id="normal_Liter_Discount_Second">
+		        		<label class="form-label"> 혜택 업종</label>
+		        		<input type="text" class="form-control">
+		        		<label class="form-label"> 그룹코드</label>
+		        		<select class="form-select" aria-label="Default select example">
+							<option selected>1</option>
+							<option value="1">2</option>
+							<option value="2">3</option>
+						</select>
+					</div>
+					<div id="normal_Liter_Discount_Third">
+						<label class="form-label">혜택 가맹점</label> 
+	        			<textarea class="form-control" rows="3">
+							커비빈 커피나루 카페베네 카페드 쉐프
+						</textarea>
+						</br>
+						<textarea id=searchBenefit class="form-control" rows="1"></textarea>
+					</div>
+					<div id="normal_Liter_Discount_Forth"> 
+	        			<label class="form-label">월최대 할인금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">일최대 할인금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">건당 최소 인정금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">건당 최대 인정금액</label>
+	        			<input type="text" class="form-control">
+	        		</div>
+	        		<div id="normal_Liter_Discount_Fifth">
+	        			<label class="form-label">일/월/년 최대 횟수 </label>
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">특정금액 기준 할인 </label>
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        		</div>
+	        		<div id="normal_Liter_Discount_Sixth">
+	        			<label class="form-label">혜택 상세</label>
+	 					<table class="table table-bordered normal_discount_minitable">
+						<thead class="text-center">
+						    <tr>
+						      <th>실적 금액</th>
+						      <th>실적별 할인한도</th>
+						      <th>실적별 해당금액</th>
+						      <th>건당 할인금액</th>
+						      <th>건당 할인율</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr>
+						      <td><span><input class="form-control normal_discount_minitable-input1" type="text" value="30"/>&nbsp; 만원 이상</span></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><span><input class="form-control normal_discount_minitable-input1" type="text" value="30"/>&nbsp; %</span></td>
+						    </tr>
+						  </tbody>
+						</table>       		
+	        		</div>
+	        		<div id="normal_Liter_Discount_Seventh">
+	        			<label class="form-label">특이사항</label>
+	        			<textarea class="form-control" rows="3">
+							서비스 제외대상 : 	백화점/할인점/아울렛/쇼핑몰
+						</textarea>
+	        		</div>
+					<div id="normal_Save_Select">
+							<button type="button" class="btn btn-primary">혜택저장</button>
+				    </div>	
+	        	</div>
+	        </form>
+	        	
+	        <!--선택형 혜택 -> 혜택방식 -> 리터당적립 --> 	        	
+	        <form class="normal_Liter_Save">
+	        	<div id=normal_Liter_Save_Div>
+	        		
+	        		<div id="normal_Liter_Save_Second">
+		        		<label class="form-label"> 혜택 업종</label>
+		        		<input type="text" class="form-control">
+		        		<label class="form-label"> 그룹코드</label>
+		        		<select class="form-select" aria-label="Default select example">
+							<option selected>1</option>
+							<option value="1">2</option>
+							<option value="2">3</option>
+						</select>
+					</div>
+					<div id="normal_Liter_Save_Third">
+						<label class="form-label">혜택 가맹점</label> 
+	        			<textarea class="form-control" rows="3">
+							커비빈 커피나루 카페베네 카페드 쉐프
+						</textarea>
+						</br>
+						<textarea id=searchBenefit class="form-control" rows="1"></textarea>
+					</div>
+					<div id="normal_Liter_Save_Forth"> 
+	        			<label class="form-label">월최대 적립금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">일최대 적립금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">건당 최소 인정금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">건당 최대 인정금액</label>
+	        			<input type="text" class="form-control">
+	        		</div>
+	        		<div id="normal_Liter_Save_Fifth">
+	        			<label class="form-label">일/월/년 최대 횟수 </label>
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">특정금액 기준 적립 </label>
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">적립방식</label>
+	        			<input type="text" class="form-control">
+	        		</div>
+	        		<div id="normal_Liter_Save_Sixth">
+	        			<label class="form-label">혜택 상세</label>
+	 					<table class="table table-bordered normal_discount_minitable">
+						<thead class="text-center">
+						    <tr>
+						      <th>실적 금액</th>
+						      <th>실적별 할인한도</th>
+						      <th>실적별 해당금액</th>
+						      <th>건당 할인금액</th>
+						      <th>건당 할인율</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr>
+						      <td><span><input class="form-control normal_discount_minitable-input1" type="text" value="30"/>&nbsp; 만원 이상</span></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><span><input class="form-control normal_discount_minitable-input1" type="text" value="30"/>&nbsp; %</span></td>
+						    </tr>
+						  </tbody>
+						</table>       		
+	        		</div>
+	        		<div id="normal_Liter_Save_Seventh">
+	        			<label class="form-label">특이사항</label>
+	        			<textarea class="form-control" rows="3">
+							서비스 제외대상 : 	백화점/할인점/아울렛/쇼핑몰
+						</textarea>
+	        		</div>
+	        		<div id="normal_Save_Select">
+						<button type="button" class="btn btn-primary">혜택저장</button>
+			        </div>	
+	        	</div>
+	        </form>		
+	        
+	        <!--선택형 혜택 -> 혜택방식 -> 현장 할인 --> 	        	
+	        <form class="normal_Spot_Discount">
+	        	<div id=normal_Spot_Discount_Div>
+	        		
+	        		<div id="normal_Spot_Discount_Second">
+		        		<label class="form-label"> 혜택 업종</label>
+		        		<input type="text" class="form-control">
+		        		<label class="form-label"> 그룹코드</label>
+		        		<select class="form-select" aria-label="Default select example">
+							<option selected>1</option>
+							<option value="1">2</option>
+							<option value="2">3</option>
+						</select>
+					</div>
+					<div id="normal_Spot_Discount_Third">
+						<label class="form-label">혜택 가맹점</label> 
+	        			<textarea class="form-control" rows="3">
+							커비빈 커피나루 카페베네 카페드 쉐프
+						</textarea>
+						</br>
+						<textarea id=searchBenefit class="form-control" rows="1"></textarea>
+					</div>
+					<div id="normal_Spot_Discount_Forth"> 
+	        			<label class="form-label">월최대 할인금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">일최대 할인금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">건당 최소 인정금액</label>
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">건당 최대 인정금액</label>
+	        			<input type="text" class="form-control">
+	        		</div>
+	        		<div id="normal_Spot_Discount_Fifth">
+	        			<label class="form-label">일/월/년 최대 횟수 </label>
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">특정금액 기준 할인 </label>
+	        			<input type="text" class="form-control">
+	        			<input type="text" class="form-control">
+	        			<label class="form-label">할인방식</label>
+	        			<input type="text" class="form-control">
+	        		</div>
+	        		<div id="normal_Spot_Discount_Sixth">
+	        			<label class="form-label">혜택 상세</label>
+	 					<table class="table table-bordered normal_discount_minitable">
+						<thead class="text-center">
+						    <tr>
+						      <th>실적 금액</th>
+						      <th>실적별 할인한도</th>
+						      <th>실적별 해당금액</th>
+						      <th>건당 할인금액</th>
+						      <th>건당 할인율</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr>
+						      <td><span><input class="form-control normal_discount_minitable-input1" type="text" value="30"/>&nbsp; 만원 이상</span></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><input class="form-control" type="text" value="10000"/></td>
+						      <td><span><input class="form-control normal_discount_minitable-input1" type="text" value="30"/>&nbsp; %</span></td>
+						    </tr>
+						  </tbody>
+						</table>       		
+	        		</div>
+	        		<div id="normal_Spot_Discount_Seventh">
+	        			<label class="form-label">특이사항</label>
+	        			<textarea class="form-control" rows="3">
+							서비스 제외대상 : 	백화점/할인점/아울렛/쇼핑몰
+						</textarea>
+	        		</div>
+					<div id="normal_Save_Select">
+						<button type="button" class="btn btn-primary">혜택저장</button>
+			        </div>	
+	        	</div>
+	        </form>
+	        
+	          <!--선택형 혜택 -> 혜택방식 -> 표준화 불가능 혜택 --> 	        	
+	        <form class="normal_Imposible">
+	        	<div id=normal_Imposible_Div>
+	        		
+	        		<div id="normal_Imposible_Second">
+		        		<label class="form-label"> 혜택 이름</label>
+		        		<input type="text" class="form-control">
+					</div>
+					<div id="normal_Imposible_Third">
+						<label class="form-label"> 혜택 요약</label>
+		        		<input type="text" class="form-control">
+					</div>
+					<div id="normal_Imposible_Forth"> 
+	       				<label class="form-label">혜택 상세</label>
+	        			<textarea class="form-control" rows="10">
+							서비스 제외대상 : 	백화점/할인점/아울렛/쇼핑몰
+						</textarea>
+	        		</div>	
+					<div id="normal_Save_Select">
+						<button type="button" class="btn btn-primary">혜택저장</button>
+			        </div>	
+	        	</div>
+	        </form>
+	        </div>
+	        </div>
+	   
+	    	 <!-- 선택형 혜택 end -->
+	    	 
+	        
+	         <!-- 특별 혜택 -->
+	          <div id="special_Total" class="tab-pane fade" role="tabpanel" aria-labelledby="home-tab3" tabindex="0">
+		        <!-- 특별 혜택  radio button-->
+				<div id="special_discount_First">
+	       			<label class="form-label">혜택 방식</label>
+	       			<div class="form-check form-check-inline">
+	 					<input class="form-check-input" type="radio" name="special-radio" value="0" checked>
+	  					연회비 혜택
+					</div>
+					<div class="form-check form-check-inline">
+	 					<input class="form-check-input" type="radio" name="special-radio" value="1">
+	  					바우처 제공
+					</div>
+					<div class="form-check form-check-inline">
+	 					<input class="form-check-input" type="radio" name="special-radio" value="2">
+	 					공항 라운지
+	 					</div> 
+					<div class="form-check form-check-inline">
+	 					<input class="form-check-input" type="radio" name="special-radio" value="3">
+	  					발레파킹
+					</div> 
+					<div class="form-check form-check-inline">
+	 					<input class="form-check-input" type="radio" name="special-radio" value="4">
+	  					호텔 서비스
+					</div> 
+					<div class="form-check form-check-inline">
+	 					<input class="form-check-input" type="radio" name="special-radio" value="5">
+	  					골프 서비스
+					</div> 
+					<div class="form-check form-check-inline">
+	 					<input id="extraCheck" class="form-check-input" type="radio" name="special-radio" value="6">
+	  					기타
+	  					<input type="text" class="form-control">
+					</div> 
+	       		</div>
+	       		
+		       <!-- radio button end--> 	
+		
+		        	        
+		        <!-- 특별 혜택 -->
+		        
+		  		<div id="special_form_All">
+			        <form class="special_annual_Form">
+			        	<input type="hidden" value="연회비"/>
+			        	<div id="special_annual_Div">
+			        		<div id="special_annual_First">
+			        			<label class="special-form-label">제공 비용</label>
+			        			<input type="text" class="form-control">
+			        			<label class="special-form-label">제공 횟수</label>
+			        			<input type="text" class="form-control">
+			        			<label class="special-form-label">연 최대 제공 횟수</label>
+			        			<input type="text" class="form-control">
+			        		</div>
+				        	<div id="special_annual_Second">
+				        		<label class="special-form-label">사용처</label>
+				        		<input type="text" class="form-control">
+				        	</div>
+				        	<div id="special_annual_Third">
+				        		<label class="special-form-label">혜택 요약</label>
+				        		<input type="text" class="form-control">
+				        	</div>
+				        	<div id="special_annual_Fourth">
+					        	<label class="special-form-label">특이사항</label>
+					        	<textarea class="form-control public-benefit-textarea" rows="12">
+									연회비 특이사항
+								</textarea>
+							</div>
+							<div id="normal_Save_Select">
+									<button type="button" class="btn btn-primary">혜택저장</button>
+				        	</div>	
+			        	</div>
+			        </form>
+			        
+			        <form class="special_voucher_Form">
+			        	<input type="hidden" value="바우처"/>
+			        	<div id="special_voucher_Div">
+			        		<div id="special_voucher_First">
+			        			<label class="special-form-label">제공 비용</label>
+			        			<input type="text" class="form-control">
+			        			<label class="special-form-label">제공 횟수</label>
+			        			<input type="text" class="form-control">
+			        			<label class="special-form-label">연 최대 제공 횟수</label>
+			        			<input type="text" class="form-control">
+			        		</div>
+				        	<div id="special_voucher_Second">
+				        		<label class="special-form-label">사용처</label>
+				        		<input type="text" class="form-control">
+				        	</div>
+				        	<div id="special_voucher_Third">
+				        		<label class="special-form-label">혜택 요약</label>
+				        		<input type="text" class="form-control">
+				        	</div>
+				        	<div id="special_voucher_Fourth">
+					        	<label class="special-form-label">특이사항</label>
+					        	<textarea class="form-control public-benefit-textarea" rows="12">
+									바우처 특이사항
+								</textarea>
+							</div>
+							<div id="normal_Save_Select">
+									<button type="button" class="btn btn-primary">혜택저장</button>
+				        	</div>	
+			        	</div>
+			        </form>
+			        
+			        <form class="special_lounge_Form">
+			        	<input type="hidden" value="공항 라운지"/>
+			        	<div id="special_lounge_Div">
+			        		<div id="special_lounge_First">
+			        			<label class="special-form-label">제공 비용</label>
+			        			<input type="text" class="form-control">
+			        			<label class="special-form-label">제공 횟수</label>
+			        			<input type="text" class="form-control">
+			        			<label class="special-form-label">연 최대 제공 횟수</label>
+			        			<input type="text" class="form-control">
+			        		</div>
+				        	<div id="special_lounge_Second">
+				        		<label class="special-form-label">사용처</label>
+				        		<input type="text" class="form-control">
+				        	</div>
+				        	<div id="special_lounge_Third">
+				        		<label class="special-form-label">혜택 요약</label>
+				        		<input type="text" class="form-control">
+				        	</div>
+				        	<div id="special_lounge_Fourth">
+					        	<label class="special-form-label">특이사항</label>
+					        	<textarea class="form-control public-benefit-textarea" rows="12">
+									공항 라운지 특이사항
+								</textarea>
+							</div>
+							<div id="normal_Save_Select">
+									<button type="button" class="btn btn-primary">혜택저장</button>
+				        	</div>	
+			        	</div>
+			        </form>
+			        <form class="special_parking_Form">
+			        	<input type="hidden" value="발레파킹"/>
+			        	<div id="special_parking_Div">
+			        		<div id="special_parking_First">
+			        			<label class="special-form-label">제공 비용</label>
+			        			<input type="text" class="form-control">
+			        			<label class="special-form-label">제공 횟수</label>
+			        			<input type="text" class="form-control">
+			        			<label class="special-form-label">연 최대 제공 횟수</label>
+			        			<input type="text" class="form-control">
+			        		</div>
+				        	<div id="special_parking_Second">
+				        		<label class="special-form-label">사용처</label>
+				        		<input type="text" class="form-control">
+				        	</div>
+				        	<div id="special_parking_Third">
+				        		<label class="special-form-label">혜택 요약</label>
+				        		<input type="text" class="form-control">
+				        	</div>
+				        	<div id="special_parking_Fourth">
+					        	<label class="special-form-label">특이사항</label>
+					        	<textarea class="form-control public-benefit-textarea" rows="12">
+									발레파킹 특이사항
+								</textarea>
+							</div>
+							<div id="normal_Save_Select">
+									<button type="button" class="btn btn-primary">혜택저장</button>
+				        	</div>	
+			        	</div>
+			        </form>
+			        <form class="special_hotel_Form">
+			        	<input type="hidden" value="호텔 서비스"/>
+			        	<div id="special_hotel_Div">
+			        		<div id="special_hotel_First">
+			        			<label class="special-form-label">제공 비용</label>
+			        			<input type="text" class="form-control">
+			        			<label class="special-form-label">제공 횟수</label>
+			        			<input type="text" class="form-control">
+			        			<label class="special-form-label">연 최대 제공 횟수</label>
+			        			<input type="text" class="form-control">
+			        		</div>
+				        	<div id="special_hotel_Second">
+				        		<label class="special-form-label">사용처</label>
+				        		<input type="text" class="form-control">
+				        	</div>
+				        	<div id="special_hotel_Third">
+				        		<label class="special-form-label">혜택 요약</label>
+				        		<input type="text" class="form-control">
+				        	</div>
+				        	<div id="special_hotel_Fourth">
+					        	<label class="special-form-label">특이사항</label>
+					        	<textarea class="form-control public-benefit-textarea" rows="12">
+									호텔 서비스 특이사항
+								</textarea>
+							</div>
+							<div id="normal_Save_Select">
+									<button type="button" class="btn btn-primary">혜택저장</button>
+				        	</div>	
+			        	</div>
+			        </form>
+			        <form class="special_golf_Form">
+			        	<input type="hidden" value="골프 서비스"/>
+			        	<div id="special_golf_Div">
+			        		<div id="special_golf_First">
+			        			<label class="special-form-label">제공 비용</label>
+			        			<input type="text" class="form-control">
+			        			<label class="special-form-label">제공 횟수</label>
+			        			<input type="text" class="form-control">
+			        			<label class="special-form-label">연 최대 제공 횟수</label>
+			        			<input type="text" class="form-control">
+			        		</div>
+				        	<div id="special_golf_Second">
+				        		<label class="special-form-label">사용처</label>
+				        		<input type="text" class="form-control">
+				        	</div>
+				        	<div id="special_golf_Third">
+				        		<label class="special-form-label">혜택 요약</label>
+				        		<input type="text" class="form-control">
+				        	</div>
+				        	<div id="special_golf_Fourth">
+					        	<label class="special-form-label">특이사항</label>
+					        	<textarea class="form-control public-benefit-textarea" rows="12">
+									골프 서비스 특이사항
+								</textarea>
+							</div>
+							<div id="normal_Save_Select">
+									<button type="button" class="btn btn-primary">혜택저장</button>
+				        	</div>	
+			        	</div>
+			        </form>
+			        
+			        <form class="special_extra_Form">
+			        	<input type="hidden" value="키타 "/>
+			        	<div id="special_extra_Div">
+			        		<div id="special_extra_First">
+			        			<label class="special-form-label">제공 비용</label>
+			        			<input type="text" class="form-control">
+			        			<label class="special-form-label">제공 횟수</label>
+			        			<input type="text" class="form-control">
+			        			<label class="special-form-label">연 최대 제공 횟수</label>
+			        			<input type="text" class="form-control">
+			        		</div>
+				        	<div id="special_extra_Second">
+				        		<label class="special-form-label">사용처</label>
+				        		<input type="text" class="form-control">
+				        	</div>
+				        	<div id="special_extra_Third">
+				        		<label class="special-form-label">혜택 요약</label>
+				        		<input type="text" class="form-control">
+				        	</div>
+				        	<div id="special_extra_Fourth">
+					        	<label class="special-form-label">특이사항</label>
+					        	<textarea class="form-control public-benefit-textarea" rows="12">
+									기타 특이사항
+								</textarea>
+							</div>
+							<div id="normal_Save_Select">
+									<button type="button" class="btn btn-primary">혜택저장</button>
+				        	</div>	
+			        	</div>
+			        </form>
+			        </div>
+			       <!-- 특별 혜택 end -->  
+			        
+			   </div>    
+			   <!-- 특별 혜택 end-->
+			   
+			   
+		   </div>
+	        
+	       	
+        	<!-- form 제일 아래에 위치하는 div -->
+        	<div id="footerDiv" >
+        		<label class="form-label">변경 이력</label>
+        		<textarea class="form-control" rows="5">
+						그러므로 없으면, 넣는 봄바람이다. 따뜻한 인간이 튼튼하며, 거친 그들은 이 있음으로써 끓는 아니다. 인생을 우리의 찬미를 인생의 아니한 하여도 약동하다. 소담스러운 청춘의 사람은 이상이 그들은 쓸쓸하랴? 생생하며, 아니한 눈에 않는 청춘은 위하여서. 심장의 못할 가슴이 능히 두기 이성은 실로 때문이다. 할지라도 커다란 스며들어 새 거친 끓는 피에 내려온 것이 운다. 커다란 그림자는 내려온 그들의 얼음이 가는 뜨거운지라, 청춘의 할지니, 부패뿐이다. 얼음 가치를 있는 만천하의 이상의 아니한 위하여서.
+
+물방아 우리는 방황하였으며, 뼈 튼튼하며, 뛰노는 생생하며, 청춘에서만 피다. 찬미를 얼마	나 가치를 갑 우리의 이것이다. 피고, 그것은 때까지 영원히 하였으며, 뿐이다. 하는 끓는 아니한 보이는 날카로우나 천자만홍이 살 봄바람을 아름다우냐? 인도하겠다는 위하여 같이, 불러 하여도 약동하다. 사라지지 역사를 뭇 군영과 든 그리하였는가? 열락의 노래하며 청춘을 따뜻한 뼈 칼이다. 가치를 유소년에게서 주는 발휘하기 그들에게 봄바람이다. 생생하며, 심장의 풍부하게 얼마나 듣는다. 인생에 사랑의 것이 위하여서 천자만홍이 그것은 그들은 찾아다녀도, 인류의 것이다. 있는 우리 들어 위하여 있는가?
+				</textarea>
+        		<label class="form-label">변경 내역</label>
+        		<input type="text" class="form-control">
+        		<button type="button" class="btn btn-primary">확정하기</button>
+        	</div>
+        	
+        		
+    	</div> 	
+    <!-- contents 내용 -->
+    </div>	
+</body>
+
+</html>
